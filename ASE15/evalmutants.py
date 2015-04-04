@@ -34,12 +34,12 @@ for o in sys.argv[pos:]:
         break
     options += o + " "
 print "OPTIONS =", options
-files = ""
+files = []
 for o in sys.argv[pos:]:
     pos += 1
     if o == "--mutate":
         break
-    files += o + " "
+    files.append(o)
 print "FILES =", files
 mutants = []
 for o in sys.argv[pos:]:
@@ -47,7 +47,7 @@ for o in sys.argv[pos:]:
 print "MUTATED FILES =",mutants
 
 mutp = "limit cputime " + timeout + " ; "
-mutp += "cbmc " + options + files
+mutp += "cbmc " + options
 
 print mutp
 
@@ -81,70 +81,75 @@ def checkMutant(mutant, keepsame, results):
     if not normal:
         return (None, None)
 
-totalSuccessTime = 0.0
-maxSuccessTime = 0.0
-minSuccesstime = 100000000.0
-totalKilledTime = 0.0
-maxKilledTime = 0.0
-minKilledTime = 100000000.0
-
 print "SANITY CHECK..."
-(checkOriginal, originalTime) = checkMutant("", mutants, "original.result")
+(checkOriginal, originalTime) = checkMutant("", mutants + files, "original.result")
 assert ((checkOriginal == True) or (checkOriginal == "TIMEOUT"))
-totalSuccessTime += originalTime
-maxSuccessTime = originalTime
-minSuccessTime = originalTime
 print "Original SUCCESSFULLY VERIFIED in", originalTime
 sys.stdout.flush()
 sys.stderr.flush()
 
-for mutant_base in mutants:
-    print "Mutating " + mutant_base
-    keepsame = []
-    for m in mutants:
-        if m != mutant_base:
-            keepsame.append(m)
-    for mutant in glob.glob("mutant*"+mutant_base):
-        total += 1
-        print "Checking mutant", mutant + ": ",
-        printMutant(mutant)
-        results = mutant + ".result"
-        (result, time) = checkMutant(mutant, keepsame, results)
-        if result == True:
-            live.append(mutant)
-            totalSuccessTime += time
-            if (time > maxSuccessTime):
-                maxSuccessTime = time
-            if (time < minSuccessTime):
-                minSuccessTime = time
-            print "VERIFICATION SUCCESSFUL", time
-        if result == False:
-            killed.append(mutant)
-            totalKilledTime += time
-            if (time > maxKilledTime):
-                maxKilledTime = time
-            if (time < minKilledTime):
-                minKilledTime = time
-            print "KILLED", time
-        if result == "TIMEOUT":
-            timedout.append(mutant)
-            print "TIMEOUT"
-        if result == None:
-            print "OTHER RESULT"
-            other.append(mutant)
-        sys.stdout.flush()
-        sys.stderr.flush()
+def mutateAll(mutants, files, totalSuccessTime, totalKilledTime, minSuccessTime, minKilledTime,
+              maxSuccessTime, maxKilledTime, killed, live, timedout, other, total,
+              harnessCall=None, mode="", indent=""):
+    for mutant_base in mutants:
+        print indent+"Mutating " + mutant_base
+        keepsame = []
+        for m in mutants:
+            if m != mutant_base:
+                keepsame.append(m)
+        for mutant in glob.glob("mutant*"+mutant_base):
+            total += 1
+            print indent+"Checking mutant", mutant + ": ",
+            printMutant(mutant)
+            results = mutant + mode + ".result"
+            (result, time) = checkMutant(mutant, keepsame+files, results)
+            if result == True:
+                live.append(mutant)
+                totalSuccessTime += time
+                if (time > maxSuccessTime):
+                    maxSuccessTime = time
+                if (time < minSuccessTime):
+                    minSuccessTime = time
+                print indent+"VERIFICATION SUCCESSFUL", time
+                if harnessMode and not harnessCall:
+                    print "Mutated harness survived, checking kill rate for", mutant
+                    print "-------------------------------------------------"
+                    mutateAll(files, [mutant], 0.0, 0.0, 100000000.0, 100000000.0, 0.0, 0.0, [], [], [], [], 0,
+                              harnessCall=True, mode="."+mutant, indent="   ")
+                    print "Done checking kill rate for", mutant
+                    print "-------------------------------------------------"
+            if result == False:
+                killed.append(mutant)
+                totalKilledTime += time
+                if (time > maxKilledTime):
+                    maxKilledTime = time
+                if (time < minKilledTime):
+                    minKilledTime = time
+                print indent+"KILLED", time
+            if result == "TIMEOUT":
+                timedout.append(mutant)
+                print indent+"TIMEOUT"
+            if result == None:
+                print indent+"OTHER RESULT"
+                other.append(mutant)
+            sys.stdout.flush()
+            sys.stderr.flush()
 
-print total, "TOTAL MUTANTS,", len(killed), "KILLED,", len(other), "FAILED TO COMPILE", len(timedout), "TIMED OUT, (" + str((len(killed) * 1.0)/(total*1.0) * (100.0)) + "% kill rate)"
-if len(killed) > 0:
-    print "AVERAGE KILL TIME", (totalKilledTime/len(killed))
-if len(live) > 0:
-    print "AVERAGE VERIFY TIME", (totalSuccessTime/len(live))
-print "MIN/MAX KILL TIME = ",minKilledTime,"/",maxKilledTime
-print "MIN/MAX SUCCESS TIME = ",minSuccessTime,"/",maxSuccessTime
-print "SURVIVING MUTANTS:"
-for f in live:
-    print f
-    printMutant(f) 
+    print indent+str(total), "TOTAL MUTANTS,", len(killed), "KILLED,", len(other), "FAILED TO COMPILE", len(timedout), "TIMED OUT, (" + str((len(killed) * 1.0)/(total*1.0) * (100.0)) + "% kill rate)"
+    if len(killed) > 0:
+        print indent+"AVERAGE KILL TIME", (totalKilledTime/len(killed))
+    if len(live) > 0:
+        print indent+"AVERAGE VERIFY TIME", (totalSuccessTime/len(live))
+    print indent+"MIN/MAX KILL TIME = ",minKilledTime,"/",maxKilledTime
+    print indent+"MIN/MAX SUCCESS TIME = ",minSuccessTime,"/",maxSuccessTime
+    if not harnessMode:
+        print "SURVIVING MUTANTS:"
+        for f in live:
+            print f
+            printMutant(f)
+
+mutateAll(mutants, files, originalTime, 0.0, originalTime, 100000000.0, originalTime, 0.0, [], [], [], [], 0)
+
+
 
 
