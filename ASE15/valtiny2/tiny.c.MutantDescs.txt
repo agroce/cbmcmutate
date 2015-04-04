@@ -1,0 +1,185 @@
+44: /* MUTANT (del_stmt) */ /* static void __rcu_process_callbacks(struct rcu_ctrlblk *rcp); */ 
+45: /* MUTANT (del_stmt) */ /* static void rcu_process_callbacks(struct softirq_action *unused); */ 
+50: /* MUTANT (del_stmt) */ /* static long long rcu_dynticks_nesting = DYNTICK_TASK_EXIT_IDLE; */ 
+57: /* MUTANT (negate) */	if(! (newval)) {
+60: /* MUTANT (del_stmt) */ /* 		rcu_dynticks_nesting = newval; */ 
+61: /* MUTANT (del_stmt) */ /* 		return; */ 
+65: /* MUTANT (rep_op) */	if (IS_ENABLED(CONFIG_RCU_TRACE) || !is_idle_task(current)) {
+65: /* MUTANT (negate) */	if(! (IS_ENABLED(CONFIG_RCU_TRACE) && !is_idle_task(current))) {
+66: /* MUTANT (del_stmt) */ /* 		struct task_struct *idle __maybe_unused = idle_task(smp_processor_id()); */ 
+70: /* MUTANT (del_stmt) */ /* 		ftrace_dump(DUMP_ALL); */ 
+71: /* MUTANT (rep_const) */		WARN_ONCE(0, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+71: /* MUTANT (rep_const) */		WARN_ONCE(-1, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+71: /* MUTANT (rep_const) */		WARN_ONCE(((1)+1), "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+76: /* MUTANT (del_stmt) */ /* 	barrier(); */ 
+77: /* MUTANT (del_stmt) */ /* 	rcu_dynticks_nesting = newval; */ 
+86: /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+87: /* MUTANT (del_stmt) */ /* 	long long newval; */ 
+89: /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+90: /* MUTANT (del_stmt) */ /* 	WARN_ON_ONCE((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) == 0); */ 
+90: /* MUTANT (rep_op) */	WARN_ON_ONCE((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) != 0);
+90: /* MUTANT (rep_const) */	WARN_ON_ONCE((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) == 1);
+90: /* MUTANT (rep_const) */	WARN_ON_ONCE((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) == -1);
+91: /* MUTANT (rep_op) */	if ((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) !=
+93: /* MUTANT (rep_const) */		newval = 1;
+93: /* MUTANT (rep_const) */		newval = -1;
+96: /* MUTANT (del_stmt) */ /* 	rcu_idle_enter_common(newval); */ 
+97: /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+106: /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+107: /* MUTANT (del_stmt) */ /* 	long long newval; */ 
+109: /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+110: /* MUTANT (del_stmt) */ /* 	newval = rcu_dynticks_nesting - 1; */ 
+110: /* MUTANT (rep_const) */	newval = rcu_dynticks_nesting - 0;
+110: /* MUTANT (rep_const) */	newval = rcu_dynticks_nesting - -1;
+110: /* MUTANT (rep_const) */	newval = rcu_dynticks_nesting - ((1)+1);
+111: /* MUTANT (del_stmt) */ /* 	WARN_ON_ONCE(newval < 0); */ 
+111: /* MUTANT (rep_op) */	WARN_ON_ONCE(newval <= 0);
+111: /* MUTANT (rep_op) */	WARN_ON_ONCE(newval > 0);
+111: /* MUTANT (rep_op) */	WARN_ON_ONCE(newval >= 0);
+111: /* MUTANT (rep_op) */	WARN_ON_ONCE(newval == 0);
+111: /* MUTANT (rep_op) */	WARN_ON_ONCE(newval != 0);
+111: /* MUTANT (rep_const) */	WARN_ON_ONCE(newval < 1);
+111: /* MUTANT (rep_const) */	WARN_ON_ONCE(newval < -1);
+112: /* MUTANT (del_stmt) */ /* 	rcu_idle_enter_common(newval); */ 
+113: /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+120: /* MUTANT (negate) */	if(! (oldval)) {
+123: /* MUTANT (del_stmt) */ /* 		return; */ 
+126: /* MUTANT (rep_op) */	if (IS_ENABLED(CONFIG_RCU_TRACE) || !is_idle_task(current)) {
+126: /* MUTANT (negate) */	if(! (IS_ENABLED(CONFIG_RCU_TRACE) && !is_idle_task(current))) {
+127: /* MUTANT (del_stmt) */ /* 		struct task_struct *idle __maybe_unused = idle_task(smp_processor_id()); */ 
+131: /* MUTANT (del_stmt) */ /* 		ftrace_dump(DUMP_ALL); */ 
+132: /* MUTANT (rep_const) */		WARN_ONCE(0, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+132: /* MUTANT (rep_const) */		WARN_ONCE(-1, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+132: /* MUTANT (rep_const) */		WARN_ONCE(((1)+1), "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+143: /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+144: /* MUTANT (del_stmt) */ /* 	long long oldval; */ 
+146: /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+147: /* MUTANT (del_stmt) */ /* 	oldval = rcu_dynticks_nesting; */ 
+148: /* MUTANT (del_stmt) */ /* 	WARN_ON_ONCE(rcu_dynticks_nesting < 0); */ 
+148: /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting <= 0);
+148: /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting > 0);
+148: /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting >= 0);
+148: /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting == 0);
+148: /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting != 0);
+148: /* MUTANT (rep_const) */	WARN_ON_ONCE(rcu_dynticks_nesting < 1);
+148: /* MUTANT (rep_const) */	WARN_ON_ONCE(rcu_dynticks_nesting < -1);
+149: /* MUTANT (negate) */	if(! (rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK))
+150: /* MUTANT (rep_op) */		rcu_dynticks_nesting -= DYNTICK_TASK_NEST_VALUE;
+150: /* MUTANT (rep_op) */		rcu_dynticks_nesting *= DYNTICK_TASK_NEST_VALUE;
+150: /* MUTANT (rep_op) */		rcu_dynticks_nesting %= DYNTICK_TASK_NEST_VALUE;
+153: /* MUTANT (del_stmt) */ /* 	rcu_idle_exit_common(oldval); */ 
+154: /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+163: /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+164: /* MUTANT (del_stmt) */ /* 	long long oldval; */ 
+166: /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+167: /* MUTANT (del_stmt) */ /* 	oldval = rcu_dynticks_nesting; */ 
+168: /* MUTANT (del_stmt) */ /* 	rcu_dynticks_nesting++; */ 
+168: /* MUTANT (rep_op) */	rcu_dynticks_nesting--;
+169: /* MUTANT (del_stmt) */ /* 	WARN_ON_ONCE(rcu_dynticks_nesting == 0); */ 
+169: /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting != 0);
+169: /* MUTANT (rep_const) */	WARN_ON_ONCE(rcu_dynticks_nesting == 1);
+169: /* MUTANT (rep_const) */	WARN_ON_ONCE(rcu_dynticks_nesting == -1);
+170: /* MUTANT (del_stmt) */ /* 	rcu_idle_exit_common(oldval); */ 
+171: /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+182: /* MUTANT (del_stmt) */ /* 	return rcu_dynticks_nesting; */ 
+195: /* MUTANT (del_stmt) */ /* 	return rcu_dynticks_nesting <= 1; */ 
+195: /* MUTANT (rep_op) */	return rcu_dynticks_nesting < 1;
+195: /* MUTANT (rep_op) */	return rcu_dynticks_nesting > 1;
+195: /* MUTANT (rep_op) */	return rcu_dynticks_nesting >= 1;
+195: /* MUTANT (rep_op) */	return rcu_dynticks_nesting == 1;
+195: /* MUTANT (rep_op) */	return rcu_dynticks_nesting != 1;
+195: /* MUTANT (rep_const) */	return rcu_dynticks_nesting <= 0;
+195: /* MUTANT (rep_const) */	return rcu_dynticks_nesting <= -1;
+195: /* MUTANT (rep_const) */	return rcu_dynticks_nesting <= ((1)+1);
+205: /* MUTANT (del_stmt) */ /* 	RCU_TRACE(reset_cpu_stall_ticks(rcp)); */ 
+206: /* MUTANT (rep_op) */	if (rcp->rcucblist == NULL &&
+206: /* MUTANT (rep_op) */	if (rcp->rcucblist != NULL ||
+207: /* MUTANT (rep_op) */	    rcp->donetail == rcp->curtail) {
+208: /* MUTANT (del_stmt) */ /* 		rcp->donetail = rcp->curtail; */ 
+209: /* MUTANT (del_stmt) */ /* 		return 1; */ 
+209: /* MUTANT (rep_const) */		return 0;
+209: /* MUTANT (rep_const) */		return -1;
+209: /* MUTANT (rep_const) */		return ((1)+1);
+212: /* MUTANT (rep_const) */	return 1;
+212: /* MUTANT (rep_const) */	return -1;
+222: /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+224: /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+225: /* MUTANT (rep_op) */	if (rcu_qsctr_help(&rcu_sched_ctrlblk) -
+225: /* MUTANT (rep_op) */	if (rcu_qsctr_help(&rcu_sched_ctrlblk) *
+225: /* MUTANT (rep_op) */	if (rcu_qsctr_help(&rcu_sched_ctrlblk) %
+228: /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+236: /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+238: /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+239: /* MUTANT (negate) */	if(! (rcu_qsctr_help(&rcu_bh_ctrlblk)))
+241: /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+252: /* MUTANT (del_stmt) */ /* 	RCU_TRACE(check_cpu_stalls()); */ 
+253: /* MUTANT (rep_op) */	if (user && rcu_is_cpu_rrupt_from_idle())
+253: /* MUTANT (negate) */	if(! (user || rcu_is_cpu_rrupt_from_idle()))
+255: /* MUTANT (negate) */	else if(! (!in_softirq()))
+257: /* MUTANT (negate) */	if(! (user))
+267: /* MUTANT (del_stmt) */ /* 	const char *rn = NULL; */ 
+268: /* MUTANT (del_stmt) */ /* 	struct rcu_head *next, *list; */ 
+269: /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+270: /* MUTANT (del_stmt) */ /* 	RCU_TRACE(int cb_count = 0); */ 
+270: /* MUTANT (rep_const) */	RCU_TRACE(int cb_count = 1);
+270: /* MUTANT (rep_const) */	RCU_TRACE(int cb_count = -1);
+273: /* MUTANT (rep_op) */	if (&rcp->rcucblist != rcp->donetail) {
+273: /* MUTANT (negate) */	if(! (&rcp->rcucblist == rcp->donetail)) {
+274: /* MUTANT (del_stmt) */ /* 		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, -1)); */ 
+274: /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 1, 0, -1));
+274: /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, -1, 0, -1));
+274: /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 1, -1));
+274: /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, -1, -1));
+274: /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, 0));
+274: /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, 1));
+274: /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, ((-1)+1)));
+274: /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, ((-1)-1)));
+275: /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_end(rcp->name, 1,
+275: /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_end(rcp->name, -1,
+280: /* MUTANT (del_stmt) */ /* 		return; */ 
+285: /* MUTANT (del_stmt) */ /* 	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, -1)); */ 
+285: /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 1, rcp->qlen, -1));
+285: /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, -1, rcp->qlen, -1));
+285: /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, 0));
+285: /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, 1));
+285: /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, ((-1)+1)));
+285: /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, ((-1)-1)));
+286: /* MUTANT (del_stmt) */ /* 	list = rcp->rcucblist; */ 
+287: /* MUTANT (del_stmt) */ /* 	rcp->rcucblist = *rcp->donetail; */ 
+288: /* MUTANT (del_stmt) */ /* 	*rcp->donetail = NULL; */ 
+289: /* MUTANT (rep_op) */	if (rcp->curtail != rcp->donetail)
+289: /* MUTANT (negate) */	if(! (rcp->curtail == rcp->donetail))
+291: /* MUTANT (del_stmt) */ /* 	rcp->donetail = &rcp->rcucblist; */ 
+292: /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+295: /* MUTANT (del_stmt) */ /* 	RCU_TRACE(rn = rcp->name); */ 
+296: /* MUTANT (negate) */	while(! (list)) {
+297: /* MUTANT (del_stmt) */ /* 		next = list->next; */ 
+298: /* MUTANT (del_stmt) */ /* 		prefetch(next); */ 
+299: /* MUTANT (del_stmt) */ /* 		debug_rcu_head_unqueue(list); */ 
+300: /* MUTANT (del_stmt) */ /* 		local_bh_disable(); */ 
+301: /* MUTANT (del_stmt) */ /* 		__rcu_reclaim(rn, list); */ 
+302: /* MUTANT (del_stmt) */ /* 		local_bh_enable(); */ 
+303: /* MUTANT (del_stmt) */ /* 		list = next; */ 
+304: /* MUTANT (del_stmt) */ /* 		RCU_TRACE(cb_count++); */ 
+304: /* MUTANT (rep_op) */		RCU_TRACE(cb_count--);
+308: /* MUTANT (rep_const) */				      cb_count, 1, need_resched(),
+308: /* MUTANT (rep_const) */				      cb_count, -1, need_resched(),
+315: /* MUTANT (del_stmt) */ /* 	__rcu_process_callbacks(&rcu_sched_ctrlblk); */ 
+316: /* MUTANT (del_stmt) */ /* 	__rcu_process_callbacks(&rcu_bh_ctrlblk); */ 
+334: /* MUTANT (rep_op) */	rcu_lockdep_assert(!lock_is_held(&rcu_bh_lock_map) ||
+335: /* MUTANT (rep_op) */			   !lock_is_held(&rcu_lock_map) ||
+338: /* MUTANT (del_stmt) */ /* 	cond_resched(); */ 
+349: /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+351: /* MUTANT (del_stmt) */ /* 	debug_rcu_head_queue(head); */ 
+352: /* MUTANT (del_stmt) */ /* 	head->func = func; */ 
+353: /* MUTANT (del_stmt) */ /* 	head->next = NULL; */ 
+355: /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+356: /* MUTANT (del_stmt) */ /* 	*rcp->curtail = head; */ 
+357: /* MUTANT (del_stmt) */ /* 	rcp->curtail = &head->next; */ 
+358: /* MUTANT (del_stmt) */ /* 	RCU_TRACE(rcp->qlen++); */ 
+358: /* MUTANT (rep_op) */	RCU_TRACE(rcp->qlen--);
+359: /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+369: /* MUTANT (del_stmt) */ /* 	__call_rcu(head, func, &rcu_sched_ctrlblk); */ 
+379: /* MUTANT (del_stmt) */ /* 	__call_rcu(head, func, &rcu_bh_ctrlblk); */ 
+385: /* MUTANT (del_stmt) */ /* 	open_softirq(RCU_SOFTIRQ, rcu_process_callbacks); */ 
+387: /* MUTANT (del_stmt) */ /* 	rcu_early_boot_tests(); */ 

@@ -1,0 +1,694 @@
+PREFIX = locks
+TIMEOUT = 1800
+OPTIONS = -DRUN
+limit cputime 1800 ; ~/cbmc/cbmc -I . -DRUN 
+SANITY CHECK...
+Original SUCCESSFULLY VERIFIED
+Checking mutant mutant100001_tiny.c:  45 :  /* MUTANT (del_stmt) */ /* static void rcu_process_callbacks(struct softirq_action *unused); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100002_tiny.c:  50 :  /* MUTANT (del_stmt) */ /* static long long rcu_dynticks_nesting = DYNTICK_TASK_EXIT_IDLE; */ 
+OTHER RESULT
+Checking mutant mutant100003_tiny.c:  57 :  /* MUTANT (negate) */	if(! (newval)) {
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100004_tiny.c:  60 :  /* MUTANT (del_stmt) */ /* 		rcu_dynticks_nesting = newval; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100005_tiny.c:  61 :  /* MUTANT (del_stmt) */ /* 		return; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100006_tiny.c:  65 :  /* MUTANT (rep_op) */	if (IS_ENABLED(CONFIG_RCU_TRACE) || !is_idle_task(current)) {
+KILLED
+Checking mutant mutant100007_tiny.c:  65 :  /* MUTANT (negate) */	if(! (IS_ENABLED(CONFIG_RCU_TRACE) && !is_idle_task(current))) {
+KILLED
+Checking mutant mutant100008_tiny.c:  66 :  /* MUTANT (del_stmt) */ /* 		struct task_struct *idle __maybe_unused = idle_task(smp_processor_id()); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100009_tiny.c:  70 :  /* MUTANT (del_stmt) */ /* 		ftrace_dump(DUMP_ALL); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100010_tiny.c:  71 :  /* MUTANT (rep_const) */		WARN_ONCE(0, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100011_tiny.c:  71 :  /* MUTANT (rep_const) */		WARN_ONCE(-1, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100012_tiny.c:  71 :  /* MUTANT (rep_const) */		WARN_ONCE(((1)+1), "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100013_tiny.c:  76 :  /* MUTANT (del_stmt) */ /* 	barrier(); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100014_tiny.c:  77 :  /* MUTANT (del_stmt) */ /* 	rcu_dynticks_nesting = newval; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100015_tiny.c:  86 :  /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+OTHER RESULT
+Checking mutant mutant100016_tiny.c:  87 :  /* MUTANT (del_stmt) */ /* 	long long newval; */ 
+OTHER RESULT
+Checking mutant mutant100017_tiny.c:  89 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100018_tiny.c:  90 :  /* MUTANT (del_stmt) */ /* 	WARN_ON_ONCE((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) == 0); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100019_tiny.c:  90 :  /* MUTANT (rep_op) */	WARN_ON_ONCE((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) != 0);
+KILLED
+Checking mutant mutant100020_tiny.c:  90 :  /* MUTANT (rep_const) */	WARN_ON_ONCE((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) == 1);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100021_tiny.c:  90 :  /* MUTANT (rep_const) */	WARN_ON_ONCE((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) == -1);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100022_tiny.c:  91 :  /* MUTANT (rep_op) */	if ((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) !=
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100023_tiny.c:  93 :  /* MUTANT (rep_const) */		newval = 1;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100024_tiny.c:  93 :  /* MUTANT (rep_const) */		newval = -1;
+KILLED
+Checking mutant mutant100025_tiny.c:  96 :  /* MUTANT (del_stmt) */ /* 	rcu_idle_enter_common(newval); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100026_tiny.c:  97 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100027_tiny.c:  106 :  /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+OTHER RESULT
+Checking mutant mutant100028_tiny.c:  107 :  /* MUTANT (del_stmt) */ /* 	long long newval; */ 
+OTHER RESULT
+Checking mutant mutant100029_tiny.c:  109 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100030_tiny.c:  110 :  /* MUTANT (del_stmt) */ /* 	newval = rcu_dynticks_nesting - 1; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100031_tiny.c:  110 :  /* MUTANT (rep_const) */	newval = rcu_dynticks_nesting - 0;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100032_tiny.c:  110 :  /* MUTANT (rep_const) */	newval = rcu_dynticks_nesting - -1;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100033_tiny.c:  110 :  /* MUTANT (rep_const) */	newval = rcu_dynticks_nesting - ((1)+1);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100034_tiny.c:  111 :  /* MUTANT (del_stmt) */ /* 	WARN_ON_ONCE(newval < 0); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100035_tiny.c:  111 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(newval <= 0);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100036_tiny.c:  111 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(newval > 0);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100037_tiny.c:  111 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(newval >= 0);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100038_tiny.c:  111 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(newval == 0);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100039_tiny.c:  111 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(newval != 0);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100040_tiny.c:  111 :  /* MUTANT (rep_const) */	WARN_ON_ONCE(newval < 1);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100041_tiny.c:  111 :  /* MUTANT (rep_const) */	WARN_ON_ONCE(newval < -1);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100042_tiny.c:  112 :  /* MUTANT (del_stmt) */ /* 	rcu_idle_enter_common(newval); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100043_tiny.c:  113 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100044_tiny.c:  120 :  /* MUTANT (negate) */	if(! (oldval)) {
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100045_tiny.c:  123 :  /* MUTANT (del_stmt) */ /* 		return; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100046_tiny.c:  126 :  /* MUTANT (rep_op) */	if (IS_ENABLED(CONFIG_RCU_TRACE) || !is_idle_task(current)) {
+KILLED
+Checking mutant mutant100047_tiny.c:  126 :  /* MUTANT (negate) */	if(! (IS_ENABLED(CONFIG_RCU_TRACE) && !is_idle_task(current))) {
+KILLED
+Checking mutant mutant100048_tiny.c:  127 :  /* MUTANT (del_stmt) */ /* 		struct task_struct *idle __maybe_unused = idle_task(smp_processor_id()); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100049_tiny.c:  131 :  /* MUTANT (del_stmt) */ /* 		ftrace_dump(DUMP_ALL); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100050_tiny.c:  132 :  /* MUTANT (rep_const) */		WARN_ONCE(0, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100051_tiny.c:  132 :  /* MUTANT (rep_const) */		WARN_ONCE(-1, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100052_tiny.c:  132 :  /* MUTANT (rep_const) */		WARN_ONCE(((1)+1), "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100053_tiny.c:  143 :  /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+OTHER RESULT
+Checking mutant mutant100054_tiny.c:  144 :  /* MUTANT (del_stmt) */ /* 	long long oldval; */ 
+OTHER RESULT
+Checking mutant mutant100055_tiny.c:  146 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100056_tiny.c:  147 :  /* MUTANT (del_stmt) */ /* 	oldval = rcu_dynticks_nesting; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100057_tiny.c:  148 :  /* MUTANT (del_stmt) */ /* 	WARN_ON_ONCE(rcu_dynticks_nesting < 0); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100058_tiny.c:  148 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting <= 0);
+KILLED
+Checking mutant mutant100059_tiny.c:  148 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting > 0);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100060_tiny.c:  148 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting >= 0);
+KILLED
+Checking mutant mutant100061_tiny.c:  148 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting == 0);
+KILLED
+Checking mutant mutant100062_tiny.c:  148 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting != 0);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100063_tiny.c:  148 :  /* MUTANT (rep_const) */	WARN_ON_ONCE(rcu_dynticks_nesting < 1);
+KILLED
+Checking mutant mutant100064_tiny.c:  148 :  /* MUTANT (rep_const) */	WARN_ON_ONCE(rcu_dynticks_nesting < -1);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100065_tiny.c:  149 :  /* MUTANT (negate) */	if(! (rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK))
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100066_tiny.c:  150 :  /* MUTANT (rep_op) */		rcu_dynticks_nesting -= DYNTICK_TASK_NEST_VALUE;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100067_tiny.c:  150 :  /* MUTANT (rep_op) */		rcu_dynticks_nesting *= DYNTICK_TASK_NEST_VALUE;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100068_tiny.c:  150 :  /* MUTANT (rep_op) */		rcu_dynticks_nesting %= DYNTICK_TASK_NEST_VALUE;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100069_tiny.c:  153 :  /* MUTANT (del_stmt) */ /* 	rcu_idle_exit_common(oldval); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100070_tiny.c:  154 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100071_tiny.c:  163 :  /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+OTHER RESULT
+Checking mutant mutant100072_tiny.c:  164 :  /* MUTANT (del_stmt) */ /* 	long long oldval; */ 
+OTHER RESULT
+Checking mutant mutant100073_tiny.c:  166 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100074_tiny.c:  167 :  /* MUTANT (del_stmt) */ /* 	oldval = rcu_dynticks_nesting; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100075_tiny.c:  168 :  /* MUTANT (del_stmt) */ /* 	rcu_dynticks_nesting++; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100076_tiny.c:  168 :  /* MUTANT (rep_op) */	rcu_dynticks_nesting--;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100077_tiny.c:  169 :  /* MUTANT (del_stmt) */ /* 	WARN_ON_ONCE(rcu_dynticks_nesting == 0); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100078_tiny.c:  169 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting != 0);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100079_tiny.c:  169 :  /* MUTANT (rep_const) */	WARN_ON_ONCE(rcu_dynticks_nesting == 1);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100080_tiny.c:  169 :  /* MUTANT (rep_const) */	WARN_ON_ONCE(rcu_dynticks_nesting == -1);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100081_tiny.c:  170 :  /* MUTANT (del_stmt) */ /* 	rcu_idle_exit_common(oldval); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100082_tiny.c:  171 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100083_tiny.c:  182 :  /* MUTANT (del_stmt) */ /* 	return rcu_dynticks_nesting; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100084_tiny.c:  195 :  /* MUTANT (del_stmt) */ /* 	return rcu_dynticks_nesting <= 1; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100085_tiny.c:  195 :  /* MUTANT (rep_op) */	return rcu_dynticks_nesting < 1;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100086_tiny.c:  195 :  /* MUTANT (rep_op) */	return rcu_dynticks_nesting > 1;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100087_tiny.c:  195 :  /* MUTANT (rep_op) */	return rcu_dynticks_nesting >= 1;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100088_tiny.c:  195 :  /* MUTANT (rep_op) */	return rcu_dynticks_nesting == 1;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100089_tiny.c:  195 :  /* MUTANT (rep_op) */	return rcu_dynticks_nesting != 1;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100090_tiny.c:  195 :  /* MUTANT (rep_const) */	return rcu_dynticks_nesting <= 0;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100091_tiny.c:  195 :  /* MUTANT (rep_const) */	return rcu_dynticks_nesting <= -1;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100092_tiny.c:  195 :  /* MUTANT (rep_const) */	return rcu_dynticks_nesting <= ((1)+1);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100093_tiny.c:  205 :  /* MUTANT (del_stmt) */ /* 	RCU_TRACE(reset_cpu_stall_ticks(rcp)); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100094_tiny.c:  206 :  /* MUTANT (rep_op) */	if (rcp->rcucblist == NULL &&
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100095_tiny.c:  206 :  /* MUTANT (rep_op) */	if (rcp->rcucblist != NULL ||
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100096_tiny.c:  207 :  /* MUTANT (rep_op) */	    rcp->donetail == rcp->curtail) {
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100097_tiny.c:  208 :  /* MUTANT (del_stmt) */ /* 		rcp->donetail = rcp->curtail; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100098_tiny.c:  209 :  /* MUTANT (del_stmt) */ /* 		return 1; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100099_tiny.c:  209 :  /* MUTANT (rep_const) */		return 0;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100100_tiny.c:  209 :  /* MUTANT (rep_const) */		return -1;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100101_tiny.c:  209 :  /* MUTANT (rep_const) */		return ((1)+1);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100102_tiny.c:  212 :  /* MUTANT (rep_const) */	return 1;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100103_tiny.c:  212 :  /* MUTANT (rep_const) */	return -1;
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100104_tiny.c:  222 :  /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+OTHER RESULT
+Checking mutant mutant100105_tiny.c:  224 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100106_tiny.c:  225 :  /* MUTANT (rep_op) */	if (rcu_qsctr_help(&rcu_sched_ctrlblk) -
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100107_tiny.c:  225 :  /* MUTANT (rep_op) */	if (rcu_qsctr_help(&rcu_sched_ctrlblk) *
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100108_tiny.c:  225 :  /* MUTANT (rep_op) */	if (rcu_qsctr_help(&rcu_sched_ctrlblk) %
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100109_tiny.c:  228 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100110_tiny.c:  236 :  /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+OTHER RESULT
+Checking mutant mutant100111_tiny.c:  238 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100112_tiny.c:  239 :  /* MUTANT (negate) */	if(! (rcu_qsctr_help(&rcu_bh_ctrlblk)))
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100113_tiny.c:  241 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100114_tiny.c:  252 :  /* MUTANT (del_stmt) */ /* 	RCU_TRACE(check_cpu_stalls()); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100115_tiny.c:  253 :  /* MUTANT (rep_op) */	if (user && rcu_is_cpu_rrupt_from_idle())
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100116_tiny.c:  253 :  /* MUTANT (negate) */	if(! (user || rcu_is_cpu_rrupt_from_idle()))
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100117_tiny.c:  255 :  /* MUTANT (negate) */	else if(! (!in_softirq()))
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100118_tiny.c:  257 :  /* MUTANT (negate) */	if(! (user))
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100119_tiny.c:  267 :  /* MUTANT (del_stmt) */ /* 	const char *rn = NULL; */ 
+OTHER RESULT
+Checking mutant mutant100120_tiny.c:  268 :  /* MUTANT (del_stmt) */ /* 	struct rcu_head *next, *list; */ 
+OTHER RESULT
+Checking mutant mutant100121_tiny.c:  269 :  /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+OTHER RESULT
+Checking mutant mutant100122_tiny.c:  270 :  /* MUTANT (del_stmt) */ /* 	RCU_TRACE(int cb_count = 0); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100123_tiny.c:  270 :  /* MUTANT (rep_const) */	RCU_TRACE(int cb_count = 1);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100124_tiny.c:  270 :  /* MUTANT (rep_const) */	RCU_TRACE(int cb_count = -1);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100125_tiny.c:  273 :  /* MUTANT (rep_op) */	if (&rcp->rcucblist != rcp->donetail) {
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100126_tiny.c:  273 :  /* MUTANT (negate) */	if(! (&rcp->rcucblist == rcp->donetail)) {
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100127_tiny.c:  274 :  /* MUTANT (del_stmt) */ /* 		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, -1)); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100128_tiny.c:  274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 1, 0, -1));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100129_tiny.c:  274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, -1, 0, -1));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100130_tiny.c:  274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 1, -1));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100131_tiny.c:  274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, -1, -1));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100132_tiny.c:  274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, 0));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100133_tiny.c:  274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, 1));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100134_tiny.c:  274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, ((-1)+1)));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100135_tiny.c:  274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, ((-1)-1)));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100136_tiny.c:  275 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_end(rcp->name, 1,
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100137_tiny.c:  275 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_end(rcp->name, -1,
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100138_tiny.c:  280 :  /* MUTANT (del_stmt) */ /* 		return; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100139_tiny.c:  285 :  /* MUTANT (del_stmt) */ /* 	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, -1)); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100140_tiny.c:  285 :  /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 1, rcp->qlen, -1));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100141_tiny.c:  285 :  /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, -1, rcp->qlen, -1));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100142_tiny.c:  285 :  /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, 0));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100143_tiny.c:  285 :  /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, 1));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100144_tiny.c:  285 :  /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, ((-1)+1)));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100145_tiny.c:  285 :  /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, ((-1)-1)));
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100146_tiny.c:  286 :  /* MUTANT (del_stmt) */ /* 	list = rcp->rcucblist; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100147_tiny.c:  287 :  /* MUTANT (del_stmt) */ /* 	rcp->rcucblist = *rcp->donetail; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100148_tiny.c:  288 :  /* MUTANT (del_stmt) */ /* 	*rcp->donetail = NULL; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100149_tiny.c:  289 :  /* MUTANT (rep_op) */	if (rcp->curtail != rcp->donetail)
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100150_tiny.c:  289 :  /* MUTANT (negate) */	if(! (rcp->curtail == rcp->donetail))
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100151_tiny.c:  291 :  /* MUTANT (del_stmt) */ /* 	rcp->donetail = &rcp->rcucblist; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100152_tiny.c:  292 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100153_tiny.c:  295 :  /* MUTANT (del_stmt) */ /* 	RCU_TRACE(rn = rcp->name); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100154_tiny.c:  296 :  /* MUTANT (negate) */	while(! (list)) {
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100155_tiny.c:  297 :  /* MUTANT (del_stmt) */ /* 		next = list->next; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100156_tiny.c:  298 :  /* MUTANT (del_stmt) */ /* 		prefetch(next); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100157_tiny.c:  299 :  /* MUTANT (del_stmt) */ /* 		debug_rcu_head_unqueue(list); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100158_tiny.c:  300 :  /* MUTANT (del_stmt) */ /* 		local_bh_disable(); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100159_tiny.c:  301 :  /* MUTANT (del_stmt) */ /* 		__rcu_reclaim(rn, list); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100160_tiny.c:  302 :  /* MUTANT (del_stmt) */ /* 		local_bh_enable(); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100161_tiny.c:  303 :  /* MUTANT (del_stmt) */ /* 		list = next; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100162_tiny.c:  304 :  /* MUTANT (del_stmt) */ /* 		RCU_TRACE(cb_count++); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100163_tiny.c:  304 :  /* MUTANT (rep_op) */		RCU_TRACE(cb_count--);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100164_tiny.c:  308 :  /* MUTANT (rep_const) */				      cb_count, 1, need_resched(),
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100165_tiny.c:  308 :  /* MUTANT (rep_const) */				      cb_count, -1, need_resched(),
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100166_tiny.c:  315 :  /* MUTANT (del_stmt) */ /* 	__rcu_process_callbacks(&rcu_sched_ctrlblk); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100167_tiny.c:  316 :  /* MUTANT (del_stmt) */ /* 	__rcu_process_callbacks(&rcu_bh_ctrlblk); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100168_tiny.c:  334 :  /* MUTANT (rep_op) */	rcu_lockdep_assert(!lock_is_held(&rcu_bh_lock_map) ||
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100169_tiny.c:  335 :  /* MUTANT (rep_op) */			   !lock_is_held(&rcu_lock_map) ||
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100170_tiny.c:  338 :  /* MUTANT (del_stmt) */ /* 	cond_resched(); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100171_tiny.c:  349 :  /* MUTANT (del_stmt) */ /* 	unsigned long flags; */ 
+OTHER RESULT
+Checking mutant mutant100172_tiny.c:  351 :  /* MUTANT (del_stmt) */ /* 	debug_rcu_head_queue(head); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100173_tiny.c:  352 :  /* MUTANT (del_stmt) */ /* 	head->func = func; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100174_tiny.c:  353 :  /* MUTANT (del_stmt) */ /* 	head->next = NULL; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100175_tiny.c:  355 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100176_tiny.c:  356 :  /* MUTANT (del_stmt) */ /* 	*rcp->curtail = head; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100177_tiny.c:  357 :  /* MUTANT (del_stmt) */ /* 	rcp->curtail = &head->next; */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100178_tiny.c:  358 :  /* MUTANT (del_stmt) */ /* 	RCU_TRACE(rcp->qlen++); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100179_tiny.c:  358 :  /* MUTANT (rep_op) */	RCU_TRACE(rcp->qlen--);
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100180_tiny.c:  359 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100181_tiny.c:  369 :  /* MUTANT (del_stmt) */ /* 	__call_rcu(head, func, &rcu_sched_ctrlblk); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100182_tiny.c:  379 :  /* MUTANT (del_stmt) */ /* 	__call_rcu(head, func, &rcu_bh_ctrlblk); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100183_tiny.c:  385 :  /* MUTANT (del_stmt) */ /* 	open_softirq(RCU_SOFTIRQ, rcu_process_callbacks); */ 
+VERIFICATION SUCCESSFUL
+Checking mutant mutant100184_tiny.c:  387 :  /* MUTANT (del_stmt) */ /* 	rcu_early_boot_tests(); */ 
+VERIFICATION SUCCESSFUL
+184 TOTAL MUTANTS, 10 KILLED, 15 FAILED TO COMPILE 0 TIMED OUT, (5.4347826087% kill rate)
+SURVIVING MUTANTS:
+mutant100001_tiny.c
+45 :  /* MUTANT (del_stmt) */ /* static void rcu_process_callbacks(struct softirq_action *unused); */ 
+mutant100003_tiny.c
+57 :  /* MUTANT (negate) */	if(! (newval)) {
+mutant100004_tiny.c
+60 :  /* MUTANT (del_stmt) */ /* 		rcu_dynticks_nesting = newval; */ 
+mutant100005_tiny.c
+61 :  /* MUTANT (del_stmt) */ /* 		return; */ 
+mutant100008_tiny.c
+66 :  /* MUTANT (del_stmt) */ /* 		struct task_struct *idle __maybe_unused = idle_task(smp_processor_id()); */ 
+mutant100009_tiny.c
+70 :  /* MUTANT (del_stmt) */ /* 		ftrace_dump(DUMP_ALL); */ 
+mutant100010_tiny.c
+71 :  /* MUTANT (rep_const) */		WARN_ONCE(0, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+mutant100011_tiny.c
+71 :  /* MUTANT (rep_const) */		WARN_ONCE(-1, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+mutant100012_tiny.c
+71 :  /* MUTANT (rep_const) */		WARN_ONCE(((1)+1), "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+mutant100013_tiny.c
+76 :  /* MUTANT (del_stmt) */ /* 	barrier(); */ 
+mutant100014_tiny.c
+77 :  /* MUTANT (del_stmt) */ /* 	rcu_dynticks_nesting = newval; */ 
+mutant100017_tiny.c
+89 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+mutant100018_tiny.c
+90 :  /* MUTANT (del_stmt) */ /* 	WARN_ON_ONCE((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) == 0); */ 
+mutant100020_tiny.c
+90 :  /* MUTANT (rep_const) */	WARN_ON_ONCE((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) == 1);
+mutant100021_tiny.c
+90 :  /* MUTANT (rep_const) */	WARN_ON_ONCE((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) == -1);
+mutant100022_tiny.c
+91 :  /* MUTANT (rep_op) */	if ((rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK) !=
+mutant100023_tiny.c
+93 :  /* MUTANT (rep_const) */		newval = 1;
+mutant100025_tiny.c
+96 :  /* MUTANT (del_stmt) */ /* 	rcu_idle_enter_common(newval); */ 
+mutant100026_tiny.c
+97 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+mutant100029_tiny.c
+109 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+mutant100030_tiny.c
+110 :  /* MUTANT (del_stmt) */ /* 	newval = rcu_dynticks_nesting - 1; */ 
+mutant100031_tiny.c
+110 :  /* MUTANT (rep_const) */	newval = rcu_dynticks_nesting - 0;
+mutant100032_tiny.c
+110 :  /* MUTANT (rep_const) */	newval = rcu_dynticks_nesting - -1;
+mutant100033_tiny.c
+110 :  /* MUTANT (rep_const) */	newval = rcu_dynticks_nesting - ((1)+1);
+mutant100034_tiny.c
+111 :  /* MUTANT (del_stmt) */ /* 	WARN_ON_ONCE(newval < 0); */ 
+mutant100035_tiny.c
+111 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(newval <= 0);
+mutant100036_tiny.c
+111 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(newval > 0);
+mutant100037_tiny.c
+111 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(newval >= 0);
+mutant100038_tiny.c
+111 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(newval == 0);
+mutant100039_tiny.c
+111 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(newval != 0);
+mutant100040_tiny.c
+111 :  /* MUTANT (rep_const) */	WARN_ON_ONCE(newval < 1);
+mutant100041_tiny.c
+111 :  /* MUTANT (rep_const) */	WARN_ON_ONCE(newval < -1);
+mutant100042_tiny.c
+112 :  /* MUTANT (del_stmt) */ /* 	rcu_idle_enter_common(newval); */ 
+mutant100043_tiny.c
+113 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+mutant100044_tiny.c
+120 :  /* MUTANT (negate) */	if(! (oldval)) {
+mutant100045_tiny.c
+123 :  /* MUTANT (del_stmt) */ /* 		return; */ 
+mutant100048_tiny.c
+127 :  /* MUTANT (del_stmt) */ /* 		struct task_struct *idle __maybe_unused = idle_task(smp_processor_id()); */ 
+mutant100049_tiny.c
+131 :  /* MUTANT (del_stmt) */ /* 		ftrace_dump(DUMP_ALL); */ 
+mutant100050_tiny.c
+132 :  /* MUTANT (rep_const) */		WARN_ONCE(0, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+mutant100051_tiny.c
+132 :  /* MUTANT (rep_const) */		WARN_ONCE(-1, "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+mutant100052_tiny.c
+132 :  /* MUTANT (rep_const) */		WARN_ONCE(((1)+1), "Current pid: %d comm: %s / Idle pid: %d comm: %s",
+mutant100055_tiny.c
+146 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+mutant100056_tiny.c
+147 :  /* MUTANT (del_stmt) */ /* 	oldval = rcu_dynticks_nesting; */ 
+mutant100057_tiny.c
+148 :  /* MUTANT (del_stmt) */ /* 	WARN_ON_ONCE(rcu_dynticks_nesting < 0); */ 
+mutant100059_tiny.c
+148 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting > 0);
+mutant100062_tiny.c
+148 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting != 0);
+mutant100064_tiny.c
+148 :  /* MUTANT (rep_const) */	WARN_ON_ONCE(rcu_dynticks_nesting < -1);
+mutant100065_tiny.c
+149 :  /* MUTANT (negate) */	if(! (rcu_dynticks_nesting & DYNTICK_TASK_NEST_MASK))
+mutant100066_tiny.c
+150 :  /* MUTANT (rep_op) */		rcu_dynticks_nesting -= DYNTICK_TASK_NEST_VALUE;
+mutant100067_tiny.c
+150 :  /* MUTANT (rep_op) */		rcu_dynticks_nesting *= DYNTICK_TASK_NEST_VALUE;
+mutant100068_tiny.c
+150 :  /* MUTANT (rep_op) */		rcu_dynticks_nesting %= DYNTICK_TASK_NEST_VALUE;
+mutant100069_tiny.c
+153 :  /* MUTANT (del_stmt) */ /* 	rcu_idle_exit_common(oldval); */ 
+mutant100070_tiny.c
+154 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+mutant100073_tiny.c
+166 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+mutant100074_tiny.c
+167 :  /* MUTANT (del_stmt) */ /* 	oldval = rcu_dynticks_nesting; */ 
+mutant100075_tiny.c
+168 :  /* MUTANT (del_stmt) */ /* 	rcu_dynticks_nesting++; */ 
+mutant100076_tiny.c
+168 :  /* MUTANT (rep_op) */	rcu_dynticks_nesting--;
+mutant100077_tiny.c
+169 :  /* MUTANT (del_stmt) */ /* 	WARN_ON_ONCE(rcu_dynticks_nesting == 0); */ 
+mutant100078_tiny.c
+169 :  /* MUTANT (rep_op) */	WARN_ON_ONCE(rcu_dynticks_nesting != 0);
+mutant100079_tiny.c
+169 :  /* MUTANT (rep_const) */	WARN_ON_ONCE(rcu_dynticks_nesting == 1);
+mutant100080_tiny.c
+169 :  /* MUTANT (rep_const) */	WARN_ON_ONCE(rcu_dynticks_nesting == -1);
+mutant100081_tiny.c
+170 :  /* MUTANT (del_stmt) */ /* 	rcu_idle_exit_common(oldval); */ 
+mutant100082_tiny.c
+171 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+mutant100083_tiny.c
+182 :  /* MUTANT (del_stmt) */ /* 	return rcu_dynticks_nesting; */ 
+mutant100084_tiny.c
+195 :  /* MUTANT (del_stmt) */ /* 	return rcu_dynticks_nesting <= 1; */ 
+mutant100085_tiny.c
+195 :  /* MUTANT (rep_op) */	return rcu_dynticks_nesting < 1;
+mutant100086_tiny.c
+195 :  /* MUTANT (rep_op) */	return rcu_dynticks_nesting > 1;
+mutant100087_tiny.c
+195 :  /* MUTANT (rep_op) */	return rcu_dynticks_nesting >= 1;
+mutant100088_tiny.c
+195 :  /* MUTANT (rep_op) */	return rcu_dynticks_nesting == 1;
+mutant100089_tiny.c
+195 :  /* MUTANT (rep_op) */	return rcu_dynticks_nesting != 1;
+mutant100090_tiny.c
+195 :  /* MUTANT (rep_const) */	return rcu_dynticks_nesting <= 0;
+mutant100091_tiny.c
+195 :  /* MUTANT (rep_const) */	return rcu_dynticks_nesting <= -1;
+mutant100092_tiny.c
+195 :  /* MUTANT (rep_const) */	return rcu_dynticks_nesting <= ((1)+1);
+mutant100093_tiny.c
+205 :  /* MUTANT (del_stmt) */ /* 	RCU_TRACE(reset_cpu_stall_ticks(rcp)); */ 
+mutant100094_tiny.c
+206 :  /* MUTANT (rep_op) */	if (rcp->rcucblist == NULL &&
+mutant100095_tiny.c
+206 :  /* MUTANT (rep_op) */	if (rcp->rcucblist != NULL ||
+mutant100096_tiny.c
+207 :  /* MUTANT (rep_op) */	    rcp->donetail == rcp->curtail) {
+mutant100097_tiny.c
+208 :  /* MUTANT (del_stmt) */ /* 		rcp->donetail = rcp->curtail; */ 
+mutant100098_tiny.c
+209 :  /* MUTANT (del_stmt) */ /* 		return 1; */ 
+mutant100099_tiny.c
+209 :  /* MUTANT (rep_const) */		return 0;
+mutant100100_tiny.c
+209 :  /* MUTANT (rep_const) */		return -1;
+mutant100101_tiny.c
+209 :  /* MUTANT (rep_const) */		return ((1)+1);
+mutant100102_tiny.c
+212 :  /* MUTANT (rep_const) */	return 1;
+mutant100103_tiny.c
+212 :  /* MUTANT (rep_const) */	return -1;
+mutant100105_tiny.c
+224 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+mutant100106_tiny.c
+225 :  /* MUTANT (rep_op) */	if (rcu_qsctr_help(&rcu_sched_ctrlblk) -
+mutant100107_tiny.c
+225 :  /* MUTANT (rep_op) */	if (rcu_qsctr_help(&rcu_sched_ctrlblk) *
+mutant100108_tiny.c
+225 :  /* MUTANT (rep_op) */	if (rcu_qsctr_help(&rcu_sched_ctrlblk) %
+mutant100109_tiny.c
+228 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+mutant100111_tiny.c
+238 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+mutant100112_tiny.c
+239 :  /* MUTANT (negate) */	if(! (rcu_qsctr_help(&rcu_bh_ctrlblk)))
+mutant100113_tiny.c
+241 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+mutant100114_tiny.c
+252 :  /* MUTANT (del_stmt) */ /* 	RCU_TRACE(check_cpu_stalls()); */ 
+mutant100115_tiny.c
+253 :  /* MUTANT (rep_op) */	if (user && rcu_is_cpu_rrupt_from_idle())
+mutant100116_tiny.c
+253 :  /* MUTANT (negate) */	if(! (user || rcu_is_cpu_rrupt_from_idle()))
+mutant100117_tiny.c
+255 :  /* MUTANT (negate) */	else if(! (!in_softirq()))
+mutant100118_tiny.c
+257 :  /* MUTANT (negate) */	if(! (user))
+mutant100122_tiny.c
+270 :  /* MUTANT (del_stmt) */ /* 	RCU_TRACE(int cb_count = 0); */ 
+mutant100123_tiny.c
+270 :  /* MUTANT (rep_const) */	RCU_TRACE(int cb_count = 1);
+mutant100124_tiny.c
+270 :  /* MUTANT (rep_const) */	RCU_TRACE(int cb_count = -1);
+mutant100125_tiny.c
+273 :  /* MUTANT (rep_op) */	if (&rcp->rcucblist != rcp->donetail) {
+mutant100126_tiny.c
+273 :  /* MUTANT (negate) */	if(! (&rcp->rcucblist == rcp->donetail)) {
+mutant100127_tiny.c
+274 :  /* MUTANT (del_stmt) */ /* 		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, -1)); */ 
+mutant100128_tiny.c
+274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 1, 0, -1));
+mutant100129_tiny.c
+274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, -1, 0, -1));
+mutant100130_tiny.c
+274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 1, -1));
+mutant100131_tiny.c
+274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, -1, -1));
+mutant100132_tiny.c
+274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, 0));
+mutant100133_tiny.c
+274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, 1));
+mutant100134_tiny.c
+274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, ((-1)+1)));
+mutant100135_tiny.c
+274 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, 0, ((-1)-1)));
+mutant100136_tiny.c
+275 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_end(rcp->name, 1,
+mutant100137_tiny.c
+275 :  /* MUTANT (rep_const) */		RCU_TRACE(trace_rcu_batch_end(rcp->name, -1,
+mutant100138_tiny.c
+280 :  /* MUTANT (del_stmt) */ /* 		return; */ 
+mutant100139_tiny.c
+285 :  /* MUTANT (del_stmt) */ /* 	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, -1)); */ 
+mutant100140_tiny.c
+285 :  /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 1, rcp->qlen, -1));
+mutant100141_tiny.c
+285 :  /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, -1, rcp->qlen, -1));
+mutant100142_tiny.c
+285 :  /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, 0));
+mutant100143_tiny.c
+285 :  /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, 1));
+mutant100144_tiny.c
+285 :  /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, ((-1)+1)));
+mutant100145_tiny.c
+285 :  /* MUTANT (rep_const) */	RCU_TRACE(trace_rcu_batch_start(rcp->name, 0, rcp->qlen, ((-1)-1)));
+mutant100146_tiny.c
+286 :  /* MUTANT (del_stmt) */ /* 	list = rcp->rcucblist; */ 
+mutant100147_tiny.c
+287 :  /* MUTANT (del_stmt) */ /* 	rcp->rcucblist = *rcp->donetail; */ 
+mutant100148_tiny.c
+288 :  /* MUTANT (del_stmt) */ /* 	*rcp->donetail = NULL; */ 
+mutant100149_tiny.c
+289 :  /* MUTANT (rep_op) */	if (rcp->curtail != rcp->donetail)
+mutant100150_tiny.c
+289 :  /* MUTANT (negate) */	if(! (rcp->curtail == rcp->donetail))
+mutant100151_tiny.c
+291 :  /* MUTANT (del_stmt) */ /* 	rcp->donetail = &rcp->rcucblist; */ 
+mutant100152_tiny.c
+292 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+mutant100153_tiny.c
+295 :  /* MUTANT (del_stmt) */ /* 	RCU_TRACE(rn = rcp->name); */ 
+mutant100154_tiny.c
+296 :  /* MUTANT (negate) */	while(! (list)) {
+mutant100155_tiny.c
+297 :  /* MUTANT (del_stmt) */ /* 		next = list->next; */ 
+mutant100156_tiny.c
+298 :  /* MUTANT (del_stmt) */ /* 		prefetch(next); */ 
+mutant100157_tiny.c
+299 :  /* MUTANT (del_stmt) */ /* 		debug_rcu_head_unqueue(list); */ 
+mutant100158_tiny.c
+300 :  /* MUTANT (del_stmt) */ /* 		local_bh_disable(); */ 
+mutant100159_tiny.c
+301 :  /* MUTANT (del_stmt) */ /* 		__rcu_reclaim(rn, list); */ 
+mutant100160_tiny.c
+302 :  /* MUTANT (del_stmt) */ /* 		local_bh_enable(); */ 
+mutant100161_tiny.c
+303 :  /* MUTANT (del_stmt) */ /* 		list = next; */ 
+mutant100162_tiny.c
+304 :  /* MUTANT (del_stmt) */ /* 		RCU_TRACE(cb_count++); */ 
+mutant100163_tiny.c
+304 :  /* MUTANT (rep_op) */		RCU_TRACE(cb_count--);
+mutant100164_tiny.c
+308 :  /* MUTANT (rep_const) */				      cb_count, 1, need_resched(),
+mutant100165_tiny.c
+308 :  /* MUTANT (rep_const) */				      cb_count, -1, need_resched(),
+mutant100166_tiny.c
+315 :  /* MUTANT (del_stmt) */ /* 	__rcu_process_callbacks(&rcu_sched_ctrlblk); */ 
+mutant100167_tiny.c
+316 :  /* MUTANT (del_stmt) */ /* 	__rcu_process_callbacks(&rcu_bh_ctrlblk); */ 
+mutant100168_tiny.c
+334 :  /* MUTANT (rep_op) */	rcu_lockdep_assert(!lock_is_held(&rcu_bh_lock_map) ||
+mutant100169_tiny.c
+335 :  /* MUTANT (rep_op) */			   !lock_is_held(&rcu_lock_map) ||
+mutant100170_tiny.c
+338 :  /* MUTANT (del_stmt) */ /* 	cond_resched(); */ 
+mutant100172_tiny.c
+351 :  /* MUTANT (del_stmt) */ /* 	debug_rcu_head_queue(head); */ 
+mutant100173_tiny.c
+352 :  /* MUTANT (del_stmt) */ /* 	head->func = func; */ 
+mutant100174_tiny.c
+353 :  /* MUTANT (del_stmt) */ /* 	head->next = NULL; */ 
+mutant100175_tiny.c
+355 :  /* MUTANT (del_stmt) */ /* 	local_irq_save(flags); */ 
+mutant100176_tiny.c
+356 :  /* MUTANT (del_stmt) */ /* 	*rcp->curtail = head; */ 
+mutant100177_tiny.c
+357 :  /* MUTANT (del_stmt) */ /* 	rcp->curtail = &head->next; */ 
+mutant100178_tiny.c
+358 :  /* MUTANT (del_stmt) */ /* 	RCU_TRACE(rcp->qlen++); */ 
+mutant100179_tiny.c
+358 :  /* MUTANT (rep_op) */	RCU_TRACE(rcp->qlen--);
+mutant100180_tiny.c
+359 :  /* MUTANT (del_stmt) */ /* 	local_irq_restore(flags); */ 
+mutant100181_tiny.c
+369 :  /* MUTANT (del_stmt) */ /* 	__call_rcu(head, func, &rcu_sched_ctrlblk); */ 
+mutant100182_tiny.c
+379 :  /* MUTANT (del_stmt) */ /* 	__call_rcu(head, func, &rcu_bh_ctrlblk); */ 
+mutant100183_tiny.c
+385 :  /* MUTANT (del_stmt) */ /* 	open_softirq(RCU_SOFTIRQ, rcu_process_callbacks); */ 
+mutant100184_tiny.c
+387 :  /* MUTANT (del_stmt) */ /* 	rcu_early_boot_tests(); */ 

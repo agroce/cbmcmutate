@@ -1,0 +1,39 @@
+USAGE: evalmuants.py <prefix> <timeout> --options <options> --files <files> --mutate <mutant-files> [--harness] [--use-existing]
+PREFIX = avl4
+TIMEOUT = 10000
+OPTIONS = -DMAX_ITEMS=4 --unwind 5 --pointer-check --bounds-check 
+FILES = harness.c 
+MUTATED FILE = avltree.c
+limit cputime 10000 ; cbmc -DMAX_ITEMS=4 --unwind 5 --pointer-check --bounds-check harness.c 
+SANITY CHECK...
+Original SUCCESSFULLY VERIFIED in 10970.0
+Checking mutant mutant100001_avltree.c:  5 :  /* MUTANT (rep_const) */struct node dummy = { -1, 0, {&dummy, &dummy} };
+VERIFICATION SUCCESSFUL 11167.0
+Checking mutant mutant100002_avltree.c:  5 :  /* MUTANT (rep_const) */struct node dummy = { 0, 1, {&dummy, &dummy} };
+KILLED 6771.46
+Checking mutant mutant100003_avltree.c:  5 :  /* MUTANT (rep_const) */struct node dummy = { 0, -1, {&dummy, &dummy} };
+VERIFICATION SUCCESSFUL 11493.5
+Checking mutant mutant100004_avltree.c:  6 :  /* MUTANT (del_stmt) */ /* struct node *nnil = &dummy; */ 
+KILLED 1429.97
+Checking mutant mutant100005_avltree.c:  10 :  /* MUTANT (del_stmt) */ /*   struct node *n = calloc(1, sizeof *n); */ 
+OTHER RESULT
+Checking mutant mutant100006_avltree.c:  10 :  /* MUTANT (rep_const) */  struct node *n = calloc(0, sizeof *n);
+KILLED 295.977
+Checking mutant mutant100007_avltree.c:  10 :  /* MUTANT (rep_const) */  struct node *n = calloc(-1, sizeof *n);
+OTHER RESULT
+Checking mutant mutant100008_avltree.c:  10 :  /* MUTANT (rep_const) */  struct node *n = calloc(((1)+1), sizeof *n);
+VERIFICATION SUCCESSFUL 4668.88
+Checking mutant mutant100009_avltree.c:  11 :  /* MUTANT (del_stmt) */ /*   *n = (struct node) { value, 1, {nnil, nnil} }; */ 
+KILLED 6088.6
+Checking mutant mutant100010_avltree.c:  11 :  /* MUTANT (rep_const) */  *n = (struct node) { value, 0, {nnil, nnil} };
+KILLED 5929.95
+Checking mutant mutant100011_avltree.c:  11 :  /* MUTANT (rep_const) */  *n = (struct node) { value, -1, {nnil, nnil} };
+KILLED 5769.17
+Checking mutant mutant100012_avltree.c:  11 :  /* MUTANT (rep_const) */  *n = (struct node) { value, ((1)+1), {nnil, nnil} };
+VERIFICATION SUCCESSFUL 11696.6
+Checking mutant mutant100013_avltree.c:  12 :  /* MUTANT (del_stmt) */ /*   return n; */ 
+OTHER RESULT
+Checking mutant mutant100014_avltree.c:  15 :  /* MUTANT (rep_op) */int max(int a, int b) { return a <= b ? a : b; }
+VERIFICATION SUCCESSFUL 10244.9
+Checking mutant mutant100015_avltree.c:  15 :  /* MUTANT (rep_op) */int max(int a, int b) { return a < b ? a : b; }
+VERIFICATION SUCCESSFUL 10167.6

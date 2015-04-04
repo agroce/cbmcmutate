@@ -1,0 +1,303 @@
+CBMC version 5.0 64-bit linux
+Parsing stackroute.c
+Converting
+Type-checking stackroute
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop lookup.0 iteration 1 (3 max) file stackroute.c line 68 function lookup thread 1
+Unwinding loop lookup.0 iteration 2 (3 max) file stackroute.c line 68 function lookup thread 1
+Not unwinding loop lookup.0 iteration 3 (3 max) file stackroute.c line 68 function lookup thread 1
+Unwinding loop lookup.0 iteration 1 (3 max) file stackroute.c line 68 function lookup thread 1
+Unwinding loop lookup.0 iteration 2 (3 max) file stackroute.c line 68 function lookup thread 1
+Not unwinding loop lookup.0 iteration 3 (3 max) file stackroute.c line 68 function lookup thread 1
+Unwinding loop lookup.0 iteration 1 (3 max) file stackroute.c line 68 function lookup thread 1
+Unwinding loop lookup.0 iteration 2 (3 max) file stackroute.c line 68 function lookup thread 1
+Not unwinding loop lookup.0 iteration 3 (3 max) file stackroute.c line 68 function lookup thread 1
+Unwinding loop lookup.0 iteration 1 (3 max) file stackroute.c line 68 function lookup thread 1
+Unwinding loop lookup.0 iteration 2 (3 max) file stackroute.c line 68 function lookup thread 1
+Not unwinding loop lookup.0 iteration 3 (3 max) file stackroute.c line 68 function lookup thread 1
+Unwinding loop lookup.0 iteration 1 (3 max) file stackroute.c line 68 function lookup thread 2
+Unwinding loop lookup.0 iteration 2 (3 max) file stackroute.c line 68 function lookup thread 2
+Not unwinding loop lookup.0 iteration 3 (3 max) file stackroute.c line 68 function lookup thread 2
+Unwinding loop lookup.0 iteration 1 (3 max) file stackroute.c line 68 function lookup thread 2
+Unwinding loop lookup.0 iteration 2 (3 max) file stackroute.c line 68 function lookup thread 2
+Not unwinding loop lookup.0 iteration 3 (3 max) file stackroute.c line 68 function lookup thread 2
+Unwinding loop lookup.0 iteration 1 (3 max) file stackroute.c line 68 function lookup thread 2
+Unwinding loop lookup.0 iteration 2 (3 max) file stackroute.c line 68 function lookup thread 2
+Not unwinding loop lookup.0 iteration 3 (3 max) file stackroute.c line 68 function lookup thread 2
+Unwinding loop lookup.0 iteration 1 (3 max) file stackroute.c line 68 function lookup thread 2
+Unwinding loop lookup.0 iteration 2 (3 max) file stackroute.c line 68 function lookup thread 2
+Not unwinding loop lookup.0 iteration 3 (3 max) file stackroute.c line 68 function lookup thread 2
+Adding SC constraints
+size of program expression: 50886 steps
+no slicing due to threads
+Generated 37 VCC(s), 37 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+218689 variables, 957856 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 5.253s
+Building error trace
+
+Counterexample:
+
+State 21  thread 0
+----------------------------------------------------
+  argv'[134217728]=irep("(\"nil\")")[134217728] (?)
+
+State 24 file stackroute.c line 131 thread 0
+----------------------------------------------------
+  argc=134217728 (00001000000000000000000000000000)
+
+State 25 file stackroute.c line 131 thread 0
+----------------------------------------------------
+  argv=argv' (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 26 file stackroute.c line 133 function main thread 0
+----------------------------------------------------
+  tr1=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 27 file stackroute.c line 134 function main thread 0
+----------------------------------------------------
+  tr2=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 28 file stackroute.c line 135 function main thread 0
+----------------------------------------------------
+  tu=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 119 file rcu.h line 35 function rcu_read_lock thread 1
+----------------------------------------------------
+  rcu_read_nesting=2 (00000000000000000000000000000010)
+
+State 122 file stackroute.c line 68 function lookup thread 1
+----------------------------------------------------
+  rep=&route_entry_1.next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 124 file rcu.h line 35 function rcu_read_lock thread 2
+----------------------------------------------------
+  rcu_read_nesting=4 (00000000000000000000000000000100)
+
+State 128 file stackroute.c line 68 function lookup thread 2
+----------------------------------------------------
+  rep=&route_entry_1.next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 131 file stackroute.c line 70 function lookup thread 1
+----------------------------------------------------
+  ret=11 (00000000000000000000000000001011)
+
+State 133 file stackroute.c line 70 function lookup thread 2
+----------------------------------------------------
+  ret=11 (00000000000000000000000000001011)
+
+State 149 file rcu.h line 40 function rcu_read_unlock thread 1
+----------------------------------------------------
+  rcu_read_nesting=2 (00000000000000000000000000000010)
+
+State 158 file stackroute.c line 118 function thread_reader thread 1
+----------------------------------------------------
+  address=2 (00000000000000000000000000000010)
+
+State 159 file stackroute.c line 64 function lookup thread 1
+----------------------------------------------------
+  rep=((struct route_entry *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 160 file stackroute.c line 65 function lookup thread 1
+----------------------------------------------------
+  ret=0 (00000000000000000000000000000000)
+
+State 163 file rcu.h line 40 function rcu_read_unlock thread 2
+----------------------------------------------------
+  rcu_read_nesting=0 (00000000000000000000000000000000)
+
+State 172 file stackroute.c line 118 function thread_reader thread 2
+----------------------------------------------------
+  address=2 (00000000000000000000000000000010)
+
+State 173 file stackroute.c line 64 function lookup thread 2
+----------------------------------------------------
+  rep=((struct route_entry *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 174 file stackroute.c line 65 function lookup thread 2
+----------------------------------------------------
+  ret=0 (00000000000000000000000000000000)
+
+State 216 file fake.h line 188 function spin_lock thread 3
+----------------------------------------------------
+  route_lock=1 (00000000000000000000000000000001)
+
+State 221 file stackroute.c line 105 function delete thread 3
+----------------------------------------------------
+  rep=&route_entry_1.next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 222 file stackroute.c line 106 function delete thread 3
+----------------------------------------------------
+  route_head=&route_entry_2.next (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 225 file stackroute.c line 107 function delete thread 3
+----------------------------------------------------
+  l=&route_lock (0000101000000000000000000000000000000000000000000000000000000000)
+
+State 226 file fake.h line 199 function spin_unlock thread 3
+----------------------------------------------------
+  route_lock=0 (00000000000000000000000000000000)
+
+State 235 file rcu.h line 52 function synchronize_rcu thread 3
+----------------------------------------------------
+  rcu_read_nesting=1 (00000000000000000000000000000001)
+
+State 242 file rcu.h line 35 function rcu_read_lock thread 1
+----------------------------------------------------
+  rcu_read_nesting=3 (00000000000000000000000000000011)
+
+State 245 file stackroute.c line 68 function lookup thread 1
+----------------------------------------------------
+  rep=&route_entry_2.next (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 251 file rcu.h line 35 function rcu_read_lock thread 2
+----------------------------------------------------
+  rcu_read_nesting=5 (00000000000000000000000000000101)
+
+State 254 file stackroute.c line 68 function lookup thread 2
+----------------------------------------------------
+  rep=&route_entry_2.next (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 257 file stackroute.c line 68 function lookup thread 2
+----------------------------------------------------
+  rep=&route_entry_2.next (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 261 file stackroute.c line 70 function lookup thread 2
+----------------------------------------------------
+  ret=22 (00000000000000000000000000010110)
+
+State 270 file stackroute.c line 68 function lookup thread 1
+----------------------------------------------------
+  rep=&route_entry_2.next (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 273 file rcu.h line 40 function rcu_read_unlock thread 2
+----------------------------------------------------
+  rcu_read_nesting=3 (00000000000000000000000000000011)
+
+State 289 file stackroute.c line 119 function thread_reader thread 2
+----------------------------------------------------
+  address=3 (00000000000000000000000000000011)
+
+State 290 file stackroute.c line 64 function lookup thread 2
+----------------------------------------------------
+  rep=((struct route_entry *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 291 file stackroute.c line 65 function lookup thread 2
+----------------------------------------------------
+  ret=0 (00000000000000000000000000000000)
+
+State 295 file stackroute.c line 70 function lookup thread 1
+----------------------------------------------------
+  ret=22 (00000000000000000000000000010110)
+
+State 304 file rcu.h line 40 function rcu_read_unlock thread 1
+----------------------------------------------------
+  rcu_read_nesting=1 (00000000000000000000000000000001)
+
+State 320 file stackroute.c line 119 function thread_reader thread 1
+----------------------------------------------------
+  address=3 (00000000000000000000000000000011)
+
+State 321 file stackroute.c line 64 function lookup thread 1
+----------------------------------------------------
+  rep=((struct route_entry *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 322 file stackroute.c line 65 function lookup thread 1
+----------------------------------------------------
+  ret=0 (00000000000000000000000000000000)
+
+State 325 file rcu.h line 35 function rcu_read_lock thread 2
+----------------------------------------------------
+  rcu_read_nesting=3 (00000000000000000000000000000011)
+
+State 328 file rcu.h line 35 function rcu_read_lock thread 1
+----------------------------------------------------
+  rcu_read_nesting=5 (00000000000000000000000000000101)
+
+State 331 file stackroute.c line 68 function lookup thread 1
+----------------------------------------------------
+  rep=&route_entry_2.next (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 334 file stackroute.c line 68 function lookup thread 2
+----------------------------------------------------
+  rep=&route_entry_2.next (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 340 file <builtin-library>-pthread_create line 20 function __actual_thread_spawn thread 1
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 343 file stackroute.c line 117 function thread_reader thread 1
+----------------------------------------------------
+  address=1 (00000000000000000000000000000001)
+
+State 344 file stackroute.c line 64 function lookup thread 1
+----------------------------------------------------
+  rep=((struct route_entry *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 345 file stackroute.c line 65 function lookup thread 1
+----------------------------------------------------
+  ret=0 (00000000000000000000000000000000)
+
+State 349 file stackroute.c line 68 function lookup thread 2
+----------------------------------------------------
+  rep=&route_entry_2.next (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 353 file stackroute.c line 68 function lookup thread 2
+----------------------------------------------------
+  rep=((struct route_entry *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 358 file stackroute.c line 68 function lookup thread 1
+----------------------------------------------------
+  rep=&route_entry_2.next (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 362 file rcu.h line 40 function rcu_read_unlock thread 2
+----------------------------------------------------
+  rcu_read_nesting=3 (00000000000000000000000000000011)
+
+State 377 file stackroute.c line 120 function thread_reader thread 2
+----------------------------------------------------
+  address=1 (00000000000000000000000000000001)
+
+State 378 file stackroute.c line 64 function lookup thread 2
+----------------------------------------------------
+  rep=((struct route_entry *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 379 file stackroute.c line 65 function lookup thread 2
+----------------------------------------------------
+  ret=0 (00000000000000000000000000000000)
+
+State 382 file stackroute.c line 68 function lookup thread 1
+----------------------------------------------------
+  rep=((struct route_entry *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 387 file stackroute.c line 111 function delete thread 3
+----------------------------------------------------
+  route_entry_1.freed=1 (00000000000000000000000000000001)
+
+State 395 file rcu.h line 35 function rcu_read_lock thread 2
+----------------------------------------------------
+  rcu_read_nesting=5 (00000000000000000000000000000101)
+
+State 398 file stackroute.c line 68 function lookup thread 2
+----------------------------------------------------
+  rep=&route_entry_2.next (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 401 file stackroute.c line 70 function lookup thread 2
+----------------------------------------------------
+  ret=11 (00000000000000000000000000001011)
+
+Violated property:
+  file stackroute.c line 71 function lookup
+  assertion !(rep->freed) || ({ __sync_synchronize(); noassert; })
+  FALSE
+
+VERIFICATION FAILED

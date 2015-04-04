@@ -1,0 +1,152 @@
+/bin/sh: limit: command not found
+CBMC version 5.0 64-bit linux
+Parsing mfake.c
+Converting
+Type-checking mfake
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Adding SC constraints
+size of program expression: 20884 steps
+no slicing due to threads
+Generated 11 VCC(s), 11 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+152431 variables, 681812 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 3.828s
+Building error trace
+
+Counterexample:
+
+State 32  thread 0
+----------------------------------------------------
+  argv'[134217728]=irep("(\"nil\")")[134217728] (?)
+
+State 35 file mfake.c line 215 thread 0
+----------------------------------------------------
+  argc=134217728 (00001000000000000000000000000000)
+
+State 36 file mfake.c line 215 thread 0
+----------------------------------------------------
+  argv=argv' (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 37 file mfake.c line 217 function main thread 0
+----------------------------------------------------
+  tu=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 38 file mfake.c line 218 function main thread 0
+----------------------------------------------------
+  tpr=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 41 file mutant100060_tiny.c line 86 function rcu_idle_enter thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 42 file mutant100060_tiny.c line 87 function rcu_idle_enter thread 0
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 45 file mutant100060_tiny.c line 89 function rcu_idle_enter thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 48 file mfake.c line 123 function local_irq_save thread 0
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 51 file mfake.c line 125 function local_irq_save thread 0
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 59 file mutant100060_tiny.c line 93 function rcu_idle_enter thread 0
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 63 file mutant100060_tiny.c line 96 function rcu_idle_enter thread 0
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 68 file mutant100060_tiny.c line 222 function rcu_sched_qs thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 71 file mutant100060_tiny.c line 224 function rcu_sched_qs thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 74 file mfake.c line 123 function local_irq_save thread 0
+----------------------------------------------------
+  local_irq_depth=2 (00000000000000000000000000000010)
+
+State 80 file mutant100060_tiny.c line 225 function rcu_sched_qs thread 0
+----------------------------------------------------
+  rcp=&rcu_sched_ctrlblk.rcucblist (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 89 file mutant100060_tiny.c line 226 function rcu_sched_qs thread 0
+----------------------------------------------------
+  rcp=&rcu_bh_ctrlblk.rcucblist (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 98 file mutant100060_tiny.c line 228 function rcu_sched_qs thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 99 file mfake.c line 136 function local_irq_restore thread 0
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 103 file mutant100060_tiny.c line 77 function rcu_idle_enter_common thread 0
+----------------------------------------------------
+  rcu_dynticks_nesting=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 107 file mutant100060_tiny.c line 97 function rcu_idle_enter thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 108 file mfake.c line 136 function local_irq_restore thread 0
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 109 file mfake.c line 138 function local_irq_restore thread 0
+----------------------------------------------------
+  irq_lock=0 (00000000000000000000000000000000)
+
+State 202 file mfake.c line 63 function fake_acquire_cpu_only thread 1
+----------------------------------------------------
+  cpu_lock=1 (00000000000000000000000000000001)
+
+State 208 file mutant100060_tiny.c line 143 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 209 file mutant100060_tiny.c line 144 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 212 file mutant100060_tiny.c line 146 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 215 file mfake.c line 123 function local_irq_save thread 1
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 218 file mfake.c line 125 function local_irq_save thread 1
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 222 file mutant100060_tiny.c line 147 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+Violated property:
+  file mutant100060_tiny.c line 148 function rcu_idle_exit
+  assertion !(rcu_dynticks_nesting >= 0) || ({ __sync_synchronize(); noassert; })
+  FALSE
+
+VERIFICATION FAILED

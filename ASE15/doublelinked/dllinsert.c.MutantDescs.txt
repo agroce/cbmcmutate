@@ -1,0 +1,56 @@
+8: /* MUTANT (del_stmt) */ /*   struct node *new_node = NULL; */ 
+9: /* MUTANT (del_stmt) */ /*   struct node *cur_node = NULL; */ 
+10: /* MUTANT (del_stmt) */ /*   int found; */  /* 1 means found a place to insert the new node in, 0 means not*/
+11: /* MUTANT (del_stmt) */ /*   new_node = (struct node *)malloc(sizeof(struct node)); */ 
+12: /* MUTANT (rep_op) */  if(new_node != NULL)
+12: /* MUTANT (negate) */  if(!(new_node == NULL))
+14: /* MUTANT (del_stmt) */ /*       printf("memory problem\n"); */ 
+15: /* MUTANT (del_stmt) */ /*       assert(0); */ 
+15: /* MUTANT (rep_const) */      assert(1);
+15: /* MUTANT (rep_const) */      assert(-1);
+19: /* MUTANT (rep_op) */  if (*head != NULL)
+19: /* MUTANT (negate) */  if(! (*head == NULL))
+21: /* MUTANT (del_stmt) */ /*       new_node->next = new_node->prev = new_node; */ 
+22: /* MUTANT (del_stmt) */ /*       *head = new_node; */ 
+24: /* MUTANT (rep_op) */  else if (new_node->data <= (*head)->data)
+24: /* MUTANT (rep_op) */  else if (new_node->data > (*head)->data)
+24: /* MUTANT (rep_op) */  else if (new_node->data >= (*head)->data)
+24: /* MUTANT (rep_op) */  else if (new_node->data == (*head)->data)
+24: /* MUTANT (rep_op) */  else if (new_node->data != (*head)->data)
+24: /* MUTANT (negate) */  else if(! (new_node->data < (*head)->data))
+26: /* MUTANT (del_stmt) */ /*       new_node->next = *head; */ 
+27: /* MUTANT (del_stmt) */ /*       new_node->prev = (*head)->prev; */ 
+28: /* MUTANT (del_stmt) */ /*       (*head)->prev = new_node; */ 
+29: /* MUTANT (del_stmt) */ /*       *head = new_node; */ 
+30: /* MUTANT (del_stmt) */ /*       (*head)->prev->next = *head; */ 
+34: /* MUTANT (del_stmt) */ /*       cur_node = *head; */ 
+35: /* MUTANT (del_stmt) */ /*       found = 0; */ 
+35: /* MUTANT (rep_const) */      found = 1;
+35: /* MUTANT (rep_const) */      found = -1;
+38: /* MUTANT (rep_op) */	  if( new_node->data <= cur_node->data )
+38: /* MUTANT (rep_op) */	  if( new_node->data > cur_node->data )
+38: /* MUTANT (rep_op) */	  if( new_node->data >= cur_node->data )
+38: /* MUTANT (rep_op) */	  if( new_node->data == cur_node->data )
+38: /* MUTANT (rep_op) */	  if( new_node->data != cur_node->data )
+38: /* MUTANT (negate) */	  if(!( new_node->data < cur_node->data ))
+40: /* MUTANT (del_stmt) */ /* 	      found = 1; */ 
+40: /* MUTANT (rep_const) */	      found = 0;
+40: /* MUTANT (rep_const) */	      found = -1;
+40: /* MUTANT (rep_const) */	      found = ((1)+1);
+41: /* MUTANT (del_stmt) */ /* 	      break; */ 
+46: /* MUTANT (del_stmt) */ /* 	      cur_node = cur_node->next; */ 
+49: /* MUTANT (rep_op) */      while ( cur_node == *head );
+49: /* MUTANT (negate) */      while(! ( cur_node != *head ));
+51: /* MUTANT (rep_op) */      if( found != 1 )
+51: /* MUTANT (rep_const) */      if( found == 0 )
+51: /* MUTANT (rep_const) */      if( found == -1 )
+51: /* MUTANT (rep_const) */      if( found == ((1)+1) )
+51: /* MUTANT (negate) */      if(!( found == 1 ))
+53: /* MUTANT (del_stmt) */ /* 	  new_node->next = cur_node; */ 
+54: /* MUTANT (del_stmt) */ /* 	  new_node->prev = cur_node->prev; */ 
+55: /* MUTANT (del_stmt) */ /* 	  cur_node->prev->next = new_node; */ 
+56: /* MUTANT (del_stmt) */ /* 	  cur_node->prev = new_node; */ 
+61: /* MUTANT (del_stmt) */ /* 	  new_node->next = *head; */ 
+62: /* MUTANT (del_stmt) */ /* 	  new_node->prev = (*head)->prev; */ 
+63: /* MUTANT (del_stmt) */ /* 	  (*head)->prev->next = new_node; */ 
+64: /* MUTANT (del_stmt) */ /* 	  (*head)->prev = new_node; */ 

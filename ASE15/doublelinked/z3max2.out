@@ -1,0 +1,183 @@
+USAGE: evalmuants.py <prefix> <timeout> --options <options> --files <files> --mutate <mutant-files>
+PREFIX = z3max2
+TIMEOUT = 1000
+OPTIONS = -DMAX_ITEMS=2 --unwind 3 --pointer-check --bounds-check --z3 
+FILES = harnessprev.c 
+MUTATED FILE = dllinsert.c
+limit cputime 1000 ; cbmc -DMAX_ITEMS=2 --unwind 3 --pointer-check --bounds-check --z3 harnessprev.c 
+SANITY CHECK...
+Original SUCCESSFULLY VERIFIED in 0.964
+Checking mutant mutant100001_dllinsert.c:  9 :  /* MUTANT (del_stmt) */ /*   struct node *cur_node = NULL; */ 
+OTHER RESULT
+Checking mutant mutant100009_dllinsert.c:  15 :  /* MUTANT (rep_const) */      assert(-1);
+VERIFICATION SUCCESSFUL 0.936
+Checking mutant mutant100010_dllinsert.c:  19 :  /* MUTANT (rep_op) */  if (*head != NULL)
+KILLED 0.738
+Checking mutant mutant100011_dllinsert.c:  19 :  /* MUTANT (negate) */  if(! (*head == NULL))
+KILLED 0.688
+Checking mutant mutant100012_dllinsert.c:  21 :  /* MUTANT (del_stmt) */ /*       new_node->next = new_node->prev = new_node; */ 
+KILLED 1.274
+Checking mutant mutant100019_dllinsert.c:  24 :  /* MUTANT (negate) */  else if(! (new_node->data < (*head)->data))
+KILLED 0.691
+Checking mutant mutant100020_dllinsert.c:  26 :  /* MUTANT (del_stmt) */ /*       new_node->next = *head; */ 
+KILLED 1.819
+Checking mutant mutant100021_dllinsert.c:  27 :  /* MUTANT (del_stmt) */ /*       new_node->prev = (*head)->prev; */ 
+KILLED 0.682
+Checking mutant mutant100022_dllinsert.c:  28 :  /* MUTANT (del_stmt) */ /*       (*head)->prev = new_node; */ 
+KILLED 0.783
+Checking mutant mutant100023_dllinsert.c:  29 :  /* MUTANT (del_stmt) */ /*       *head = new_node; */ 
+KILLED 0.512
+Checking mutant mutant100024_dllinsert.c:  30 :  /* MUTANT (del_stmt) */ /*       (*head)->prev->next = *head; */ 
+KILLED 0.941
+Checking mutant mutant100025_dllinsert.c:  34 :  /* MUTANT (del_stmt) */ /*       cur_node = *head; */ 
+KILLED 0.876
+Checking mutant mutant100026_dllinsert.c:  35 :  /* MUTANT (del_stmt) */ /*       found = 0; */ 
+VERIFICATION SUCCESSFUL 0.622
+Checking mutant mutant100027_dllinsert.c:  35 :  /* MUTANT (rep_const) */      found = 1;
+VERIFICATION SUCCESSFUL 0.707
+Checking mutant mutant100028_dllinsert.c:  35 :  /* MUTANT (rep_const) */      found = -1;
+VERIFICATION SUCCESSFUL 0.926
+Checking mutant mutant100029_dllinsert.c:  38 :  /* MUTANT (rep_op) */	  if( new_node->data <= cur_node->data )
+VERIFICATION SUCCESSFUL 0.602
+Checking mutant mutant100030_dllinsert.c:  38 :  /* MUTANT (rep_op) */	  if( new_node->data > cur_node->data )
+VERIFICATION SUCCESSFUL 0.548
+Checking mutant mutant100031_dllinsert.c:  38 :  /* MUTANT (rep_op) */	  if( new_node->data >= cur_node->data )
+VERIFICATION SUCCESSFUL 0.906
+Checking mutant mutant100032_dllinsert.c:  38 :  /* MUTANT (rep_op) */	  if( new_node->data == cur_node->data )
+VERIFICATION SUCCESSFUL 1.211
+Checking mutant mutant100033_dllinsert.c:  38 :  /* MUTANT (rep_op) */	  if( new_node->data != cur_node->data )
+VERIFICATION SUCCESSFUL 1.093
+Checking mutant mutant100034_dllinsert.c:  38 :  /* MUTANT (negate) */	  if(!( new_node->data < cur_node->data ))
+VERIFICATION SUCCESSFUL 1.065
+Checking mutant mutant100035_dllinsert.c:  40 :  /* MUTANT (del_stmt) */ /* 	      found = 1; */ 
+VERIFICATION SUCCESSFUL 1.073
+Checking mutant mutant100036_dllinsert.c:  40 :  /* MUTANT (rep_const) */	      found = 0;
+VERIFICATION SUCCESSFUL 1.173
+Checking mutant mutant100037_dllinsert.c:  40 :  /* MUTANT (rep_const) */	      found = -1;
+VERIFICATION SUCCESSFUL 1.131
+Checking mutant mutant100038_dllinsert.c:  40 :  /* MUTANT (rep_const) */	      found = ((1)+1);
+VERIFICATION SUCCESSFUL 0.806
+Checking mutant mutant100039_dllinsert.c:  41 :  /* MUTANT (del_stmt) */ /* 	      break; */ 
+VERIFICATION SUCCESSFUL 1.209
+Checking mutant mutant100040_dllinsert.c:  46 :  /* MUTANT (del_stmt) */ /* 	      cur_node = cur_node->next; */ 
+VERIFICATION SUCCESSFUL 0.415
+Checking mutant mutant100041_dllinsert.c:  49 :  /* MUTANT (rep_op) */      while ( cur_node == *head );
+KILLED 0.485
+Checking mutant mutant100042_dllinsert.c:  49 :  /* MUTANT (negate) */      while(! ( cur_node != *head ));
+KILLED 0.508
+Checking mutant mutant100043_dllinsert.c:  51 :  /* MUTANT (rep_op) */      if( found != 1 )
+VERIFICATION SUCCESSFUL 0.782
+Checking mutant mutant100044_dllinsert.c:  51 :  /* MUTANT (rep_const) */      if( found == 0 )
+VERIFICATION SUCCESSFUL 0.741
+Checking mutant mutant100045_dllinsert.c:  51 :  /* MUTANT (rep_const) */      if( found == -1 )
+VERIFICATION SUCCESSFUL 1.21
+Checking mutant mutant100046_dllinsert.c:  51 :  /* MUTANT (rep_const) */      if( found == ((1)+1) )
+VERIFICATION SUCCESSFUL 0.804
+Checking mutant mutant100047_dllinsert.c:  51 :  /* MUTANT (negate) */      if(!( found == 1 ))
+VERIFICATION SUCCESSFUL 0.549
+Checking mutant mutant100048_dllinsert.c:  53 :  /* MUTANT (del_stmt) */ /* 	  new_node->next = cur_node; */ 
+VERIFICATION SUCCESSFUL 0.549
+Checking mutant mutant100049_dllinsert.c:  54 :  /* MUTANT (del_stmt) */ /* 	  new_node->prev = cur_node->prev; */ 
+VERIFICATION SUCCESSFUL 0.929
+Checking mutant mutant100050_dllinsert.c:  55 :  /* MUTANT (del_stmt) */ /* 	  cur_node->prev->next = new_node; */ 
+VERIFICATION SUCCESSFUL 0.888
+Checking mutant mutant100051_dllinsert.c:  56 :  /* MUTANT (del_stmt) */ /* 	  cur_node->prev = new_node; */ 
+VERIFICATION SUCCESSFUL 1.145
+Checking mutant mutant100052_dllinsert.c:  61 :  /* MUTANT (del_stmt) */ /* 	  new_node->next = *head; */ 
+KILLED 0.393
+Checking mutant mutant100053_dllinsert.c:  62 :  /* MUTANT (del_stmt) */ /* 	  new_node->prev = (*head)->prev; */ 
+KILLED 0.454
+Checking mutant mutant100054_dllinsert.c:  63 :  /* MUTANT (del_stmt) */ /* 	  (*head)->prev->next = new_node; */ 
+KILLED 0.529
+Checking mutant mutant100055_dllinsert.c:  64 :  /* MUTANT (del_stmt) */ /* 	  (*head)->prev = new_node; */ 
+VERIFICATION SUCCESSFUL 0.961
+Checking mutant mutant100013_dllinsert.c:  22 :  /* MUTANT (del_stmt) */ /*       *head = new_node; */ 
+KILLED 0.122
+Checking mutant mutant100014_dllinsert.c:  24 :  /* MUTANT (rep_op) */  else if (new_node->data <= (*head)->data)
+VERIFICATION SUCCESSFUL 0.931
+Checking mutant mutant100015_dllinsert.c:  24 :  /* MUTANT (rep_op) */  else if (new_node->data > (*head)->data)
+KILLED 0.613
+Checking mutant mutant100016_dllinsert.c:  24 :  /* MUTANT (rep_op) */  else if (new_node->data >= (*head)->data)
+KILLED 0.792
+Checking mutant mutant100017_dllinsert.c:  24 :  /* MUTANT (rep_op) */  else if (new_node->data == (*head)->data)
+KILLED 0.669
+Checking mutant mutant100018_dllinsert.c:  24 :  /* MUTANT (rep_op) */  else if (new_node->data != (*head)->data)
+KILLED 0.502
+Checking mutant mutant100002_dllinsert.c:  10 :  /* MUTANT (del_stmt) */ /*   int found; */  /* 1 means found a place to insert the new node in, 0 means not*/
+OTHER RESULT
+Checking mutant mutant100003_dllinsert.c:  11 :  /* MUTANT (del_stmt) */ /*   new_node = (struct node *)malloc(sizeof(struct node)); */ 
+KILLED 0.075
+Checking mutant mutant100004_dllinsert.c:  12 :  /* MUTANT (rep_op) */  if(new_node != NULL)
+KILLED 0.311
+Checking mutant mutant100005_dllinsert.c:  12 :  /* MUTANT (negate) */  if(!(new_node == NULL))
+KILLED 0.723
+Checking mutant mutant100006_dllinsert.c:  14 :  /* MUTANT (del_stmt) */ /*       printf("memory problem\n"); */ 
+VERIFICATION SUCCESSFUL 0.489
+Checking mutant mutant100007_dllinsert.c:  15 :  /* MUTANT (del_stmt) */ /*       assert(0); */ 
+VERIFICATION SUCCESSFUL 1.003
+Checking mutant mutant100008_dllinsert.c:  15 :  /* MUTANT (rep_const) */      assert(1);
+VERIFICATION SUCCESSFUL 0.772
+55 TOTAL MUTANTS, 23 KILLED, 2 FAILED TO COMPILE 0 TIMED OUT, (41.8181818182% kill rate)
+AVERAGE KILL TIME 0.66
+AVERAGE VERIFY TIME 0.872533333333
+SURVIVING MUTANTS:
+mutant100009_dllinsert.c
+15 :  /* MUTANT (rep_const) */      assert(-1);
+mutant100026_dllinsert.c
+35 :  /* MUTANT (del_stmt) */ /*       found = 0; */ 
+mutant100027_dllinsert.c
+35 :  /* MUTANT (rep_const) */      found = 1;
+mutant100028_dllinsert.c
+35 :  /* MUTANT (rep_const) */      found = -1;
+mutant100029_dllinsert.c
+38 :  /* MUTANT (rep_op) */	  if( new_node->data <= cur_node->data )
+mutant100030_dllinsert.c
+38 :  /* MUTANT (rep_op) */	  if( new_node->data > cur_node->data )
+mutant100031_dllinsert.c
+38 :  /* MUTANT (rep_op) */	  if( new_node->data >= cur_node->data )
+mutant100032_dllinsert.c
+38 :  /* MUTANT (rep_op) */	  if( new_node->data == cur_node->data )
+mutant100033_dllinsert.c
+38 :  /* MUTANT (rep_op) */	  if( new_node->data != cur_node->data )
+mutant100034_dllinsert.c
+38 :  /* MUTANT (negate) */	  if(!( new_node->data < cur_node->data ))
+mutant100035_dllinsert.c
+40 :  /* MUTANT (del_stmt) */ /* 	      found = 1; */ 
+mutant100036_dllinsert.c
+40 :  /* MUTANT (rep_const) */	      found = 0;
+mutant100037_dllinsert.c
+40 :  /* MUTANT (rep_const) */	      found = -1;
+mutant100038_dllinsert.c
+40 :  /* MUTANT (rep_const) */	      found = ((1)+1);
+mutant100039_dllinsert.c
+41 :  /* MUTANT (del_stmt) */ /* 	      break; */ 
+mutant100040_dllinsert.c
+46 :  /* MUTANT (del_stmt) */ /* 	      cur_node = cur_node->next; */ 
+mutant100043_dllinsert.c
+51 :  /* MUTANT (rep_op) */      if( found != 1 )
+mutant100044_dllinsert.c
+51 :  /* MUTANT (rep_const) */      if( found == 0 )
+mutant100045_dllinsert.c
+51 :  /* MUTANT (rep_const) */      if( found == -1 )
+mutant100046_dllinsert.c
+51 :  /* MUTANT (rep_const) */      if( found == ((1)+1) )
+mutant100047_dllinsert.c
+51 :  /* MUTANT (negate) */      if(!( found == 1 ))
+mutant100048_dllinsert.c
+53 :  /* MUTANT (del_stmt) */ /* 	  new_node->next = cur_node; */ 
+mutant100049_dllinsert.c
+54 :  /* MUTANT (del_stmt) */ /* 	  new_node->prev = cur_node->prev; */ 
+mutant100050_dllinsert.c
+55 :  /* MUTANT (del_stmt) */ /* 	  cur_node->prev->next = new_node; */ 
+mutant100051_dllinsert.c
+56 :  /* MUTANT (del_stmt) */ /* 	  cur_node->prev = new_node; */ 
+mutant100055_dllinsert.c
+64 :  /* MUTANT (del_stmt) */ /* 	  (*head)->prev = new_node; */ 
+mutant100014_dllinsert.c
+24 :  /* MUTANT (rep_op) */  else if (new_node->data <= (*head)->data)
+mutant100006_dllinsert.c
+14 :  /* MUTANT (del_stmt) */ /*       printf("memory problem\n"); */ 
+mutant100007_dllinsert.c
+15 :  /* MUTANT (del_stmt) */ /*       assert(0); */ 
+mutant100008_dllinsert.c
+15 :  /* MUTANT (rep_const) */      assert(1);

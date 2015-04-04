@@ -1,0 +1,343 @@
+/bin/sh: limit: command not found
+CBMC version 5.0 64-bit linux
+Parsing harness.c
+Parsing mutant100002_avltree.c
+Converting
+Type-checking harness
+file harness.c line 37 function main: function `assert' is not declared
+Type-checking mutant100002_avltree
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 (4 max) file harness.c line 18 function main thread 0
+Unwinding recursion insert iteration 1 (4 max)
+Unwinding recursion insert iteration 2 (4 max)
+Unwinding recursion insert iteration 3 (4 max)
+Unwinding recursion insert iteration 4 (4 max)
+Not unwinding recursion insert iteration 5 (4 max)
+Unwinding recursion delete iteration 1 (4 max)
+Unwinding recursion delete iteration 2 (4 max)
+Unwinding recursion delete iteration 3 (4 max)
+Unwinding recursion delete iteration 4 (4 max)
+Not unwinding recursion delete iteration 5 (4 max)
+Unwinding loop main.0 iteration 2 (4 max) file harness.c line 18 function main thread 0
+Unwinding recursion insert iteration 1 (4 max)
+Unwinding recursion insert iteration 2 (4 max)
+Unwinding recursion insert iteration 3 (4 max)
+Unwinding recursion insert iteration 4 (4 max)
+Not unwinding recursion insert iteration 5 (4 max)
+Unwinding recursion delete iteration 1 (4 max)
+Unwinding recursion delete iteration 2 (4 max)
+Unwinding recursion delete iteration 3 (4 max)
+Unwinding recursion delete iteration 4 (4 max)
+Not unwinding recursion delete iteration 5 (4 max)
+Unwinding loop main.0 iteration 3 (4 max) file harness.c line 18 function main thread 0
+Unwinding recursion query iteration 1 (4 max)
+Unwinding recursion query iteration 2 (4 max)
+Unwinding recursion query iteration 3 (4 max)
+Unwinding recursion query iteration 4 (4 max)
+Not unwinding recursion query iteration 5 (4 max)
+Unwinding recursion query iteration 1 (4 max)
+Unwinding recursion query iteration 2 (4 max)
+Unwinding recursion query iteration 3 (4 max)
+Unwinding recursion query iteration 4 (4 max)
+Not unwinding recursion query iteration 5 (4 max)
+size of program expression: 14022 steps
+simple slicing removed 9 assignments
+Generated 5380 VCC(s), 5230 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+13511095 variables, 59947080 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 431.141s
+Building error trace
+
+Counterexample:
+
+State 19 file harness.c line 9 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 20 file harness.c line 9 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 21 file harness.c line 9 function main thread 0
+----------------------------------------------------
+  c=0 (00000000000000000000000000000000)
+
+State 22 file harness.c line 10 function main thread 0
+----------------------------------------------------
+  present=0 (00000000000000000000000000000000)
+
+State 23 file harness.c line 10 function main thread 0
+----------------------------------------------------
+  present=0 (00000000000000000000000000000000)
+
+State 24 file harness.c line 12 function main thread 0
+----------------------------------------------------
+  val=0 (00000000000000000000000000000000)
+
+State 25 file harness.c line 12 function main thread 0
+----------------------------------------------------
+  val=-1073700864 (11000000000000001010000000000000)
+searching for -1073700864
+
+
+State 27 file harness.c line 16 function main thread 0
+----------------------------------------------------
+  root=((struct node *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 28 file harness.c line 16 function main thread 0
+----------------------------------------------------
+  root=&dummy.payload (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 29 file harness.c line 18 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 30 file harness.c line 19 function main thread 0
+----------------------------------------------------
+  v=-2147442688 (10000000000000001010000000000000)
+
+State 31 file harness.c line 20 function main thread 0
+----------------------------------------------------
+  c=1073741824 (01000000000000000000000000000000)
+LOG 0: insert(-2147442688)
+
+
+State 36 file harness.c line 23 function main thread 0
+----------------------------------------------------
+  rootp=&root!0@1 (0000110100000000000000000000000000000000000000000000000000000000)
+
+State 37 file harness.c line 23 function main thread 0
+----------------------------------------------------
+  value=-2147442688 (10000000000000001010000000000000)
+
+State 38 file mutant100002_avltree.c line 65 function insert thread 0
+----------------------------------------------------
+  root=((struct node *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 42 file mutant100002_avltree.c line 65 function insert thread 0
+----------------------------------------------------
+  root=&dummy.payload (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 45 file mutant100002_avltree.c line 68 function insert thread 0
+----------------------------------------------------
+  value=-2147442688 (10000000000000001010000000000000)
+
+State 46 file mutant100002_avltree.c line 10 function new_node thread 0
+----------------------------------------------------
+  n=((struct node *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 75 file mutant100002_avltree.c line 10 function new_node thread 0
+----------------------------------------------------
+  n=&dynamic_object1.payload (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 79 file mutant100002_avltree.c line 11 function new_node thread 0
+----------------------------------------------------
+  dynamic_object1={ .payload=-2147442688, .height=1, .kid={ &dummy.payload, &dummy.payload } } ({ 10000000000000001010000000000000, 00000000000000000000000000000001, { 0000001100000000000000000000000000000000000000000000000000000000, 0000001100000000000000000000000000000000000000000000000000000000 } })
+
+State 86 file mutant100002_avltree.c line 68 function insert thread 0
+----------------------------------------------------
+  root=&dynamic_object1.payload (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 91 file harness.c line 18 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 93 file harness.c line 19 function main thread 0
+----------------------------------------------------
+  v=-1073700864 (11000000000000001010000000000000)
+
+State 94 file harness.c line 20 function main thread 0
+----------------------------------------------------
+  c=16777216 (00000001000000000000000000000000)
+LOG 1: insert(-1073700864)
+
+
+State 99 file harness.c line 23 function main thread 0
+----------------------------------------------------
+  rootp=&root!0@1 (0000110100000000000000000000000000000000000000000000000000000000)
+
+State 100 file harness.c line 23 function main thread 0
+----------------------------------------------------
+  value=-1073700864 (11000000000000001010000000000000)
+
+State 101 file mutant100002_avltree.c line 65 function insert thread 0
+----------------------------------------------------
+  root=((struct node *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 105 file mutant100002_avltree.c line 65 function insert thread 0
+----------------------------------------------------
+  root=&dynamic_object1.payload (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 116 file mutant100002_avltree.c line 70 function insert thread 0
+----------------------------------------------------
+  rootp=dynamic_object1.kid + 1 (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 117 file mutant100002_avltree.c line 70 function insert thread 0
+----------------------------------------------------
+  value=-1073700864 (11000000000000001010000000000000)
+
+State 118 file mutant100002_avltree.c line 65 function insert thread 0
+----------------------------------------------------
+  root=((struct node *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 125 file mutant100002_avltree.c line 65 function insert thread 0
+----------------------------------------------------
+  root=&dummy.payload (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 129 file mutant100002_avltree.c line 68 function insert thread 0
+----------------------------------------------------
+  value=-1073700864 (11000000000000001010000000000000)
+
+State 130 file mutant100002_avltree.c line 10 function new_node thread 0
+----------------------------------------------------
+  n=((struct node *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 159 file mutant100002_avltree.c line 10 function new_node thread 0
+----------------------------------------------------
+  n=&dynamic_object3.payload (0000011100000000000000000000000000000000000000000000000000000000)
+
+State 163 file mutant100002_avltree.c line 11 function new_node thread 0
+----------------------------------------------------
+  dynamic_object3={ .payload=-1073700864, .height=1, .kid={ &dummy.payload, &dummy.payload } } ({ 11000000000000001010000000000000, 00000000000000000000000000000001, { 0000001100000000000000000000000000000000000000000000000000000000, 0000001100000000000000000000000000000000000000000000000000000000 } })
+
+State 173 file mutant100002_avltree.c line 68 function insert thread 0
+----------------------------------------------------
+  dynamic_object1={ .payload=-2147442688, .height=1, .kid={ &dummy.payload, &dynamic_object3.payload } } ({ 10000000000000001010000000000000, 00000000000000000000000000000001, { 0000001100000000000000000000000000000000000000000000000000000000, 0000011100000000000000000000000000000000000000000000000000000000 } })
+
+State 178 file mutant100002_avltree.c line 71 function insert thread 0
+----------------------------------------------------
+  rootp=&root!0@1 (0000110100000000000000000000000000000000000000000000000000000000)
+
+State 179 file mutant100002_avltree.c line 42 function adjust_balance thread 0
+----------------------------------------------------
+  root=((struct node *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 183 file mutant100002_avltree.c line 42 function adjust_balance thread 0
+----------------------------------------------------
+  root=&dynamic_object1.payload (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 184 file mutant100002_avltree.c line 43 function adjust_balance thread 0
+----------------------------------------------------
+  b=0 (00000000000000000000000000000000)
+
+State 188 file mutant100002_avltree.c line 43 function adjust_balance thread 0
+----------------------------------------------------
+  n=&dynamic_object1.payload (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 215 file mutant100002_avltree.c line 43 function adjust_balance thread 0
+----------------------------------------------------
+  b=0 (00000000000000000000000000000000)
+
+State 220 file mutant100002_avltree.c line 50 function adjust_balance thread 0
+----------------------------------------------------
+  n=&dynamic_object1.payload (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 246 file mutant100002_avltree.c line 18 function set_height thread 0
+----------------------------------------------------
+  a=1 (00000000000000000000000000000001)
+
+State 247 file mutant100002_avltree.c line 18 function set_height thread 0
+----------------------------------------------------
+  b=1 (00000000000000000000000000000001)
+
+State 258 file mutant100002_avltree.c line 18 function set_height thread 0
+----------------------------------------------------
+  dynamic_object1.height=2 (00000000000000000000000000000010)
+
+State 263 file harness.c line 25 function main thread 0
+----------------------------------------------------
+  present=1 (00000000000000000000000000000001)
+
+State 265 file harness.c line 18 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 267 file harness.c line 19 function main thread 0
+----------------------------------------------------
+  v=-2147442688 (10000000000000001010000000000000)
+
+State 268 file harness.c line 20 function main thread 0
+----------------------------------------------------
+  c=-2147475456 (10000000000000000010000000000000)
+LOG 2: delete(-2147442688)
+
+
+State 273 file harness.c line 29 function main thread 0
+----------------------------------------------------
+  rootp=&root!0@1 (0000110100000000000000000000000000000000000000000000000000000000)
+
+State 274 file harness.c line 29 function main thread 0
+----------------------------------------------------
+  value=-2147442688 (10000000000000001010000000000000)
+
+State 275 file mutant100002_avltree.c line 77 function delete thread 0
+----------------------------------------------------
+  root=((struct node *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 279 file mutant100002_avltree.c line 77 function delete thread 0
+----------------------------------------------------
+  root=&dynamic_object1.payload (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 291 file mutant100002_avltree.c line 82 function delete thread 0
+----------------------------------------------------
+  n=&dynamic_object1.payload (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 320 file mutant100002_avltree.c line 82 function delete thread 0
+----------------------------------------------------
+  rootp=&root!0@1 (0000110100000000000000000000000000000000000000000000000000000000)
+
+State 321 file mutant100002_avltree.c line 82 function delete thread 0
+----------------------------------------------------
+  dir=0 (00000000000000000000000000000000)
+
+State 322 file mutant100002_avltree.c line 28 function rotate thread 0
+----------------------------------------------------
+  old_r=((struct node *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 326 file mutant100002_avltree.c line 28 function rotate thread 0
+----------------------------------------------------
+  old_r=&dynamic_object1.payload (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 327 file mutant100002_avltree.c line 28 function rotate thread 0
+----------------------------------------------------
+  new_r=((struct node *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 336 file mutant100002_avltree.c line 28 function rotate thread 0
+----------------------------------------------------
+  new_r=&dummy.payload (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 337 file mutant100002_avltree.c line 30 function rotate thread 0
+----------------------------------------------------
+  root=&dummy.payload (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 358 file mutant100002_avltree.c line 82 function delete thread 0
+----------------------------------------------------
+  root=&dummy.payload (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 363 file harness.c line 18 function main thread 0
+----------------------------------------------------
+  i=3 (00000000000000000000000000000011)
+
+State 370 file harness.c line 37 function main thread 0
+----------------------------------------------------
+  root=&dummy.payload (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 371 file harness.c line 37 function main thread 0
+----------------------------------------------------
+  value=-1073700864 (11000000000000001010000000000000)
+
+Violated property:
+  file harness.c line 37 function main
+  assertion return_value_query$1 != ((struct node *)NULL)
+  return_value_query$1 != ((struct node *)NULL)
+
+VERIFICATION FAILED

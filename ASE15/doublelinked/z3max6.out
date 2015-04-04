@@ -1,0 +1,37 @@
+USAGE: evalmuants.py <prefix> <timeout> --options <options> --files <files> --mutate <mutant-files>
+PREFIX = z3max6
+TIMEOUT = 1000
+OPTIONS = -DMAX_ITEMS=6 --unwind 7 --pointer-check --bounds-check --z3 
+FILES = harnessprev.c 
+MUTATED FILE = dllinsert.c
+limit cputime 1000 ; cbmc -DMAX_ITEMS=6 --unwind 7 --pointer-check --bounds-check --z3 harnessprev.c 
+SANITY CHECK...
+Original SUCCESSFULLY VERIFIED in 27740.4
+Checking mutant mutant100001_dllinsert.c:  9 :  /* MUTANT (del_stmt) */ /*   struct node *cur_node = NULL; */ 
+OTHER RESULT
+Checking mutant mutant100009_dllinsert.c:  15 :  /* MUTANT (rep_const) */      assert(-1);
+VERIFICATION SUCCESSFUL 25677.9
+Checking mutant mutant100010_dllinsert.c:  19 :  /* MUTANT (rep_op) */  if (*head != NULL)
+KILLED 10.231
+Checking mutant mutant100011_dllinsert.c:  19 :  /* MUTANT (negate) */  if(! (*head == NULL))
+KILLED 10.154
+Checking mutant mutant100012_dllinsert.c:  21 :  /* MUTANT (del_stmt) */ /*       new_node->next = new_node->prev = new_node; */ 
+KILLED 22.191
+Checking mutant mutant100019_dllinsert.c:  24 :  /* MUTANT (negate) */  else if(! (new_node->data < (*head)->data))
+KILLED 27.685
+Checking mutant mutant100020_dllinsert.c:  26 :  /* MUTANT (del_stmt) */ /*       new_node->next = *head; */ 
+KILLED 27.921
+Checking mutant mutant100021_dllinsert.c:  27 :  /* MUTANT (del_stmt) */ /*       new_node->prev = (*head)->prev; */ 
+KILLED 37.302
+Checking mutant mutant100022_dllinsert.c:  28 :  /* MUTANT (del_stmt) */ /*       (*head)->prev = new_node; */ 
+KILLED 32.305
+Checking mutant mutant100023_dllinsert.c:  29 :  /* MUTANT (del_stmt) */ /*       *head = new_node; */ 
+KILLED 30.526
+Checking mutant mutant100024_dllinsert.c:  30 :  /* MUTANT (del_stmt) */ /*       (*head)->prev->next = *head; */ 
+KILLED 26.371
+Checking mutant mutant100025_dllinsert.c:  34 :  /* MUTANT (del_stmt) */ /*       cur_node = *head; */ 
+KILLED 68.184
+Checking mutant mutant100026_dllinsert.c:  35 :  /* MUTANT (del_stmt) */ /*       found = 0; */ 
+OTHER RESULT
+Checking mutant mutant100027_dllinsert.c:  35 :  /* MUTANT (rep_const) */      found = 1;
+OTHER RESULT

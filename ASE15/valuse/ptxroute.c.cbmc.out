@@ -1,0 +1,117 @@
+CBMC version 5.0 64-bit linux
+Parsing ptxroute.c
+Converting
+Type-checking ptxroute
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop lookup.1 iteration 1 (2 max) file ptxroute.c line 111 function lookup thread 1
+Not unwinding loop lookup.1 iteration 2 (2 max) file ptxroute.c line 111 function lookup thread 1
+Unwinding loop lookup.1 iteration 1 (2 max) file ptxroute.c line 111 function lookup thread 1
+Not unwinding loop lookup.1 iteration 2 (2 max) file ptxroute.c line 111 function lookup thread 1
+Unwinding loop lookup.1 iteration 1 (2 max) file ptxroute.c line 111 function lookup thread 1
+Not unwinding loop lookup.1 iteration 2 (2 max) file ptxroute.c line 111 function lookup thread 1
+Unwinding loop lookup.1 iteration 1 (2 max) file ptxroute.c line 111 function lookup thread 2
+Not unwinding loop lookup.1 iteration 2 (2 max) file ptxroute.c line 111 function lookup thread 2
+Unwinding loop lookup.1 iteration 1 (2 max) file ptxroute.c line 111 function lookup thread 2
+Not unwinding loop lookup.1 iteration 2 (2 max) file ptxroute.c line 111 function lookup thread 2
+Unwinding loop lookup.1 iteration 1 (2 max) file ptxroute.c line 111 function lookup thread 2
+Not unwinding loop lookup.1 iteration 2 (2 max) file ptxroute.c line 111 function lookup thread 2
+Unwinding loop delete.3 iteration 1 (2 max) file ptxroute.c line 144 function delete thread 3
+Not unwinding loop delete.3 iteration 2 (2 max) file ptxroute.c line 144 function delete thread 3
+Adding SC constraints
+size of program expression: 37232 steps
+no slicing due to threads
+Generated 28 VCC(s), 28 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+324204 variables, 1351918 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 9.178s
+Building error trace
+
+Counterexample:
+
+State 22  thread 0
+----------------------------------------------------
+  argv'[134217728]=irep("(\"nil\")")[134217728] (?)
+
+State 25 file ptxroute.c line 188 thread 0
+----------------------------------------------------
+  argc=134217728 (00001000000000000000000000000000)
+
+State 26 file ptxroute.c line 188 thread 0
+----------------------------------------------------
+  argv=argv' (0000010100000000000000000000000000000000000000000000000000000000)
+
+State 27 file ptxroute.c line 190 function main thread 0
+----------------------------------------------------
+  tr1=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 28 file ptxroute.c line 191 function main thread 0
+----------------------------------------------------
+  tr2=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 29 file ptxroute.c line 192 function main thread 0
+----------------------------------------------------
+  tu=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 118 file rcu.h line 35 function rcu_read_lock thread 2
+----------------------------------------------------
+  rcu_read_nesting=2 (00000000000000000000000000000010)
+
+State 121 file ptxroute.c line 104 function lookup thread 2
+----------------------------------------------------
+  rep=((struct route_entry *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 124 file ptxroute.c line 111 function lookup thread 2
+----------------------------------------------------
+  __ptr=((struct list_head *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 125 file ptxroute.c line 111 function lookup thread 2
+----------------------------------------------------
+  __ptr=&route_entry_1.next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 127 file ptxroute.c line 111 function lookup thread 2
+----------------------------------------------------
+  __mptr=((struct list_head *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 128 file ptxroute.c line 111 function lookup thread 2
+----------------------------------------------------
+  __mptr=&route_entry_1.next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 131 file ptxroute.c line 111 function lookup thread 2
+----------------------------------------------------
+  rep=&route_entry_1.next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 134 file ptxroute.c line 113 function lookup thread 2
+----------------------------------------------------
+  ret=11 (00000000000000000000000000001011)
+
+State 135 file ptxroute.c line 114 function lookup thread 2
+----------------------------------------------------
+  route_cache=&route_entry_1.next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 182 file rcu.h line 35 function rcu_read_lock thread 1
+----------------------------------------------------
+  rcu_read_nesting=4 (00000000000000000000000000000100)
+
+State 185 file ptxroute.c line 104 function lookup thread 1
+----------------------------------------------------
+  rep=&route_entry_1.next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 188 file ptxroute.c line 106 function lookup thread 1
+----------------------------------------------------
+  ret=0 (00000000000000000000000000000000)
+
+Violated property:
+  file ptxroute.c line 107 function lookup
+  assertion !(rep->freed) || ({ __sync_synchronize(); noassert; })
+  FALSE
+
+VERIFICATION FAILED

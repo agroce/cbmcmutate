@@ -1,0 +1,197 @@
+USAGE: evalmuants.py <prefix> <timeout> --options <options> --files <files> --mutate <mutant-files> [--harness] [--use-existing]
+PREFIX = quick1
+TIMEOUT = 1000
+OPTIONS = -DMAX_ITEMS=1 --bounds-check --unwind 2 
+FILES = harness.c 
+MUTATED FILE = quicksort.c
+limit cputime 1000 ; cbmc -DMAX_ITEMS=1 --bounds-check --unwind 2 harness.c 
+SANITY CHECK...
+Original SUCCESSFULLY VERIFIED in 0.542
+Checking mutant mutant100001_quicksort.c:  5 :  /* MUTANT (rep_op) */    if (n <= 2)
+VERIFICATION SUCCESSFUL 0.526
+Checking mutant mutant100002_quicksort.c:  5 :  /* MUTANT (rep_op) */    if (n > 2)
+KILLED 0.533
+Checking mutant mutant100003_quicksort.c:  5 :  /* MUTANT (rep_op) */    if (n >= 2)
+KILLED 0.557
+Checking mutant mutant100004_quicksort.c:  5 :  /* MUTANT (rep_op) */    if (n == 2)
+KILLED 0.519
+Checking mutant mutant100005_quicksort.c:  5 :  /* MUTANT (rep_op) */    if (n != 2)
+VERIFICATION SUCCESSFUL 0.522
+Checking mutant mutant100006_quicksort.c:  5 :  /* MUTANT (rep_const) */    if (n < 0)
+KILLED 0.509
+Checking mutant mutant100007_quicksort.c:  5 :  /* MUTANT (rep_const) */    if (n < 1)
+KILLED 0.531
+Checking mutant mutant100008_quicksort.c:  5 :  /* MUTANT (rep_const) */    if (n < -1)
+KILLED 0.551
+Checking mutant mutant100009_quicksort.c:  5 :  /* MUTANT (rep_const) */    if (n < ((2)+1))
+VERIFICATION SUCCESSFUL 0.534
+Checking mutant mutant100010_quicksort.c:  5 :  /* MUTANT (rep_const) */    if (n < ((2)-1))
+KILLED 0.53
+Checking mutant mutant100011_quicksort.c:  5 :  /* MUTANT (negate) */    if(! (n < 2))
+KILLED 0.526
+Checking mutant mutant100012_quicksort.c:  7 :  /* MUTANT (del_stmt) */ /*     p = a[n / 2]; */ 
+VERIFICATION SUCCESSFUL 0.466
+Checking mutant mutant100013_quicksort.c:  7 :  /* MUTANT (rep_const) */    p = a[n / 0];
+VERIFICATION SUCCESSFUL 0.531
+Checking mutant mutant100014_quicksort.c:  7 :  /* MUTANT (rep_const) */    p = a[n / 1];
+VERIFICATION SUCCESSFUL 0.5
+Checking mutant mutant100015_quicksort.c:  7 :  /* MUTANT (rep_const) */    p = a[n / -1];
+VERIFICATION SUCCESSFUL 0.553
+Checking mutant mutant100016_quicksort.c:  7 :  /* MUTANT (rep_const) */    p = a[n / ((2)+1)];
+VERIFICATION SUCCESSFUL 0.573
+Checking mutant mutant100017_quicksort.c:  7 :  /* MUTANT (rep_const) */    p = a[n / ((2)-1)];
+VERIFICATION SUCCESSFUL 0.504
+Checking mutant mutant100018_quicksort.c:  8 :  /* MUTANT (rep_op) */    for (i = 0, j = n - 1;; i--, j--) {
+VERIFICATION SUCCESSFUL 0.706
+Checking mutant mutant100019_quicksort.c:  8 :  /* MUTANT (rep_op) */    for (i = 0, j = n - 1;; i++, j++) {
+VERIFICATION SUCCESSFUL 0.562
+Checking mutant mutant100020_quicksort.c:  8 :  /* MUTANT (rep_const) */    for (i = 1, j = n - 1;; i++, j--) {
+VERIFICATION SUCCESSFUL 0.521
+Checking mutant mutant100021_quicksort.c:  8 :  /* MUTANT (rep_const) */    for (i = -1, j = n - 1;; i++, j--) {
+VERIFICATION SUCCESSFUL 0.735
+Checking mutant mutant100022_quicksort.c:  8 :  /* MUTANT (rep_const) */    for (i = 0, j = n - 0;; i++, j--) {
+VERIFICATION SUCCESSFUL 0.55
+Checking mutant mutant100023_quicksort.c:  8 :  /* MUTANT (rep_const) */    for (i = 0, j = n - -1;; i++, j--) {
+VERIFICATION SUCCESSFUL 0.57
+Checking mutant mutant100024_quicksort.c:  8 :  /* MUTANT (rep_const) */    for (i = 0, j = n - ((1)+1);; i++, j--) {
+VERIFICATION SUCCESSFUL 0.525
+Checking mutant mutant100025_quicksort.c:  9 :  /* MUTANT (rep_op) */        while (a[i] <= p)
+VERIFICATION SUCCESSFUL 0.544
+Checking mutant mutant100026_quicksort.c:  9 :  /* MUTANT (rep_op) */        while (a[i] > p)
+VERIFICATION SUCCESSFUL 0.566
+Checking mutant mutant100027_quicksort.c:  9 :  /* MUTANT (rep_op) */        while (a[i] >= p)
+VERIFICATION SUCCESSFUL 0.559
+Checking mutant mutant100028_quicksort.c:  9 :  /* MUTANT (rep_op) */        while (a[i] == p)
+VERIFICATION SUCCESSFUL 0.513
+Checking mutant mutant100029_quicksort.c:  9 :  /* MUTANT (rep_op) */        while (a[i] != p)
+VERIFICATION SUCCESSFUL 0.527
+Checking mutant mutant100030_quicksort.c:  9 :  /* MUTANT (negate) */        while(! (a[i] < p))
+VERIFICATION SUCCESSFUL 0.555
+Checking mutant mutant100031_quicksort.c:  10 :  /* MUTANT (rep_op) */            i--;
+VERIFICATION SUCCESSFUL 1.116
+Checking mutant mutant100032_quicksort.c:  11 :  /* MUTANT (rep_op) */        while (p <= a[j])
+VERIFICATION SUCCESSFUL 0.592
+Checking mutant mutant100033_quicksort.c:  11 :  /* MUTANT (rep_op) */        while (p > a[j])
+VERIFICATION SUCCESSFUL 0.575
+Checking mutant mutant100034_quicksort.c:  11 :  /* MUTANT (rep_op) */        while (p >= a[j])
+VERIFICATION SUCCESSFUL 0.526
+Checking mutant mutant100035_quicksort.c:  11 :  /* MUTANT (rep_op) */        while (p == a[j])
+VERIFICATION SUCCESSFUL 0.533
+Checking mutant mutant100036_quicksort.c:  11 :  /* MUTANT (rep_op) */        while (p != a[j])
+VERIFICATION SUCCESSFUL 0.526
+Checking mutant mutant100037_quicksort.c:  11 :  /* MUTANT (negate) */        while(! (p < a[j]))
+VERIFICATION SUCCESSFUL 0.525
+Checking mutant mutant100038_quicksort.c:  12 :  /* MUTANT (rep_op) */            j++;
+VERIFICATION SUCCESSFUL 0.527
+Checking mutant mutant100039_quicksort.c:  13 :  /* MUTANT (rep_op) */        if (i <= j)
+VERIFICATION SUCCESSFUL 0.553
+Checking mutant mutant100040_quicksort.c:  13 :  /* MUTANT (rep_op) */        if (i < j)
+VERIFICATION SUCCESSFUL 0.579
+Checking mutant mutant100041_quicksort.c:  13 :  /* MUTANT (rep_op) */        if (i > j)
+VERIFICATION SUCCESSFUL 0.567
+Checking mutant mutant100042_quicksort.c:  13 :  /* MUTANT (rep_op) */        if (i == j)
+VERIFICATION SUCCESSFUL 0.548
+Checking mutant mutant100043_quicksort.c:  13 :  /* MUTANT (rep_op) */        if (i != j)
+VERIFICATION SUCCESSFUL 0.527
+Checking mutant mutant100044_quicksort.c:  13 :  /* MUTANT (negate) */        if(! (i >= j))
+VERIFICATION SUCCESSFUL 0.576
+Checking mutant mutant100045_quicksort.c:  15 :  /* MUTANT (del_stmt) */ /*         t = a[i]; */ 
+VERIFICATION SUCCESSFUL 0.51
+Checking mutant mutant100046_quicksort.c:  16 :  /* MUTANT (del_stmt) */ /*         a[i] = a[j]; */ 
+VERIFICATION SUCCESSFUL 0.513
+Checking mutant mutant100047_quicksort.c:  17 :  /* MUTANT (del_stmt) */ /*         a[j] = t; */ 
+VERIFICATION SUCCESSFUL 0.481
+Checking mutant mutant100048_quicksort.c:  20 :  /* MUTANT (del_stmt) */ /*     quick_sort(a + i, n - i); */ 
+VERIFICATION SUCCESSFUL 0.121
+Checking mutant mutant100049_quicksort.c:  20 :  /* MUTANT (rep_op) */    quick_sort(a - i, n - i);
+VERIFICATION SUCCESSFUL 0.748
+Checking mutant mutant100050_quicksort.c:  20 :  /* MUTANT (rep_op) */    quick_sort(a * i, n - i);
+OTHER RESULT
+Checking mutant mutant100051_quicksort.c:  20 :  /* MUTANT (rep_op) */    quick_sort(a % i, n - i);
+OTHER RESULT
+51 TOTAL MUTANTS, 8 KILLED, 2 FAILED TO COMPILE 0 TIMED OUT, (15.6862745098% kill rate)
+AVERAGE KILL TIME 0.532
+AVERAGE VERIFY TIME 0.555731707317
+SURVIVING MUTANTS:
+mutant100001_quicksort.c
+5 :  /* MUTANT (rep_op) */    if (n <= 2)
+mutant100005_quicksort.c
+5 :  /* MUTANT (rep_op) */    if (n != 2)
+mutant100009_quicksort.c
+5 :  /* MUTANT (rep_const) */    if (n < ((2)+1))
+mutant100012_quicksort.c
+7 :  /* MUTANT (del_stmt) */ /*     p = a[n / 2]; */ 
+mutant100013_quicksort.c
+7 :  /* MUTANT (rep_const) */    p = a[n / 0];
+mutant100014_quicksort.c
+7 :  /* MUTANT (rep_const) */    p = a[n / 1];
+mutant100015_quicksort.c
+7 :  /* MUTANT (rep_const) */    p = a[n / -1];
+mutant100016_quicksort.c
+7 :  /* MUTANT (rep_const) */    p = a[n / ((2)+1)];
+mutant100017_quicksort.c
+7 :  /* MUTANT (rep_const) */    p = a[n / ((2)-1)];
+mutant100018_quicksort.c
+8 :  /* MUTANT (rep_op) */    for (i = 0, j = n - 1;; i--, j--) {
+mutant100019_quicksort.c
+8 :  /* MUTANT (rep_op) */    for (i = 0, j = n - 1;; i++, j++) {
+mutant100020_quicksort.c
+8 :  /* MUTANT (rep_const) */    for (i = 1, j = n - 1;; i++, j--) {
+mutant100021_quicksort.c
+8 :  /* MUTANT (rep_const) */    for (i = -1, j = n - 1;; i++, j--) {
+mutant100022_quicksort.c
+8 :  /* MUTANT (rep_const) */    for (i = 0, j = n - 0;; i++, j--) {
+mutant100023_quicksort.c
+8 :  /* MUTANT (rep_const) */    for (i = 0, j = n - -1;; i++, j--) {
+mutant100024_quicksort.c
+8 :  /* MUTANT (rep_const) */    for (i = 0, j = n - ((1)+1);; i++, j--) {
+mutant100025_quicksort.c
+9 :  /* MUTANT (rep_op) */        while (a[i] <= p)
+mutant100026_quicksort.c
+9 :  /* MUTANT (rep_op) */        while (a[i] > p)
+mutant100027_quicksort.c
+9 :  /* MUTANT (rep_op) */        while (a[i] >= p)
+mutant100028_quicksort.c
+9 :  /* MUTANT (rep_op) */        while (a[i] == p)
+mutant100029_quicksort.c
+9 :  /* MUTANT (rep_op) */        while (a[i] != p)
+mutant100030_quicksort.c
+9 :  /* MUTANT (negate) */        while(! (a[i] < p))
+mutant100031_quicksort.c
+10 :  /* MUTANT (rep_op) */            i--;
+mutant100032_quicksort.c
+11 :  /* MUTANT (rep_op) */        while (p <= a[j])
+mutant100033_quicksort.c
+11 :  /* MUTANT (rep_op) */        while (p > a[j])
+mutant100034_quicksort.c
+11 :  /* MUTANT (rep_op) */        while (p >= a[j])
+mutant100035_quicksort.c
+11 :  /* MUTANT (rep_op) */        while (p == a[j])
+mutant100036_quicksort.c
+11 :  /* MUTANT (rep_op) */        while (p != a[j])
+mutant100037_quicksort.c
+11 :  /* MUTANT (negate) */        while(! (p < a[j]))
+mutant100038_quicksort.c
+12 :  /* MUTANT (rep_op) */            j++;
+mutant100039_quicksort.c
+13 :  /* MUTANT (rep_op) */        if (i <= j)
+mutant100040_quicksort.c
+13 :  /* MUTANT (rep_op) */        if (i < j)
+mutant100041_quicksort.c
+13 :  /* MUTANT (rep_op) */        if (i > j)
+mutant100042_quicksort.c
+13 :  /* MUTANT (rep_op) */        if (i == j)
+mutant100043_quicksort.c
+13 :  /* MUTANT (rep_op) */        if (i != j)
+mutant100044_quicksort.c
+13 :  /* MUTANT (negate) */        if(! (i >= j))
+mutant100045_quicksort.c
+15 :  /* MUTANT (del_stmt) */ /*         t = a[i]; */ 
+mutant100046_quicksort.c
+16 :  /* MUTANT (del_stmt) */ /*         a[i] = a[j]; */ 
+mutant100047_quicksort.c
+17 :  /* MUTANT (del_stmt) */ /*         a[j] = t; */ 
+mutant100048_quicksort.c
+20 :  /* MUTANT (del_stmt) */ /*     quick_sort(a + i, n - i); */ 
+mutant100049_quicksort.c
+20 :  /* MUTANT (rep_op) */    quick_sort(a - i, n - i);

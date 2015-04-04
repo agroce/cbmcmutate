@@ -1,0 +1,397 @@
+/bin/sh: limit: command not found
+CBMC version 5.0 64-bit linux
+Parsing harnessprev.c
+Parsing mutant100055_dllinsert.c
+Converting
+Type-checking harnessprev
+file harnessprev.c line 41 function main: function `assert' is not declared
+Type-checking mutant100055_dllinsert
+file mutant100055_dllinsert.c line 15 function insert_node: function `assert' is not declared
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 (4 max) file harnessprev.c line 16 function main thread 0
+Unwinding loop insert_node.0 iteration 1 (4 max) file mutant100055_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop insert_node.0 iteration 2 (4 max) file mutant100055_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop insert_node.0 iteration 3 (4 max) file mutant100055_dllinsert.c line 49 function insert_node thread 0
+Not unwinding loop insert_node.0 iteration 4 (4 max) file mutant100055_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop main.0 iteration 2 (4 max) file harnessprev.c line 16 function main thread 0
+Unwinding loop insert_node.0 iteration 1 (4 max) file mutant100055_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop insert_node.0 iteration 2 (4 max) file mutant100055_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop insert_node.0 iteration 3 (4 max) file mutant100055_dllinsert.c line 49 function insert_node thread 0
+Not unwinding loop insert_node.0 iteration 4 (4 max) file mutant100055_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop main.0 iteration 3 (4 max) file harnessprev.c line 16 function main thread 0
+Unwinding loop insert_node.0 iteration 1 (4 max) file mutant100055_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop insert_node.0 iteration 2 (4 max) file mutant100055_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop insert_node.0 iteration 3 (4 max) file mutant100055_dllinsert.c line 49 function insert_node thread 0
+Not unwinding loop insert_node.0 iteration 4 (4 max) file mutant100055_dllinsert.c line 49 function insert_node thread 0
+Not unwinding loop main.0 iteration 4 (4 max) file harnessprev.c line 16 function main thread 0
+Unwinding loop main.1 iteration 1 (4 max) file harnessprev.c line 25 function main thread 0
+Unwinding loop main.1 iteration 2 (4 max) file harnessprev.c line 25 function main thread 0
+Unwinding loop main.1 iteration 3 (4 max) file harnessprev.c line 25 function main thread 0
+Not unwinding loop main.1 iteration 4 (4 max) file harnessprev.c line 25 function main thread 0
+Unwinding loop main.2 iteration 1 (4 max) file harnessprev.c line 38 function main thread 0
+Unwinding loop main.2 iteration 2 (4 max) file harnessprev.c line 38 function main thread 0
+Unwinding loop main.2 iteration 3 (4 max) file harnessprev.c line 38 function main thread 0
+Not unwinding loop main.2 iteration 4 (4 max) file harnessprev.c line 38 function main thread 0
+Unwinding loop main.3 iteration 1 (4 max) file harnessprev.c line 55 function main thread 0
+Unwinding loop main.3 iteration 2 (4 max) file harnessprev.c line 55 function main thread 0
+Unwinding loop main.3 iteration 3 (4 max) file harnessprev.c line 55 function main thread 0
+Not unwinding loop main.3 iteration 4 (4 max) file harnessprev.c line 55 function main thread 0
+size of program expression: 1630 steps
+simple slicing removed 6 assignments
+Generated 1065 VCC(s), 742 remaining after simplification
+Passing problem to SMT2 QF_AUFBV using Z3
+Running SMT2 QF_AUFBV using Z3
+Runtime decision procedure: 3.394s
+Building error trace
+
+Counterexample:
+
+State 18 file harnessprev.c line 10 function main thread 0
+----------------------------------------------------
+  head=((struct node *)NULL) (NULL)
+
+State 19 file harnessprev.c line 10 function main thread 0
+----------------------------------------------------
+  head=((struct node *)NULL) (NULL)
+
+State 20 file harnessprev.c line 11 function main thread 0
+----------------------------------------------------
+  pos=((struct node *)NULL) (NULL)
+
+State 21 file harnessprev.c line 11 function main thread 0
+----------------------------------------------------
+  pos=((struct node *)NULL) (NULL)
+
+State 22 file harnessprev.c line 12 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 23 file harnessprev.c line 12 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 24 file harnessprev.c line 12 function main thread 0
+----------------------------------------------------
+  index=0 (00000000000000000000000000000000)
+
+State 25 file harnessprev.c line 12 function main thread 0
+----------------------------------------------------
+  count=0 (00000000000000000000000000000000)
+
+State 26 file harnessprev.c line 12 function main thread 0
+----------------------------------------------------
+  ncount=0 (00000000000000000000000000000000)
+
+State 27 file harnessprev.c line 12 function main thread 0
+----------------------------------------------------
+  pcount=0 (00000000000000000000000000000000)
+
+State 28 file harnessprev.c line 12 function main thread 0
+----------------------------------------------------
+  curr=0 (00000000000000000000000000000000)
+
+State 29 file harnessprev.c line 13 function main thread 0
+----------------------------------------------------
+  s=0 (00000000000000000000000000000000)
+
+State 30 file harnessprev.c line 13 function main thread 0
+----------------------------------------------------
+  s=3 (00000000000000000000000000000011)
+
+State 32 file harnessprev.c line 16 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 34 file harnessprev.c line 17 function main thread 0
+----------------------------------------------------
+  v=101187652 (00000110000010000000000001000100)
+LOG: ref[0] = 101187652
+
+
+State 36 file harnessprev.c line 19 function main thread 0
+----------------------------------------------------
+  ref[(long int)i!0@1]=(assignment removed)
+
+State 39 file harnessprev.c line 20 function main thread 0
+----------------------------------------------------
+  head=((struct node **)NULL) (NULL)
+
+State 40 file harnessprev.c line 20 function main thread 0
+----------------------------------------------------
+  value=101187652 (00000110000010000000000001000100)
+
+State 41 file mutant100055_dllinsert.c line 8 function insert_node thread 0
+----------------------------------------------------
+  new_node=((struct node *)NULL) (NULL)
+
+State 42 file mutant100055_dllinsert.c line 8 function insert_node thread 0
+----------------------------------------------------
+  new_node=((struct node *)NULL) (NULL)
+
+State 43 file mutant100055_dllinsert.c line 9 function insert_node thread 0
+----------------------------------------------------
+  cur_node=((struct node *)NULL) (NULL)
+
+State 44 file mutant100055_dllinsert.c line 9 function insert_node thread 0
+----------------------------------------------------
+  cur_node=((struct node *)NULL) (NULL)
+
+State 45 file mutant100055_dllinsert.c line 10 function insert_node thread 0
+----------------------------------------------------
+  found=0 (00000000000000000000000000000000)
+
+State 63 file mutant100055_dllinsert.c line 11 function insert_node thread 0
+----------------------------------------------------
+  new_node=((struct node *)NULL) (NULL)
+
+State 68 file mutant100055_dllinsert.c line 17 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object1.data=101187652 (00000110000010000000000001000100)
+
+State 75 file mutant100055_dllinsert.c line 21 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object1.prev=((struct node *)NULL) (NULL)
+
+State 79 file mutant100055_dllinsert.c line 21 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object1.next=((struct node *)NULL) (NULL)
+
+State 83 file mutant100055_dllinsert.c line 22 function insert_node thread 0
+----------------------------------------------------
+  head=((struct node *)NULL) (NULL)
+
+State 91 file harnessprev.c line 20 function main thread 0
+----------------------------------------------------
+  head=((struct node *)NULL) (NULL)
+
+State 92 file harnessprev.c line 16 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 95 file harnessprev.c line 17 function main thread 0
+----------------------------------------------------
+  v=738983947 (00101100000011000000000000001011)
+LOG: ref[1] = 738983947
+
+
+State 97 file harnessprev.c line 19 function main thread 0
+----------------------------------------------------
+  ref[(long int)i!0@1]=(assignment removed)
+
+State 100 file harnessprev.c line 20 function main thread 0
+----------------------------------------------------
+  head=((struct node **)NULL) (NULL)
+
+State 101 file harnessprev.c line 20 function main thread 0
+----------------------------------------------------
+  value=738983947 (00101100000011000000000000001011)
+
+State 102 file mutant100055_dllinsert.c line 8 function insert_node thread 0
+----------------------------------------------------
+  new_node=((struct node *)NULL) (NULL)
+
+State 103 file mutant100055_dllinsert.c line 8 function insert_node thread 0
+----------------------------------------------------
+  new_node=((struct node *)NULL) (NULL)
+
+State 104 file mutant100055_dllinsert.c line 9 function insert_node thread 0
+----------------------------------------------------
+  cur_node=((struct node *)NULL) (NULL)
+
+State 105 file mutant100055_dllinsert.c line 9 function insert_node thread 0
+----------------------------------------------------
+  cur_node=((struct node *)NULL) (NULL)
+
+State 106 file mutant100055_dllinsert.c line 10 function insert_node thread 0
+----------------------------------------------------
+  found=0 (00000000000000000000000000000000)
+
+State 124 file mutant100055_dllinsert.c line 11 function insert_node thread 0
+----------------------------------------------------
+  new_node=((struct node *)NULL) (NULL)
+
+State 129 file mutant100055_dllinsert.c line 17 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object2.data=738983947 (00101100000011000000000000001011)
+
+State 147 file mutant100055_dllinsert.c line 34 function insert_node thread 0
+----------------------------------------------------
+  cur_node=((struct node *)NULL) (NULL)
+
+State 148 file mutant100055_dllinsert.c line 35 function insert_node thread 0
+----------------------------------------------------
+  found=0 (00000000000000000000000000000000)
+
+State 159 file mutant100055_dllinsert.c line 46 function insert_node thread 0
+----------------------------------------------------
+  cur_node=((struct node *)NULL) (NULL)
+
+State 171 file mutant100055_dllinsert.c line 61 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object2.next=((struct node *)NULL) (NULL)
+
+State 181 file mutant100055_dllinsert.c line 62 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object2.prev=((struct node *)NULL) (NULL)
+
+State 194 file mutant100055_dllinsert.c line 63 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object1.next=((struct node *)NULL) (NULL)
+
+State 201 file harnessprev.c line 20 function main thread 0
+----------------------------------------------------
+  head=((struct node *)NULL) (NULL)
+
+State 202 file harnessprev.c line 16 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 205 file harnessprev.c line 17 function main thread 0
+----------------------------------------------------
+  v=-1509425087 (10100110000010000000000001000001)
+LOG: ref[2] = -1509425087
+
+
+State 207 file harnessprev.c line 19 function main thread 0
+----------------------------------------------------
+  ref[(long int)i!0@1]=(assignment removed)
+
+State 210 file harnessprev.c line 20 function main thread 0
+----------------------------------------------------
+  head=((struct node **)NULL) (NULL)
+
+State 211 file harnessprev.c line 20 function main thread 0
+----------------------------------------------------
+  value=-1509425087 (10100110000010000000000001000001)
+
+State 212 file mutant100055_dllinsert.c line 8 function insert_node thread 0
+----------------------------------------------------
+  new_node=((struct node *)NULL) (NULL)
+
+State 213 file mutant100055_dllinsert.c line 8 function insert_node thread 0
+----------------------------------------------------
+  new_node=((struct node *)NULL) (NULL)
+
+State 214 file mutant100055_dllinsert.c line 9 function insert_node thread 0
+----------------------------------------------------
+  cur_node=((struct node *)NULL) (NULL)
+
+State 215 file mutant100055_dllinsert.c line 9 function insert_node thread 0
+----------------------------------------------------
+  cur_node=((struct node *)NULL) (NULL)
+
+State 216 file mutant100055_dllinsert.c line 10 function insert_node thread 0
+----------------------------------------------------
+  found=0 (00000000000000000000000000000000)
+
+State 234 file mutant100055_dllinsert.c line 11 function insert_node thread 0
+----------------------------------------------------
+  new_node=((struct node *)NULL) (NULL)
+
+State 239 file mutant100055_dllinsert.c line 17 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object3.data=-1509425087 (10100110000010000000000001000001)
+
+State 257 file mutant100055_dllinsert.c line 26 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object3.next=((struct node *)NULL) (NULL)
+
+State 270 file mutant100055_dllinsert.c line 27 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object3.prev=((struct node *)NULL) (NULL)
+
+State 280 file mutant100055_dllinsert.c line 28 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object1.prev=((struct node *)NULL) (NULL)
+
+State 284 file mutant100055_dllinsert.c line 29 function insert_node thread 0
+----------------------------------------------------
+  head=((struct node *)NULL) (NULL)
+
+State 297 file mutant100055_dllinsert.c line 30 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object1.next=((struct node *)NULL) (NULL)
+
+State 305 file harnessprev.c line 20 function main thread 0
+----------------------------------------------------
+  head=((struct node *)NULL) (NULL)
+
+State 306 file harnessprev.c line 16 function main thread 0
+----------------------------------------------------
+  i=3 (00000000000000000000000000000011)
+
+State 309 file harnessprev.c line 22 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 310 file harnessprev.c line 23 function main thread 0
+----------------------------------------------------
+  count=0 (00000000000000000000000000000000)
+LOG: checking 0
+
+
+State 312 file harnessprev.c line 25 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 315 file harnessprev.c line 25 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 319 file harnessprev.c line 25 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 323 file harnessprev.c line 25 function main thread 0
+----------------------------------------------------
+  i=3 (00000000000000000000000000000011)
+LOG: ref count = 0
+
+
+State 327 file harnessprev.c line 31 function main thread 0
+----------------------------------------------------
+  pos=((struct node *)NULL) (NULL)
+
+State 328 file harnessprev.c line 32 function main thread 0
+----------------------------------------------------
+  ncount=0 (00000000000000000000000000000000)
+
+State 335 file harnessprev.c line 33 function main thread 0
+----------------------------------------------------
+  curr=-1509425087 (10100110000010000000000001000001)
+
+State 337 file harnessprev.c line 38 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+LOG: moving to next item
+
+
+State 346 file harnessprev.c line 40 function main thread 0
+----------------------------------------------------
+  pos=((struct node *)NULL) (NULL)
+
+State 354 file harnessprev.c line 42 function main thread 0
+----------------------------------------------------
+  curr=101187652 (00000110000010000000000001000100)
+
+State 356 file harnessprev.c line 38 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+LOG: moving to next item
+
+
+State 366 file harnessprev.c line 40 function main thread 0
+----------------------------------------------------
+  pos=((struct node *)NULL) (NULL)
+
+Violated property:
+  file harnessprev.c line 41 function main
+  assertion pos->data >= curr
+  pos->data >= curr
+
+VERIFICATION FAILED

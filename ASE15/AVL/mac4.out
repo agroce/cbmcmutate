@@ -1,0 +1,26 @@
+USAGE: evalmuants.py <prefix> <timeout> --options <options> --files <files> --mutate <mutant-files> [--harness] [--use-existing]
+PREFIX = mac4
+TIMEOUT = 100000
+OPTIONS = -DMAX_ITEMS=4 --unwind 5 --pointer-check --bounds-check 
+FILES = harness.c 
+MUTATED FILES = ['avltree.c']
+limit cputime 100000 ; cbmc -DMAX_ITEMS=4 --unwind 5 --pointer-check --bounds-check harness.c 
+SANITY CHECK...
+Original SUCCESSFULLY VERIFIED in 4553.01
+Mutating avltree.c
+Checking mutant mutant100001_avltree.c:  5 :  /* MUTANT (rep_const) */struct node dummy = { -1, 0, {&dummy, &dummy} };
+VERIFICATION SUCCESSFUL 6018.77
+Checking mutant mutant100002_avltree.c:  5 :  /* MUTANT (rep_const) */struct node dummy = { 0, 1, {&dummy, &dummy} };
+KILLED 1225.02
+Checking mutant mutant100003_avltree.c:  5 :  /* MUTANT (rep_const) */struct node dummy = { 0, -1, {&dummy, &dummy} };
+VERIFICATION SUCCESSFUL 18778.3
+Checking mutant mutant100004_avltree.c:  6 :  /* MUTANT (del_stmt) */ /* struct node *nnil = &dummy; */ 
+KILLED 14029.0
+Checking mutant mutant100005_avltree.c:  10 :  /* MUTANT (del_stmt) */ /*   struct node *n = calloc(1, sizeof *n); */ 
+OTHER RESULT
+Checking mutant mutant100006_avltree.c:  10 :  /* MUTANT (rep_const) */  struct node *n = calloc(0, sizeof *n);
+KILLED 201.763
+Checking mutant mutant100007_avltree.c:  10 :  /* MUTANT (rep_const) */  struct node *n = calloc(-1, sizeof *n);
+OTHER RESULT
+Checking mutant mutant100008_avltree.c:  10 :  /* MUTANT (rep_const) */  struct node *n = calloc(((1)+1), sizeof *n);
+VERIFICATION SUCCESSFUL 23938.1

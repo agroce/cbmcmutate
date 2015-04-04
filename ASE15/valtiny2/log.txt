@@ -1,0 +1,37 @@
+o	Built scaffolding for rcutiny.
+
+o	goto-cc and impara choke on it.
+
+o	Download CBMC v5, which passes!
+
+o	But forcing failure triggers unexpected assertion.
+
+o	Checking backtrace shows that CBMC ignores pthread_mutex_lock().
+
+o	Check to see if CBMC pays attention to gcc atomics.
+	(see cmbctest/check_gcc_sync.c on KSIC)
+
+	And after some futzing around, it appears that CBMC does in fact
+	handle gcc atomics correctly.
+
+o	Update rcutiny scaffolding to set noassert on lock-acquisition
+	failure, and then condition all assertiong on noassert.
+
+o	Again passes validation.  But forcing failure still triggers
+	the same unexpected assertion.  Even though the backtrace
+	clearly shows noassert set to one several times!
+
+o	So ditch the dynticks stuff, perhaps a bridge too far.
+	Replacing rcu_reader()'s cond_resched() with a bare
+	fake_release_cpu() and fake_acquire_cpu() results in the
+	expected failure!
+
+	But still...
+
+o	Maybe need ordering for noassert settings.  (Shouldn't, given
+	SC default nature of cbmc, but...)  Still, need to check
+	noassert -after- checking condition to avoid false negatives.
+
+o	But no, the problem was that there is no scheduler.  Must
+	therefore combine dynticks with acquiring and releasing CPU.
+	Also must do rcu_idle_enter() in mainprogram ahead of time.

@@ -1,0 +1,291 @@
+USAGE: evalmuants.py <prefix> <timeout> --options <options> --files <files> --mutate <mutant-files> [--harness] [--use-existing]
+PREFIX = avl3
+TIMEOUT = 10000
+OPTIONS = -DMAX_ITEMS=3 --unwind 4 --pointer-check --bounds-check 
+FILES = harness.c 
+MUTATED FILE = avltree.c
+limit cputime 10000 ; cbmc -DMAX_ITEMS=3 --unwind 4 --pointer-check --bounds-check harness.c 
+SANITY CHECK...
+Original SUCCESSFULLY VERIFIED in 479.636
+Checking mutant mutant100001_avltree.c:  5 :  /* MUTANT (rep_const) */struct node dummy = { -1, 0, {&dummy, &dummy} };
+VERIFICATION SUCCESSFUL 515.958
+Checking mutant mutant100002_avltree.c:  5 :  /* MUTANT (rep_const) */struct node dummy = { 0, 1, {&dummy, &dummy} };
+KILLED 431.141
+Checking mutant mutant100003_avltree.c:  5 :  /* MUTANT (rep_const) */struct node dummy = { 0, -1, {&dummy, &dummy} };
+VERIFICATION SUCCESSFUL 508.678
+Checking mutant mutant100004_avltree.c:  6 :  /* MUTANT (del_stmt) */ /* struct node *nnil = &dummy; */ 
+KILLED 159.904
+Checking mutant mutant100005_avltree.c:  10 :  /* MUTANT (del_stmt) */ /*   struct node *n = calloc(1, sizeof *n); */ 
+OTHER RESULT
+Checking mutant mutant100006_avltree.c:  10 :  /* MUTANT (rep_const) */  struct node *n = calloc(0, sizeof *n);
+KILLED 75.253
+Checking mutant mutant100007_avltree.c:  10 :  /* MUTANT (rep_const) */  struct node *n = calloc(-1, sizeof *n);
+OTHER RESULT
+Checking mutant mutant100008_avltree.c:  10 :  /* MUTANT (rep_const) */  struct node *n = calloc(((1)+1), sizeof *n);
+VERIFICATION SUCCESSFUL 462.372
+Checking mutant mutant100009_avltree.c:  11 :  /* MUTANT (del_stmt) */ /*   *n = (struct node) { value, 1, {nnil, nnil} }; */ 
+KILLED 218.603
+Checking mutant mutant100010_avltree.c:  11 :  /* MUTANT (rep_const) */  *n = (struct node) { value, 0, {nnil, nnil} };
+KILLED 395.911
+Checking mutant mutant100011_avltree.c:  11 :  /* MUTANT (rep_const) */  *n = (struct node) { value, -1, {nnil, nnil} };
+KILLED 402.148
+Checking mutant mutant100012_avltree.c:  11 :  /* MUTANT (rep_const) */  *n = (struct node) { value, ((1)+1), {nnil, nnil} };
+VERIFICATION SUCCESSFUL 578.597
+Checking mutant mutant100013_avltree.c:  12 :  /* MUTANT (del_stmt) */ /*   return n; */ 
+OTHER RESULT
+Checking mutant mutant100014_avltree.c:  15 :  /* MUTANT (rep_op) */int max(int a, int b) { return a <= b ? a : b; }
+VERIFICATION SUCCESSFUL 516.722
+Checking mutant mutant100015_avltree.c:  15 :  /* MUTANT (rep_op) */int max(int a, int b) { return a < b ? a : b; }
+VERIFICATION SUCCESSFUL 507.173
+Checking mutant mutant100016_avltree.c:  15 :  /* MUTANT (rep_op) */int max(int a, int b) { return a >= b ? a : b; }
+VERIFICATION SUCCESSFUL 579.273
+Checking mutant mutant100017_avltree.c:  15 :  /* MUTANT (rep_op) */int max(int a, int b) { return a == b ? a : b; }
+VERIFICATION SUCCESSFUL 506.558
+Checking mutant mutant100018_avltree.c:  15 :  /* MUTANT (rep_op) */int max(int a, int b) { return a != b ? a : b; }
+VERIFICATION SUCCESSFUL 509.845
+Checking mutant mutant100019_avltree.c:  18 :  /* MUTANT (del_stmt) */ /*   n->height = 1 + max(n->kid[0]->height, n->kid[1]->height); */ 
+VERIFICATION SUCCESSFUL 154.407
+Checking mutant mutant100020_avltree.c:  18 :  /* MUTANT (rep_op) */  n->height = 1 - max(n->kid[0]->height, n->kid[1]->height);
+VERIFICATION SUCCESSFUL 219.974
+Checking mutant mutant100021_avltree.c:  18 :  /* MUTANT (rep_op) */  n->height = 1 * max(n->kid[0]->height, n->kid[1]->height);
+VERIFICATION SUCCESSFUL 245.171
+Checking mutant mutant100022_avltree.c:  18 :  /* MUTANT (rep_op) */  n->height = 1 % max(n->kid[0]->height, n->kid[1]->height);
+KILLED 133.013
+Checking mutant mutant100023_avltree.c:  18 :  /* MUTANT (rep_const) */  n->height = 0 + max(n->kid[0]->height, n->kid[1]->height);
+VERIFICATION SUCCESSFUL 244.189
+Checking mutant mutant100024_avltree.c:  18 :  /* MUTANT (rep_const) */  n->height = -1 + max(n->kid[0]->height, n->kid[1]->height);
+VERIFICATION SUCCESSFUL 492.913
+Checking mutant mutant100025_avltree.c:  18 :  /* MUTANT (rep_const) */  n->height = ((1)+1) + max(n->kid[0]->height, n->kid[1]->height);
+VERIFICATION SUCCESSFUL 566.416
+Checking mutant mutant100026_avltree.c:  18 :  /* MUTANT (rep_const) */  n->height = 1 + max(n->kid[1]->height, n->kid[1]->height);
+VERIFICATION SUCCESSFUL 502.972
+Checking mutant mutant100027_avltree.c:  18 :  /* MUTANT (rep_const) */  n->height = 1 + max(n->kid[-1]->height, n->kid[1]->height);
+KILLED 205.203
+Checking mutant mutant100028_avltree.c:  18 :  /* MUTANT (rep_const) */  n->height = 1 + max(n->kid[0]->height, n->kid[0]->height);
+VERIFICATION SUCCESSFUL 480.853
+Checking mutant mutant100029_avltree.c:  18 :  /* MUTANT (rep_const) */  n->height = 1 + max(n->kid[0]->height, n->kid[-1]->height);
+KILLED 211.726
+Checking mutant mutant100030_avltree.c:  18 :  /* MUTANT (rep_const) */  n->height = 1 + max(n->kid[0]->height, n->kid[((1)+1)]->height);
+KILLED 205.585
+Checking mutant mutant100031_avltree.c:  22 :  /* MUTANT (del_stmt) */ /*   return n->kid[0]->height - n->kid[1]->height; */ 
+KILLED 196.971
+Checking mutant mutant100032_avltree.c:  22 :  /* MUTANT (rep_const) */  return n->kid[1]->height - n->kid[1]->height;
+KILLED 521.764
+Checking mutant mutant100033_avltree.c:  22 :  /* MUTANT (rep_const) */  return n->kid[-1]->height - n->kid[1]->height;
+KILLED 213.21
+Checking mutant mutant100034_avltree.c:  22 :  /* MUTANT (rep_const) */  return n->kid[0]->height - n->kid[0]->height;
+KILLED 307.461
+Checking mutant mutant100035_avltree.c:  22 :  /* MUTANT (rep_const) */  return n->kid[0]->height - n->kid[-1]->height;
+KILLED 220.282
+Checking mutant mutant100036_avltree.c:  22 :  /* MUTANT (rep_const) */  return n->kid[0]->height - n->kid[((1)+1)]->height;
+KILLED 214.09
+Checking mutant mutant100037_avltree.c:  28 :  /* MUTANT (del_stmt) */ /*   struct node *old_r = *rootp, *new_r = old_r->kid[dir]; */ 
+OTHER RESULT
+Checking mutant mutant100038_avltree.c:  30 :  /* MUTANT (rep_op) */  if (nnil != (*rootp = new_r))
+KILLED 345.515
+Checking mutant mutant100039_avltree.c:  30 :  /* MUTANT (negate) */  if(! (nnil == (*rootp = new_r)))
+KILLED 347.341
+Checking mutant mutant100040_avltree.c:  33 :  /* MUTANT (del_stmt) */ /*     old_r->kid[dir] = new_r->kid[!dir]; */ 
+KILLED 161.235
+Checking mutant mutant100041_avltree.c:  34 :  /* MUTANT (del_stmt) */ /*     set_height(old_r); */ 
+VERIFICATION SUCCESSFUL 339.454
+Checking mutant mutant100042_avltree.c:  35 :  /* MUTANT (del_stmt) */ /*     new_r->kid[!dir] = old_r; */ 
+KILLED 169.045
+Checking mutant mutant100043_avltree.c:  42 :  /* MUTANT (del_stmt) */ /*   struct node *root = *rootp; */ 
+OTHER RESULT
+Checking mutant mutant100044_avltree.c:  43 :  /* MUTANT (del_stmt) */ /*   int b = balance(root)/2; */ 
+OTHER RESULT
+Checking mutant mutant100045_avltree.c:  43 :  /* MUTANT (rep_const) */  int b = balance(root)/0;
+KILLED 213.554
+Checking mutant mutant100046_avltree.c:  43 :  /* MUTANT (rep_const) */  int b = balance(root)/1;
+VERIFICATION SUCCESSFUL 586.023
+Checking mutant mutant100047_avltree.c:  43 :  /* MUTANT (rep_const) */  int b = balance(root)/-1;
+KILLED 203.76
+Checking mutant mutant100048_avltree.c:  43 :  /* MUTANT (rep_const) */  int b = balance(root)/((2)+1);
+VERIFICATION SUCCESSFUL 459.736
+Checking mutant mutant100049_avltree.c:  43 :  /* MUTANT (rep_const) */  int b = balance(root)/((2)-1);
+VERIFICATION SUCCESSFUL 587.74
+Checking mutant mutant100050_avltree.c:  44 :  /* MUTANT (negate) */  if(! (b)) {
+KILLED 216.045
+Checking mutant mutant100051_avltree.c:  45 :  /* MUTANT (del_stmt) */ /*     int dir = (1 - b)/2; */ 
+OTHER RESULT
+Checking mutant mutant100052_avltree.c:  45 :  /* MUTANT (rep_const) */    int dir = (0 - b)/2;
+KILLED 201.134
+Checking mutant mutant100053_avltree.c:  45 :  /* MUTANT (rep_const) */    int dir = (-1 - b)/2;
+KILLED 282.492
+Checking mutant mutant100054_avltree.c:  45 :  /* MUTANT (rep_const) */    int dir = (((1)+1) - b)/2;
+VERIFICATION SUCCESSFUL 550.172
+Checking mutant mutant100055_avltree.c:  45 :  /* MUTANT (rep_const) */    int dir = (1 - b)/0;
+KILLED 230.579
+Checking mutant mutant100056_avltree.c:  45 :  /* MUTANT (rep_const) */    int dir = (1 - b)/1;
+KILLED 272.632
+Checking mutant mutant100057_avltree.c:  45 :  /* MUTANT (rep_const) */    int dir = (1 - b)/-1;
+KILLED 235.599
+Checking mutant mutant100058_avltree.c:  45 :  /* MUTANT (rep_const) */    int dir = (1 - b)/((2)+1);
+KILLED 443.212
+Checking mutant mutant100059_avltree.c:  45 :  /* MUTANT (rep_const) */    int dir = (1 - b)/((2)-1);
+KILLED 270.366
+Checking mutant mutant100060_avltree.c:  46 :  /* MUTANT (rep_op) */    if (balance(root->kid[dir]) != -b)
+KILLED 390.098
+Checking mutant mutant100061_avltree.c:  46 :  /* MUTANT (negate) */    if(! (balance(root->kid[dir]) == -b))
+KILLED 388.97
+Checking mutant mutant100062_avltree.c:  48 :  /* MUTANT (del_stmt) */ /*     root = rotate(rootp, dir); */ 
+VERIFICATION SUCCESSFUL 341.073
+Checking mutant mutant100063_avltree.c:  50 :  /* MUTANT (rep_op) */  if (root == nnil) set_height(root);
+VERIFICATION SUCCESSFUL 471.112
+Checking mutant mutant100064_avltree.c:  50 :  /* MUTANT (negate) */  if(! (root != nnil)) set_height(root);
+VERIFICATION SUCCESSFUL 457.351
+Checking mutant mutant100065_avltree.c:  56 :  /* MUTANT (rep_op) */  return root != nnil
+KILLED 206.194
+Checking mutant mutant100066_avltree.c:  57 :  /* MUTANT (rep_const) */    ? 1
+KILLED 202.681
+Checking mutant mutant100067_avltree.c:  57 :  /* MUTANT (rep_const) */    ? -1
+KILLED 206.947
+Checking mutant mutant100068_avltree.c:  58 :  /* MUTANT (rep_op) */    : root->payload != value
+KILLED 204.349
+Checking mutant mutant100069_avltree.c:  60 :  /* MUTANT (rep_op) */    : query(root->kid[value <= root->payload], value);
+KILLED 200.646
+Checking mutant mutant100070_avltree.c:  60 :  /* MUTANT (rep_op) */    : query(root->kid[value < root->payload], value);
+KILLED 205.033
+Checking mutant mutant100071_avltree.c:  60 :  /* MUTANT (rep_op) */    : query(root->kid[value >= root->payload], value);
+VERIFICATION SUCCESSFUL 504.349
+Checking mutant mutant100072_avltree.c:  60 :  /* MUTANT (rep_op) */    : query(root->kid[value == root->payload], value);
+KILLED 205.808
+Checking mutant mutant100073_avltree.c:  60 :  /* MUTANT (rep_op) */    : query(root->kid[value != root->payload], value);
+KILLED 207.639
+Checking mutant mutant100074_avltree.c:  65 :  /* MUTANT (del_stmt) */ /*   struct node *root = *rootp; */ 
+OTHER RESULT
+Checking mutant mutant100075_avltree.c:  67 :  /* MUTANT (rep_op) */  if (root != nnil)
+KILLED 433.021
+Checking mutant mutant100076_avltree.c:  67 :  /* MUTANT (negate) */  if(! (root == nnil))
+KILLED 429.972
+Checking mutant mutant100077_avltree.c:  69 :  /* MUTANT (rep_op) */  else if (value == root->payload) { // don't allow dup keys
+KILLED 204.124
+Checking mutant mutant100078_avltree.c:  69 :  /* MUTANT (negate) */  else if(! (value != root->payload)) { // don't allow dup keys
+KILLED 203.114
+Checking mutant mutant100079_avltree.c:  70 :  /* MUTANT (del_stmt) */ /*     insert(&root->kid[value > root->payload], value); */ 
+KILLED 63.817
+Checking mutant mutant100080_avltree.c:  70 :  /* MUTANT (rep_op) */    insert(&root->kid[value <= root->payload], value);
+KILLED 203.668
+Checking mutant mutant100081_avltree.c:  70 :  /* MUTANT (rep_op) */    insert(&root->kid[value < root->payload], value);
+KILLED 223.902
+Checking mutant mutant100082_avltree.c:  70 :  /* MUTANT (rep_op) */    insert(&root->kid[value >= root->payload], value);
+VERIFICATION SUCCESSFUL 512.604
+Checking mutant mutant100083_avltree.c:  70 :  /* MUTANT (rep_op) */    insert(&root->kid[value == root->payload], value);
+KILLED 217.088
+Checking mutant mutant100084_avltree.c:  70 :  /* MUTANT (rep_op) */    insert(&root->kid[value != root->payload], value);
+KILLED 214.759
+Checking mutant mutant100085_avltree.c:  71 :  /* MUTANT (del_stmt) */ /*     adjust_balance(rootp); */ 
+VERIFICATION SUCCESSFUL 229.282
+Checking mutant mutant100086_avltree.c:  77 :  /* MUTANT (del_stmt) */ /*   struct node *root = *rootp; */ 
+OTHER RESULT
+Checking mutant mutant100087_avltree.c:  78 :  /* MUTANT (del_stmt) */ /*   if (root == nnil) return; */  // not found
+KILLED 1377.51
+Checking mutant mutant100088_avltree.c:  78 :  /* MUTANT (rep_op) */  if (root != nnil) return; // not found
+KILLED 1408.69
+Checking mutant mutant100089_avltree.c:  78 :  /* MUTANT (negate) */  if(! (root == nnil)) return; // not found
+KILLED 1450.57
+Checking mutant mutant100090_avltree.c:  81 :  /* MUTANT (rep_op) */  if (root->payload != value)
+KILLED 201.844
+Checking mutant mutant100091_avltree.c:  81 :  /* MUTANT (negate) */  if(! (root->payload == value))
+KILLED 201.834
+Checking mutant mutant100092_avltree.c:  82 :  /* MUTANT (rep_op) */    if (nnil != (root = rotate(rootp, balance(root) < 0)))
+KILLED 209.623
+Checking mutant mutant100093_avltree.c:  82 :  /* MUTANT (rep_op) */    if (nnil == (root = rotate(rootp, balance(root) <= 0)))
+VERIFICATION SUCCESSFUL 514.528
+Checking mutant mutant100094_avltree.c:  82 :  /* MUTANT (rep_op) */    if (nnil == (root = rotate(rootp, balance(root) > 0)))
+KILLED 475.671
+Checking mutant mutant100095_avltree.c:  82 :  /* MUTANT (rep_op) */    if (nnil == (root = rotate(rootp, balance(root) >= 0)))
+KILLED 355.271
+Checking mutant mutant100096_avltree.c:  82 :  /* MUTANT (rep_op) */    if (nnil == (root = rotate(rootp, balance(root) == 0)))
+KILLED 204.267
+Checking mutant mutant100097_avltree.c:  82 :  /* MUTANT (rep_op) */    if (nnil == (root = rotate(rootp, balance(root) != 0)))
+KILLED 449.393
+Checking mutant mutant100098_avltree.c:  82 :  /* MUTANT (rep_const) */    if (nnil == (root = rotate(rootp, balance(root) < 1)))
+VERIFICATION SUCCESSFUL 499.995
+Checking mutant mutant100099_avltree.c:  82 :  /* MUTANT (rep_const) */    if (nnil == (root = rotate(rootp, balance(root) < -1)))
+KILLED 462.242
+Checking mutant mutant100100_avltree.c:  82 :  /* MUTANT (negate) */    if(! (nnil == (root = rotate(rootp, balance(root) < 0))))
+KILLED 210.667
+Checking mutant mutant100101_avltree.c:  85 :  /* MUTANT (del_stmt) */ /*   delete(&root->kid[value > root->payload], value); */ 
+KILLED 117.755
+Checking mutant mutant100102_avltree.c:  85 :  /* MUTANT (rep_op) */  delete(&root->kid[value <= root->payload], value);
+KILLED 238.547
+Checking mutant mutant100103_avltree.c:  85 :  /* MUTANT (rep_op) */  delete(&root->kid[value < root->payload], value);
+KILLED 272.963
+Checking mutant mutant100104_avltree.c:  85 :  /* MUTANT (rep_op) */  delete(&root->kid[value >= root->payload], value);
+VERIFICATION SUCCESSFUL 518.217
+Checking mutant mutant100105_avltree.c:  85 :  /* MUTANT (rep_op) */  delete(&root->kid[value == root->payload], value);
+KILLED 415.426
+Checking mutant mutant100106_avltree.c:  85 :  /* MUTANT (rep_op) */  delete(&root->kid[value != root->payload], value);
+KILLED 395.621
+Checking mutant mutant100107_avltree.c:  86 :  /* MUTANT (del_stmt) */ /*   adjust_balance(rootp); */ 
+VERIFICATION SUCCESSFUL 315.307
+107 TOTAL MUTANTS, 66 KILLED, 9 FAILED TO COMPILE 0 TIMED OUT, (61.6822429907% kill rate)
+AVERAGE KILL TIME 314.613606061
+AVERAGE VERIFY TIME 452.4691875
+SURVIVING MUTANTS:
+mutant100001_avltree.c
+5 :  /* MUTANT (rep_const) */struct node dummy = { -1, 0, {&dummy, &dummy} };
+mutant100003_avltree.c
+5 :  /* MUTANT (rep_const) */struct node dummy = { 0, -1, {&dummy, &dummy} };
+mutant100008_avltree.c
+10 :  /* MUTANT (rep_const) */  struct node *n = calloc(((1)+1), sizeof *n);
+mutant100012_avltree.c
+11 :  /* MUTANT (rep_const) */  *n = (struct node) { value, ((1)+1), {nnil, nnil} };
+mutant100014_avltree.c
+15 :  /* MUTANT (rep_op) */int max(int a, int b) { return a <= b ? a : b; }
+mutant100015_avltree.c
+15 :  /* MUTANT (rep_op) */int max(int a, int b) { return a < b ? a : b; }
+mutant100016_avltree.c
+15 :  /* MUTANT (rep_op) */int max(int a, int b) { return a >= b ? a : b; }
+mutant100017_avltree.c
+15 :  /* MUTANT (rep_op) */int max(int a, int b) { return a == b ? a : b; }
+mutant100018_avltree.c
+15 :  /* MUTANT (rep_op) */int max(int a, int b) { return a != b ? a : b; }
+mutant100019_avltree.c
+18 :  /* MUTANT (del_stmt) */ /*   n->height = 1 + max(n->kid[0]->height, n->kid[1]->height); */ 
+mutant100020_avltree.c
+18 :  /* MUTANT (rep_op) */  n->height = 1 - max(n->kid[0]->height, n->kid[1]->height);
+mutant100021_avltree.c
+18 :  /* MUTANT (rep_op) */  n->height = 1 * max(n->kid[0]->height, n->kid[1]->height);
+mutant100023_avltree.c
+18 :  /* MUTANT (rep_const) */  n->height = 0 + max(n->kid[0]->height, n->kid[1]->height);
+mutant100024_avltree.c
+18 :  /* MUTANT (rep_const) */  n->height = -1 + max(n->kid[0]->height, n->kid[1]->height);
+mutant100025_avltree.c
+18 :  /* MUTANT (rep_const) */  n->height = ((1)+1) + max(n->kid[0]->height, n->kid[1]->height);
+mutant100026_avltree.c
+18 :  /* MUTANT (rep_const) */  n->height = 1 + max(n->kid[1]->height, n->kid[1]->height);
+mutant100028_avltree.c
+18 :  /* MUTANT (rep_const) */  n->height = 1 + max(n->kid[0]->height, n->kid[0]->height);
+mutant100041_avltree.c
+34 :  /* MUTANT (del_stmt) */ /*     set_height(old_r); */ 
+mutant100046_avltree.c
+43 :  /* MUTANT (rep_const) */  int b = balance(root)/1;
+mutant100048_avltree.c
+43 :  /* MUTANT (rep_const) */  int b = balance(root)/((2)+1);
+mutant100049_avltree.c
+43 :  /* MUTANT (rep_const) */  int b = balance(root)/((2)-1);
+mutant100054_avltree.c
+45 :  /* MUTANT (rep_const) */    int dir = (((1)+1) - b)/2;
+mutant100062_avltree.c
+48 :  /* MUTANT (del_stmt) */ /*     root = rotate(rootp, dir); */ 
+mutant100063_avltree.c
+50 :  /* MUTANT (rep_op) */  if (root == nnil) set_height(root);
+mutant100064_avltree.c
+50 :  /* MUTANT (negate) */  if(! (root != nnil)) set_height(root);
+mutant100071_avltree.c
+60 :  /* MUTANT (rep_op) */    : query(root->kid[value >= root->payload], value);
+mutant100082_avltree.c
+70 :  /* MUTANT (rep_op) */    insert(&root->kid[value >= root->payload], value);
+mutant100085_avltree.c
+71 :  /* MUTANT (del_stmt) */ /*     adjust_balance(rootp); */ 
+mutant100093_avltree.c
+82 :  /* MUTANT (rep_op) */    if (nnil == (root = rotate(rootp, balance(root) <= 0)))
+mutant100098_avltree.c
+82 :  /* MUTANT (rep_const) */    if (nnil == (root = rotate(rootp, balance(root) < 1)))
+mutant100104_avltree.c
+85 :  /* MUTANT (rep_op) */  delete(&root->kid[value >= root->payload], value);
+mutant100107_avltree.c
+86 :  /* MUTANT (del_stmt) */ /*   adjust_balance(rootp); */ 
