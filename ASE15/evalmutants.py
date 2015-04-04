@@ -80,14 +80,7 @@ def checkMutant(mutant, keepsame, results):
             return ("TIMEOUT", None)
     if not normal:
         return (None, None)
-
-print "SANITY CHECK..."
-(checkOriginal, originalTime) = checkMutant("", mutants + files, "original.result")
-assert ((checkOriginal == True) or (checkOriginal == "TIMEOUT"))
-print "Original SUCCESSFULLY VERIFIED in", originalTime
-sys.stdout.flush()
-sys.stderr.flush()
-
+    
 def mutateAll(mutants, files, totalSuccessTime, totalKilledTime, minSuccessTime, minKilledTime,
               maxSuccessTime, maxKilledTime, killed, live, timedout, other, total,
               harnessCall=None, mode="", indent=""):
@@ -104,20 +97,35 @@ def mutateAll(mutants, files, totalSuccessTime, totalKilledTime, minSuccessTime,
             results = mutant + mode + ".result"
             (result, time) = checkMutant(mutant, keepsame+files, results)
             if result == True:
-                live.append(mutant)
+                print indent+"VERIFICATION SUCCESSFUL", time
                 totalSuccessTime += time
                 if (time > maxSuccessTime):
                     maxSuccessTime = time
                 if (time < minSuccessTime):
-                    minSuccessTime = time
-                print indent+"VERIFICATION SUCCESSFUL", time
+                    minSuccessTime = time                
                 if harnessMode and not harnessCall:
                     print "Mutated harness survived, checking kill rate for", mutant
                     print "-------------------------------------------------"
-                    mutateAll(files, [mutant], 0.0, 0.0, 100000000.0, 100000000.0, 0.0, 0.0, [], [], [], [], 0,
-                              harnessCall=True, mode="."+mutant, indent="   ")
+                    rate = mutateAll(files, [mutant], 0.0, 0.0, 100000000.0, 100000000.0, 0.0, 0.0, [], [], [], [], 0,
+                                    harnessCall=True, mode="."+mutant, indent="   ")
                     print "Done checking kill rate for", mutant
+                    if rate == harnessRate:
+                        print "Mutated harness preserves kill rate."
+                        live.append(mutant)
+                    elif rate > harnessRate:
+                        print "MUTATED HARNESS IMPROVES KILL RATE."
+                        better.append((mutant, rate))
+                    else:
+                        print "Mutated harness has worse kill rate than base harness. (KILLED)"
+                        killed.append(mutant)
                     print "-------------------------------------------------"
+                else:
+                    live.append(mutant)
+                    totalSuccessTime += time
+                    if (time > maxSuccessTime):
+                        maxSuccessTime = time
+                    if (time < minSuccessTime):
+                        minSuccessTime = time
             if result == False:
                 killed.append(mutant)
                 totalKilledTime += time
@@ -142,11 +150,38 @@ def mutateAll(mutants, files, totalSuccessTime, totalKilledTime, minSuccessTime,
         print indent+"AVERAGE VERIFY TIME", (totalSuccessTime/len(live))
     print indent+"MIN/MAX KILL TIME = ",minKilledTime,"/",maxKilledTime
     print indent+"MIN/MAX SUCCESS TIME = ",minSuccessTime,"/",maxSuccessTime
-    if not harnessMode:
+    if not harnessCall:
         print "SURVIVING MUTANTS:"
+        if harnessMode:
+            print "(SAME KILL RATE)"
         for f in live:
             print f
             printMutant(f)
+        if harnessMode:
+            print "(** BETTER KILL RATE **)"            
+            for (f, rate) in better:
+                print f
+                printMutant(f)
+                print "RATE: ", rate
+
+                   
+    return ((len(killed)*1.0)/(total*1.0))*100.0
+
+print "SANITY CHECK..."
+(checkOriginal, originalTime) = checkMutant("", mutants + files, "original.result")
+assert ((checkOriginal == True) or (checkOriginal == "TIMEOUT"))
+print "Original SUCCESSFULLY VERIFIED in", originalTime
+sys.stdout.flush()
+sys.stderr.flush()
+
+if harnessMode:
+    print "Computing base harness kill rate"
+    print "-------------------------------------------------"
+    harnessRate = mutateAll(files, [mutants[0]], originalTime, 0.0, originalTime, 100000000.0, originalTime, 0.0, [], [], [], [], 0,
+                            harnessCall = True, mode="."+mutants[0], indent="   ")
+    print "-------------------------------------------------"
+    print "Done computing base kill rate"
+    better = []
 
 mutateAll(mutants, files, originalTime, 0.0, originalTime, 100000000.0, originalTime, 0.0, [], [], [], [], 0)
 
