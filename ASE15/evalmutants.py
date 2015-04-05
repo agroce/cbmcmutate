@@ -90,7 +90,7 @@ def mutateAll(mutants, files, totalSuccessTime, totalKilledTime, minSuccessTime,
         for m in mutants:
             if m != mutant_base:
                 keepsame.append(m)
-        for mutant in glob.glob("mutant*"+mutant_base):
+        for mutant in glob.glob("mutant*_"+mutant_base):
             total += 1
             print indent+"Checking mutant", mutant + ": ",
             printMutant(mutant)
