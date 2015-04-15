@@ -485,10 +485,21 @@ there are no allowable executions of the system at all.
 This problem has concerned the model checking community for some time
 \cite{PracticalCov}, and resulted in efforts to define \emph{coverage
   metrics} for model checking.  While such metrics are interesting and
-useful, however, they have primarily been aimed at the hardware
+useful, however, they have typically been aimed at the hardware
 verification community, and often useful primarily to experts in
 formal verification.  In this paper, we adapt traditional mutation
 testing \cite{mutation} to the problem of software verification.
+
+However, the use of mutation testing most often seen in the software
+engineering literature will not suffice in this case:  simply noting a
+mutation kill rate is not enough.  The scope of the code to be
+verified, and the presumed importance of such critical code suggests
+an approach in which \emph{individual mutants} are examined by the
+developer.  Without additional assistance, such an approach will not
+scale.  We show that the model checking tool, the nature of formal
+verification, and the adoption of certain best practices can make this
+seemingly too-demanding approach in fact practical for real
+verification tasks.
 
 Our primary contribution in this paper is a detailed examination of
 the extension of traditional mutation testing to understand successful
