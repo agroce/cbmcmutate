@@ -352,7 +352,8 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{How Verified is My Program?}
+\title{How Verified is My Program?\\Techniques for Understanding
+  Successful Verifications}
 
 
 % author names and affiliations
@@ -403,109 +404,113 @@ Email: paulmck@linux.vnet.ibm.com}
 
 \section{Introduction}
 
+Software model checking \cite{ModelChecking} has recently, thanks to
+improvements in model checking tools as well as SAT and SMT solvers,
+and the large amount of memory available even on commodity
+workstations, become a potentially valuable tool for developers of
+critical software modules who want to, at minimum, perform a very
+aggressive search for bugs and, at best, prove correctness of their
+code.  Tools such as CBMC \cite{CBMCp} (the C Bounded Model Checker)
+allow a software engineer to model check code by writing what is
+essentially a generalized test harness\footnote{By a harness we mean a
+  program that defines the environment in which a program is verified,
+  provides correctness properties, etc.; in CBMC such a harness looks
+  very similar to a harness for more traditional software testing.} in
+the language of the Software Under Test (SUT).  Figure
+\ref{fig:sortharness} shows a CBMC harness for a sorting routine.
 
+\begin{figure}
+{\scriptsize
+\begin{code}
+\#include <stdio.h>
+\#include <stdlib.h>
+\#include "sort.h"
 
-% no \IEEEPARstart
-This demo file is intended to serve as a ``starter file''
-for IEEE conference papers produced under \LaTeX\ using
-IEEEtran.cls version 1.7 and later.
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-I wish you the best of success.
+int a[MAX\_ITEMS];
+int ref[MAX\_ITEMS];
 
-\hfill mds
- 
-\hfill January 11, 2007
+int nondet\_int();
 
-\subsection{Subsection Heading Here}
-Subsection text here.
+int main () \{
+  int i, v, prev;
+  int s = nondet\_int();
+  \_\_CPROVER\_assume((s > 0) \&\& (s <=MAX\_ITEMS));
+  for (i = 0; i < s; i++) \{
+    v = nondet\_int();
+    printf ("LOG: ref[\%d] = \%d\\n", i, v);
+    ref[i] = v;
+    a[i] = v;
+  \}
+  sort(a, s);
+  prev = a[0];
+  for (i = 0; i < s; i++) \{
+    printf ("LOG: a[\%d] = \%d\\n", i, a[i]);
+    assert (a[i] >= prev);
+    prev = a[i];
+  \}
+\}
+\end{code}
+}
+\caption{A simple harness for a sorting algorithm.}
+\label{fig:sortharness}
+\end{figure}
 
+CBMC compiles a harness and the SUT into a goto-program, instruments
+this program with property checks for assertions, array bounds
+violations, etc., and then unrolls loops based on a user-provided
+\emph{unwinding bound} to produce a SAT problem or SMT constraint such
+that satisfying assignments are representations of a trace
+demonstrating a property violation, known as a \emph{counterexample}
+\cite{CountWitness}.  When a model checker produces a counterexample,
+a developer's task is straightforward, if sometimes difficult: either
+the SUT has a fault, or the harness itself is flawed.  In both cases,
+the status of the verification effort is clear and the resulting
+output (a detailed trace, including the output of any print
+statements) is full of evidence as to the reason for the failure to
+verify the SUT. Moreover, any solution (fix to SUT or harness) is
+easily checked: if it is correct, the model checker stops reporting
+the previous counterexample.  
 
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
+Unfortunately, model checkers do not invariably report
+counterexamples: eventually the SUT is likely to satisfy the properties encoded in
+the harness!  It is in this case that problems arise: what, precisely,
+has been verified?  Does the harness in fact specify all aspects of
+correctness required?  Is the SUT correct?  Formal verification is not
+only subject to the many issues that make ``no faults detected''
+results dubious in testing \cite{WODA09}, but also to more subtle
+problems.  For example, an incorrect \emph{assume} statement may
+constrain a system so that not only are there no counterexamples,
+there are no allowable executions of the system at all.  
 
+This problem has concerned the model checking community for some time
+\cite{PracticalCov}, and resulted in efforts to define \emph{coverage
+  metrics} for model checking.  While such metrics are interesting and
+useful, however, they have primarily been aimed at the hardware
+verification community, and often useful primarily to experts in
+formal verification.  In this paper, we adapt traditional mutation
+testing \cite{mutation} to the problem of software verification.
 
-% An example of a floating figure using the graphicx package.
-% Note that \label must occur AFTER (or within) \caption.
-% For figures, \caption should occur after the \includegraphics.
-% Note that IEEEtran v1.7 and later has special internal code that
-% is designed to preserve the operation of \label within \caption
-% even when the captionsoff option is in effect. However, because
-% of issues like this, it may be the safest practice to put all your
-% \label just after \caption rather than within \caption{}.
-%
-% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
-% option should be used if it is desired that the figures are to be
-% displayed while in draft mode.
-%
-%\begin{figure}[!t]
-%\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-%\caption{Simulation Results}
-%\label{fig_sim}
-%\end{figure}
+Our primary contribution in this paper is a detailed examination of
+the extension of traditional mutation testing to understand successful
+verification results, and determine when a harness is not actually
+sufficiently powerful to ensure correctness.  To support this
+approach, we show how to use mutation testing to choose an unwinding
+depth for loops in bounded model checking, how to mutate a harness to
+determine if other, similar harnesses have an equal (or better)
+mutation kill rate, how to produce successful complex executions of
+surviving mutants in order to understand mutant behavior, and propose
+the use of mutation analysis to gain some confidence of program
+correctness even past model checker scalability limits. At a more
+general level, we discuss the fundamental nature of ``verification''
+in a real-world context where specifications are never known to be
+complete. We propose that falsification, as in certain theories of
+natural science, is a more useful conceptual framework for most
+software verification efforts: rather than focusing on what can be
+proven about a program, it is best to focus on how a verification
+effort distinguishes the ``real'' program from similar alternative
+programs that can be shown to not match the theory of its behavior.
 
-% Note that IEEE typically puts floats only at the top, even when this
-% results in a large percentage of a column being occupied by floats.
-
-
-% An example of a double column floating figure using two subfigures.
-% (The subfig.sty package must be loaded for this to work.)
-% The subfigure \label commands are set within each subfloat command, the
-% \label for the overall figure must come after \caption.
-% \hfil must be used as a separator to get equal spacing.
-% The subfigure.sty package works much the same way, except \subfigure is
-% used instead of \subfloat.
-%
-%\begin{figure*}[!t]
-%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
-%\label{fig_first_case}}
-%\hfil
-%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
-%\label{fig_second_case}}}
-%\caption{Simulation results}
-%\label{fig_sim}
-%\end{figure*}
-%
-% Note that often IEEE papers with subfigures do not employ subfigure
-% captions (using the optional argument to \subfloat), but instead will
-% reference/describe all of them (a), (b), etc., within the main caption.
-
-
-% An example of a floating table. Note that, for IEEE style tables, the 
-% \caption command should come BEFORE the table. Table text will default to
-% \footnotesize as IEEE normally uses this smaller font for tables.
-% The \label must come after \caption as always.
-%
-%\begin{table}[!t]
-%% increase table row spacing, adjust to taste
-%\renewcommand{\arraystretch}{1.3}
-% if using array.sty, it might be a good idea to tweak the value of
-% \extrarowheight as needed to properly center the text within the cells
-%\caption{An Example of a Table}
-%\label{table_example}
-%\centering
-%% Some packages, such as MDW tools, offer better commands for making tables
-%% than the plain LaTeX2e tabular which is used here.
-%\begin{tabular}{|c||c|}
-%\hline
-%One & Two\\
-%\hline
-%Three & Four\\
-%\hline
-%\end{tabular}
-%\end{table}
-
-
-% Note that IEEE does not put floats in the very first column - or typically
-% anywhere on the first page for that matter. Also, in-text middle ("here")
-% positioning is not used. Most IEEE journals/conferences use top floats
-% exclusively. Note that, LaTeX2e, unlike IEEE journals/conferences, places
-% footnotes above bottom floats. This can be corrected via the \fnbelowfloat
-% command of the stfloats package.
+\subsection{Falsification and Verification}
 
 
 
@@ -513,9 +518,6 @@ Subsubsection text here.
 The conclusion goes here.
 
 
-
-
-% conference papers do not normally have an appendix
 
 
 % use section* for acknowledgement
@@ -550,16 +552,8 @@ The authors would like to thank...
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-\begin{thebibliography}{1}
-
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
-\end{thebibliography}
-
-
-
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
 
 % that's all folks
 \end{document}

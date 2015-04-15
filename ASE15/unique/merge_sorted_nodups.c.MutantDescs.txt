@@ -1,0 +1,73 @@
+4: /* MUTANT (del_stmt) */ /*   int apos = 0; */ 
+4: /* MUTANT (rep_const) */  int apos = 1;
+4: /* MUTANT (rep_const) */  int apos = -1;
+5: /* MUTANT (del_stmt) */ /*   int bpos = 0; */ 
+5: /* MUTANT (rep_const) */  int bpos = 1;
+5: /* MUTANT (rep_const) */  int bpos = -1;
+6: /* MUTANT (del_stmt) */ /*   int cpos = -1; */ 
+6: /* MUTANT (rep_const) */  int cpos = 0;
+6: /* MUTANT (rep_const) */  int cpos = 1;
+6: /* MUTANT (rep_const) */  int cpos = ((-1)+1);
+6: /* MUTANT (rep_const) */  int cpos = ((-1)-1);
+7: /* MUTANT (del_stmt) */ /*   int csize = 0; */ 
+7: /* MUTANT (rep_const) */  int csize = 1;
+7: /* MUTANT (rep_const) */  int csize = -1;
+8: /* MUTANT (rep_op) */  while ((apos <= asize) || (bpos < bsize)) {
+8: /* MUTANT (rep_op) */  while ((apos > asize) || (bpos < bsize)) {
+8: /* MUTANT (rep_op) */  while ((apos >= asize) || (bpos < bsize)) {
+8: /* MUTANT (rep_op) */  while ((apos == asize) || (bpos < bsize)) {
+8: /* MUTANT (rep_op) */  while ((apos != asize) || (bpos < bsize)) {
+8: /* MUTANT (rep_op) */  while ((apos < asize) && (bpos < bsize)) {
+8: /* MUTANT (rep_op) */  while ((apos < asize) || (bpos <= bsize)) {
+8: /* MUTANT (rep_op) */  while ((apos < asize) || (bpos > bsize)) {
+8: /* MUTANT (rep_op) */  while ((apos < asize) || (bpos >= bsize)) {
+8: /* MUTANT (rep_op) */  while ((apos < asize) || (bpos == bsize)) {
+8: /* MUTANT (rep_op) */  while ((apos < asize) || (bpos != bsize)) {
+8: /* MUTANT (negate) */  while(! ((apos < asize) || (bpos < bsize))) {
+9: /* MUTANT (del_stmt) */ /*     printf ("LOG: apos = %d, bpos = %d, cpos = %d\n", apos, bpos, cpos); */ 
+10: /* MUTANT (rep_op) */    if ((apos <= asize) && ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos > asize) && ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos >= asize) && ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos == asize) && ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos != asize) && ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos < asize) || ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos <= bsize) || (a[apos] < b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos < bsize) || (a[apos] < b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos > bsize) || (a[apos] < b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos == bsize) || (a[apos] < b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos != bsize) || (a[apos] < b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) && (a[apos] < b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) || (a[apos] <= b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) || (a[apos] > b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) || (a[apos] >= b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) || (a[apos] == b[bpos]))) {
+10: /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) || (a[apos] != b[bpos]))) {
+10: /* MUTANT (negate) */    if(! ((apos < asize) && ((bpos >= bsize) || (a[apos] < b[bpos])))) {
+11: /* MUTANT (rep_op) */      if ((cpos != -1) || (c[cpos] != a[apos])) {
+11: /* MUTANT (rep_op) */      if ((cpos == -1) && (c[cpos] != a[apos])) {
+11: /* MUTANT (rep_op) */      if ((cpos == -1) || (c[cpos] == a[apos])) {
+11: /* MUTANT (rep_const) */      if ((cpos == 0) || (c[cpos] != a[apos])) {
+11: /* MUTANT (rep_const) */      if ((cpos == 1) || (c[cpos] != a[apos])) {
+11: /* MUTANT (rep_const) */      if ((cpos == ((-1)+1)) || (c[cpos] != a[apos])) {
+11: /* MUTANT (rep_const) */      if ((cpos == ((-1)-1)) || (c[cpos] != a[apos])) {
+11: /* MUTANT (negate) */      if(! ((cpos == -1) || (c[cpos] != a[apos]))) {
+12: /* MUTANT (del_stmt) */ /* 	printf ("LOG: PUTTING a[%d]=%d in c\n", apos, a[apos]); */ 
+13: /* MUTANT (del_stmt) */ /* 	c[++cpos] = a[apos]; */ 
+13: /* MUTANT (rep_op) */	c[--cpos] = a[apos];
+14: /* MUTANT (del_stmt) */ /* 	csize++; */ 
+14: /* MUTANT (rep_op) */	csize--;
+16: /* MUTANT (rep_op) */      apos--;
+18: /* MUTANT (rep_op) */      if ((cpos != -1) || (c[cpos] != b[bpos])) {
+18: /* MUTANT (rep_op) */      if ((cpos == -1) && (c[cpos] != b[bpos])) {
+18: /* MUTANT (rep_op) */      if ((cpos == -1) || (c[cpos] == b[bpos])) {
+18: /* MUTANT (rep_const) */      if ((cpos == 0) || (c[cpos] != b[bpos])) {
+18: /* MUTANT (rep_const) */      if ((cpos == 1) || (c[cpos] != b[bpos])) {
+18: /* MUTANT (rep_const) */      if ((cpos == ((-1)+1)) || (c[cpos] != b[bpos])) {
+18: /* MUTANT (rep_const) */      if ((cpos == ((-1)-1)) || (c[cpos] != b[bpos])) {
+18: /* MUTANT (negate) */      if(! ((cpos == -1) || (c[cpos] != b[bpos]))) {
+19: /* MUTANT (del_stmt) */ /* 	printf ("LOG: PUTTING b[%d]=%d in c\n", bpos, b[bpos]); */ 
+20: /* MUTANT (del_stmt) */ /* 	c[++cpos] = b[bpos]; */ 
+20: /* MUTANT (rep_op) */	c[--cpos] = b[bpos];
+21: /* MUTANT (del_stmt) */ /* 	csize++; */ 
+21: /* MUTANT (rep_op) */	csize--;
+23: /* MUTANT (rep_op) */      bpos--;      

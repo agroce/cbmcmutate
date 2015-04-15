@@ -1,0 +1,82 @@
+6: /* MUTANT (del_stmt) */ /*   printf ("LOG: quicksort called with l=%d, r=%d\n", l, r); */  
+7: /* MUTANT (del_stmt) */ /*   int j; */ 
+9: /* MUTANT (rep_op) */  if( l <= r ) 
+9: /* MUTANT (rep_op) */  if( l > r ) 
+9: /* MUTANT (rep_op) */  if( l >= r ) 
+9: /* MUTANT (rep_op) */  if( l == r ) 
+9: /* MUTANT (rep_op) */  if( l != r ) 
+9: /* MUTANT (negate) */  if(!( l < r )) 
+12: /* MUTANT (del_stmt) */ /*       j = partition( a, l, r); */ 
+13: /* MUTANT (del_stmt) */ /*       quickSort( a, l, j-1); */ 
+13: /* MUTANT (rep_const) */      quickSort( a, l, j-0);
+13: /* MUTANT (rep_const) */      quickSort( a, l, j--1);
+13: /* MUTANT (rep_const) */      quickSort( a, l, j-((1)+1));
+14: /* MUTANT (del_stmt) */ /*       quickSort( a, j+1, r); */ 
+14: /* MUTANT (rep_op) */      quickSort( a, j-1, r);
+14: /* MUTANT (rep_op) */      quickSort( a, j*1, r);
+14: /* MUTANT (rep_op) */      quickSort( a, j%1, r);
+14: /* MUTANT (rep_const) */      quickSort( a, j+0, r);
+14: /* MUTANT (rep_const) */      quickSort( a, j+-1, r);
+14: /* MUTANT (rep_const) */      quickSort( a, j+((1)+1), r);
+22: /* MUTANT (del_stmt) */ /*   int pivot, i, j, t; */ 
+23: /* MUTANT (del_stmt) */ /*   pivot = a[l]; */ 
+24: /* MUTANT (del_stmt) */ /*   i = l; */  j = r+1;
+24: /* MUTANT (del_stmt) */ /*   i = l; */  /*  j = r+1; */ 
+24: /* MUTANT (del_stmt) */  i = l; /*  j = r+1; */ 
+24: /* MUTANT (rep_op) */  i = l; j = r-1;
+24: /* MUTANT (rep_op) */  i = l; j = r*1;
+24: /* MUTANT (rep_op) */  i = l; j = r%1;
+24: /* MUTANT (rep_const) */  i = l; j = r+0;
+24: /* MUTANT (rep_const) */  i = l; j = r+-1;
+24: /* MUTANT (rep_const) */  i = l; j = r+((1)+1);
+26: /* MUTANT (rep_const) */  while( 0)
+26: /* MUTANT (rep_const) */  while( -1)
+26: /* MUTANT (rep_const) */  while( ((1)+1))
+26: /* MUTANT (negate) */  while(!( 1))
+28: /* MUTANT (del_stmt) */ /*       do ++i; */  while( a[i] <= pivot && i <= r );
+28: /* MUTANT (del_stmt) */ /*       do ++i; */  /*  while( a[i] <= pivot && i <= r ); */ 
+28: /* MUTANT (del_stmt) */      do ++i; /*  while( a[i] <= pivot && i <= r ); */ 
+28: /* MUTANT (rep_op) */      do --i; while( a[i] <= pivot && i <= r );
+28: /* MUTANT (rep_op) */      do ++i; while( a[i] < pivot && i <= r );
+28: /* MUTANT (rep_op) */      do ++i; while( a[i] > pivot && i <= r );
+28: /* MUTANT (rep_op) */      do ++i; while( a[i] >= pivot && i <= r );
+28: /* MUTANT (rep_op) */      do ++i; while( a[i] == pivot && i <= r );
+28: /* MUTANT (rep_op) */      do ++i; while( a[i] != pivot && i <= r );
+28: /* MUTANT (rep_op) */      do ++i; while( a[i] <= pivot || i <= r );
+28: /* MUTANT (rep_op) */      do ++i; while( a[i] <= pivot && i < r );
+28: /* MUTANT (rep_op) */      do ++i; while( a[i] <= pivot && i > r );
+28: /* MUTANT (rep_op) */      do ++i; while( a[i] <= pivot && i >= r );
+28: /* MUTANT (rep_op) */      do ++i; while( a[i] <= pivot && i == r );
+28: /* MUTANT (rep_op) */      do ++i; while( a[i] <= pivot && i != r );
+28: /* MUTANT (negate) */      do ++i; while(!( a[i] <= pivot && i <= r ));
+29: /* MUTANT (del_stmt) */ /*       do --j; */  while( a[j] > pivot );
+29: /* MUTANT (del_stmt) */ /*       do --j; */  /*  while( a[j] > pivot ); */ 
+29: /* MUTANT (del_stmt) */      do --j; /*  while( a[j] > pivot ); */ 
+29: /* MUTANT (rep_op) */      do ++j; while( a[j] > pivot );
+29: /* MUTANT (rep_op) */      do --j; while( a[j] <= pivot );
+29: /* MUTANT (rep_op) */      do --j; while( a[j] < pivot );
+29: /* MUTANT (rep_op) */      do --j; while( a[j] >= pivot );
+29: /* MUTANT (rep_op) */      do --j; while( a[j] == pivot );
+29: /* MUTANT (rep_op) */      do --j; while( a[j] != pivot );
+29: /* MUTANT (negate) */      do --j; while(!( a[j] > pivot ));
+30: /* MUTANT (del_stmt) */ /*       if( i >= j ) break; */ 
+30: /* MUTANT (rep_op) */      if( i <= j ) break;
+30: /* MUTANT (rep_op) */      if( i < j ) break;
+30: /* MUTANT (rep_op) */      if( i > j ) break;
+30: /* MUTANT (rep_op) */      if( i == j ) break;
+30: /* MUTANT (rep_op) */      if( i != j ) break;
+30: /* MUTANT (negate) */      if(!( i >= j )) break;
+31: /* MUTANT (del_stmt) */ /*       t = a[i]; */  a[i] = a[j]; a[j] = t;
+31: /* MUTANT (del_stmt) */ /*       t = a[i]; */  /*  a[i] = a[j]; */  a[j] = t;
+31: /* MUTANT (del_stmt) */ /*       t = a[i]; */  /*  a[i] = a[j]; */  /*  a[j] = t; */ 
+31: /* MUTANT (del_stmt) */ /*       t = a[i]; */  a[i] = a[j]; /*  a[j] = t; */ 
+31: /* MUTANT (del_stmt) */      t = a[i]; /*  a[i] = a[j]; */  a[j] = t;
+31: /* MUTANT (del_stmt) */      t = a[i]; /*  a[i] = a[j]; */  /*  a[j] = t; */ 
+31: /* MUTANT (del_stmt) */      t = a[i]; a[i] = a[j]; /*  a[j] = t; */ 
+34: /* MUTANT (del_stmt) */ /*   return j; */ 
+39: /* MUTANT (del_stmt) */ /*   quickSort(a, 0, size-1); */ 
+39: /* MUTANT (rep_const) */  quickSort(a, 1, size-1);
+39: /* MUTANT (rep_const) */  quickSort(a, -1, size-1);
+39: /* MUTANT (rep_const) */  quickSort(a, 0, size-0);
+39: /* MUTANT (rep_const) */  quickSort(a, 0, size--1);
+39: /* MUTANT (rep_const) */  quickSort(a, 0, size-((1)+1));

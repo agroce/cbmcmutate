@@ -1,0 +1,165 @@
+/bin/sh: limit: command not found
+CBMC version 5.0 64-bit macos
+Parsing harness.c
+Parsing mutant100076_quicksort.c
+Converting
+Type-checking harness
+file harness.c line 38 function main: function `assert' is not declared
+Type-checking mutant100076_quicksort
+file mutant100076_quicksort.c line 6 function quickSort: function `printf' is not declared
+file mutant100076_quicksort.c line 12 function quickSort: function `partition' is not declared
+warning: ignoring conflicting implicit function declaration "printf"
+old definition in module harness file /usr/include/stdio.h line 259
+signed int (const char *, ...)
+new definition in module mutant100076_quicksort file mutant100076_quicksort.c line 6 function quickSort
+signed int (void)
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 (4 max) file harness.c line 17 function main thread 0
+Unwinding loop main.0 iteration 2 (4 max) file harness.c line 17 function main thread 0
+Unwinding loop main.0 iteration 3 (4 max) file harness.c line 17 function main thread 0
+Not unwinding loop main.0 iteration 4 (4 max) file harness.c line 17 function main thread 0
+Unwinding loop main.1 iteration 1 (4 max) file harness.c line 36 function main thread 0
+Unwinding loop main.1 iteration 2 (4 max) file harness.c line 36 function main thread 0
+Unwinding loop main.1 iteration 3 (4 max) file harness.c line 36 function main thread 0
+Not unwinding loop main.1 iteration 4 (4 max) file harness.c line 36 function main thread 0
+size of program expression: 191 steps
+simple slicing removed 4 assignments
+Generated 31 VCC(s), 12 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+3123 variables, 8902 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 0.015s
+Building error trace
+
+Counterexample:
+
+State 18 file harness.c line 10 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 19 file harness.c line 10 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 20 file harness.c line 10 function main thread 0
+----------------------------------------------------
+  last=0 (00000000000000000000000000000000)
+
+State 21 file harness.c line 10 function main thread 0
+----------------------------------------------------
+  val=0 (00000000000000000000000000000000)
+
+State 22 file harness.c line 11 function main thread 0
+----------------------------------------------------
+  refc=0 (00000000000000000000000000000000)
+
+State 23 file harness.c line 11 function main thread 0
+----------------------------------------------------
+  refc=0 (00000000000000000000000000000000)
+
+State 24 file harness.c line 12 function main thread 0
+----------------------------------------------------
+  acount=0 (00000000000000000000000000000000)
+
+State 25 file harness.c line 12 function main thread 0
+----------------------------------------------------
+  acount=0 (00000000000000000000000000000000)
+
+State 26 file harness.c line 13 function main thread 0
+----------------------------------------------------
+  s=0 (00000000000000000000000000000000)
+
+State 27 file harness.c line 13 function main thread 0
+----------------------------------------------------
+  s=3 (00000000000000000000000000000011)
+
+State 29 file harness.c line 10 function main thread 0
+----------------------------------------------------
+  val=0 (00000000000000000000000000000000)
+
+State 30 file harness.c line 15 function main thread 0
+----------------------------------------------------
+  val=-2147483646 (10000000000000000000000000000010)
+LOG: s = 3, val = -2147483646
+
+
+State 32 file harness.c line 17 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 34 file harness.c line 18 function main thread 0
+----------------------------------------------------
+  v=-1342177278 (10110000000000000000000000000010)
+LOG: a[0] = -1342177278
+
+
+State 36 file harness.c line 20 function main thread 0
+----------------------------------------------------
+  a[0]=-1342177278 (10110000000000000000000000000010)
+
+State 38 file harness.c line 17 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 41 file harness.c line 18 function main thread 0
+----------------------------------------------------
+  v=-1610612734 (10100000000000000000000000000010)
+LOG: a[1] = -1610612734
+
+
+State 43 file harness.c line 20 function main thread 0
+----------------------------------------------------
+  a[1]=-1610612734 (10100000000000000000000000000010)
+
+State 45 file harness.c line 17 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 48 file harness.c line 18 function main thread 0
+----------------------------------------------------
+  v=-2147483645 (10000000000000000000000000000011)
+LOG: a[2] = -2147483645
+
+
+State 50 file harness.c line 20 function main thread 0
+----------------------------------------------------
+  a[2]=-2147483645 (10000000000000000000000000000011)
+
+State 52 file harness.c line 17 function main thread 0
+----------------------------------------------------
+  i=3 (00000000000000000000000000000011)
+
+State 57 file harness.c line 26 function main thread 0
+----------------------------------------------------
+  a=a (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 58 file harness.c line 26 function main thread 0
+----------------------------------------------------
+  size=3 (00000000000000000000000000000011)
+LOG: sorted a
+
+
+State 62 file harness.c line 31 function main thread 0
+----------------------------------------------------
+  last=-1342177278 (10110000000000000000000000000010)
+
+State 64 file harness.c line 36 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+LOG: last = -1342177278, a[1] = -1610612734
+
+
+Violated property:
+  file harness.c line 38 function main
+  assertion a[(signed long int)i] >= last
+  a[(signed long int)i] >= last
+
+VERIFICATION FAILED

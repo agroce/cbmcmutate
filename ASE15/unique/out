@@ -1,0 +1,356 @@
+CBMC version 5.0 64-bit linux
+Parsing merge_sorted_nodups.c
+Parsing unique2.c
+Converting
+Type-checking merge_sorted_nodups
+file merge_sorted_nodups.c line 9 function merge_sorted_nodups: function `printf' is not declared
+Type-checking unique2
+file unique2.c line 18 function main: function `printf' is not declared
+file unique2.c line 41 function main: function `assert' is not declared
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 (6 max) file unique2.c line 20 function main thread 0
+Unwinding loop main.0 iteration 2 (6 max) file unique2.c line 20 function main thread 0
+Unwinding loop main.0 iteration 3 (6 max) file unique2.c line 20 function main thread 0
+Unwinding loop main.0 iteration 4 (6 max) file unique2.c line 20 function main thread 0
+Unwinding loop main.0 iteration 5 (6 max) file unique2.c line 20 function main thread 0
+Not unwinding loop main.0 iteration 6 (6 max) file unique2.c line 20 function main thread 0
+Unwinding loop main.1 iteration 1 (6 max) file unique2.c line 27 function main thread 0
+Unwinding loop main.1 iteration 2 (6 max) file unique2.c line 27 function main thread 0
+Unwinding loop main.1 iteration 3 (6 max) file unique2.c line 27 function main thread 0
+Unwinding loop main.1 iteration 4 (6 max) file unique2.c line 27 function main thread 0
+Unwinding loop main.1 iteration 5 (6 max) file unique2.c line 27 function main thread 0
+Not unwinding loop main.1 iteration 6 (6 max) file unique2.c line 27 function main thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 1 (6 max) file merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 2 (6 max) file merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 3 (6 max) file merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 4 (6 max) file merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 5 (6 max) file merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Not unwinding loop merge_sorted_nodups.0 iteration 6 (6 max) file merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop main.2 iteration 1 (6 max) file unique2.c line 64 function main thread 0
+Unwinding loop main.2 iteration 2 (6 max) file unique2.c line 64 function main thread 0
+Unwinding loop main.2 iteration 3 (6 max) file unique2.c line 64 function main thread 0
+Unwinding loop main.2 iteration 4 (6 max) file unique2.c line 64 function main thread 0
+Unwinding loop main.2 iteration 5 (6 max) file unique2.c line 64 function main thread 0
+Not unwinding loop main.2 iteration 6 (6 max) file unique2.c line 64 function main thread 0
+Unwinding loop main.3 iteration 1 (6 max) file unique2.c line 78 function main thread 0
+Unwinding loop main.3 iteration 2 (6 max) file unique2.c line 78 function main thread 0
+Unwinding loop main.3 iteration 3 (6 max) file unique2.c line 78 function main thread 0
+Unwinding loop main.3 iteration 4 (6 max) file unique2.c line 78 function main thread 0
+Unwinding loop main.3 iteration 5 (6 max) file unique2.c line 78 function main thread 0
+Not unwinding loop main.3 iteration 6 (6 max) file unique2.c line 78 function main thread 0
+size of program expression: 919 steps
+simple slicing removed 4 assignments
+Generated 86 VCC(s), 28 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+35062 variables, 106054 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 0.809s
+Building error trace
+
+Counterexample:
+
+State 17 file unique2.c line 6 function main thread 0
+----------------------------------------------------
+  a={ 0, 0, 0 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000, 00000000000000000000000000000000 })
+
+State 18 file unique2.c line 7 function main thread 0
+----------------------------------------------------
+  b={ 0, 0, 0 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000, 00000000000000000000000000000000 })
+
+State 19 file unique2.c line 9 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 20 file unique2.c line 9 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 21 file unique2.c line 11 function main thread 0
+----------------------------------------------------
+  asize=0 (00000000000000000000000000000000)
+
+State 22 file unique2.c line 11 function main thread 0
+----------------------------------------------------
+  asize=3 (00000000000000000000000000000011)
+
+State 23 file unique2.c line 12 function main thread 0
+----------------------------------------------------
+  bsize=0 (00000000000000000000000000000000)
+
+State 24 file unique2.c line 12 function main thread 0
+----------------------------------------------------
+  bsize=3 (00000000000000000000000000000011)
+LOG: asize = 3, bsize = 3
+
+
+State 30 file unique2.c line 20 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 32 file unique2.c line 21 function main thread 0
+----------------------------------------------------
+  v=-2146959374 (10000000000001111111111111110010)
+LOG: a[0] = -2146959374
+
+
+State 37 file unique2.c line 24 function main thread 0
+----------------------------------------------------
+  a[0]=-2146959374 (10000000000001111111111111110010)
+
+State 38 file unique2.c line 20 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 41 file unique2.c line 21 function main thread 0
+----------------------------------------------------
+  v=-2137014445 (10000000100111111011111101010011)
+LOG: a[1] = -2137014445
+
+
+State 47 file unique2.c line 24 function main thread 0
+----------------------------------------------------
+  a[1]=-2137014445 (10000000100111111011111101010011)
+
+State 48 file unique2.c line 20 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 51 file unique2.c line 21 function main thread 0
+----------------------------------------------------
+  v=44028969 (00000010100111111101010000101001)
+LOG: a[2] = 44028969
+
+
+State 57 file unique2.c line 24 function main thread 0
+----------------------------------------------------
+  a[2]=44028969 (00000010100111111101010000101001)
+
+State 58 file unique2.c line 20 function main thread 0
+----------------------------------------------------
+  i=3 (00000000000000000000000000000011)
+
+State 61 file unique2.c line 27 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 63 file unique2.c line 28 function main thread 0
+----------------------------------------------------
+  v=-2146435150 (10000000000011111111111110110010)
+LOG: b[0] = -2146435150
+
+
+State 68 file unique2.c line 31 function main thread 0
+----------------------------------------------------
+  b[0]=-2146435150 (10000000000011111111111110110010)
+
+State 69 file unique2.c line 27 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 72 file unique2.c line 28 function main thread 0
+----------------------------------------------------
+  v=-2146435150 (10000000000011111111111110110010)
+LOG: b[1] = -2146435150
+
+
+State 78 file unique2.c line 31 function main thread 0
+----------------------------------------------------
+  b[1]=-2146435150 (10000000000011111111111110110010)
+
+State 79 file unique2.c line 27 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 82 file unique2.c line 28 function main thread 0
+----------------------------------------------------
+  v=-2145403069 (10000000000111111011111101000011)
+LOG: b[2] = -2145403069
+
+
+State 88 file unique2.c line 31 function main thread 0
+----------------------------------------------------
+  b[2]=-2145403069 (10000000000111111011111101000011)
+
+State 89 file unique2.c line 27 function main thread 0
+----------------------------------------------------
+  i=3 (00000000000000000000000000000011)
+
+State 92 file unique2.c line 34 function main thread 0
+----------------------------------------------------
+  c={ 0, 0, 116620646, 1061850129, -755009618, -736526338 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000, 00000110111100110111110101100110, 00111111010010101000110000010001, 11010010111111110111011110101110, 11010100000110010111111111111110 })
+
+State 93 file unique2.c line 35 function main thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 96 file unique2.c line 37 function main thread 0
+----------------------------------------------------
+  a=a!0@1 (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 97 file unique2.c line 37 function main thread 0
+----------------------------------------------------
+  asize=3 (00000000000000000000000000000011)
+
+State 98 file unique2.c line 37 function main thread 0
+----------------------------------------------------
+  b=b!0@1 (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 99 file unique2.c line 37 function main thread 0
+----------------------------------------------------
+  bsize=3 (00000000000000000000000000000011)
+
+State 100 file unique2.c line 37 function main thread 0
+----------------------------------------------------
+  c=c!0@1 (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 101 file merge_sorted_nodups.c line 4 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=0 (00000000000000000000000000000000)
+
+State 102 file merge_sorted_nodups.c line 4 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=0 (00000000000000000000000000000000)
+
+State 103 file merge_sorted_nodups.c line 5 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=0 (00000000000000000000000000000000)
+
+State 104 file merge_sorted_nodups.c line 5 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=0 (00000000000000000000000000000000)
+
+State 105 file merge_sorted_nodups.c line 6 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=0 (00000000000000000000000000000000)
+
+State 106 file merge_sorted_nodups.c line 6 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=-1 (11111111111111111111111111111111)
+
+State 107 file merge_sorted_nodups.c line 7 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 108 file merge_sorted_nodups.c line 7 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+LOG: apos = 0, bpos = 0, cpos = -1
+
+LOG: PUTTING a[0]=-2146959374 in c
+
+
+State 123 file merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=0 (00000000000000000000000000000000)
+
+State 124 file merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[0]=-2146959374 (10000000000001111111111111110010)
+
+State 125 file merge_sorted_nodups.c line 14 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=1 (00000000000000000000000000000001)
+
+State 126 file merge_sorted_nodups.c line 16 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=1 (00000000000000000000000000000001)
+LOG: apos = 1, bpos = 0, cpos = 0
+
+LOG: PUTTING b[0]=-2146435150 in c
+
+
+State 144 file merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=1 (00000000000000000000000000000001)
+
+State 145 file merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[1]=-2146435150 (10000000000011111111111110110010)
+
+State 146 file merge_sorted_nodups.c line 21 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=2 (00000000000000000000000000000010)
+
+State 147 file merge_sorted_nodups.c line 23 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=1 (00000000000000000000000000000001)
+LOG: apos = 1, bpos = 1, cpos = 1
+
+
+State 163 file merge_sorted_nodups.c line 23 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=2 (00000000000000000000000000000010)
+LOG: apos = 1, bpos = 2, cpos = 1
+
+LOG: PUTTING b[2]=-2145403069 in c
+
+
+State 180 file merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=2 (00000000000000000000000000000010)
+
+State 181 file merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[2]=-2145403069 (10000000000111111011111101000011)
+
+State 182 file merge_sorted_nodups.c line 21 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=3 (00000000000000000000000000000011)
+
+State 183 file merge_sorted_nodups.c line 23 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=3 (00000000000000000000000000000011)
+LOG: apos = 1, bpos = 3, cpos = 2
+
+LOG: PUTTING a[1]=-2137014445 in c
+
+
+State 201 file merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=3 (00000000000000000000000000000011)
+
+State 202 file merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[3]=-2137014445 (10000000100111111011111101010011)
+
+State 203 file merge_sorted_nodups.c line 14 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=4 (00000000000000000000000000000100)
+
+State 204 file merge_sorted_nodups.c line 16 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=2 (00000000000000000000000000000010)
+LOG: apos = 2, bpos = 3, cpos = 3
+
+LOG: PUTTING a[2]=44028969 in c
+
+
+State 223 file merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=4 (00000000000000000000000000000100)
+
+State 224 file merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[4]=44028969 (00000010100111111101010000101001)
+
+State 225 file merge_sorted_nodups.c line 14 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=5 (00000000000000000000000000000101)
+
+State 226 file merge_sorted_nodups.c line 16 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=3 (00000000000000000000000000000011)
+
+Violated property:
+  file merge_sorted_nodups.c line 8 function merge_sorted_nodups
+  unwinding assertion loop 0
+
+VERIFICATION FAILED
