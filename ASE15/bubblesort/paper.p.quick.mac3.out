@@ -1,0 +1,98 @@
+USAGE: evalmuants.py <prefix> <timeout> [--ignoreKilled <prefix>] [--ignoreSurvived <prefix>] [--cbmc <PATH>] --options <options> --files <files> --mutate <mutant-files> [--harness] [--use-existing] [--check-strength] [--cover]
+PREFIX = paper.p.quick.mac3
+TIMEOUT = 10000
+False --options
+OPTIONS = --bounds-check --pointer-check -DMAX_ITEMS=3 --unwind 4 
+FILES = ['paperharness.c']
+MUTATED FILES = ['quicksort.c']
+limit cputime 10000 ; cbmc --bounds-check --pointer-check -DMAX_ITEMS=3 --unwind 4 
+SANITY CHECK...
+Original SUCCESSFULLY VERIFIED in 30.591
+Mutating quicksort.c
+PREFIX: mutant*_
+Checking mutant mutant100001_quicksort.c:  7 :  /* MUTANT (del_stmt) */ /*   int j; */ 
+OTHER RESULT
+Checking mutant mutant100002_quicksort.c:  9 :  /* MUTANT (rep_op) */  if( l <= r ) 
+VERIFICATION SUCCESSFUL 33.103
+Checking mutant mutant100003_quicksort.c:  9 :  /* MUTANT (rep_op) */  if( l > r ) 
+KILLED 24.802
+Checking mutant mutant100004_quicksort.c:  9 :  /* MUTANT (rep_op) */  if( l >= r ) 
+KILLED 25.215
+Checking mutant mutant100005_quicksort.c:  9 :  /* MUTANT (rep_op) */  if( l == r ) 
+KILLED 22.507
+Checking mutant mutant100006_quicksort.c:  9 :  /* MUTANT (rep_op) */  if( l != r ) 
+KILLED 34.037
+Checking mutant mutant100007_quicksort.c:  9 :  /* MUTANT (negate) */  if(!( l < r )) 
+KILLED 23.701
+Checking mutant mutant100008_quicksort.c:  12 :  /* MUTANT (del_stmt) */ /*       j = partition( a, l, r); */ 
+KILLED 0.04
+Checking mutant mutant100009_quicksort.c:  13 :  /* MUTANT (del_stmt) */ /*       quickSort( a, l, j-1); */ 
+KILLED 2.548
+Checking mutant mutant100010_quicksort.c:  13 :  /* MUTANT (rep_const) */      quickSort( a, l, j-0);
+KILLED 25.077
+Checking mutant mutant100011_quicksort.c:  13 :  /* MUTANT (rep_const) */      quickSort( a, l, j--1);
+OTHER RESULT
+Checking mutant mutant100012_quicksort.c:  13 :  /* MUTANT (rep_const) */      quickSort( a, l, j-((1)+1));
+KILLED 26.694
+Checking mutant mutant100013_quicksort.c:  14 :  /* MUTANT (del_stmt) */ /*       quickSort( a, j+1, r); */ 
+KILLED 1.654
+Checking mutant mutant100014_quicksort.c:  14 :  /* MUTANT (rep_op) */      quickSort( a, j-1, r);
+KILLED 29.951
+Checking mutant mutant100015_quicksort.c:  14 :  /* MUTANT (rep_op) */      quickSort( a, j*1, r);
+KILLED 21.285
+Checking mutant mutant100016_quicksort.c:  14 :  /* MUTANT (rep_op) */      quickSort( a, j%1, r);
+KILLED 17.39
+Checking mutant mutant100017_quicksort.c:  14 :  /* MUTANT (rep_const) */      quickSort( a, j+0, r);
+KILLED 21.85
+Checking mutant mutant100018_quicksort.c:  14 :  /* MUTANT (rep_const) */      quickSort( a, j+-1, r);
+KILLED 27.774
+Checking mutant mutant100019_quicksort.c:  14 :  /* MUTANT (rep_const) */      quickSort( a, j+((1)+1), r);
+KILLED 33.703
+Checking mutant mutant100020_quicksort.c:  22 :  /* MUTANT (del_stmt) */ /*   int pivot, i, j, t; */ 
+OTHER RESULT
+Checking mutant mutant100021_quicksort.c:  23 :  /* MUTANT (del_stmt) */ /*   pivot = a[l]; */ 
+KILLED 27.916
+Checking mutant mutant100022_quicksort.c:  24 :  /* MUTANT (del_stmt) */ /*   i = l; */  j = r+1;
+KILLED 30.854
+Checking mutant mutant100023_quicksort.c:  24 :  /* MUTANT (del_stmt) */ /*   i = l; */  /*  j = r+1; */ 
+KILLED 27.547
+Checking mutant mutant100024_quicksort.c:  24 :  /* MUTANT (del_stmt) */  i = l; /*  j = r+1; */ 
+KILLED 20.753
+Checking mutant mutant100025_quicksort.c:  24 :  /* MUTANT (rep_op) */  i = l; j = r-1;
+KILLED 24.252
+Checking mutant mutant100026_quicksort.c:  24 :  /* MUTANT (rep_op) */  i = l; j = r*1;
+KILLED 25.294
+Checking mutant mutant100027_quicksort.c:  24 :  /* MUTANT (rep_op) */  i = l; j = r%1;
+KILLED 15.181
+Checking mutant mutant100028_quicksort.c:  24 :  /* MUTANT (rep_const) */  i = l; j = r+0;
+KILLED 25.252
+Checking mutant mutant100029_quicksort.c:  24 :  /* MUTANT (rep_const) */  i = l; j = r+-1;
+KILLED 25.431
+Checking mutant mutant100030_quicksort.c:  24 :  /* MUTANT (rep_const) */  i = l; j = r+((1)+1);
+KILLED 24.098
+Checking mutant mutant100031_quicksort.c:  26 :  /* MUTANT (rep_const) */  while( 0)
+KILLED 0.827
+Checking mutant mutant100032_quicksort.c:  26 :  /* MUTANT (rep_const) */  while( -1)
+VERIFICATION SUCCESSFUL 31.68
+Checking mutant mutant100033_quicksort.c:  26 :  /* MUTANT (rep_const) */  while( ((1)+1))
+VERIFICATION SUCCESSFUL 32.554
+Checking mutant mutant100034_quicksort.c:  26 :  /* MUTANT (negate) */  while(!( 1))
+KILLED 0.838
+Checking mutant mutant100035_quicksort.c:  28 :  /* MUTANT (del_stmt) */ /*       do ++i; */  while( i <= r && a[i] <= pivot );
+KILLED 14.653
+Checking mutant mutant100036_quicksort.c:  28 :  /* MUTANT (del_stmt) */ /*       do ++i; */  /*  while( i <= r && a[i] <= pivot ); */ 
+KILLED 15.936
+Checking mutant mutant100037_quicksort.c:  28 :  /* MUTANT (del_stmt) */      do ++i; /*  while( i <= r && a[i] <= pivot ); */ 
+OTHER RESULT
+Checking mutant mutant100038_quicksort.c:  28 :  /* MUTANT (rep_op) */      do --i; while( i <= r && a[i] <= pivot );
+KILLED 33.081
+Checking mutant mutant100039_quicksort.c:  28 :  /* MUTANT (rep_op) */      do ++i; while( i < r && a[i] <= pivot );
+VERIFICATION SUCCESSFUL 35.989
+Checking mutant mutant100040_quicksort.c:  28 :  /* MUTANT (rep_op) */      do ++i; while( i > r && a[i] <= pivot );
+KILLED 29.21
+Checking mutant mutant100041_quicksort.c:  28 :  /* MUTANT (rep_op) */      do ++i; while( i >= r && a[i] <= pivot );
+KILLED 31.737
+Checking mutant mutant100042_quicksort.c:  28 :  /* MUTANT (rep_op) */      do ++i; while( i == r && a[i] <= pivot );
+KILLED 28.452
+Checking mutant mutant100043_quicksort.c:  28 :  /* MUTANT (rep_op) */      do ++i; while( i != r && a[i] <= pivot );
+VERIFICATION SUCCESSFUL 25.45

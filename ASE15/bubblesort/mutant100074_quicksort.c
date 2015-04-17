@@ -25,7 +25,7 @@ int partition( int a[], int l, int r) {
   
   while( 1)
     {
-      do ++i; while( a[i] <= pivot && i <= r );
+      do ++i; while( i <= r && a[i] <= pivot );
       do --j; while( a[j] > pivot );
       if( i >= j ) break;
  /* MUTANT (del_stmt) */      t = a[i]; a[i] = a[j]; /*  a[j] = t; */ 
