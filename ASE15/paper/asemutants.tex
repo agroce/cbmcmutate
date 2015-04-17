@@ -535,11 +535,12 @@ practical for real verification tasks.
   have a kill rate $\leq$ the kill rate for $H$.
 \end{enumerate}
 
-
+\begin{figure}
 {\scriptsize
 \begin{code}
-int unwinding($H$: harness, $M$: mutants, $O$: options) 
-U = 0
+(int, survivors) unwind($H$, $M$, $O$: options, $U_s$: int) 
+\vspace{0.1in}
+U = $U_s$-1
 r' = \{\}
 changed = False
 while changed:
@@ -553,16 +554,44 @@ while changed:
          r[m] = check($H$,$m$,$U$,$O(U)$)
          if r[m] == KILLED:
             //once killed, assume always killed
-            $M$ = $M \ m$
+            $M$ = $M \\ m$
       if r[m] == SURVIVED:
          r'[m] = check($H$,$m$,$U$+1,$O(U+1)$)
          if r'[m] == KILLED:
-            $M$ = $M \ m$
+            $M$ = $M \\ m$
             changed = True
             goto TOP
-return U-1
+return (U-1, $M$)
 \end{code}
 }
+\caption{Algorithm 1: Finding unwinding depth and surviving mutants}
+\label{alg:unwind}
+\end{figure}
+
+\begin{figure}
+{\scriptsize
+\begin{code}
+harness covering($H$, $TARGET$)
+\vspace{0.1in}
+$H'$ = $H$
+
+for stmt $\in H'$:
+   if stmt == assert(P):
+      stmt = assume(P);
+
+cover = [
+  assume(total\_coverage > TARGET); 
+  assert(!mutant\_covered);
+]
+
+insert cover at end of $H'$.main()
+
+return $H'$
+\end{code}
+}
+\caption{Algorithm 2: Convert harness into maximal coverage search}
+\label{alg:invert}
+\end{figure}
 
 Our primary contribution in this paper is a detailed examination of
 the extension of traditional mutation testing to understand successful
