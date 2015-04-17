@@ -535,6 +535,35 @@ practical for real verification tasks.
   have a kill rate $\leq$ the kill rate for $H$.
 \end{enumerate}
 
+
+{\scriptsize
+\begin{code}
+int unwinding($H$: harness, $M$: mutants, $O$: options) 
+U = 0
+r' = \{\}
+changed = False
+while changed:
+   TOP:
+   U = U + 1
+   changed = False
+   r = r'
+   r' = \{\}
+   for $m \in M$:
+      if $m \not\in r$:
+         r[m] = check($H$,$m$,$U$,$O(U)$)
+         if r[m] == KILLED:
+            //once killed, assume always killed
+            $M$ = $M \ m$
+      if r[m] == SURVIVED:
+         r'[m] = check($H$,$m$,$U$+1,$O(U+1)$)
+         if r'[m] == KILLED:
+            $M$ = $M \ m$
+            changed = True
+            goto TOP
+return U-1
+\end{code}
+}
+
 Our primary contribution in this paper is a detailed examination of
 the extension of traditional mutation testing to understand successful
 (and ``successful'') verification results, and determine when a
@@ -557,13 +586,13 @@ it may be best to focus on how a verification effort distinguishes the
 ``real'' program from similar alternative programs that can be shown
 to \emph{not} match the theory of program behavior.
 
-\subsection{Falsification and Verification}
+\section{Falsification and Verification}
 
 
 
-\section{The Opposite of Counterexample}
+\section{Witnesses to Success}
 
-Given a mutant of program $P$, $P_m$, the 
+Given a mutant of program $P$, $M_i$, the 
 
 Even a killed mutant (e.g., a mutant the harness detects) can shed
 critical light on harness vulnerabilities.  For example, the code in
@@ -584,8 +613,12 @@ detected.  No mutant produces such behavior, but noting an incorrect
 but passing trace of this run lets us see the problem.
 
 
+\section{Case Studies}
+
+\section{Related Work}
+
 \section{Conclusion}
-The conclusion goes here.
+
 
 
 
