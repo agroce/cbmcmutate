@@ -13,12 +13,12 @@ int merge_sorted_nodups(int a[], int asize, int b[], int bsize, int c[]) {
       if ((cpos == -1) || (c[cpos] != a[apos])) {
 	printf ("LOG: PUTTING a[%d]=%d in c\n", apos, a[apos]);
 	c[++cpos] = a[apos];
-  mutant_covered = 1;
- /* MUTANT (rep_op) */	csize--;
+	csize++;
       }
       apos++;
     } else {
-      if ((cpos == -1) || (c[cpos] != b[bpos])) {
+  mutant_covered = 1;
+ /* MUTANT (rep_op) */      if ((cpos == -1) && (c[cpos] != b[bpos])) {
 	printf ("LOG: PUTTING b[%d]=%d in c\n", bpos, b[bpos]);
 	c[++cpos] = b[bpos];
 	csize++;

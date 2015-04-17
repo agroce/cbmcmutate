@@ -4,7 +4,8 @@ int mutant_covered = 0;
 
 int merge_sorted_nodups(int a[], int asize, int b[], int bsize, int c[]) {
   int apos = 0;
-  int bpos = 0;
+  mutant_covered = 1;
+ /* MUTANT (del_stmt) */ /*   int bpos = 0; */ 
   int cpos = -1;
   int csize = 0;
   while ((apos < asize) || (bpos < bsize)) {
@@ -13,8 +14,7 @@ int merge_sorted_nodups(int a[], int asize, int b[], int bsize, int c[]) {
       if ((cpos == -1) || (c[cpos] != a[apos])) {
 	printf ("LOG: PUTTING a[%d]=%d in c\n", apos, a[apos]);
 	c[++cpos] = a[apos];
-  mutant_covered = 1;
- /* MUTANT (rep_op) */	csize--;
+	csize++;
       }
       apos++;
     } else {

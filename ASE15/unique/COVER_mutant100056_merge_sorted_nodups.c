@@ -14,7 +14,7 @@ int merge_sorted_nodups(int a[], int asize, int b[], int bsize, int c[]) {
 	printf ("LOG: PUTTING a[%d]=%d in c\n", apos, a[apos]);
 	c[++cpos] = a[apos];
   mutant_covered = 1;
- /* MUTANT (rep_op) */	csize--;
+ /* MUTANT (del_stmt) */ /* 	csize++; */ 
       }
       apos++;
     } else {

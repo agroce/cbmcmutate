@@ -11,10 +11,10 @@ int merge_sorted_nodups(int a[], int asize, int b[], int bsize, int c[]) {
     printf ("LOG: apos = %d, bpos = %d, cpos = %d\n", apos, bpos, cpos);
     if ((apos < asize) && ((bpos >= bsize) || (a[apos] < b[bpos]))) {
       if ((cpos == -1) || (c[cpos] != a[apos])) {
-	printf ("LOG: PUTTING a[%d]=%d in c\n", apos, a[apos]);
-	c[++cpos] = a[apos];
   mutant_covered = 1;
- /* MUTANT (rep_op) */	csize--;
+ /* MUTANT (del_stmt) */ /* 	printf ("LOG: PUTTING a[%d]=%d in c\n", apos, a[apos]); */ 
+	c[++cpos] = a[apos];
+	csize++;
       }
       apos++;
     } else {
