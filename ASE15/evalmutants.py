@@ -11,22 +11,55 @@ total = 0
 
 harnessMode = False
 useExisting = False
+checkStrength = False
+coverMode = False
 
-print "USAGE: evalmuants.py <prefix> <timeout> --options <options> --files <files> --mutate <mutant-files> [--harness] [--use-existing]"
+print "USAGE: evalmuants.py <prefix> <timeout> [--ignoreKilled <prefix>] [--ignoreSurvived <prefix>] [--cbmc <PATH>] --options <options> --files <files> --mutate <mutant-files> [--harness] [--use-existing] [--check-strength] [--cover]"
+
+if "--cover" in sys.argv:
+    sys.argv.remove("--cover")
+    coverMode = True
 
 if "--harness" in sys.argv:
     sys.argv.remove("--harness")
     harnessMode = True
 
+if "--check-strength" in sys.argv:
+    sys.argv.remove("--check-strength")
+    checkStrength = True    
+
 if "--use-existing" in sys.argv:
     sys.argv.remove("--use-existing")
     useExisting = True
+
+ignoreKilled = None
+ignoreSurvived = None
 
 prefix = sys.argv[1]
 print "PREFIX =", prefix
 timeout = sys.argv[2]
 print "TIMEOUT =", timeout
-pos = 4
+pos = 3
+cbmc = "cbmc"
+nextCBMC=False
+for o in sys.argv[pos:]:
+    print nextCBMC,o
+    pos += 1
+    if nextCBMC:
+        cbmc = o
+        nextCBMC = False
+    if o == "--options":
+        break
+    if o == "--cbmc":
+        nextCBMC = True
+if "--ignoreKilled" in sys.argv:
+    ikpos = sys.argv.index["--ignoreKilled"]
+    ignoreKilled = sys.argv[ikpos+1]
+    sys.argv = sys.argv[0:ikpos] + sys.argv[ikpos+1:]
+if "--ignoreSurvived" in sys.argv:
+    ispos = sys.argv.index["--ignoreSurvived"]
+    ignoreSurvived = sys.argv[ispos+1]
+    sys.argv = sys.argv[0:ispos] + sys.argv[ispos+1:]    
 options = ""
 for o in sys.argv[pos:]:
     pos += 1
@@ -47,7 +80,7 @@ for o in sys.argv[pos:]:
 print "MUTATED FILES =",mutants
 
 mutp = "limit cputime " + timeout + " ; "
-mutp += "cbmc " + options
+mutp += cbmc + " " + options
 
 print mutp
 
@@ -90,7 +123,11 @@ def mutateAll(mutants, files, totalSuccessTime, totalKilledTime, minSuccessTime,
         for m in mutants:
             if m != mutant_base:
                 keepsame.append(m)
-        for mutant in glob.glob("mutant*_"+mutant_base):
+        mprefix = "mutant*_"
+        if coverMode:
+            mprefix = "COVER_" + mprefix
+        print "PREFIX:",mprefix
+        for mutant in glob.glob(mprefix+mutant_base):
             total += 1
             print indent+"Checking mutant", mutant + ": ",
             printMutant(mutant)
@@ -169,8 +206,12 @@ def mutateAll(mutants, files, totalSuccessTime, totalKilledTime, minSuccessTime,
 
 print "SANITY CHECK..."
 (checkOriginal, originalTime) = checkMutant("", mutants + files, "original.result")
-assert ((checkOriginal == True) or (checkOriginal == "TIMEOUT"))
-print "Original SUCCESSFULLY VERIFIED in", originalTime
+if not checkStrength:
+    assert ((checkOriginal == True) or (checkOriginal == "TIMEOUT"))
+    print "Original SUCCESSFULLY VERIFIED in", originalTime
+else:
+    assert ((checkOriginal == False) or (checkOriginal == "TIMEOUT"))
+    print "Original SUCCESSFULLY KILLED in",originalTime
 sys.stdout.flush()
 sys.stderr.flush()
 
