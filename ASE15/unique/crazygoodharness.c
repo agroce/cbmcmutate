@@ -2,6 +2,8 @@
 
 int nondet_int();
 
+int mutant_covered = 0;
+
 int main () {
   int a[SIZE];
   int b[SIZE];
@@ -38,7 +40,7 @@ int main () {
 
   printf ("LOG: csize = %d\n", csize);
 
-  assert (csize <= (asize + bsize));
+  __CPROVER_assume (csize <= (asize + bsize));
   assert (((asize == 0) && (bsize == 0)) || (csize >= 1));
 
   int i1, i2;
@@ -49,17 +51,19 @@ int main () {
   __CPROVER_assume(i2 >= 0);
   __CPROVER_assume(i1 < csize);
   __CPROVER_assume(i2 < csize);
-  //__CPROVER_assume(i1 != i2);
 
   printf ("LOG: c[%d] = %d, c[%d] = %d\n", i1, c[i1], i2, c[i2]);
 
-  assert((i1 != i2) || (c[i1] != c[i2]));
+  assert((i1 == i2) || (c[i1] != c[i2]));
 
   v = nondet_int();
   __CPROVER_assume (v >= 0);
   __CPROVER_assume (v < asize);
 
   v = a[v];
+
+  printf ("LOG: a check: v = %d\n", v);
+
   int found = 0;
   for (i = 0; i < csize; i++) {
     if (c[i] == v) {
@@ -74,9 +78,38 @@ int main () {
   __CPROVER_assume (v < bsize);
 
   v = b[v];
+
+  printf ("LOG: b check: v = %d\n", v);
+
+
   found = 0;
   for (i = 0; i < csize; i++) {
     if (c[i] == v) {
+      found = 1;
+      break;
+    }
+  }
+  assert (found == 1);
+
+  v = nondet_int();
+  __CPROVER_assume (v >= 0);
+  __CPROVER_assume (v < csize);
+
+  v = c[v];
+
+  printf ("LOG: c check: v = %d\n", v);
+
+
+  found = 0;
+  for (i = 0; i < asize; i++) {
+    if (a[i] == v) {
+      found = 1;
+      break;
+    }
+  }
+
+  for (i = 0; (!found) && (i < bsize); i++) {
+    if (b[i] == v) {
       found = 1;
       break;
     }
