@@ -352,8 +352,8 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{How Verified is My Program?\\Techniques for Understanding
-  Successful Verifications}
+\title{How Verified is My Code?\\Techniques for Understanding
+  ``Successful'' Verifications}
 
 
 % author names and affiliations
@@ -491,38 +491,97 @@ formal verification.  In this paper, we adapt traditional mutation
 testing \cite{mutation} to the problem of software verification.
 
 However, the use of mutation testing most often seen in the software
-engineering literature will not suffice in this case:  simply noting a
+engineering literature will not suffice in this case: simply noting a
 mutation kill rate is not enough.  The scope of the code to be
 verified, and the presumed importance of such critical code suggests
 an approach in which \emph{individual mutants} are examined by the
 developer.  Without additional assistance, such an approach will not
-scale.  We show that the model checking tool, the nature of formal
-verification, and the adoption of certain best practices can make this
-seemingly too-demanding approach in fact practical for real
-verification tasks.
+scale.  We show that the capabilities of the model checking tool, the
+nature of formal verification, and the adoption of certain best
+practices can make this seemingly too-demanding approach in fact
+practical for real verification tasks.
+
+\begin{enumerate}
+\item Generate mutant set $M = m_1 \ldots m_n$ for the program $P$.
+\item Prune $M$ into $M'$ by equivalence classes based on optimizing
+  compiler output, removing mutants that fail to compile or are equal
+  to the original code.
+\item Set unwinding depth/problem size $U$ to 0.
+\item Set $r = 0, r' = 1$.
+\item While $r != r'$:
+\begin{enumerate}
+\item Set $U = U + 1$.
+\item Set $r = r'$
+\item Set $K = \emptyset, S = \emptyset$.
+\item Check each mutant $m_i \in M$ using $H$ and size $U$: if $m_i$ is killed, $K = K \cup
+  \{m_i\}$, otherwise $S = S \cup \{m_i\}$.
+\item Set $r' = |K| / |M|$.  
+\end{enumerate}
+\item Examine each mutant in $S$.  Remove those that are, by
+  inspection, semantically equivalent to $P$.
+\item Modify harness $H$ for mutants in $S$ that indicate a clear
+  violation of the specification, easily understood, until $H$ kills
+  all such mutants.  Remove them from $S$ and add them to $K$.
+\item For remaining mutants in $S$, generate a successful execution
+  that covers the mutant but satisfied $H$.  If the execution is
+  degenerate, add constraints removing that class of execution until a
+  witness to an incorrect, mutant-covering behavior is produced.  Use
+  this to modify $H$ and move newly killed mutants from $S$ to $K$.
+\item Take mutants in $m_i \in K$, and check whether there exists a successful
+  execution of $m_i$ satisfying $H$.  Examine and constraint each such
+  execution to remove degenerate solutions, modifying $H$ as needed.
+\item Compute mutants $M_H$ of the harness, and check that all mutants
+  either:  produce a counterexample for the original program $P$ or
+  have a kill rate $\leq$ the kill rate for $H$.
+\end{enumerate}
 
 Our primary contribution in this paper is a detailed examination of
 the extension of traditional mutation testing to understand successful
-verification results, and determine when a harness is not actually
-sufficiently powerful to ensure correctness.  To support this
-approach, we show how to use mutation testing to choose an unwinding
-depth for loops in bounded model checking, how to mutate a harness to
-determine if other, similar harnesses have an equal (or better)
-mutation kill rate, how to produce successful complex executions of
-surviving mutants in order to understand mutant behavior, and propose
-the use of mutation analysis to gain some confidence of program
-correctness even past model checker scalability limits. At a more
-general level, we discuss the fundamental nature of ``verification''
-in a real-world context where specifications are never known to be
-complete. We propose that falsification, as in certain theories of
-natural science, is a more useful conceptual framework for most
-software verification efforts: rather than focusing on what can be
-proven about a program, it is best to focus on how a verification
-effort distinguishes the ``real'' program from similar alternative
-programs that can be shown to not match the theory of its behavior.
+(and ``successful'') verification results, and determine when a
+harness is not actually sufficiently powerful to ensure correctness.
+To support this approach, we show how to use mutation testing to
+choose an unwinding depth for loops in bounded model checking, how to
+mutate a harness to determine if any similar harnesses have an equal
+(or better) mutation kill rate, and most importantly, how to
+modify CBMC to automatically
+produce successful high-coverage executions covering mutated code
+in order to understand mutant behavior and find subtle harness flaws.  We also propose the use of
+mutation analysis to gain limited confidence of program correctness even
+past model checker scalability limits. At a more general level, we
+discuss the fundamental nature of ``verification'' in a real-world
+context where specifications are never known to be complete. We
+propose that falsification, as in certain theories of natural science,
+is a more useful conceptual framework for most software verification
+efforts: rather than focusing on what can be proven about a program,
+it may be best to focus on how a verification effort distinguishes the
+``real'' program from similar alternative programs that can be shown
+to \emph{not} match the theory of program behavior.
 
 \subsection{Falsification and Verification}
 
+
+
+\section{The Opposite of Counterexample}
+
+Given a mutant of program $P$, $P_m$, the 
+
+Even a killed mutant (e.g., a mutant the harness detects) can shed
+critical light on harness vulnerabilities.  For example, the code in
+Figure \ref{fig:uniqueharness} is a portion of a harness to verify
+code that merges two sorted arrays, removing all duplicates (the
+source arrays may contain duplciates or shared items, the output array
+is guaranteed to be sorted and have all-unique values).  This harness
+detects all non-equivalent mutants of the source code.  However, as is
+well known, many software faults \cite{justmutants} are not
+represented by a mutant.  Because we are model checking, we want our
+harness to actually rule out \emph{all} bad runs of the program under
+test.  Even a killed mutant's passing executions may show such a
+problem.  Here we see that when the output array's size is 1, the way
+we have written the duplicate check in fact \emph{assume}s away
+\emph{all executions}!  We check no properties of size 1 output
+arrays, and a fault that only appears with size = 1 will never be
+detected.  No mutant produces such behavior, but noting an incorrect
+but passing trace of this run lets us see the problem.
 
 
 \section{Conclusion}
