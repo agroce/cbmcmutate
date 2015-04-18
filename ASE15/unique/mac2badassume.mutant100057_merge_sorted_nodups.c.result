@@ -1,0 +1,305 @@
+/bin/sh: limit: command not found
+CBMC version 5.0 64-bit macos
+Parsing badassumeharness.c
+Parsing mutant100057_merge_sorted_nodups.c
+Converting
+Type-checking badassumeharness
+file badassumeharness.c line 18 function main: function `printf' is not declared
+file badassumeharness.c line 41 function main: function `assert' is not declared
+Type-checking mutant100057_merge_sorted_nodups
+file mutant100057_merge_sorted_nodups.c line 9 function merge_sorted_nodups: function `printf' is not declared
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 (5 max) file badassumeharness.c line 20 function main thread 0
+Unwinding loop main.0 iteration 2 (5 max) file badassumeharness.c line 20 function main thread 0
+Unwinding loop main.0 iteration 3 (5 max) file badassumeharness.c line 20 function main thread 0
+Unwinding loop main.0 iteration 4 (5 max) file badassumeharness.c line 20 function main thread 0
+Not unwinding loop main.0 iteration 5 (5 max) file badassumeharness.c line 20 function main thread 0
+Unwinding loop main.1 iteration 1 (5 max) file badassumeharness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 2 (5 max) file badassumeharness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 3 (5 max) file badassumeharness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 4 (5 max) file badassumeharness.c line 27 function main thread 0
+Not unwinding loop main.1 iteration 5 (5 max) file badassumeharness.c line 27 function main thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 1 (5 max) file mutant100057_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 2 (5 max) file mutant100057_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 3 (5 max) file mutant100057_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 4 (5 max) file mutant100057_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Not unwinding loop merge_sorted_nodups.0 iteration 5 (5 max) file mutant100057_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop main.2 iteration 1 (5 max) file badassumeharness.c line 64 function main thread 0
+Unwinding loop main.2 iteration 2 (5 max) file badassumeharness.c line 64 function main thread 0
+Unwinding loop main.2 iteration 3 (5 max) file badassumeharness.c line 64 function main thread 0
+Unwinding loop main.2 iteration 4 (5 max) file badassumeharness.c line 64 function main thread 0
+Not unwinding loop main.2 iteration 5 (5 max) file badassumeharness.c line 64 function main thread 0
+Unwinding loop main.3 iteration 1 (5 max) file badassumeharness.c line 78 function main thread 0
+Unwinding loop main.3 iteration 2 (5 max) file badassumeharness.c line 78 function main thread 0
+Unwinding loop main.3 iteration 3 (5 max) file badassumeharness.c line 78 function main thread 0
+Unwinding loop main.3 iteration 4 (5 max) file badassumeharness.c line 78 function main thread 0
+Not unwinding loop main.3 iteration 5 (5 max) file badassumeharness.c line 78 function main thread 0
+size of program expression: 1001 steps
+simple slicing removed 10 assignments
+Generated 350 VCC(s), 242 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+28412 variables, 82527 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 0.159s
+Building error trace
+
+Counterexample:
+
+State 17 file badassumeharness.c line 6 function main thread 0
+----------------------------------------------------
+  a={ 0, 0 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000 })
+
+State 18 file badassumeharness.c line 7 function main thread 0
+----------------------------------------------------
+  b={ 0, 0 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000 })
+
+State 19 file badassumeharness.c line 9 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 20 file badassumeharness.c line 9 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 21 file badassumeharness.c line 11 function main thread 0
+----------------------------------------------------
+  asize=0 (00000000000000000000000000000000)
+
+State 22 file badassumeharness.c line 11 function main thread 0
+----------------------------------------------------
+  asize=2 (00000000000000000000000000000010)
+
+State 23 file badassumeharness.c line 12 function main thread 0
+----------------------------------------------------
+  bsize=0 (00000000000000000000000000000000)
+
+State 24 file badassumeharness.c line 12 function main thread 0
+----------------------------------------------------
+  bsize=2 (00000000000000000000000000000010)
+LOG: asize = 2, bsize = 2
+
+
+State 30 file badassumeharness.c line 20 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 32 file badassumeharness.c line 21 function main thread 0
+----------------------------------------------------
+  v=-1074876650 (10111111111011101010111100010110)
+LOG: a[0] = -1074876650
+
+
+State 37 file badassumeharness.c line 24 function main thread 0
+----------------------------------------------------
+  a[0]=-1074876650 (10111111111011101010111100010110)
+
+State 38 file badassumeharness.c line 20 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 41 file badassumeharness.c line 21 function main thread 0
+----------------------------------------------------
+  v=1079439894 (01000000010101101111001000010110)
+LOG: a[1] = 1079439894
+
+
+State 47 file badassumeharness.c line 24 function main thread 0
+----------------------------------------------------
+  a[1]=1079439894 (01000000010101101111001000010110)
+
+State 48 file badassumeharness.c line 20 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 51 file badassumeharness.c line 27 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 53 file badassumeharness.c line 28 function main thread 0
+----------------------------------------------------
+  v=-1135082 (11111111111011101010111000010110)
+LOG: b[0] = -1135082
+
+
+State 58 file badassumeharness.c line 31 function main thread 0
+----------------------------------------------------
+  b[0]=-1135082 (11111111111011101010111000010110)
+
+State 59 file badassumeharness.c line 27 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 62 file badassumeharness.c line 28 function main thread 0
+----------------------------------------------------
+  v=2146963990 (01111111111110000001001000010110)
+LOG: b[1] = 2146963990
+
+
+State 68 file badassumeharness.c line 31 function main thread 0
+----------------------------------------------------
+  b[1]=2146963990 (01111111111110000001001000010110)
+
+State 69 file badassumeharness.c line 27 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 72 file badassumeharness.c line 34 function main thread 0
+----------------------------------------------------
+  c={ 0, 0, 494059162, 494059162 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000, 00011101011100101011111010011010, 00011101011100101011111010011010 })
+
+State 73 file badassumeharness.c line 35 function main thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 76 file badassumeharness.c line 37 function main thread 0
+----------------------------------------------------
+  a=a!0@1 (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 77 file badassumeharness.c line 37 function main thread 0
+----------------------------------------------------
+  asize=2 (00000000000000000000000000000010)
+
+State 78 file badassumeharness.c line 37 function main thread 0
+----------------------------------------------------
+  b=b!0@1 (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 79 file badassumeharness.c line 37 function main thread 0
+----------------------------------------------------
+  bsize=2 (00000000000000000000000000000010)
+
+State 80 file badassumeharness.c line 37 function main thread 0
+----------------------------------------------------
+  c=c!0@1 (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 81 file mutant100057_merge_sorted_nodups.c line 4 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=0 (00000000000000000000000000000000)
+
+State 82 file mutant100057_merge_sorted_nodups.c line 4 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=0 (00000000000000000000000000000000)
+
+State 83 file mutant100057_merge_sorted_nodups.c line 5 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=0 (00000000000000000000000000000000)
+
+State 84 file mutant100057_merge_sorted_nodups.c line 5 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=0 (00000000000000000000000000000000)
+
+State 85 file mutant100057_merge_sorted_nodups.c line 6 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=0 (00000000000000000000000000000000)
+
+State 86 file mutant100057_merge_sorted_nodups.c line 6 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=-1 (11111111111111111111111111111111)
+
+State 87 file mutant100057_merge_sorted_nodups.c line 7 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 88 file mutant100057_merge_sorted_nodups.c line 7 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+LOG: apos = 0, bpos = 0, cpos = -1
+
+LOG: PUTTING a[0]=-1074876650 in c
+
+
+State 112 file mutant100057_merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=0 (00000000000000000000000000000000)
+
+State 116 file mutant100057_merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[0]=-1074876650 (10111111111011101010111100010110)
+
+State 117 file mutant100057_merge_sorted_nodups.c line 14 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=-1 (11111111111111111111111111111111)
+
+State 118 file mutant100057_merge_sorted_nodups.c line 16 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=1 (00000000000000000000000000000001)
+LOG: apos = 1, bpos = 0, cpos = 0
+
+LOG: PUTTING b[0]=-1135082 in c
+
+
+State 159 file mutant100057_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=1 (00000000000000000000000000000001)
+
+State 164 file mutant100057_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[1]=-1135082 (11111111111011101010111000010110)
+
+State 165 file mutant100057_merge_sorted_nodups.c line 21 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 166 file mutant100057_merge_sorted_nodups.c line 23 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=1 (00000000000000000000000000000001)
+LOG: apos = 1, bpos = 1, cpos = 1
+
+LOG: PUTTING a[1]=1079439894 in c
+
+
+State 208 file mutant100057_merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=2 (00000000000000000000000000000010)
+
+State 214 file mutant100057_merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[2]=1079439894 (01000000010101101111001000010110)
+
+State 215 file mutant100057_merge_sorted_nodups.c line 14 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=-1 (11111111111111111111111111111111)
+
+State 216 file mutant100057_merge_sorted_nodups.c line 16 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=2 (00000000000000000000000000000010)
+LOG: apos = 2, bpos = 1, cpos = 2
+
+LOG: PUTTING b[1]=2146963990 in c
+
+
+State 246 file mutant100057_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=3 (00000000000000000000000000000011)
+
+State 252 file mutant100057_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[3]=2146963990 (01111111111110000001001000010110)
+
+State 253 file mutant100057_merge_sorted_nodups.c line 21 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 254 file mutant100057_merge_sorted_nodups.c line 23 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=2 (00000000000000000000000000000010)
+
+State 262 file badassumeharness.c line 37 function main thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+LOG: csize = 0
+
+
+Violated property:
+  file badassumeharness.c line 42 function main
+  assertion asize == 0 && bsize == 0 || csize >= 1
+  asize == 0 && bsize == 0 || csize >= 1
+
+VERIFICATION FAILED

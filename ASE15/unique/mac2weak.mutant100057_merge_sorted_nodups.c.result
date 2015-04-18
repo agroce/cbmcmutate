@@ -1,0 +1,333 @@
+/bin/sh: limit: command not found
+CBMC version 5.0 64-bit macos
+Parsing weakharness.c
+Parsing mutant100057_merge_sorted_nodups.c
+Converting
+Type-checking mutant100057_merge_sorted_nodups
+file mutant100057_merge_sorted_nodups.c line 9 function merge_sorted_nodups: function `printf' is not declared
+Type-checking weakharness
+file weakharness.c line 18 function main: function `printf' is not declared
+file weakharness.c line 41 function main: function `assert' is not declared
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 (5 max) file weakharness.c line 20 function main thread 0
+Unwinding loop main.0 iteration 2 (5 max) file weakharness.c line 20 function main thread 0
+Unwinding loop main.0 iteration 3 (5 max) file weakharness.c line 20 function main thread 0
+Unwinding loop main.0 iteration 4 (5 max) file weakharness.c line 20 function main thread 0
+Not unwinding loop main.0 iteration 5 (5 max) file weakharness.c line 20 function main thread 0
+Unwinding loop main.1 iteration 1 (5 max) file weakharness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 2 (5 max) file weakharness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 3 (5 max) file weakharness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 4 (5 max) file weakharness.c line 27 function main thread 0
+Not unwinding loop main.1 iteration 5 (5 max) file weakharness.c line 27 function main thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 1 (5 max) file mutant100057_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 2 (5 max) file mutant100057_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 3 (5 max) file mutant100057_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 4 (5 max) file mutant100057_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Not unwinding loop merge_sorted_nodups.0 iteration 5 (5 max) file mutant100057_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop main.2 iteration 1 (5 max) file weakharness.c line 66 function main thread 0
+Unwinding loop main.2 iteration 2 (5 max) file weakharness.c line 66 function main thread 0
+Unwinding loop main.2 iteration 3 (5 max) file weakharness.c line 66 function main thread 0
+Unwinding loop main.2 iteration 4 (5 max) file weakharness.c line 66 function main thread 0
+Not unwinding loop main.2 iteration 5 (5 max) file weakharness.c line 66 function main thread 0
+Unwinding loop main.3 iteration 1 (5 max) file weakharness.c line 80 function main thread 0
+Unwinding loop main.3 iteration 2 (5 max) file weakharness.c line 80 function main thread 0
+Unwinding loop main.3 iteration 3 (5 max) file weakharness.c line 80 function main thread 0
+Unwinding loop main.3 iteration 4 (5 max) file weakharness.c line 80 function main thread 0
+Not unwinding loop main.3 iteration 5 (5 max) file weakharness.c line 80 function main thread 0
+size of program expression: 1001 steps
+simple slicing removed 10 assignments
+Generated 349 VCC(s), 241 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+28374 variables, 82319 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 0.157s
+Building error trace
+
+Counterexample:
+
+State 17 file weakharness.c line 6 function main thread 0
+----------------------------------------------------
+  a={ 0, 0 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000 })
+
+State 18 file weakharness.c line 7 function main thread 0
+----------------------------------------------------
+  b={ 0, 0 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000 })
+
+State 19 file weakharness.c line 9 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 20 file weakharness.c line 9 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 21 file weakharness.c line 11 function main thread 0
+----------------------------------------------------
+  asize=0 (00000000000000000000000000000000)
+
+State 22 file weakharness.c line 11 function main thread 0
+----------------------------------------------------
+  asize=2 (00000000000000000000000000000010)
+
+State 23 file weakharness.c line 12 function main thread 0
+----------------------------------------------------
+  bsize=0 (00000000000000000000000000000000)
+
+State 24 file weakharness.c line 12 function main thread 0
+----------------------------------------------------
+  bsize=2 (00000000000000000000000000000010)
+LOG: asize = 2, bsize = 2
+
+
+State 30 file weakharness.c line 20 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 32 file weakharness.c line 21 function main thread 0
+----------------------------------------------------
+  v=1691466793 (01100100110100011011110000101001)
+LOG: a[0] = 1691466793
+
+
+State 37 file weakharness.c line 24 function main thread 0
+----------------------------------------------------
+  a[0]=1691466793 (01100100110100011011110000101001)
+
+State 38 file weakharness.c line 20 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 41 file weakharness.c line 21 function main thread 0
+----------------------------------------------------
+  v=1871825921 (01101111100100011100110000000001)
+LOG: a[1] = 1871825921
+
+
+State 47 file weakharness.c line 24 function main thread 0
+----------------------------------------------------
+  a[1]=1871825921 (01101111100100011100110000000001)
+
+State 48 file weakharness.c line 20 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 51 file weakharness.c line 27 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 53 file weakharness.c line 28 function main thread 0
+----------------------------------------------------
+  v=1691466793 (01100100110100011011110000101001)
+LOG: b[0] = 1691466793
+
+
+State 58 file weakharness.c line 31 function main thread 0
+----------------------------------------------------
+  b[0]=1691466793 (01100100110100011011110000101001)
+
+State 59 file weakharness.c line 27 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 62 file weakharness.c line 28 function main thread 0
+----------------------------------------------------
+  v=1691466809 (01100100110100011011110000111001)
+LOG: b[1] = 1691466809
+
+
+State 68 file weakharness.c line 31 function main thread 0
+----------------------------------------------------
+  b[1]=1691466809 (01100100110100011011110000111001)
+
+State 69 file weakharness.c line 27 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 72 file weakharness.c line 34 function main thread 0
+----------------------------------------------------
+  c={ 0, 524288, -201326593, -203424001 } ({ 00000000000000000000000000000000, 00000000000010000000000000000000, 11110011111111111111111111111111, 11110011110111111111111011111111 })
+
+State 73 file weakharness.c line 35 function main thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 76 file weakharness.c line 37 function main thread 0
+----------------------------------------------------
+  a=a!0@1 (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 77 file weakharness.c line 37 function main thread 0
+----------------------------------------------------
+  asize=2 (00000000000000000000000000000010)
+
+State 78 file weakharness.c line 37 function main thread 0
+----------------------------------------------------
+  b=b!0@1 (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 79 file weakharness.c line 37 function main thread 0
+----------------------------------------------------
+  bsize=2 (00000000000000000000000000000010)
+
+State 80 file weakharness.c line 37 function main thread 0
+----------------------------------------------------
+  c=c!0@1 (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 81 file mutant100057_merge_sorted_nodups.c line 4 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=0 (00000000000000000000000000000000)
+
+State 82 file mutant100057_merge_sorted_nodups.c line 4 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=0 (00000000000000000000000000000000)
+
+State 83 file mutant100057_merge_sorted_nodups.c line 5 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=0 (00000000000000000000000000000000)
+
+State 84 file mutant100057_merge_sorted_nodups.c line 5 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=0 (00000000000000000000000000000000)
+
+State 85 file mutant100057_merge_sorted_nodups.c line 6 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=0 (00000000000000000000000000000000)
+
+State 86 file mutant100057_merge_sorted_nodups.c line 6 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=-1 (11111111111111111111111111111111)
+
+State 87 file mutant100057_merge_sorted_nodups.c line 7 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 88 file mutant100057_merge_sorted_nodups.c line 7 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+LOG: apos = 0, bpos = 0, cpos = -1
+
+LOG: PUTTING b[0]=1691466793 in c
+
+
+State 112 file mutant100057_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=0 (00000000000000000000000000000000)
+
+State 116 file mutant100057_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[0]=1691466793 (01100100110100011011110000101001)
+
+State 117 file mutant100057_merge_sorted_nodups.c line 21 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=1 (00000000000000000000000000000001)
+
+State 118 file mutant100057_merge_sorted_nodups.c line 23 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=1 (00000000000000000000000000000001)
+LOG: apos = 0, bpos = 1, cpos = 0
+
+
+State 152 file mutant100057_merge_sorted_nodups.c line 16 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=1 (00000000000000000000000000000001)
+LOG: apos = 1, bpos = 1, cpos = 0
+
+LOG: PUTTING b[1]=1691466809 in c
+
+
+State 195 file mutant100057_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=1 (00000000000000000000000000000001)
+
+State 201 file mutant100057_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[1]=1691466809 (01100100110100011011110000111001)
+
+State 202 file mutant100057_merge_sorted_nodups.c line 21 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=2 (00000000000000000000000000000010)
+
+State 203 file mutant100057_merge_sorted_nodups.c line 23 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=2 (00000000000000000000000000000010)
+LOG: apos = 1, bpos = 2, cpos = 1
+
+LOG: PUTTING a[1]=1871825921 in c
+
+
+State 236 file mutant100057_merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=2 (00000000000000000000000000000010)
+
+State 242 file mutant100057_merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[2]=1871825921 (01101111100100011100110000000001)
+
+State 243 file mutant100057_merge_sorted_nodups.c line 14 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=1 (00000000000000000000000000000001)
+
+State 244 file mutant100057_merge_sorted_nodups.c line 16 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=2 (00000000000000000000000000000010)
+
+State 253 file weakharness.c line 37 function main thread 0
+----------------------------------------------------
+  csize=1 (00000000000000000000000000000001)
+LOG: csize = 1
+
+
+State 256 file weakharness.c line 44 function main thread 0
+----------------------------------------------------
+  i1=0 (00000000000000000000000000000000)
+
+State 257 file weakharness.c line 44 function main thread 0
+----------------------------------------------------
+  i2=0 (00000000000000000000000000000000)
+
+State 258 file weakharness.c line 46 function main thread 0
+----------------------------------------------------
+  i1=0 (00000000000000000000000000000000)
+
+State 259 file weakharness.c line 47 function main thread 0
+----------------------------------------------------
+  i2=0 (00000000000000000000000000000000)
+LOG: c[0] = 1691466793, c[0] = 1691466793
+
+
+State 270 file weakharness.c line 60 function main thread 0
+----------------------------------------------------
+  v=1 (00000000000000000000000000000001)
+
+State 275 file weakharness.c line 64 function main thread 0
+----------------------------------------------------
+  v=1871825921 (01101111100100011100110000000001)
+
+State 276 file weakharness.c line 65 function main thread 0
+----------------------------------------------------
+  found=0 (00000000000000000000000000000000)
+
+State 277 file weakharness.c line 65 function main thread 0
+----------------------------------------------------
+  found=0 (00000000000000000000000000000000)
+
+State 278 file weakharness.c line 66 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 281 file weakharness.c line 66 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+Violated property:
+  file weakharness.c line 72 function main
+  assertion found == 1
+  found == 1
+
+VERIFICATION FAILED

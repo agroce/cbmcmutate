@@ -1,0 +1,189 @@
+/bin/sh: limit: command not found
+CBMC version 5.0 64-bit macos
+Parsing basicharness.c
+Parsing mutant100010_merge_sorted_nodups.c
+Converting
+Type-checking basicharness
+file basicharness.c line 18 function main: function `printf' is not declared
+file basicharness.c line 41 function main: function `assert' is not declared
+Type-checking mutant100010_merge_sorted_nodups
+file mutant100010_merge_sorted_nodups.c line 9 function merge_sorted_nodups: function `printf' is not declared
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 (7 max) file basicharness.c line 20 function main thread 0
+Unwinding loop main.0 iteration 2 (7 max) file basicharness.c line 20 function main thread 0
+Unwinding loop main.0 iteration 3 (7 max) file basicharness.c line 20 function main thread 0
+Unwinding loop main.0 iteration 4 (7 max) file basicharness.c line 20 function main thread 0
+Unwinding loop main.0 iteration 5 (7 max) file basicharness.c line 20 function main thread 0
+Unwinding loop main.0 iteration 6 (7 max) file basicharness.c line 20 function main thread 0
+Not unwinding loop main.0 iteration 7 (7 max) file basicharness.c line 20 function main thread 0
+Unwinding loop main.1 iteration 1 (7 max) file basicharness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 2 (7 max) file basicharness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 3 (7 max) file basicharness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 4 (7 max) file basicharness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 5 (7 max) file basicharness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 6 (7 max) file basicharness.c line 27 function main thread 0
+Not unwinding loop main.1 iteration 7 (7 max) file basicharness.c line 27 function main thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 1 (7 max) file mutant100010_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 2 (7 max) file mutant100010_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 3 (7 max) file mutant100010_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 4 (7 max) file mutant100010_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 5 (7 max) file mutant100010_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 6 (7 max) file mutant100010_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Not unwinding loop merge_sorted_nodups.0 iteration 7 (7 max) file mutant100010_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop main.2 iteration 1 (7 max) file basicharness.c line 66 function main thread 0
+Unwinding loop main.2 iteration 2 (7 max) file basicharness.c line 66 function main thread 0
+Unwinding loop main.2 iteration 3 (7 max) file basicharness.c line 66 function main thread 0
+Unwinding loop main.2 iteration 4 (7 max) file basicharness.c line 66 function main thread 0
+Unwinding loop main.2 iteration 5 (7 max) file basicharness.c line 66 function main thread 0
+Unwinding loop main.2 iteration 6 (7 max) file basicharness.c line 66 function main thread 0
+Not unwinding loop main.2 iteration 7 (7 max) file basicharness.c line 66 function main thread 0
+Unwinding loop main.3 iteration 1 (7 max) file basicharness.c line 80 function main thread 0
+Unwinding loop main.3 iteration 2 (7 max) file basicharness.c line 80 function main thread 0
+Unwinding loop main.3 iteration 3 (7 max) file basicharness.c line 80 function main thread 0
+Unwinding loop main.3 iteration 4 (7 max) file basicharness.c line 80 function main thread 0
+Unwinding loop main.3 iteration 5 (7 max) file basicharness.c line 80 function main thread 0
+Unwinding loop main.3 iteration 6 (7 max) file basicharness.c line 80 function main thread 0
+Not unwinding loop main.3 iteration 7 (7 max) file basicharness.c line 80 function main thread 0
+size of program expression: 1426 steps
+simple slicing removed 10 assignments
+Generated 518 VCC(s), 372 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+67656 variables, 230423 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 0.4s
+Building error trace
+
+Counterexample:
+
+State 17 file basicharness.c line 6 function main thread 0
+----------------------------------------------------
+  a={ 0, 0, 0 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000, 00000000000000000000000000000000 })
+
+State 18 file basicharness.c line 7 function main thread 0
+----------------------------------------------------
+  b={ 0, 0, 1 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000, 00000000000000000000000000000001 })
+
+State 19 file basicharness.c line 9 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 20 file basicharness.c line 9 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 21 file basicharness.c line 11 function main thread 0
+----------------------------------------------------
+  asize=0 (00000000000000000000000000000000)
+
+State 22 file basicharness.c line 11 function main thread 0
+----------------------------------------------------
+  asize=1 (00000000000000000000000000000001)
+
+State 23 file basicharness.c line 12 function main thread 0
+----------------------------------------------------
+  bsize=0 (00000000000000000000000000000000)
+
+State 24 file basicharness.c line 12 function main thread 0
+----------------------------------------------------
+  bsize=0 (00000000000000000000000000000000)
+LOG: asize = 1, bsize = 0
+
+
+State 30 file basicharness.c line 20 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 32 file basicharness.c line 21 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+LOG: a[0] = 0
+
+
+State 37 file basicharness.c line 24 function main thread 0
+----------------------------------------------------
+  a[0]=0 (00000000000000000000000000000000)
+
+State 38 file basicharness.c line 20 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 41 file basicharness.c line 27 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 43 file basicharness.c line 34 function main thread 0
+----------------------------------------------------
+  c={ 0, 1, 1, 1, 1, 16 } ({ 00000000000000000000000000000000, 00000000000000000000000000000001, 00000000000000000000000000000001, 00000000000000000000000000000001, 00000000000000000000000000000001, 00000000000000000000000000010000 })
+
+State 44 file basicharness.c line 35 function main thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 47 file basicharness.c line 37 function main thread 0
+----------------------------------------------------
+  a=a!0@1 (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 48 file basicharness.c line 37 function main thread 0
+----------------------------------------------------
+  asize=1 (00000000000000000000000000000001)
+
+State 49 file basicharness.c line 37 function main thread 0
+----------------------------------------------------
+  b=b!0@1 (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 50 file basicharness.c line 37 function main thread 0
+----------------------------------------------------
+  bsize=0 (00000000000000000000000000000000)
+
+State 51 file basicharness.c line 37 function main thread 0
+----------------------------------------------------
+  c=c!0@1 (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 52 file mutant100010_merge_sorted_nodups.c line 4 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=0 (00000000000000000000000000000000)
+
+State 53 file mutant100010_merge_sorted_nodups.c line 4 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=0 (00000000000000000000000000000000)
+
+State 54 file mutant100010_merge_sorted_nodups.c line 5 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=0 (00000000000000000000000000000000)
+
+State 55 file mutant100010_merge_sorted_nodups.c line 5 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=0 (00000000000000000000000000000000)
+
+State 56 file mutant100010_merge_sorted_nodups.c line 6 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=0 (00000000000000000000000000000000)
+
+State 57 file mutant100010_merge_sorted_nodups.c line 6 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=-2 (11111111111111111111111111111110)
+
+State 58 file mutant100010_merge_sorted_nodups.c line 7 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 59 file mutant100010_merge_sorted_nodups.c line 7 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+LOG: apos = 0, bpos = 0, cpos = -2
+
+
+Violated property:
+  file mutant100010_merge_sorted_nodups.c line 11 function merge_sorted_nodups
+  dereference failure: object bounds in c[(signed long int)cpos]
+  !(4 * (signed long int)cpos + POINTER_OFFSET(c) < 0) && OBJECT_SIZE(c) >= 4 * (signed long int)cpos + 4 + POINTER_OFFSET(c) || DYNAMIC_OBJECT(c)
+
+VERIFICATION FAILED

@@ -1,0 +1,329 @@
+/bin/sh: limit: command not found
+CBMC version 5.0 64-bit macos
+Parsing noextrasharness.c
+Parsing mutant100012_merge_sorted_nodups.c
+Converting
+Type-checking mutant100012_merge_sorted_nodups
+file mutant100012_merge_sorted_nodups.c line 9 function merge_sorted_nodups: function `printf' is not declared
+Type-checking noextrasharness
+file noextrasharness.c line 20 function main: function `printf' is not declared
+file noextrasharness.c line 44 function main: function `assert' is not declared
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 (5 max) file noextrasharness.c line 22 function main thread 0
+Unwinding loop main.0 iteration 2 (5 max) file noextrasharness.c line 22 function main thread 0
+Unwinding loop main.0 iteration 3 (5 max) file noextrasharness.c line 22 function main thread 0
+Unwinding loop main.0 iteration 4 (5 max) file noextrasharness.c line 22 function main thread 0
+Not unwinding loop main.0 iteration 5 (5 max) file noextrasharness.c line 22 function main thread 0
+Unwinding loop main.1 iteration 1 (5 max) file noextrasharness.c line 29 function main thread 0
+Unwinding loop main.1 iteration 2 (5 max) file noextrasharness.c line 29 function main thread 0
+Unwinding loop main.1 iteration 3 (5 max) file noextrasharness.c line 29 function main thread 0
+Unwinding loop main.1 iteration 4 (5 max) file noextrasharness.c line 29 function main thread 0
+Not unwinding loop main.1 iteration 5 (5 max) file noextrasharness.c line 29 function main thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 1 (5 max) file mutant100012_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 2 (5 max) file mutant100012_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 3 (5 max) file mutant100012_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 4 (5 max) file mutant100012_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Not unwinding loop merge_sorted_nodups.0 iteration 5 (5 max) file mutant100012_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop main.2 iteration 1 (5 max) file noextrasharness.c line 68 function main thread 0
+Unwinding loop main.2 iteration 2 (5 max) file noextrasharness.c line 68 function main thread 0
+Unwinding loop main.2 iteration 3 (5 max) file noextrasharness.c line 68 function main thread 0
+Unwinding loop main.2 iteration 4 (5 max) file noextrasharness.c line 68 function main thread 0
+Not unwinding loop main.2 iteration 5 (5 max) file noextrasharness.c line 68 function main thread 0
+Unwinding loop main.3 iteration 1 (5 max) file noextrasharness.c line 86 function main thread 0
+Unwinding loop main.3 iteration 2 (5 max) file noextrasharness.c line 86 function main thread 0
+Unwinding loop main.3 iteration 3 (5 max) file noextrasharness.c line 86 function main thread 0
+Unwinding loop main.3 iteration 4 (5 max) file noextrasharness.c line 86 function main thread 0
+Not unwinding loop main.3 iteration 5 (5 max) file noextrasharness.c line 86 function main thread 0
+Unwinding loop main.4 iteration 1 (5 max) file noextrasharness.c line 104 function main thread 0
+Unwinding loop main.4 iteration 2 (5 max) file noextrasharness.c line 104 function main thread 0
+Unwinding loop main.4 iteration 3 (5 max) file noextrasharness.c line 104 function main thread 0
+Unwinding loop main.4 iteration 4 (5 max) file noextrasharness.c line 104 function main thread 0
+Not unwinding loop main.4 iteration 5 (5 max) file noextrasharness.c line 104 function main thread 0
+Unwinding loop main.5 iteration 1 (5 max) file noextrasharness.c line 111 function main thread 0
+Unwinding loop main.5 iteration 2 (5 max) file noextrasharness.c line 111 function main thread 0
+Unwinding loop main.5 iteration 3 (5 max) file noextrasharness.c line 111 function main thread 0
+Unwinding loop main.5 iteration 4 (5 max) file noextrasharness.c line 111 function main thread 0
+Not unwinding loop main.5 iteration 5 (5 max) file noextrasharness.c line 111 function main thread 0
+size of program expression: 1165 steps
+simple slicing removed 10 assignments
+Generated 378 VCC(s), 256 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+29028 variables, 84119 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 0.141s
+Building error trace
+
+Counterexample:
+
+State 18 file noextrasharness.c line 8 function main thread 0
+----------------------------------------------------
+  a={ 0, -430882852 } ({ 00000000000000000000000000000000, 11100110010100010011111111011100 })
+
+State 19 file noextrasharness.c line 9 function main thread 0
+----------------------------------------------------
+  b={ 0, -430358564 } ({ 00000000000000000000000000000000, 11100110010110010011111111011100 })
+
+State 20 file noextrasharness.c line 11 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 21 file noextrasharness.c line 11 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 22 file noextrasharness.c line 13 function main thread 0
+----------------------------------------------------
+  asize=0 (00000000000000000000000000000000)
+
+State 23 file noextrasharness.c line 13 function main thread 0
+----------------------------------------------------
+  asize=1 (00000000000000000000000000000001)
+
+State 24 file noextrasharness.c line 14 function main thread 0
+----------------------------------------------------
+  bsize=0 (00000000000000000000000000000000)
+
+State 25 file noextrasharness.c line 14 function main thread 0
+----------------------------------------------------
+  bsize=1 (00000000000000000000000000000001)
+LOG: asize = 1, bsize = 1
+
+
+State 31 file noextrasharness.c line 22 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 33 file noextrasharness.c line 23 function main thread 0
+----------------------------------------------------
+  v=-1495711756 (10100110110110010011111111110100)
+LOG: a[0] = -1495711756
+
+
+State 38 file noextrasharness.c line 26 function main thread 0
+----------------------------------------------------
+  a[0]=-1495711756 (10100110110110010011111111110100)
+
+State 39 file noextrasharness.c line 22 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 42 file noextrasharness.c line 29 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 44 file noextrasharness.c line 30 function main thread 0
+----------------------------------------------------
+  v=-1495711756 (10100110110110010011111111110100)
+LOG: b[0] = -1495711756
+
+
+State 49 file noextrasharness.c line 33 function main thread 0
+----------------------------------------------------
+  b[0]=-1495711756 (10100110110110010011111111110100)
+
+State 50 file noextrasharness.c line 29 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 53 file noextrasharness.c line 36 function main thread 0
+----------------------------------------------------
+  c={ 0, -1160036404, -1495711755, -1294385163 } ({ 00000000000000000000000000000000, 10111010110110110011111111001100, 10100110110110010011111111110101, 10110010110110010011111111110101 })
+
+State 54 file noextrasharness.c line 37 function main thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 57 file noextrasharness.c line 39 function main thread 0
+----------------------------------------------------
+  a=a!0@1 (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 58 file noextrasharness.c line 39 function main thread 0
+----------------------------------------------------
+  asize=1 (00000000000000000000000000000001)
+
+State 59 file noextrasharness.c line 39 function main thread 0
+----------------------------------------------------
+  b=b!0@1 (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 60 file noextrasharness.c line 39 function main thread 0
+----------------------------------------------------
+  bsize=1 (00000000000000000000000000000001)
+
+State 61 file noextrasharness.c line 39 function main thread 0
+----------------------------------------------------
+  c=c!0@1 (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 62 file mutant100012_merge_sorted_nodups.c line 4 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=0 (00000000000000000000000000000000)
+
+State 63 file mutant100012_merge_sorted_nodups.c line 4 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=0 (00000000000000000000000000000000)
+
+State 64 file mutant100012_merge_sorted_nodups.c line 5 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=0 (00000000000000000000000000000000)
+
+State 65 file mutant100012_merge_sorted_nodups.c line 5 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=0 (00000000000000000000000000000000)
+
+State 66 file mutant100012_merge_sorted_nodups.c line 6 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=0 (00000000000000000000000000000000)
+
+State 67 file mutant100012_merge_sorted_nodups.c line 6 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=-1 (11111111111111111111111111111111)
+
+State 68 file mutant100012_merge_sorted_nodups.c line 7 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 69 file mutant100012_merge_sorted_nodups.c line 7 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=1 (00000000000000000000000000000001)
+LOG: apos = 0, bpos = 0, cpos = -1
+
+LOG: PUTTING b[0]=-1495711756 in c
+
+
+State 93 file mutant100012_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=0 (00000000000000000000000000000000)
+
+State 97 file mutant100012_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[0]=-1495711756 (10100110110110010011111111110100)
+
+State 98 file mutant100012_merge_sorted_nodups.c line 21 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=2 (00000000000000000000000000000010)
+
+State 99 file mutant100012_merge_sorted_nodups.c line 23 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=1 (00000000000000000000000000000001)
+LOG: apos = 0, bpos = 1, cpos = 0
+
+
+State 124 file mutant100012_merge_sorted_nodups.c line 16 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=1 (00000000000000000000000000000001)
+
+State 133 file noextrasharness.c line 39 function main thread 0
+----------------------------------------------------
+  csize=2 (00000000000000000000000000000010)
+LOG: csize = 2
+
+
+State 137 file noextrasharness.c line 46 function main thread 0
+----------------------------------------------------
+  i1=0 (00000000000000000000000000000000)
+
+State 138 file noextrasharness.c line 46 function main thread 0
+----------------------------------------------------
+  i2=0 (00000000000000000000000000000000)
+
+State 139 file noextrasharness.c line 48 function main thread 0
+----------------------------------------------------
+  i1=0 (00000000000000000000000000000000)
+
+State 140 file noextrasharness.c line 49 function main thread 0
+----------------------------------------------------
+  i2=0 (00000000000000000000000000000000)
+LOG: c[0] = -1495711756, c[0] = -1495711756
+
+
+State 155 file noextrasharness.c line 59 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 160 file noextrasharness.c line 63 function main thread 0
+----------------------------------------------------
+  v=-1495711756 (10100110110110010011111111110100)
+LOG: a check: v = -1495711756
+
+
+State 162 file noextrasharness.c line 67 function main thread 0
+----------------------------------------------------
+  found=0 (00000000000000000000000000000000)
+
+State 163 file noextrasharness.c line 67 function main thread 0
+----------------------------------------------------
+  found=0 (00000000000000000000000000000000)
+
+State 164 file noextrasharness.c line 68 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 167 file noextrasharness.c line 70 function main thread 0
+----------------------------------------------------
+  found=1 (00000000000000000000000000000001)
+
+State 170 file noextrasharness.c line 76 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 175 file noextrasharness.c line 80 function main thread 0
+----------------------------------------------------
+  v=-1495711756 (10100110110110010011111111110100)
+LOG: b check: v = -1495711756
+
+
+State 177 file noextrasharness.c line 85 function main thread 0
+----------------------------------------------------
+  found=0 (00000000000000000000000000000000)
+
+State 178 file noextrasharness.c line 86 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 181 file noextrasharness.c line 88 function main thread 0
+----------------------------------------------------
+  found=1 (00000000000000000000000000000001)
+
+State 184 file noextrasharness.c line 94 function main thread 0
+----------------------------------------------------
+  v=1 (00000000000000000000000000000001)
+
+State 189 file noextrasharness.c line 98 function main thread 0
+----------------------------------------------------
+  v=-1160036404 (10111010110110110011111111001100)
+LOG: c check: v = -1160036404
+
+
+State 191 file noextrasharness.c line 103 function main thread 0
+----------------------------------------------------
+  found=0 (00000000000000000000000000000000)
+
+State 192 file noextrasharness.c line 104 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 195 file noextrasharness.c line 104 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 198 file noextrasharness.c line 111 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 201 file noextrasharness.c line 111 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+Violated property:
+  file noextrasharness.c line 117 function main
+  assertion found == 1
+  found == 1
+
+VERIFICATION FAILED

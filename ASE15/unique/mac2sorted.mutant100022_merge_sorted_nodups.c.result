@@ -1,0 +1,311 @@
+/bin/sh: limit: command not found
+CBMC version 5.0 64-bit macos
+Parsing sortharness.c
+Parsing mutant100022_merge_sorted_nodups.c
+Converting
+Type-checking mutant100022_merge_sorted_nodups
+file mutant100022_merge_sorted_nodups.c line 9 function merge_sorted_nodups: function `printf' is not declared
+Type-checking sortharness
+file sortharness.c line 20 function main: function `printf' is not declared
+file sortharness.c line 44 function main: function `assert' is not declared
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 (5 max) file sortharness.c line 22 function main thread 0
+Unwinding loop main.0 iteration 2 (5 max) file sortharness.c line 22 function main thread 0
+Unwinding loop main.0 iteration 3 (5 max) file sortharness.c line 22 function main thread 0
+Unwinding loop main.0 iteration 4 (5 max) file sortharness.c line 22 function main thread 0
+Not unwinding loop main.0 iteration 5 (5 max) file sortharness.c line 22 function main thread 0
+Unwinding loop main.1 iteration 1 (5 max) file sortharness.c line 29 function main thread 0
+Unwinding loop main.1 iteration 2 (5 max) file sortharness.c line 29 function main thread 0
+Unwinding loop main.1 iteration 3 (5 max) file sortharness.c line 29 function main thread 0
+Unwinding loop main.1 iteration 4 (5 max) file sortharness.c line 29 function main thread 0
+Not unwinding loop main.1 iteration 5 (5 max) file sortharness.c line 29 function main thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 1 (5 max) file mutant100022_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 2 (5 max) file mutant100022_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 3 (5 max) file mutant100022_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop merge_sorted_nodups.0 iteration 4 (5 max) file mutant100022_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Not unwinding loop merge_sorted_nodups.0 iteration 5 (5 max) file mutant100022_merge_sorted_nodups.c line 8 function merge_sorted_nodups thread 0
+Unwinding loop main.2 iteration 1 (5 max) file sortharness.c line 69 function main thread 0
+Unwinding loop main.2 iteration 2 (5 max) file sortharness.c line 69 function main thread 0
+Unwinding loop main.2 iteration 3 (5 max) file sortharness.c line 69 function main thread 0
+Unwinding loop main.2 iteration 4 (5 max) file sortharness.c line 69 function main thread 0
+Not unwinding loop main.2 iteration 5 (5 max) file sortharness.c line 69 function main thread 0
+Unwinding loop main.3 iteration 1 (5 max) file sortharness.c line 87 function main thread 0
+Unwinding loop main.3 iteration 2 (5 max) file sortharness.c line 87 function main thread 0
+Unwinding loop main.3 iteration 3 (5 max) file sortharness.c line 87 function main thread 0
+Unwinding loop main.3 iteration 4 (5 max) file sortharness.c line 87 function main thread 0
+Not unwinding loop main.3 iteration 5 (5 max) file sortharness.c line 87 function main thread 0
+Unwinding loop main.4 iteration 1 (5 max) file sortharness.c line 105 function main thread 0
+Unwinding loop main.4 iteration 2 (5 max) file sortharness.c line 105 function main thread 0
+Unwinding loop main.4 iteration 3 (5 max) file sortharness.c line 105 function main thread 0
+Unwinding loop main.4 iteration 4 (5 max) file sortharness.c line 105 function main thread 0
+Not unwinding loop main.4 iteration 5 (5 max) file sortharness.c line 105 function main thread 0
+Unwinding loop main.5 iteration 1 (5 max) file sortharness.c line 112 function main thread 0
+Unwinding loop main.5 iteration 2 (5 max) file sortharness.c line 112 function main thread 0
+Unwinding loop main.5 iteration 3 (5 max) file sortharness.c line 112 function main thread 0
+Unwinding loop main.5 iteration 4 (5 max) file sortharness.c line 112 function main thread 0
+Not unwinding loop main.5 iteration 5 (5 max) file sortharness.c line 112 function main thread 0
+size of program expression: 1178 steps
+simple slicing removed 10 assignments
+Generated 383 VCC(s), 261 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+29182 variables, 84883 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 0.147s
+Building error trace
+
+Counterexample:
+
+State 18 file sortharness.c line 8 function main thread 0
+----------------------------------------------------
+  a={ 0, 0 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000 })
+
+State 19 file sortharness.c line 9 function main thread 0
+----------------------------------------------------
+  b={ 0, 0 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000 })
+
+State 20 file sortharness.c line 11 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 21 file sortharness.c line 11 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 22 file sortharness.c line 13 function main thread 0
+----------------------------------------------------
+  asize=0 (00000000000000000000000000000000)
+
+State 23 file sortharness.c line 13 function main thread 0
+----------------------------------------------------
+  asize=2 (00000000000000000000000000000010)
+
+State 24 file sortharness.c line 14 function main thread 0
+----------------------------------------------------
+  bsize=0 (00000000000000000000000000000000)
+
+State 25 file sortharness.c line 14 function main thread 0
+----------------------------------------------------
+  bsize=2 (00000000000000000000000000000010)
+LOG: asize = 2, bsize = 2
+
+
+State 31 file sortharness.c line 22 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 33 file sortharness.c line 23 function main thread 0
+----------------------------------------------------
+  v=-1795030528 (10010101000000100000001000000000)
+LOG: a[0] = -1795030528
+
+
+State 38 file sortharness.c line 26 function main thread 0
+----------------------------------------------------
+  a[0]=-1795030528 (10010101000000100000001000000000)
+
+State 39 file sortharness.c line 22 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 42 file sortharness.c line 23 function main thread 0
+----------------------------------------------------
+  v=352453120 (00010101000000100000001000000000)
+LOG: a[1] = 352453120
+
+
+State 48 file sortharness.c line 26 function main thread 0
+----------------------------------------------------
+  a[1]=352453120 (00010101000000100000001000000000)
+
+State 49 file sortharness.c line 22 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 52 file sortharness.c line 29 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 54 file sortharness.c line 30 function main thread 0
+----------------------------------------------------
+  v=-1807351279 (10010100010001100000001000010001)
+LOG: b[0] = -1807351279
+
+
+State 59 file sortharness.c line 33 function main thread 0
+----------------------------------------------------
+  b[0]=-1807351279 (10010100010001100000001000010001)
+
+State 60 file sortharness.c line 29 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 63 file sortharness.c line 30 function main thread 0
+----------------------------------------------------
+  v=-1711013359 (10011010000001000000001000010001)
+LOG: b[1] = -1711013359
+
+
+State 69 file sortharness.c line 33 function main thread 0
+----------------------------------------------------
+  b[1]=-1711013359 (10011010000001000000001000010001)
+
+State 70 file sortharness.c line 29 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 73 file sortharness.c line 36 function main thread 0
+----------------------------------------------------
+  c={ 0, 0, 0, 0 } ({ 00000000000000000000000000000000, 00000000000000000000000000000000, 00000000000000000000000000000000, 00000000000000000000000000000000 })
+
+State 74 file sortharness.c line 37 function main thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 77 file sortharness.c line 39 function main thread 0
+----------------------------------------------------
+  a=a!0@1 (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 78 file sortharness.c line 39 function main thread 0
+----------------------------------------------------
+  asize=2 (00000000000000000000000000000010)
+
+State 79 file sortharness.c line 39 function main thread 0
+----------------------------------------------------
+  b=b!0@1 (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 80 file sortharness.c line 39 function main thread 0
+----------------------------------------------------
+  bsize=2 (00000000000000000000000000000010)
+
+State 81 file sortharness.c line 39 function main thread 0
+----------------------------------------------------
+  c=c!0@1 (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 82 file mutant100022_merge_sorted_nodups.c line 4 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=0 (00000000000000000000000000000000)
+
+State 83 file mutant100022_merge_sorted_nodups.c line 4 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=0 (00000000000000000000000000000000)
+
+State 84 file mutant100022_merge_sorted_nodups.c line 5 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=0 (00000000000000000000000000000000)
+
+State 85 file mutant100022_merge_sorted_nodups.c line 5 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=0 (00000000000000000000000000000000)
+
+State 86 file mutant100022_merge_sorted_nodups.c line 6 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=0 (00000000000000000000000000000000)
+
+State 87 file mutant100022_merge_sorted_nodups.c line 6 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=-1 (11111111111111111111111111111111)
+
+State 88 file mutant100022_merge_sorted_nodups.c line 7 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+
+State 89 file mutant100022_merge_sorted_nodups.c line 7 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=0 (00000000000000000000000000000000)
+LOG: apos = 0, bpos = 0, cpos = -1
+
+LOG: PUTTING b[0]=-1807351279 in c
+
+
+State 113 file mutant100022_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=0 (00000000000000000000000000000000)
+
+State 117 file mutant100022_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[0]=-1807351279 (10010100010001100000001000010001)
+
+State 118 file mutant100022_merge_sorted_nodups.c line 21 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=1 (00000000000000000000000000000001)
+
+State 119 file mutant100022_merge_sorted_nodups.c line 23 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=1 (00000000000000000000000000000001)
+LOG: apos = 0, bpos = 1, cpos = 0
+
+LOG: PUTTING a[0]=-1795030528 in c
+
+
+State 159 file mutant100022_merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=1 (00000000000000000000000000000001)
+
+State 164 file mutant100022_merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[1]=-1795030528 (10010101000000100000001000000000)
+
+State 165 file mutant100022_merge_sorted_nodups.c line 14 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=2 (00000000000000000000000000000010)
+
+State 166 file mutant100022_merge_sorted_nodups.c line 16 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=1 (00000000000000000000000000000001)
+LOG: apos = 1, bpos = 1, cpos = 1
+
+LOG: PUTTING b[1]=-1711013359 in c
+
+
+State 209 file mutant100022_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=2 (00000000000000000000000000000010)
+
+State 215 file mutant100022_merge_sorted_nodups.c line 20 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[2]=-1711013359 (10011010000001000000001000010001)
+
+State 216 file mutant100022_merge_sorted_nodups.c line 21 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=3 (00000000000000000000000000000011)
+
+State 217 file mutant100022_merge_sorted_nodups.c line 23 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  bpos=2 (00000000000000000000000000000010)
+LOG: apos = 1, bpos = 2, cpos = 2
+
+LOG: PUTTING a[1]=352453120 in c
+
+
+State 250 file mutant100022_merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  cpos=3 (00000000000000000000000000000011)
+
+State 256 file mutant100022_merge_sorted_nodups.c line 13 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  c[3]=352453120 (00010101000000100000001000000000)
+
+State 257 file mutant100022_merge_sorted_nodups.c line 14 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  csize=4 (00000000000000000000000000000100)
+
+State 258 file mutant100022_merge_sorted_nodups.c line 16 function merge_sorted_nodups thread 0
+----------------------------------------------------
+  apos=2 (00000000000000000000000000000010)
+LOG: apos = 2, bpos = 2, cpos = 3
+
+
+Violated property:
+  file mutant100022_merge_sorted_nodups.c line 18 function merge_sorted_nodups
+  dereference failure: object bounds in b[(signed long int)bpos]
+  !(4 * (signed long int)bpos + POINTER_OFFSET(b) < 0) && OBJECT_SIZE(b) >= 4 * (signed long int)bpos + 4 + POINTER_OFFSET(b) || DYNAMIC_OBJECT(b)
+
+VERIFICATION FAILED
