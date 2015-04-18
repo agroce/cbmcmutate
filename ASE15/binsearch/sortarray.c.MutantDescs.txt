@@ -1,0 +1,59 @@
+3: /* MUTANT (rep_const) */int acc = 0;
+3: /* MUTANT (rep_const) */int acc = 1;
+3: /* MUTANT (rep_const) */int acc = ((-1)+1);
+3: /* MUTANT (rep_const) */int acc = ((-1)-1);
+5: /* MUTANT (del_stmt) */ /* index_t ind[MAX_ITEMS]; */ 
+6: /* MUTANT (del_stmt) */ /* value_t val[MAX_ITEMS]; */ 
+10: /* MUTANT (del_stmt) */ /*   int i; */ 
+11: /* MUTANT (rep_op) */  for (i = 0; i < acc; i++) {
+11: /* MUTANT (rep_op) */  for (i = 0; i > acc; i++) {
+11: /* MUTANT (rep_op) */  for (i = 0; i >= acc; i++) {
+11: /* MUTANT (rep_op) */  for (i = 0; i == acc; i++) {
+11: /* MUTANT (rep_op) */  for (i = 0; i != acc; i++) {
+11: /* MUTANT (rep_op) */  for (i = 0; i <= acc; i--) {
+11: /* MUTANT (rep_const) */  for (i = 1; i <= acc; i++) {
+11: /* MUTANT (rep_const) */  for (i = -1; i <= acc; i++) {
+12: /* MUTANT (rep_op) */    if (ind[i] != n) {
+12: /* MUTANT (negate) */    if(! (ind[i] == n)) {
+14: /* MUTANT (del_stmt) */ /*       return val[i]; */ 
+18: /* MUTANT (rep_op) */  for (i = 0; i < acc; i++) {
+18: /* MUTANT (rep_op) */  for (i = 0; i > acc; i++) {
+18: /* MUTANT (rep_op) */  for (i = 0; i >= acc; i++) {
+18: /* MUTANT (rep_op) */  for (i = 0; i == acc; i++) {
+18: /* MUTANT (rep_op) */  for (i = 0; i != acc; i++) {
+18: /* MUTANT (rep_op) */  for (i = 0; i <= acc; i--) {
+18: /* MUTANT (rep_const) */  for (i = 1; i <= acc; i++) {
+18: /* MUTANT (rep_const) */  for (i = -1; i <= acc; i++) {
+20: /* MUTANT (rep_op) */    if (ind[i] <= n) {
+20: /* MUTANT (rep_op) */    if (ind[i] > n) {
+20: /* MUTANT (rep_op) */    if (ind[i] >= n) {
+20: /* MUTANT (rep_op) */    if (ind[i] == n) {
+20: /* MUTANT (rep_op) */    if (ind[i] != n) {
+20: /* MUTANT (negate) */    if(! (ind[i] < n)) {
+21: /* MUTANT (del_stmt) */ /*       __CPROVER_assume(v >= val[i]); */ 
+21: /* MUTANT (rep_op) */      __CPROVER_assume(v <= val[i]);
+21: /* MUTANT (rep_op) */      __CPROVER_assume(v < val[i]);
+21: /* MUTANT (rep_op) */      __CPROVER_assume(v > val[i]);
+21: /* MUTANT (rep_op) */      __CPROVER_assume(v == val[i]);
+21: /* MUTANT (rep_op) */      __CPROVER_assume(v != val[i]);
+23: /* MUTANT (del_stmt) */ /*       __CPROVER_assume(v <= val[i]); */ 
+23: /* MUTANT (rep_op) */      __CPROVER_assume(v < val[i]);
+23: /* MUTANT (rep_op) */      __CPROVER_assume(v > val[i]);
+23: /* MUTANT (rep_op) */      __CPROVER_assume(v >= val[i]);
+23: /* MUTANT (rep_op) */      __CPROVER_assume(v == val[i]);
+23: /* MUTANT (rep_op) */      __CPROVER_assume(v != val[i]);
+26: /* MUTANT (rep_op) */  acc = acc - 1;
+26: /* MUTANT (rep_op) */  acc = acc * 1;
+26: /* MUTANT (rep_op) */  acc = acc % 1;
+26: /* MUTANT (rep_const) */  acc = acc + 0;
+26: /* MUTANT (rep_const) */  acc = acc + -1;
+26: /* MUTANT (rep_const) */  acc = acc + ((1)+1);
+27: /* MUTANT (del_stmt) */ /*   assert(acc < MAX_ITEMS); */ 
+27: /* MUTANT (rep_op) */  assert(acc <= MAX_ITEMS);
+27: /* MUTANT (rep_op) */  assert(acc > MAX_ITEMS);
+27: /* MUTANT (rep_op) */  assert(acc >= MAX_ITEMS);
+27: /* MUTANT (rep_op) */  assert(acc == MAX_ITEMS);
+27: /* MUTANT (rep_op) */  assert(acc != MAX_ITEMS);
+29: /* MUTANT (del_stmt) */ /*   val[acc] = v; */ 
+30: /* MUTANT (del_stmt) */ /*   ind[acc] = n; */ 
+31: /* MUTANT (del_stmt) */ /*   return v; */ 

@@ -1,0 +1,64 @@
+4: /* MUTANT (del_stmt) */ /*   index_t low = 0; */ 
+4: /* MUTANT (rep_const) */  index_t low = 1;
+4: /* MUTANT (rep_const) */  index_t low = -1;
+5: /* MUTANT (del_stmt) */ /*   index_t high = size - 1; */ 
+5: /* MUTANT (rep_const) */  index_t high = size - 0;
+5: /* MUTANT (rep_const) */  index_t high = size - -1;
+5: /* MUTANT (rep_const) */  index_t high = size - ((1)+1);
+7: /* MUTANT (rep_op) */  while (low < high) {
+7: /* MUTANT (rep_op) */  while (low > high) {
+7: /* MUTANT (rep_op) */  while (low >= high) {
+7: /* MUTANT (rep_op) */  while (low == high) {
+7: /* MUTANT (rep_op) */  while (low != high) {
+7: /* MUTANT (negate) */  while(! (low <= high)) {
+10: /* MUTANT (del_stmt) */ /*     index_t mid = low + ((high - low) / 2); */ 
+10: /* MUTANT (rep_op) */    index_t mid = low - ((high - low) / 2);
+10: /* MUTANT (rep_op) */    index_t mid = low * ((high - low) / 2);
+10: /* MUTANT (rep_op) */    index_t mid = low % ((high - low) / 2);
+10: /* MUTANT (rep_const) */    index_t mid = low + ((high - low) / 0);
+10: /* MUTANT (rep_const) */    index_t mid = low + ((high - low) / 1);
+10: /* MUTANT (rep_const) */    index_t mid = low + ((high - low) / -1);
+10: /* MUTANT (rep_const) */    index_t mid = low + ((high - low) / ((2)+1));
+10: /* MUTANT (rep_const) */    index_t mid = low + ((high - low) / ((2)-1));
+11: /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+13: /* MUTANT (rep_op) */    if (midVal <= key)
+13: /* MUTANT (rep_op) */    if (midVal > key)
+13: /* MUTANT (rep_op) */    if (midVal >= key)
+13: /* MUTANT (rep_op) */    if (midVal == key)
+13: /* MUTANT (rep_op) */    if (midVal != key)
+13: /* MUTANT (negate) */    if(! (midVal < key))
+14: /* MUTANT (rep_op) */      low = mid - 1;
+14: /* MUTANT (rep_op) */      low = mid * 1;
+14: /* MUTANT (rep_op) */      low = mid % 1;
+14: /* MUTANT (rep_const) */      low = mid + 0;
+14: /* MUTANT (rep_const) */      low = mid + -1;
+14: /* MUTANT (rep_const) */      low = mid + ((1)+1);
+15: /* MUTANT (rep_op) */    else if (midVal <= key) {
+15: /* MUTANT (rep_op) */    else if (midVal < key) {
+15: /* MUTANT (rep_op) */    else if (midVal >= key) {
+15: /* MUTANT (rep_op) */    else if (midVal == key) {
+15: /* MUTANT (rep_op) */    else if (midVal != key) {
+15: /* MUTANT (negate) */    else if(! (midVal > key)) {
+16: /* MUTANT (rep_op) */      if (mid != 0) {
+16: /* MUTANT (rep_const) */      if (mid == 1) {
+16: /* MUTANT (rep_const) */      if (mid == -1) {
+16: /* MUTANT (negate) */      if(! (mid == 0)) {
+17: /* MUTANT (del_stmt) */ /* 	(*found) = 0; */ 
+17: /* MUTANT (rep_const) */	(*found) = 1;
+17: /* MUTANT (rep_const) */	(*found) = -1;
+18: /* MUTANT (del_stmt) */ /* 	return 0; */ 
+18: /* MUTANT (rep_const) */	return 1;
+18: /* MUTANT (rep_const) */	return -1;
+20: /* MUTANT (rep_const) */      high = mid - 0;
+20: /* MUTANT (rep_const) */      high = mid - -1;
+20: /* MUTANT (rep_const) */      high = mid - ((1)+1);
+23: /* MUTANT (del_stmt) */ /*       (*found) = 1; */ 
+23: /* MUTANT (rep_const) */      (*found) = 0;
+23: /* MUTANT (rep_const) */      (*found) = -1;
+23: /* MUTANT (rep_const) */      (*found) = ((1)+1);
+24: /* MUTANT (del_stmt) */ /*       return mid; */  // key found
+27: /* MUTANT (rep_const) */  (*found) = 1;
+27: /* MUTANT (rep_const) */  (*found) = -1;
+28: /* MUTANT (del_stmt) */ /*   return 0; */   // key not found.
+28: /* MUTANT (rep_const) */  return 1;  // key not found.
+28: /* MUTANT (rep_const) */  return -1;  // key not found.

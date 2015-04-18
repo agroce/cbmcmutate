@@ -1,0 +1,39 @@
+5: /* MUTANT (del_stmt) */ /*   index_t s = nondet_index(); */ 
+6: /* MUTANT (del_stmt) */ /*   __CPROVER_assume(s > 0); */ 
+6: /* MUTANT (rep_op) */  __CPROVER_assume(s <= 0);
+6: /* MUTANT (rep_op) */  __CPROVER_assume(s < 0);
+6: /* MUTANT (rep_op) */  __CPROVER_assume(s >= 0);
+6: /* MUTANT (rep_op) */  __CPROVER_assume(s == 0);
+6: /* MUTANT (rep_op) */  __CPROVER_assume(s != 0);
+6: /* MUTANT (rep_const) */  __CPROVER_assume(s > 1);
+6: /* MUTANT (rep_const) */  __CPROVER_assume(s > -1);
+7: /* MUTANT (del_stmt) */ /*   value_t k = nondet_value(); */ 
+8: /* MUTANT (del_stmt) */ /*   int found; */ 
+10: /* MUTANT (del_stmt) */ /*   index_t bret = binsearch(k, s, &found); */ 
+12: /* MUTANT (rep_op) */  if (found != 1)
+12: /* MUTANT (rep_const) */  if (found == 0)
+12: /* MUTANT (rep_const) */  if (found == -1)
+12: /* MUTANT (rep_const) */  if (found == ((1)+1))
+12: /* MUTANT (negate) */  if(! (found == 1))
+13: /* MUTANT (rep_op) */    assert (a(bret) != k);
+15: /* MUTANT (del_stmt) */ /*     assert (found == 0); */ 
+15: /* MUTANT (rep_op) */    assert (found != 0);
+15: /* MUTANT (rep_const) */    assert (found == 1);
+15: /* MUTANT (rep_const) */    assert (found == -1);
+16: /* MUTANT (del_stmt) */ /*     int vn = nondet_index(); */ 
+17: /* MUTANT (del_stmt) */ /*     __CPROVER_assume ((vn < s) && (vn >= 0)); */ 
+17: /* MUTANT (rep_op) */    __CPROVER_assume ((vn <= s) && (vn >= 0));
+17: /* MUTANT (rep_op) */    __CPROVER_assume ((vn > s) && (vn >= 0));
+17: /* MUTANT (rep_op) */    __CPROVER_assume ((vn >= s) && (vn >= 0));
+17: /* MUTANT (rep_op) */    __CPROVER_assume ((vn == s) && (vn >= 0));
+17: /* MUTANT (rep_op) */    __CPROVER_assume ((vn != s) && (vn >= 0));
+17: /* MUTANT (rep_op) */    __CPROVER_assume ((vn < s) || (vn >= 0));
+17: /* MUTANT (rep_op) */    __CPROVER_assume ((vn < s) && (vn <= 0));
+17: /* MUTANT (rep_op) */    __CPROVER_assume ((vn < s) && (vn < 0));
+17: /* MUTANT (rep_op) */    __CPROVER_assume ((vn < s) && (vn > 0));
+17: /* MUTANT (rep_op) */    __CPROVER_assume ((vn < s) && (vn == 0));
+17: /* MUTANT (rep_op) */    __CPROVER_assume ((vn < s) && (vn != 0));
+17: /* MUTANT (rep_const) */    __CPROVER_assume ((vn < s) && (vn >= 1));
+17: /* MUTANT (rep_const) */    __CPROVER_assume ((vn < s) && (vn >= -1));
+18: /* MUTANT (del_stmt) */ /*     assert (a(vn) != k); */ 
+18: /* MUTANT (rep_op) */    assert (a(vn) == k);
