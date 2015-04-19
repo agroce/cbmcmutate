@@ -2,19 +2,23 @@ import sys
 import glob
 
 mutant_base = sys.argv[1]
-maxcov = sys.argv[2]
 
 for infile in glob.glob("mutant*_" + mutant_base):
 
-    outfile = "FULLCOV_" + infile
+    outfile = "BRANCHCOV_" + infile
 
     outf = open(outfile,'w')
 
-    outf.write ("int mutant_covered = 0;\n\n")
-    outf.write ("int total_covered = 0;\n\n")
-    outf.write ("int covered[" + maxcov + "];\n\n")
+    newCode = []
+    
+    newCode.append ("int mutant_covered = 0;\n\n")
+    newCode.append ("int total_covered = 0;\n\n")
 
     cnum = 0
+
+    lprev = ["foo"]
+
+    branchers = ["if","else","for","while"]
     
     for l in open(infile):
         if "/*" in l:
@@ -27,9 +31,9 @@ for infile in glob.glob("mutant*_" + mutant_base):
                         sp += " "
                     else:
                         break
-                outf.write(sp + "mutant_covered = 1;\n")
+                newCode.append(sp + "mutant_covered = 1;\n")
             inCode = ((l[0] == " " or l[0] == "\t") and not (l.split()[0] == "else"))
-            if inCode:
+            if inCode and (lprev[0] in branchers):
                 sp = "";
                 for c in l:
                     if c == " ":
@@ -38,10 +42,17 @@ for infile in glob.glob("mutant*_" + mutant_base):
                         sp += "\t"
                     else:
                         break            
-                outf.write(sp + "__CPROVER_atomic_begin(); if (!covered[" + str(cnum) + "]) {covered[" + str(cnum) + "] = 1; total_covered += 1;} __CPROVER_atomic_end(); \n")
+                newCode.append(sp + "if (!__covered" + str(cnum) + ") {__covered" + str(cnum) + " = 1; total_covered += 1;}\n")
                 cnum += 1
         if "*/" in l:
             inComment = False
-        outf.write(l)
+        lprev = l.split()
+        if lprev == []:
+            lprev = ["foo"]
+        newCode.append(l)
 
+    for i in xrange(0,cnum):
+        outf.write("int __covered"+str(i)+";\n")
+    for l in newCode:
+        outf.write(l)
     outf.close()

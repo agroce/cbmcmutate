@@ -6,9 +6,10 @@ prefix = sys.argv[1]
 harness = sys.argv[2]
 mutant_base = sys.argv[3]
 start = int(sys.argv[4])
+covprefix = sys.argv[5]
 
 options = ""
-for o in sys.argv[5:]:
+for o in sys.argv[6:]:
     options += o + " "
 
 print prefix
@@ -18,13 +19,13 @@ print start
 
 mutStrength = {}
 
-for m in glob.glob("FULLCOV_mutant*_" + mutant_base):
+for m in glob.glob(covprefix + "_mutant*_" + mutant_base):
     print "Analyzing mutant",m
     sys.stdout.flush()
     sys.stderr.flush()
     t = start
     foundCover = False
-    while ((t > 0) and (not foundCover)):
+    while ((t >= 0) and (not foundCover)):
         print "Trying to find",t,"covering execution..."
         sys.stdout.flush()
         sys.stderr.flush()        
@@ -33,16 +34,22 @@ for m in glob.glob("FULLCOV_mutant*_" + mutant_base):
         resultF = open (results, 'w')
         print cmd
         subprocess.call([cmd], shell=True, stdout = resultF, stderr = resultF)
+        verOk = False
         for l in open (results):
+            if "VERIFICATION SUCCESSFUL" in l:
+                verOk = True
             if "VERIFICATION FAILED" in l:
                 print "Successful!"
                 sys.stdout.flush()
                 sys.stderr.flush()
                 foundCover = True
                 break
+        if not verOk:
+            print "Failed to model check"
+            t = -2
         if not foundCover:
             t -= 1
-    if t == 0:
+    if t < 0:
         print "Can't cover mutant at all!"
         sys.stdout.flush()
         sys.stderr.flush()
