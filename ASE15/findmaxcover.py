@@ -7,9 +7,9 @@ harness = sys.argv[2]
 mutant_base = sys.argv[3]
 start = int(sys.argv[4])
 covprefix = sys.argv[5]
-
+canhitprefix = sys.argv[6]
 options = ""
-for o in sys.argv[6:]:
+for o in sys.argv[7:]:
     options += o + " "
 
 print prefix
@@ -25,6 +25,24 @@ for m in glob.glob(covprefix + "_mutant*_" + mutant_base):
     sys.stderr.flush()
     t = start
     foundCover = False
+    mhit = canhitprefix + "." + m
+    mhit = mhit.replace(covprefix,"COVER")
+    mhit = mhit + ".result"
+    mutantOk = None
+    for l in open (mhit):
+        if "VERIFICATION FAILED" in l:
+            mutantOk = True
+            break
+        if "VERIFICATION SUCCESSFUL" in l:
+            print "Mutant can't be covered"
+            mutStrength[m] = -1
+            break
+    if mutantOk == None:
+        print "Mutant doesn't compile"
+        mutStrength[m] = -2
+    if not mutantOk:
+        print "Skipping mutant", m
+        continue
     while ((t >= 0) and (not foundCover)):
         print "Trying to find",t,"covering execution..."
         sys.stdout.flush()

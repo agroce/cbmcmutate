@@ -21,8 +21,9 @@ for infile in glob.glob("mutant*_" + mutant_base):
     branchers = ["if","else","for","while"]
     
     for l in open(infile):
-        if "/*" in l:
+        if ("/*" in l) and "*/" not in l:
             inComment = True
+            
         if not inComment:
             if "MUTANT" in l:
                 sp = "";
