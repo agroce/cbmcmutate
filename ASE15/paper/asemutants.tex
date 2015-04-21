@@ -417,42 +417,65 @@ essentially a generalized test harness\footnote{By a harness we mean a
   provides correctness properties, etc.; in CBMC such a harness looks
   very similar to a harness for more traditional software testing.} in
 the language of the Software Under Test (SUT).  Figure
-\ref{fig:sortharness} shows a CBMC harness for a sorting routine.
+\ref{fig:harness} shows a CBMC harness for a function that takes two
+sorted arrays as inputs, and outputs a third array containing exactly
+one copy of each item appearing in either array, {\tt
+  merge\_sorted\_nodups}.  This is a simple program, but typical of a
+small verification problem:  it is not easy to write an obviously
+bug-free implementation of this routine, and it is non-standard enough
+that no library implementation is likely available.
 
 \begin{figure}
 {\scriptsize
 \begin{code}
-\#include <stdio.h>
-\#include "sort.h"
-
-int a[MAX\_ITEMS];
-int ref[MAX\_ITEMS];
-
-int nondet\_int();
-
 int main () \{
-  int i, v, prev;
-  int s = nondet\_int();
-  \_\_CPROVER\_assume((s > 0) \&\& (s <=MAX\_ITEMS));
-  for (i = 0; i < s; i++) \{
-    v = nondet\_int();
-    printf ("LOG: ref[\%d] = \%d\\n", i, v);
-    ref[i] = v;
-    a[i] = v;
+  int a[SIZE], b[SIZE], c[SIZE*2];
+  int i, v, i1, i2, csize;
+  int asize = nondet\_int();
+  int bsize = nondet\_int();
+  \_\_CPROVER\_assume ((asize >= 0) \&\& (bsize >=0));
+  \_\_CPROVER\_assume ((asize <= SIZE) \&\& (bsize <= SIZE));
+  for (i = 0; i < asize; i++) \{
+    a[i] = nondet\_int();
+    \_\_CPROVER\_assume((i == 0) || (a[i] >= a[i-1]));
   \}
-  sort(a, s);
-  prev = a[0];
-  for (i = 0; i < s; i++) \{
-    printf ("LOG: a[\%d] = \%d\\n", i, a[i]);
-    assert (a[i] >= prev);
-    prev = a[i];
+  for (i = 0; i < bsize; i++) \{
+    b[i] = nondet\_int();
+    \_\_CPROVER\_assume((i == 0) || (b[i] >= b[i-1]));
   \}
+  csize = merge\_sorted\_nodups(a, asize, b, bsize, c);
+  assert (csize <= (asize + bsize));
+  i1 = nondet\_int();
+  i2 = nondet\_int();
+  \_\_CPROVER\_assume((i1 >= 0) \&\& (i2 >= 0));
+  \_\_CPROVER\_assume((i1 < csize) \& \& (i2 < csize));
+  \_\_CPROVER\_assume(i1 != i2);
+  assert(c[i1] != c[i2]);
+  v = nondet\_int();
+  \_\_CPROVER\_assume ((v >= 0) \&\& (v < asize));
+  v = a[v];
+  int found = 0;
+  for (i = 0; i < csize; i++) \{
+    if (c[i] == v)
+      found = 1;
+  \}
+  assert (found == 1);
+  v = nondet\_int();
+  \_\_CPROVER\_assume ((v >= 0) \&\& (v < bsize));
+  v = b[v];
+  int found = 0;
+  for (i = 0; i < csize; i++) \{
+    if (c[i] == v)
+      found = 1;
+  \}
+  assert (found == 1);
 \}
 \end{code}
 }
-\caption{A simple harness for a sorting algorithm.}
-\label{fig:sortharness}
+\caption{Harness for merge\_sorted\_nodups}
+\label{fig:harness}
 \end{figure}
+
 
 CBMC compiles a harness and the SUT (here a quick sort implementation)
 into a goto-program, instruments
@@ -540,6 +563,37 @@ the SUT itself.
 
 \subsection{A Simple Example Verification}
 
+\begin{figure}
+{\scriptsize
+\begin{code}
+int merge\_sorted\_nodups(int a[], int asize, 
+                        int b[], int bsize, int c[]) \{
+  int apos = 0, bpos = 0, cpos = -1, csize = 0;
+  while ((apos < asize) || (bpos < bsize)) \{
+    if ((apos < asize) \&\& 
+        ((bpos >= bsize) || (a[apos] < b[bpos]))) \{
+      if ((cpos == -1) || (c[cpos] != a[apos])) \{
+	c[++cpos] = a[apos];
+	csize++;
+      \}
+      apos++;
+    \} else \{
+      if ((cpos == -1) || (c[cpos] != b[bpos])) \{
+	c[++cpos] = b[bpos];
+	csize++;
+      \}
+      bpos++;      
+    \}
+  \}
+  return csize;
+\}
+\end{code}
+}
+\caption{Code to merge two sorted arrays into one sorted array with no
+  duplicate elements}
+\label{fig:sortnodup}
+\end{figure}
+
 As an example of the proposed verification methdology, consider again
 the harness shown in Figure \ref{fig:sortharness}.  If we take the
 first hit on Google for ``quick sort in C'' \cite{quicksortcode},
@@ -552,41 +606,7 @@ of items in the array).  CBMC reports {\tt VERIFICATON SUCCESSFUL} in
 less than a second.  Does this mean we have verified what we want to
 verify?  How do we understand this ``successful'' verification result better?
 
-\begin{figure}
-{\scriptsize
-\begin{code}
-\#include "sort.h"
 
-void quickSort( int a[], int l, int r) \{
-  int j;
-  if( l < r ) \{
-      j = partition( a, l, r);
-      quickSort( a, l, j-1);
-      quickSort( a, j+1, r);
-    \}
-\}
-int partition( int a[], int l, int r) \{
-  int pivot, i, j, t;
-  pivot = a[l];
-  i = l; j = r+1;
-  while(1) \{
-      do ++i; while( i <= r && a[i] <= pivot );
-      do --j; while( a[j] > pivot );
-      if( i >= j ) break;
-      t = a[i]; a[i] = a[j]; a[j] = t;
-    \}
-  t = a[l]; a[l] = a[j]; a[j] = t;
-  return j;
-\}
-void sort(int a[], unsigned int size) \{
-  quickSort(a, 0, size-1);
-\}
-
-\end{code}
-}
-\caption{Quick sort code from the web.}
-\label{fig:qsort}
-\end{figure}
 
 \subsubsection{Finding a Good Unwinding Depth}
 
@@ -617,7 +637,8 @@ unlikely that a \emph{complete verification} over all possible arrays
 with a good specification of sorting would produce such a poor
 mutation kill rate.  If we up the size limit to 3 (the verification
 taking just over 15 minutes), only 8 mutants survive.  Increasing the
-limit to size 4, again the same 8 mutants survive.  We call an
+limit to size 4, again the same 8 mutants survive (though this time
+the verification requires 229 minutes).  We call an
 unwinding depth (or, more generally, problem size) such that
 increasing it by one does not kill any additional mutants
 \emph{mutant-stable}.  In the absence of any further domain specific
@@ -784,42 +805,7 @@ to \emph{not} match the theory of program behavior.
 
 \section{Algorithms and Techniques}
 
-\begin{figure}
-{\scriptsize
-\begin{code}
-int main () \{
-   /* Code to assign asize, bsize, elements of a and b omitted
-       due to space limitations. */
 
-  int c[SIZE*2];
-  int csize;
-  csize = merge\_sorted\_nodups(a, asize, b, bsize, c);
-  assert (csize <= (asize + bsize));
-
-  i1 = nondet\_int();
-  i2 = nondet\_int();
-  \_\_CPROVER\_assume((i1 >= 0) \&\& (i2 >= 0));
-  \_\_CPROVER\_assume((i1 < csize) \& \& (i2 < csize));
-  \_\_CPROVER\_assume(i1 != i2);
-  assert(c[i1] != c[i2]);
-  v = nondet\_int();
-  \_\_CPROVER\_assume ((v >= 0) \&\& (v < asize));
-
-  v = a[v];
-  int found = 0;
-  for (i = 0; i < csize; i++) \{
-    if (c[i] == v)
-      found = 1;
-  \}
-  assert (found == 1);
-
-  // Do the same for array b
-\}
-\end{code}
-}
-\caption{Harness for merge\_sorted\_nodups}
-\label{fig:uniqueharness}
-\end{figure}
 
 Given a mutant of program $P$, $M_i$, the 
 
