@@ -53,14 +53,17 @@ for o in sys.argv[pos:]:
     if o == "--cbmc":
         nextCBMC = True
 if "--ignoreKilled" in sys.argv:
-    ikpos = sys.argv.index["--ignoreKilled"]
+    print sys.argv
+    ikpos = sys.argv.index("--ignoreKilled")
     ignoreKilled = sys.argv[ikpos+1]
-    sys.argv = sys.argv[0:ikpos] + sys.argv[ikpos+1:]
+    sys.argv = sys.argv[0:ikpos] + sys.argv[ikpos+2:]
+    print sys.argv
 if "--ignoreSurvived" in sys.argv:
-    ispos = sys.argv.index["--ignoreSurvived"]
+    ispos = sys.argv.index("--ignoreSurvived")
     ignoreSurvived = sys.argv[ispos+1]
-    sys.argv = sys.argv[0:ispos] + sys.argv[ispos+1:]    
+    sys.argv = sys.argv[0:ispos] + sys.argv[ispos+2:]    
 options = ""
+pos = sys.argv.index("--options")+1
 for o in sys.argv[pos:]:
     pos += 1
     if o == "--files":
@@ -132,6 +135,27 @@ def mutateAll(mutants, files, totalSuccessTime, totalKilledTime, minSuccessTime,
             print indent+"Checking mutant", mutant + ": ",
             printMutant(mutant)
             results = mutant + mode + ".result"
+            ignoreIt = False
+            if not (ignoreKilled == None):
+                oldResult = ignoreKilled + "." + results
+                for l in open(oldResult):
+                    if "VERIFICATION FAILED" in l:
+                        print "Skipping due to ignoreKilled"
+                        cpcmd = "cp " + oldResult + " " + prefix + "." + results
+                        subprocess.call([cpcmd], shell=True)
+                        ignoreIt = True
+                        break
+            if not (ignoreSurvived == None):
+                oldResult = ignoreSurvived + "." + results
+                for l in open(oldResult):
+                    if "VERIFICATION SUCCESSFUL" in l:
+                        print "Skipping due to ignoreSurvived"
+                        cpcmd = "cp " + oldResult + " " + prefix + "." + results
+                        subprocess.call([cpcmd], shell=True)
+                        ignoreIt = True
+                        break
+            if ignoreIt:
+                continue                    
             (result, time) = checkMutant(mutant, keepsame+files, results)
             if result == True:
                 print indent+"VERIFICATION SUCCESSFUL", time
@@ -188,7 +212,7 @@ def mutateAll(mutants, files, totalSuccessTime, totalKilledTime, minSuccessTime,
     print indent+"MIN/MAX KILL TIME = ",minKilledTime,"/",maxKilledTime
     print indent+"MIN/MAX SUCCESS TIME = ",minSuccessTime,"/",maxSuccessTime
     if not harnessCall:
-        print "SURVIVING MUTANTS:"
+        print "SURVIVING MUTANTS:",len(live)
         if harnessMode:
             print "(SAME KILL RATE)"
         for f in live:

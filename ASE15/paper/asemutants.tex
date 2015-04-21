@@ -605,7 +605,7 @@ Jamie Andrews \cite{mutant}, we can produce 81 mutants of this code in
 less than a second.  We then run the harness with unwinding depth 2
 (and {\tt MAX\_ITEMS=1}) on each of the 81 mutants.  The process takes
 about a minute and a half (on a Macbook Pro with dual-core 3.1GHz
-Intel Core i7).  CBMC reports that 6 mutants do not compile (these
+Intel Core i7, but using only one core).  CBMC reports that 6 mutants do not compile (these
 remove variable declarations, for the most part), 4 are detected by
 the harness, and 71 mutants pass without detection.  Clearly length 1
 arrays are not sufficient to detect even the most glaring bugs in a
@@ -617,8 +617,22 @@ unlikely that a \emph{complete verification} over all possible arrays
 with a good specification of sorting would produce such a poor
 mutation kill rate.  If we up the size limit to 3 (the verification
 taking just over 15 minutes), only 8 mutants survive.  Increasing the
-limit to size 4, again the same 8 mutants survive.
+limit to size 4, again the same 8 mutants survive.  We call an
+unwinding depth (or, more generally, problem size) such that
+increasing it by one does not kill any additional mutants
+\emph{mutant-stable}.  In the absence of any further domain specific
+knowledge, finding a mutant-stable problem size can serve as a good
+heuristic for approximating a completeness threshold. 
 
+While the time needed for this process may seem excessive for a small
+program, note that the results are exhaustive, and of course the
+verification problems for each individual mutant and bound can be
+solved in parallel.  A more sophisticated algorithm for unwinding
+determination (Figure \ref{alg:unwind}) presented later in this paper
+further reduces the burden, by moving to larger unwindings as soon as
+it is known the current unwinding is not mutant-stable.
+
+\subsubsection{Examining Surviving Mutants}
 
 \begin{enumerate}
 \item Generate mutant set $M = m_1 \ldots m_n$ for the program $P$.

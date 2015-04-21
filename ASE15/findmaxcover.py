@@ -20,11 +20,6 @@ print start
 mutStrength = {}
 
 for m in glob.glob(covprefix + "_mutant*_" + mutant_base):
-    print "Analyzing mutant",m
-    sys.stdout.flush()
-    sys.stderr.flush()
-    t = start
-    foundCover = False
     mhit = canhitprefix + "." + m
     mhit = mhit.replace(covprefix,"COVER")
     mhit = mhit + ".result"
@@ -34,15 +29,20 @@ for m in glob.glob(covprefix + "_mutant*_" + mutant_base):
             mutantOk = True
             break
         if "VERIFICATION SUCCESSFUL" in l:
-            print "Mutant can't be covered"
+            print m,"can't be covered"
             mutStrength[m] = -1
             break
     if mutantOk == None:
-        print "Mutant doesn't compile"
+        print m,"doesn't compile"
         mutStrength[m] = -2
     if not mutantOk:
-        print "Skipping mutant", m
         continue
+    print "=========================================================="
+    print "Analyzing mutant",m
+    sys.stdout.flush()
+    sys.stderr.flush()
+    t = start
+    foundCover = False
     while ((t >= 0) and (not foundCover)):
         print "Trying to find",t,"covering execution..."
         sys.stdout.flush()
@@ -53,7 +53,10 @@ for m in glob.glob(covprefix + "_mutant*_" + mutant_base):
         print cmd
         subprocess.call([cmd], shell=True, stdout = resultF, stderr = resultF)
         verOk = False
+        time = None
         for l in open (results):
+            if "Runtime decision" in l:
+                time = float((l.split()[-1])[:-1])            
             if "VERIFICATION SUCCESSFUL" in l:
                 verOk = True
             if "VERIFICATION FAILED" in l:
@@ -61,8 +64,8 @@ for m in glob.glob(covprefix + "_mutant*_" + mutant_base):
                 sys.stdout.flush()
                 sys.stderr.flush()
                 foundCover = True
-                break
-        if not verOk:
+        print "TIME = ",time
+        if not (verOk or foundCover):
             print "Failed to model check"
             t = -2
         if not foundCover:
