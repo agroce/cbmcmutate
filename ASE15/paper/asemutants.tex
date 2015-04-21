@@ -622,7 +622,14 @@ unwinding depth (or, more generally, problem size) such that
 increasing it by one does not kill any additional mutants
 \emph{mutant-stable}.  In the absence of any further domain specific
 knowledge, finding a mutant-stable problem size can serve as a good
-heuristic for approximating a completeness threshold. 
+heuristic for approximating a completeness threshold.  Obviously,
+there is no guarantee that a mutant-stable size is sufficient, but
+given the speed with which the computational requirements for checking
+even the original program increase with unwinding depth, moving to
+larger sizes is inefficient until it is known that the harness and SUT
+are likely correct.  Our approach to verification aims to always
+minimize both machine and human time spent analyzing versions of
+the harness or SUT that are not finalized.
 
 While the time needed for this process may seem excessive for a small
 program, note that the results are exhaustive, and of course the
@@ -633,6 +640,29 @@ further reduces the burden, by moving to larger unwindings as soon as
 it is known the current unwinding is not mutant-stable.
 
 \subsubsection{Examining Surviving Mutants}
+
+\begin{figure}
+{\scriptsize
+\begin{code}
+9 :  /*(rep\_op)*/ if (l <= r) 
+26 :  /*(rep\_const)*/ while(-1)
+26 :  /*(rep\_const)*/ while( ((1)+1))
+28 :  /*(rep\_op)*/ do ++i; while(i<r \&\& a[i]<=pivot);
+28 :  /*(rep\_op)*/ do ++i; while(i!=r \&\& a[i]<=pivot);
+28 :  /*(rep\_op)*/ do ++i; while(i<=r \&\& a[i]<pivot);
+30 :  /*(rep\_op)*/ if( i > j ) break;
+31 :  /*(del\_stmt)*/ t=a[i]; /*  a[i]=a[j]; */  a[j]=t;
+\end{code}
+}
+\caption{Surviving mutants}
+\label{fig:survivors}
+\end{figure}
+
+Figure \ref{fig:survivors} shows surviving mutants for our quick sort
+code (the comment indicates the type of mutant, and the line\# in the
+quick sort file is also given for reference).
+
+
 
 \begin{enumerate}
 \item Generate mutant set $M = m_1 \ldots m_n$ for the program $P$.
