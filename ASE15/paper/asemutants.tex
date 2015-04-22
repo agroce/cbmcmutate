@@ -210,7 +210,7 @@
 % algorithmicx.sty package by Szasz Janos:
 % http://www.ctan.org/tex-archive/macros/latex/contrib/algorithmicx/
 
-
+\usepackage{comment}
 
 
 % *** ALIGNMENT PACKAGES ***
@@ -360,9 +360,9 @@
 % use a multiple column layout for up to three different
 % affiliations
 \author{\IEEEauthorblockN{Alex Groce, Iftekhar Ahmed, Carlos Jensen}
-\IEEEauthorblockA{School of Electrical Engineering and\\Computer  Science\\
+\IEEEauthorblockA{School of Electrical Engineering and Computer  Science\\
 Oregon State University, Corvallis, Oregon\\
-Email: agroce@gmail.com}
+Email: agroce@gmail.com, ahmedi@onid.oregonstate.edu, cjensen@eecs.orst.edu}
 \and
 \IEEEauthorblockN{Paul E. McKenney}
 \IEEEauthorblockA{IBM Linux Technology Center\\
@@ -417,93 +417,80 @@ essentially a generalized test harness\footnote{By a harness we mean a
   provides correctness properties, etc.; in CBMC such a harness looks
   very similar to a harness for more traditional software testing.} in
 the language of the Software Under Test (SUT).  Figure
-\ref{fig:harness} shows a CBMC harness for inserting elements in
-sorted order into a doubly linked list.  This is a simple program, but typical of a
-small verification problem:  it is not easy to write an obviously
-bug-free implementation of this routine, and it is non-standard enough
-that no library implementation is likely available.
+\ref{fig:sortharness} shows a CBMC harness for sorting routines.  This is
+a simple program, but typical of the structure of a small verification
+problem.  Only a few aspects of this code differ from normal testing.
+First, {\tt nondet\_int} in CBMC can return any value,
+nondeterministically.  It is not equivalent to a ``random'' choice but
+true nondeterminism:  CBMC will explore all possible values.  The {\tt
+  \_\_CPROVER\_assume} statement is used to restrict the program executions
+considered: it has the usual {\tt assume} semantics
+\cite{EWD:Discipline,exploit}, so CBMC ignores all executions that violate assumptions.
 
 \begin{figure}
 {\scriptsize
 \begin{code}
 \#include <stdio.h>
-\#include "doublelinked.h"
+\#include "sort.h"
 
+int a[SIZE];
 int ref[SIZE];
 
 int nondet\_int();
 
 int main () \{
-  struct node * head = NULL;
-  struct node * pos = NULL;
-  int i, v, index, count, lcount, curr;
+  int i, v, prev;
   int s = nondet\_int();
   \_\_CPROVER\_assume((s > 0) \&\& (s <=SIZE));
-
   for (i = 0; i < s; i++) \{
     v = nondet\_int();
     printf ("LOG: ref[\%d] = \%d\\n", i, v);
     ref[i] = v;
-    head = insert\_node(\&head, v);
+    a[i] = v;
   \}
-  v = nondet\_int();
-  count = 0;
-  printf ("LOG: checking \%d\\n", v);
+  sort(a, s);
+  prev = a[0];
   for (i = 0; i < s; i++) \{
-    if (ref[i] == v)
-      count++;
+    printf ("LOG: a[\%d] = \%d\\n", i, a[i]);
+    assert (a[i] >= prev);
+    prev = a[i];
   \}
-  printf ("LOG: ref count = \%d\\n",count);
-  pos = head;
-  lcount = 0;
-  curr = head->data;
-  printf ("LOG: head = \%d\\n", head->data);
-  if (curr == v)
-    lcount++;
-  for (i = 1; i < s; i++) \{
-    printf ("LOG: moving to next item\\n");
-    pos = pos->next;
-    assert(pos->data >= curr);
-    curr = pos->data;
-    printf ("LOG: data \%d\\n", pos->data);
-    if (curr == v)
-      lcount++;
-  \}
-  printf("LOG: list count = \%d\\n", lcount);
-  assert (count == lcount);
 \}
 \end{code}
 }
-\caption{Harness for insertion sort into a doubly linked list.}
-\label{fig:harness}
+\caption{CBMC harness to check a sorting routine.}
+\label{fig:sortharness}
 \end{figure}
 
 CBMC compiles a harness and the SUT (here a quick sort implementation)
-into a goto-program, instruments
-this program with property checks for assertions, array bounds
-violations, etc., and then unrolls loops based on a user-provided
-\emph{unwinding bound} to produce a SAT problem or SMT constraint such
-that satisfying assignments are representations of a trace
-demonstrating a property violation, known as a \emph{counterexample}
-\cite{CountWitness}.  For CBMC, this means that if \emph{any possible execution
-  allowed by the harness} violates any properties we are checking, a
-counterexample will be produced.  One such property is that no
-loop in the program executes more than the \emph{unwinding bound}
-times.  For example, if we run CBMC on the harness shown and set the
-unwinding depth to 4 and add {\tt -DMAX\_ITEMS=3}, we will check the
-correctness of the SUT over all possible arrays of size 3 or less,
-including that sorting never requires running any loop more than 4
-times (counting the iteration where the bound is exceeded).
+into a goto-program, instruments this program with property checks for
+assertions, array bounds violations, etc., and then unrolls loops
+based on a user-provided \emph{unwinding bound} to produce a SAT
+problem or SMT constraint such that satisfying assignments are
+representations of a trace demonstrating a property violation, known
+as a \emph{counterexample} \cite{CountWitness}.  For CBMC, this means
+that if \emph{any possible execution allowed by the harness} violates
+any properties checked, a counterexample will be produced.  This
+includes user-specified assertions and automatically generated
+properties such as array bounds and pointer validity checks. One such
+generated property is that no loop in the program executes more than
+the \emph{unwinding bound} times.  For example, if we run CBMC on the
+harness shown and set the unwinding bound to 3 and add {\tt -DSIZE=2},
+we will check the correctness of the SUT over \emph{all possible
+  arrays} of size 2 or less, including checking that sorting never
+requires passing through any loop more than 3 times (counting the
+iteration where the bound is exceeded).
 
-When a model checker produces a counterexample,
-a developer's task is straightforward, if sometimes difficult: either
-the SUT has a fault, or the harness itself is flawed.  In both cases,
-the status of the verification effort is clear and the resulting
-output (a detailed trace, including the output of any print
-statements) is full of evidence as to the reason for the failure to
-verify the SUT. Moreover, any solution (fix to SUT or harness) is
-easily checked: if it is correct, the model checker stops reporting
-the previous counterexample.  
+When a model checker produces a counterexample, a developer's task is
+straightforward, if sometimes difficult: either the SUT has a fault,
+or the harness itself is flawed.  In both cases, the status of the
+verification effort is clear and the resulting output (a detailed
+trace, including the output of any print statements) is full of
+evidence as to the reason for the failure to verify the SUT. Moreover,
+any solution (fix to SUT or harness) is easily checked: if it is
+correct, the model checker stops reporting the previous
+counterexample.  This is essentially a normal debugging problem, but
+with the advantage that solutions are easily checked.
 
 Unfortunately, model checkers do not invariably report
 counterexamples: eventually the SUT is likely to satisfy the
@@ -515,14 +502,14 @@ Formal verification is not only subject to the many issues that make
 also to more subtle problems.  For example, an incorrect \emph{assume}
 statement may constrain a system so that not only are there no
 counterexamples, there are no allowable executions of the system at
-all!
+all.
 
 This problem has concerned the model checking community for some time
 \cite{PracticalCov}, and resulted in efforts to define \emph{coverage
   metrics} for model checking.  While such metrics are interesting and
 useful, however, they have typically been aimed at the hardware
 verification community, and often useful primarily to experts in
-formal verification.  In this paper, we adapt traditional mutation
+formal verification.  In this paper, we adapt more traditional mutation
 testing \cite{mutation1,mutation2} to the problem of software
 verification.  A mutant of a program is a version of the program that
 introduces a small syntactic change.  The idea behind mutation testing
@@ -535,55 +522,101 @@ likely to indicate a weakness of the verification.
 The use of mutation testing most often seen in the software
 engineering literature will not suffice in this case: simply noting a
 mutation kill rate is not enough.  The typical small scope of the code to be
-verified, and the presumed importance of such critical code suggests
+verified, and the presumed importance of code targeted for verification suggests
 an approach in which \emph{individual mutants} are examined by the
-developer.  Without additional assistance, such an approach will not
+developer.  Without additional assistance, such an approach cannot
 scale.  We show that the capabilities of the model checking tool, the
 nature of formal verification, and the adoption of certain best
 practices can make this seemingly too-demanding approach in fact
 practical for real verification tasks.
 
-Our basic idea is to use mutants throughout the verification
-effort, even guiding the choice of an unwinding depth by examining
-mutants.  At each stage the developer examines the currently surviving
-mutants, either by inspecting the mutated code or (when this does not
-make the reason the mutant is not detected clear) looking at
-\emph{successful executions covering the mutant but satisfying the
-  specification given in the harness}.  For critical verification
-tasks, we suggest that developers not only examine the passing
-executions of surviving mutants, but the passing executions of
-\emph{killed mutants}.  While examining test cases that do not kill a
-given mutant could be useful in traditional testing, the model checker
-makes a much more potent investigation possible, where a developer can
-constrain the behavior to force the mutant's behavior to matter, if
-that is possible, and automatically find passing executions that maximize
-total branch coverage.  Finally, we propose a developer should use mutants
-of the test harness itself to ensure that no similar harness has a
-better mutant kill rate, and that most mutants of the harness reject
-the SUT itself.
+Our basic idea is to use mutants \emph{throughout the verification
+  effort}, even in choosing a bound for bounded model checking.  At
+each stage the developer examines the currently surviving mutants,
+either by inspecting the mutated code or (when this does not make the
+reason the mutant is not detected clear) looking at \emph{successful
+  executions covering the mutant but satisfying the specification
+  given in the harness}.  For critical verification tasks, we suggest
+that developers not only examine the passing executions of surviving
+mutants, but the passing executions of \emph{killed mutants}.  While
+examining test cases that do not kill a given mutant could be useful
+in traditional testing, the model checker makes a much more potent
+investigation possible, where a developer can constrain the behavior
+to force the mutant's behavior to matter, if that is possible, and
+automatically find passing executions that maximize coverage (that
+include the mutant).  We also propose that a developer should use
+mutants of the test harness itself to ensure that no similar harness
+has a better mutant kill rate, and that most mutants of the harness
+reject the SUT itself.  
 
 \subsection{A Simple Example Verification}
 
+\begin{figure}
+{\scriptsize
+\begin{code}
+ \#include "sort.h"
+
+ void quickSort( int a[], int l, int r)
+ \{
+
+   printf ("LOG: called with l=\%d, r=\%d\\n", l, r); 
+   int j;
+
+{$_9$}  if( l < r ) 
+     \{
+       // divide and conquer
+       j = partition( a, l, r);
+       quickSort( a, l, j-1);
+       quickSort( a, j+1, r);
+     \}
+  
+ \}
+
+ int partition( int a[], int l, int r) \{
+   int pivot, i, j, t;
+   pivot = a[l];
+   i = l; j = r+1;
+  
+{$_{26}$} while( 1)
+     \{
+{$_{28}$}     do ++i; while( i <= r \&\& a[i] <= pivot );
+       do --j; while( a[j] > pivot );
+{$_{30}$}     if( i >= j ) break;
+{$_{31}$}     t = a[i]; a[i] = a[j]; a[j] = t;
+     \}
+   t = a[l]; a[l] = a[j]; a[j] = t;
+   return j;
+ \}
+
+
+ void sort(int a[], unsigned int size) \{
+   quickSort(a, 0, size-1);
+ \}
+\end{code}
+}
+\caption{Quick sort code.}
+\label{fig:qsort}
+\end{figure}
 
 As an example of the proposed verification methdology, consider again
-the harness shown in Figure \ref{fig:harness}.  If we take the
+the harness shown in Figure \ref{fig:sortharness}.  If we take the
 first hit on Google for ``quick sort in C'' \cite{quicksortcode},
 shown in Figure \ref{fig:qsort}\footnote{In fact, that actual code is
-  incorrect, with an access {\tt a[i]} that does not properly
-  use short circuiting logical operators to protect array bounds;
-  CBMC detected this, and we fixed it for this paper.}, we can model check it using the
-harness, defining {\tt MAX\_ITEMS=2} and setting unwinding depth to three (we need one more unwinding than the largest possible number
-of items in the array).  CBMC reports {\tt VERIFICATON SUCCESSFUL} in
-less than a second.  Does this mean we have verified what we want to
-verify?  How do we understand this ``successful'' verification result better?
+  incorrect, with an access {\tt a[i]} that does not properly use
+  short circuiting logical operators to protect array bounds; CBMC
+  detected this, and we fixed it for this paper.}, we can model check
+it using the harness, defining {\tt SIZE=2} and setting the unwinding
+bound to 3 (we need one more unwinding than the largest possible
+number of items in the array).  CBMC reports {\tt VERIFICATON
+  SUCCESSFUL} in less than a second.  Does this mean we have verified
+what we want to verify?  How do we understand this ``successful''
+verification result better?
 
-
-
-\subsubsection{Finding a Good Unwinding Depth}
+\subsubsection{Finding a Good Problem Size}
 
 The first question we face is whether 2 is really a good maximum array
 size to examine.  The problem of determining a \emph{completeness
-  threshold} (execution length bound sufficient to prove correctness
+  threshold} (an execution-length bound sufficient to prove correctness
 in all cases for a given property) for bounded model checking is
 fundamentally difficult \cite{CTDaniel} and is, for real-world C
 programs, more an art than a science at present\footnote{In our own
@@ -591,70 +624,132 @@ programs, more an art than a science at present\footnote{In our own
   see if the resulting problem is too large for the available
   computational resources.}.  Are there bugs for which 2 is too small
 an array size?  In order to find out, we generate a set of mutants for
-{\tt quicksort.c}.  Using the mutation tool for C code developed my
+{\tt quicksort.c}.  Using the mutation tool for C code developed by
 Jamie Andrews \cite{mutant}, we can produce 81 mutants of this code in
-less than a second.  We then run the harness with unwinding depth 2
-(and {\tt MAX\_ITEMS=1}) on each of the 81 mutants.  The process takes
-about a minute and a half (on a Macbook Pro with dual-core 3.1GHz
-Intel Core i7, but using only one core).  CBMC reports that 6 mutants do not compile (these
-remove variable declarations, for the most part), 4 are detected by
-the harness, and 71 mutants pass without detection.  Clearly length 1
-arrays are not sufficient to detect even the most glaring bugs in a
-sort algorithm.  What about our choice of size 2?  Re-running the
-mutants (dropping those already killed by the smaller bound) takes
-slightly over 6 minutes and reduces the number of surviving mutants to
-26.  We could inspect these mutants by hand, but it seems highly
-unlikely that a \emph{complete verification} over all possible arrays
-with a good specification of sorting would produce such a poor
-mutation kill rate.  If we up the size limit to 3 (the verification
-taking just over 15 minutes), only 8 mutants survive.  Increasing the
-limit to size 4, again the same 8 mutants survive (though this time
-the verification requires 229 minutes).  We call an
-unwinding depth (or, more generally, problem size) such that
-increasing it by one does not kill any additional mutants
-\emph{mutant-stable}.  In the absence of any further domain specific
-knowledge, finding a mutant-stable problem size can serve as a good
-heuristic for approximating a completeness threshold.  Obviously,
-there is no guarantee that a mutant-stable size is sufficient, but
-given the speed with which the computational requirements for checking
-even the original program increase with unwinding depth, moving to
-larger sizes is inefficient until it is known that the harness and SUT
-are likely correct.  Our approach to verification aims to always
-minimize both machine and human time spent analyzing versions of
-the harness or SUT that are not finalized.
+less than a second.  We then run the harness with unwinding bound 2
+(and {\tt SIZE=1}) on each of the 81 mutants.  The process takes less
+than a minute and a half (on a Macbook Pro with dual-core 3.1GHz Intel
+Core i7, using only one core).  CBMC reports that 6 mutants do not
+compile (these remove variable declarations, for the most part), 4 are
+detected by the harness, and 71 mutants pass without detection.
+Clearly length 1 arrays are not sufficient to detect even the most
+glaring bugs in a sort algorithm (no surprise; all size 1 arrays are
+sorted).  What about our choice of size 2?  Re-running the mutants
+(dropping those already killed by the smaller bound) takes slightly
+over 13 minutes (due to one mutant requiring over 8 minutes
+to model check) and reduces the number of surviving mutants to 26.  We
+could inspect these mutants by hand, but it seems highly unlikely that
+a \emph{complete verification} over all possible arrays with a good
+specification for sorting would produce such a poor mutation kill rate.
+If we up the size limit to 3 (the verification taking just over 33
+minutes), only 8 mutants survive. 
 
-While the time needed for this process may seem excessive for a small
-program, note that the results are exhaustive, and of course the
-verification problems for each individual mutant and bound can be
-solved in parallel.  A more sophisticated algorithm for unwinding
-determination (Figure \ref{alg:unwind}) presented later in this paper
-further reduces the burden, by moving to larger unwindings as soon as
-it is known the current unwinding is not mutant-stable.
+At this point, we can increase {\tt SIZE} to 4 (which will kill one
+additional mutant), but the time required to check the remaining
+mutants is growing rapidly.  In fact, completing the check for size 4,
+even though only the original program and 8 mutants have to be
+checked, requires \emph{nearly 9 hours}.  When the model checking
+difficulty grows more slowly with problem size, we propose increasing
+size until the number of mutants killed does not increase with a step
+up in size (we call such a size \emph{mutant-stable}).  However, in
+many cases, such as this one, the time required to check mutants
+starts growing unacceptably.  We propose a more efficient algorithm
+for finding a mutant-stable size below (Figure \ref{alg:unwind}, and
+mutations can be checked in parallel, but the fundamental problem for
+size 4 (and above) is that some individual mutants require hours to
+produce a {\tt VERIFICATION SUCCESSFUL} result.  What is a developer
+to do?
+
 
 \subsubsection{Examining Surviving Mutants}
+
+The developer should turn to the surviving mutants.  The 8 surviving
+mutants for size 3 are shown in Figure \ref{fig:survivors}.
+
 
 \begin{figure}
 {\scriptsize
 \begin{code}
-9 :  /*(rep\_op)*/ if (l <= r) 
-26 :  /*(rep\_const)*/ while(-1)
-26 :  /*(rep\_const)*/ while( ((1)+1))
-28 :  /*(rep\_op)*/ do ++i; while(i<r \&\& a[i]<=pivot);
-28 :  /*(rep\_op)*/ do ++i; while(i!=r \&\& a[i]<=pivot);
-28 :  /*(rep\_op)*/ do ++i; while(i<=r \&\& a[i]<pivot);
-30 :  /*(rep\_op)*/ if( i > j ) break;
-31 :  /*(del\_stmt)*/ t=a[i]; /*  a[i]=a[j]; */  a[j]=t;
+ 9 :   /*(rep\_op)*/ if (l <= r) 
+ 26 :  /*(rep\_const)*/ while(-1)
+ 26 :  /*(rep\_const)*/ while( ((1)+1))
+ 28 :  /*(rep\_op)*/ do ++i; while(i<r \&\& a[i]<=pivot);
+ 28 :  /*(rep\_op)*/ do ++i; while(i!=r \&\& a[i]<=pivot);
+ 28 :  /*(rep\_op)*/ do ++i; while(i<=r \&\& a[i]<pivot);
+ 30 :  /*(rep\_op)*/ if( i > j ) break;
+ 31 :  /*(del\_stmt)*/ t=a[i]; /*  a[i]=a[j]; */  a[j]=t;
 \end{code}
 }
-\caption{Surviving mutants}
+\caption{Surviving mutants at {\tt SIZE=3}.}
 \label{fig:survivors}
 \end{figure}
 
-Figure \ref{fig:survivors} shows surviving mutants for our quick sort
-code (the comment indicates the type of mutant, and the line\# in the
-quick sort file is also given for reference).
+The comment indicates the type of mutant, and the line \# in the quick
+sort file is also given for reference.  The relevant lines are marked
+in Figure \ref{fig:qsort}.  Some of these mutants are easily seen to
+be equivalent to the original code.  For example, the two {\tt
+  rep\_const} mutations simply change a {\tt while(1)} into an
+equivalent infinite loop with a different constant non-zero value.
+These two mutants could in fact have been automatically removed from
+the set, like uncompilable mutants, by checking their compiled code
+for equivalence with the original program \cite{TCE}.  We suggest
+always pruning mutants via Trivial Compiler Equivalence (TCE) before
+working with mutants.  The remaining 6 mutants produce different
+binaries when compiled with an optimizing compiler, so require manual
+analysis.  The 5 {\tt rep\_op} mutations all alter comparison
+operators by changing their truth value on one corner case (when two
+values are equal), and we may suspect that quick sort is robust to,
+for example, changing {\tt i <= r} to {\tt i != r} since {\tt i} is
+initially set to {\tt l}, which we know to be less than {\tt r}.
+
+The {\tt del\_stmt} mutant, however, is clearly problematic.  How can
+quick sort be correct if the inner loop's swapping of {\tt a[i]} and
+{\tt a[j]} is changed to instead copy {\tt a[i]} to {\tt a[j]}?  The
+consequences of this mutant are clearly drastic, but why are they not
+detected by our harness?  We find out by asking CBMC to produce an
+execution such that 1) the mutated code is covered 2) other coverage
+is maximized (to avoid degenerate executions, e.g., over size 1
+arrays) and 3) the execution is \emph{not a counterexample}.  We have
+modified CBMC, and written instrumentation tools that produce a
+modified mutant and harness, allowing us to pose such queries.
+Running CBMC in this new mode, with the target of maximum branch
+coverage and statement coverage of the {\tt del\_stmt} mutant (or,
+rather, the statement after it in the CFG, since it no longer exists),
+we produce the ``counterexample'' in Figure \ref{fig:witness1} in less
+than a minute\footnote{We show the output of the print statements, not
+  the full CBMC trace, in the interest of space and ease of
+  understanding; examining this output alone, initially, is the most
+  likely course of action for a developer as well.}.  Our harness
+checks that the array {\tt a} is \emph{sorted} after the call to {\tt
+  sort}, but it does not check that it is a permutation of the
+original array!
+
+\begin{figure}
+{\scriptsize
+\begin{code}
+LOG: ref[0] = 2147414872
+LOG: ref[1] = 2147480408
+LOG: ref[2] = -1073743560
+LOG: called with l=0, r=2
+LOG: called with l=0, r=-1
+LOG: called with l=1, r=2
+LOG: called with l=1, r=1
+LOG: called with l=3, r=2
+LOG: a[0] = 2147414872
+LOG: a[1] = 2147480408
+LOG: a[2] = 2147480408
+\end{code}
+}
+\caption{Witness to the harness' inability to kill the {\tt
+    del\_stmt} mutant.}
+\label{fig:witness1}
+\end{figure}
 
 
+
+
+
+\begin{comment}
 
 \begin{enumerate}
 \item Generate mutant set $M = m_1 \ldots m_n$ for the program $P$.
@@ -690,63 +785,9 @@ quick sort file is also given for reference).
   have a kill rate $\leq$ the kill rate for $H$.
 \end{enumerate}
 
-\begin{figure}
-{\scriptsize
-\begin{code}
-(int, survivors) unwind($H$, $M$, $O$: options, $U_s$: int) 
-\vspace{0.1in}
-U = $U_s$-1
-r' = \{\}
-changed = False
-while changed:
-   TOP:
-   U = U + 1
-   changed = False
-   r = r'
-   r' = \{\}
-   for $m \in M$:
-      if $m \not\in r$:
-         r[m] = check($H$,$m$,$U$,$O(U)$)
-         if r[m] == KILLED:
-            //once killed, assume always killed
-            $M$ = $M \\ m$
-      if r[m] == SURVIVED:
-         r'[m] = check($H$,$m$,$U$+1,$O(U+1)$)
-         if r'[m] == KILLED:
-            $M$ = $M \\ m$
-            changed = True
-            goto TOP
-return (U-1, $M$)
-\end{code}
-}
-\caption{Algorithm 1: Finding unwinding depth and surviving mutants}
-\label{alg:unwind}
-\end{figure}
+\end{comment}
 
-\begin{figure}
-{\scriptsize
-\begin{code}
-harness covering($H$, $TARGET$)
-\vspace{0.1in}
-$H'$ = $H$
-
-for stmt $\in H'$:
-   if stmt == assert(P):
-      stmt = assume(P);
-
-cover = [
-  assume(total\_coverage >= TARGET); 
-  assert(!mutant\_covered);
-]
-
-insert cover at end of $H'$.main()
-
-return $H'$
-\end{code}
-}
-\caption{Algorithm 2: Convert harness into maximal coverage search}
-\label{alg:invert}
-\end{figure}
+\subsection{Contributions}
 
 Our primary contribution in this paper is a detailed examination of
 the extension of traditional mutation testing to understand successful
@@ -775,6 +816,69 @@ to \emph{not} match the theory of program behavior.
 
 
 \section{Algorithms and Techniques}
+
+\begin{figure}
+{\scriptsize 
+\begin{code}
+(int, survivors) find-size($H$, $M$, $S_0$: int,
+                           $O$: int $\rightarrow$ options,
+                           $U$: int $\rightarrow$ int) 
+\vspace{0.1in}
+S = $S_0$-1 
+r' = \{\}
+changed = False 
+while changed:
+   TOP:
+   S = S + 1 
+   changed = False 
+   r = r' 
+   r' = \{\}
+   for $m \in M$:
+      if $m \not\in r$:
+         r[m] = check($H$,$m$,$U(S)$,$O(S)$) 
+         if r[m] == KILLED:
+            //once killed, assume always killed 
+            $M$ = $M \\ m$
+      if r[m] == SURVIVED:
+         r'[m] = check($H$,$m$,$U(S+1)$+1,$O(S+1)$) 
+         if r'[m] == KILLED:
+            $M$ = $M \\ m$
+            changed = True 
+            goto TOP 
+// No result changed, so S is mutant-stable 
+return (S-1, $M$) 
+\end{code}
+}
+\caption{Algorithm 1: Finding size/unwinding and surviving mutants}
+\label{alg:unwind}
+\end{figure}
+
+\begin{figure}
+{\scriptsize 
+\begin{code}
+harness covering($H$, $TARGET$) 
+\vspace{0.1in}
+$H'$ = $H$
+
+for stmt $\in H'$:
+   if stmt == assert(P):
+      stmt = assume(P);
+
+cover = [
+  assume(total\_coverage >= TARGET); 
+  assert(!mutant\_covered);
+]
+
+insert cover at end of $H'$.main() 
+
+return $H'$
+\end{code}
+}
+\caption{Algorithm 2: Convert harness into maximal coverage search}
+\label{alg:invert}
+\end{figure}
+
+
 
 \begin{figure}
 {\scriptsize
@@ -863,7 +967,7 @@ Given a mutant of program $P$, $M_i$, the
 
 Even a killed mutant (e.g., a mutant the harness detects) can shed
 critical light on harness vulnerabilities.  For example, the code in
-Figure \ref{fig:uniqueharness} is a portion of a harness to verify
+Figure \ref{fig:mergeharness} is a portion of a harness to verify
 code that merges two sorted arrays, removing all duplicates (the
 source arrays may contain duplciates or shared items, the output array
 is guaranteed to be sorted and have all-unique values).  This harness
