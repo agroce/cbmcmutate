@@ -805,7 +805,11 @@ it detects more failures; we can indirectly estimate strength by
 determining how many mutants a harness can kill at a given problem
 size, or how many executions covering killed mutants can still satisfy the
 harness.  Figure \ref{fig:added} shows how to modify the sorting harness to
-check this additional critical property.  Because CBMC is exhaustive,
+check this additional critical property\footnote{In fact, if we choose
+  a {\tt val} to check before we assign to {\tt ref} and count that
+  value's appearances, we can completely dispense with storing {\tt
+    ref} at all.  In practice, this is more difficult for non-CBMC
+  experts to understand, and makes model checking only slightly faster.} .  Because CBMC is exhaustive,
 instead of performing a complete check for permutation, we can detect
 violation of the property by letting {\tt v} be any value, and
 ensuring that both {\tt a} and {\tt ref} contain the same
@@ -1108,7 +1112,7 @@ int merge\_sorted\_nodups(int a[], int asize,
 \label{fig:sortnodup}
 \end{figure}
 
-
+\begin{comment}
 Given a mutant of program $P$, $M_i$, the 
 
 Even a killed mutant (e.g., a mutant the harness detects) can shed
@@ -1128,6 +1132,7 @@ we have written the duplicate check in fact \emph{assume}s away
 arrays, and a fault that only appears with size = 1 will never be
 detected.  No mutant produces such behavior, but noting an incorrect
 but passing trace of this run lets us see the problem.
+\end{comment}
 
 \section{Experimental Results and Case Studies}
 
