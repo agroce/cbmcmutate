@@ -18,7 +18,9 @@ for infile in glob.glob("mutant*_" + mutant_base):
 
     lprev = ["foo"]
 
-    branchers = ["if","else","for","while"]
+    branchers = ["if","else","for","while","do"]
+
+    inComment = False
     
     for l in open(infile):
         if ("/*" in l) and "*/" not in l:
@@ -33,7 +35,7 @@ for infile in glob.glob("mutant*_" + mutant_base):
                     else:
                         break
                 newCode.append(sp + "mutant_covered = 1;\n")
-            inCode = ((l[0] == " " or l[0] == "\t") and not (l.split()[0] == "else"))
+            inCode = ((l[0] == " " or l[0] == "\t"))
             if inCode and (lprev[0] in branchers):
                 sp = "";
                 for c in l:

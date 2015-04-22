@@ -505,7 +505,7 @@ counterexamples, there are no allowable executions of the system at
 all.
 
 This problem has concerned the model checking community for some time
-\cite{PracticalCov}, and resulted in efforts to define \emph{coverage
+\cite{Hoskote,PracticalCov}, and resulted in efforts to define \emph{coverage
   metrics} for model checking.  While such metrics are interesting and
 useful, however, they have typically been aimed at the hardware
 verification community, and often useful primarily to experts in
@@ -745,9 +745,108 @@ LOG: a[2] = 2147480408
 \label{fig:witness1}
 \end{figure}
 
+\begin{figure}
+{\scriptsize
+\begin{code}
+...
+   int i, v, count, qcount, prev;
+...
+  sort(a, s);
+  // Pick a value to check
+  v = nondet\_int();
+  count = 0;
+  qcount = 0;
+...
+  for (i = 0; i < s; i++) \{
+...
+     if (ref[i] == v) 
+       count++;
+     if (a[i] == v) 
+       qcount++;
+...
+   assert (count == qcount);
+\}
+\end{code}
+}
+\caption{Modifying the harness to ensure {\tt a} is a permutation of
+  {\tt ref}.}
+\label{fig:added}
+\end{figure}
 
+We might have discovered this problem by a different method: if we
+remove the call to {\tt sort} in the harness, and replace it by a loop
+assigning {\tt nondet\_int} to every element in {\tt a} (a kind of
+most-general any-order type-correct ``mutant'' of {\tt sort}), we can run
+the modified CBMC and see examples of executions our harness allows,
+which should include \emph{any sorted} array.  The problem with this
+method is that, while it sometimes works, CBMC is also free to choose
+set all elements in all arrays to 0, and to generally provide an
+uninformative example of a successful execution.  The requirement to
+cover a mutant (and as much other code as possible) helps guide CBMC
+to a successful execution that is \emph{likely to be incorrect},
+because the mutant changes the original program.  Moreover, while the
+problem with the harness in this case is simple, understanding
+arbitrary ``passing'' but wrong executions can be very difficult
+without the ability to think about \emph{a specific bug} the model
+checker is missing.  Moreover, basing the production of witnesses on
+mutants allows us to compare harnesses even over killed mutants:  if
+one harness reduces the set of passing executions for a mutant, it is
+arguably a better verification of correctness than one allowing more
+executions of the mutant, even if both produce a counterexample
+killing the mutant.  A harness is most effective with respect to a
+mutant if it allows \emph{no} executions covering the mutant to pass,
+or (in practice) only those such that the behavior is still identical
+to the correct program.
 
+The witness tells us that the sorting harness needs to be modified.
+It is too \emph{weak}.  We say that harness is weak if it fails to
+detect incorrect executions.  One harness is stronger than another if
+it detects more failures; we can indirectly estimate strength by
+determining how many mutants a harness can kill at a given problem
+size, or how many executions covering killed mutants can still satisfy the
+harness.  Figure \ref{fig:added} shows how to modify the sorting harness to
+check this additional critical property.  Because CBMC is exhaustive,
+instead of performing a complete check for permutation, we can detect
+violation of the property by letting {\tt v} be any value, and
+ensuring that both {\tt a} and {\tt ref} contain the same
+\emph{number} of elements equal to {\tt v}.  If {\tt a} is \emph{not}
+a permutation of {\tt ref}, $\exists {\tt v}$ such that this is not
+true, and we can rely on CBMC to report it as part of a
+counterexample.  This is a useful reminder that while a CBMC harness
+resembles a C program to test the SUT, it can make use of approaches
+to testing that are not viable in a non-exhaustive context.
 
+If we modify the harness as above, we can re-check our mutants.  In
+practice, we would remove the two we determined are equivalent based
+on compiler output, but for the sake of comparison we retain all
+mutants.  With the revised harness, checking mutants at {\tt SIZE=1}
+takes slightly longer (8 more seconds) and kills the same number of
+mutants, since the problem is the size, not the harness.  At {\tt
+  SIZE=2} mutant kill results are again unchanged, but the run now
+only requires slightly over 5 minutes.  Finally, at {\tt SIZE=3}, we
+kill the {\tt del\_stmt} mutant that previously survived, and the
+process requires only 14 minutes, only slightly more than at {\tt
+  SIZE} 2 with the weaker harness.  The {\tt SIZE} 3 verification is
+stable.  Checking this by running all surviving mutants at {\tt SIZE}
+4 now only requires slightly more than an hour, nearly an order of
+magnitude faster than with the weaker harness.  A stronger harness not
+only finds more bugs in the SUT, it often \emph{speeds up
+  verification} by making the set of satisfying instances larger for
+the SAT solver.  Even UNSAT is easier to prove when the possible
+executions to consider are reduced, in many cases.
+
+\subsubsection{Mutating the Harness}
+
+Previous efforts to understand model checking results have also
+considered mutants to the property, usually given as a temporal logic
+formula \cite{MutSpec}.  Once a developer is satisfied with a harness,
+has a mutant-stable bound for verification, and is convinced all
+surviving mutants are semantically equivalent to the original program
+(or, if not equivalent, also satisfy the same correct specification),
+we propose the developer \emph{mutate the test harness itself}.  The
+idea is to check that 1) most mutants of the harness reject the SUT
+and 2) the remaining mutants have a mutant kill rate no greater than
+that of the harness.  
 
 \begin{comment}
 
@@ -794,13 +893,13 @@ the extension of traditional mutation testing to understand successful
 (and ``successful'') verification results, and determine when a
 harness is not actually sufficiently powerful to ensure correctness.
 To support this approach, we show how to use mutation testing to
-choose an unwinding depth for loops in bounded model checking, how to
+choose bounds in bounded model checking, how to
 mutate a harness to determine if any similar harnesses have an equal
 (or better) mutation kill rate, and most importantly, how to
 modify CBMC to automatically
-produce successful high-coverage executions covering mutated code
+produce \emph{successful high-coverage executions covering mutated code}
 in order to understand mutant behavior and find subtle harness flaws.  We also propose the use of
-mutation analysis to gain limited confidence of program correctness even
+mutation analysis to gain limited confidence in program correctness even
 past model checker scalability limits. At a more general level, we
 discuss the fundamental nature of ``verification'' in a real-world
 context where specifications are never known to be complete. We
@@ -810,10 +909,6 @@ efforts: rather than focusing on what can be proven about a program,
 it may be best to focus on how a verification effort distinguishes the
 ``real'' program from similar alternative programs that can be shown
 to \emph{not} match the theory of program behavior.
-
-\section{Falsification and Verification}
-
-
 
 \section{Algorithms and Techniques}
 
@@ -836,12 +931,12 @@ while changed:
    for $m \in M$:
       if $m \not\in r$:
          r[m] = check($H$,$m$,$U(S)$,$O(S)$) 
-         if r[m] == KILLED:
+         if r[m] == VERIFICATION FAILED:
             //once killed, assume always killed 
             $M$ = $M \\ m$
-      if r[m] == SURVIVED:
-         r'[m] = check($H$,$m$,$U(S+1)$+1,$O(S+1)$) 
-         if r'[m] == KILLED:
+      if r[m] == VERIFICATION SUCCESSFUL:
+         r'[m] = check($H$,$m$,$U(S+1)$,$O(S+1)$) 
+         if r'[m] == VERIFICATION FAILED:
             $M$ = $M \\ m$
             changed = True 
             goto TOP 
@@ -849,7 +944,7 @@ while changed:
 return (S-1, $M$) 
 \end{code}
 }
-\caption{Algorithm 1: Finding size/unwinding and surviving mutants}
+\caption{Algorithm 1: Finding size/unwinding bound and surviving mutants.}
 \label{alg:unwind}
 \end{figure}
 
@@ -865,7 +960,7 @@ for stmt $\in H'$:
       stmt = assume(P);
 
 cover = [
-  assume(total\_coverage >= TARGET); 
+  assume(total\_coverage >= $TARGET$); 
   assert(!mutant\_covered);
 ]
 
@@ -874,11 +969,62 @@ insert cover at end of $H'$.main()
 return $H'$
 \end{code}
 }
-\caption{Algorithm 2: Convert harness into maximal coverage search}
+\caption{Algorithm 2: Convert harness into maximal coverage search.}
 \label{alg:invert}
 \end{figure}
 
+\begin{figure}
+{\scriptsize 
+\begin{code}
+mutant coverinst($m$) 
+\vspace{0.1in}
+n = 0
+$m'$ = $m$
+for if\_stmt c in $m'$:
+   if c has no else:
+      add [else \{\}] to c
+for basic\_block b in $m'$:
+   b = [if !covered[n] \{
+           covered[n] = 1;
+           total\_covered += 1;
+         \}
+       b]
+\end{code}
+}
+\caption{Algorithm 3: Instrument mutant for coverage.}
+\label{alg:covermut}
+\end{figure}
 
+\begin{figure}
+{\scriptsize 
+\begin{code}
+trace maxcover($m$, $H$, $S$) 
+\vspace{0.1in}
+
+$m'$ = coverinst($m$)
+
+T = 0
+trace = $\emptyset$
+failed = False
+while (not failed)
+   $H'$ = covering($H$, T)
+   r = scheck($H$,$m'$,$U(S)$,$O(S)$)
+   if r == VERIFICATION SUCCESSFUL:
+     // Can't achieve this level of coverage
+     failed = True
+   else if r == VERIFICATION FAILED:
+     trace = r.trace
+     // Instead of incrementing by 1, see
+     // what actual coverage was and
+     // increase by one from that baseline.
+     T = trace.read(total\_covered) + 1
+return trace
+\end{code}
+}
+\caption{Algorithm 4: Find a maximally covering execution trace that
+  covers a mutant.}
+\label{alg:maxcover}
+\end{figure}
 
 \begin{figure}
 {\scriptsize
@@ -985,16 +1131,74 @@ but passing trace of this run lets us see the problem.
 
 \section{Experimental Results and Case Studies}
 
+\subsection{Algorithm Implementations}
+
+\subsubsection{Binary Search}
+
+\subsubsection{Doubly-linked List Insertion Sort}
+
+\subsubsection{AVL Tree}
+
+\subsubsection{Merge With Duplicate Removal}
+
+\subsection{SpiderMonkey Boyer-Moore-Horspool Implementation}
+
+\subsection{Linux Kernel RCU Verification Challenges}
+
+\section{Discussion: Falsification vs. Verification}
+
+The core idea of this paper is that, while successful verification is
+the \emph{result} that a developer seeks when verifying a program, it
+is most meaningful in a context provided by many failed verifications.
+The useful model checking harness (e.g., specification) essentially,
+is one that \emph{prohibits} certain execution sequences.  This is not
+controversial; a good property is defined by its rejection of bad
+behavior.  However, in most verification efforts, there is a focus on
+arriving at a successful verification, which sheds very little light
+on what, exactly is verified.  By focusing on mutants throughout the
+verification process, our approach shifts the emphasis to one of
+``verifying'' the verification itself by repeatedly \emph{falsifying}
+claims that various incorrect programs satisfy the property.  This is,
+at a conceptual level, akin to Karl Popper's philosophy of science
+\cite{Popper}.
+
+For Popper, all scientific knowledge is provisional, and the key to
+the scientific approach is a critical effort, based on
+\emph{prohibitive} theories.  In brief, Popper proposes that proper
+science must be strongly grounded in a search for counterexamples.
+Using mutants as a basis for verification is akin to this approach,
+with the harness taken to be the ``theory'' of the empirical behavior
+of the world.  Mutants, in this view, are counterfactual worlds that
+are likely to violate any correct theory of the actual world.  A
+``scientific theory'' (that is, a harness) is proven effective by its
+ability to be \emph{shown to be false} in these counterfactual worlds.
+If we can prove a theory is incorrect for an ``incorrect'' world and
+cannot prove it is incorrect for the real world, that gives us greater
+confidence (always provisional, since our understanding of the world,
+e.g., any complex software system, is almost always limited and prone
+to error) that the theory is indeed true of the real world/program.
+Of course, generating alternative worlds and showing that, for
+example, special relativity is easily falsified in a world where
+special relativity does not in fact hold, is not practical in
+scientific discovery.  It is, however, quite easy in the artificial
+``science'' of verifying a property of a computer program.
+
 \section{Related Work}
 
 The idea that a ``successful verification'' often simply indicates an
-inadequate property is long-standing \cite{PracticalCov} and the use
-of mutants to provide a coverage measure dates back both to these
-early explorations and relatively recent work \cite{MutInterp}.
-However, in these efforts the mutation was applied to hardware models,
-and (critically) the surviving mutants were used to identify
-``uncovered'' portions of a model, rather than presented to a
-developer for examination and understanding directly.
+inadequate property is long-standing \cite{PracticalCov,Hoskote}. Use
+of mutants \cite{MutSpec,MutCov} to provide a coverage measure dates back
+both to these early explorations and relatively recent work
+\cite{MutInterp}.  However, in these efforts the mutation was usually
+applied to hardware models, and (critically) the surviving mutants
+were used to identify ``uncovered'' portions of a model, rather than
+presented to a developer for examination and understanding directly.
+To our knowledge, no previous work presented passing executions of a
+source code mutant as a guide to understanding specification
+weakness.  Our modification of the harness is a source-code analogue
+to attempts to modify logical formulas, e.g., the effort to (in a
+narrow, vacuity-based sense) produce the \emph{strongest passing LTL
+  formula} of Chockler et al. \cite{BeyondVac}.  
 
 Our idea of examining successful executions to better understand
 surviving (and even killed) mutants is a peculiar variation of the
@@ -1003,7 +1207,7 @@ fault localization and error explanation problem in model checking
 artificial fault that 1) typically does not cause a test failure (for
 surviving mutants) and 2) has an obviously known location.
 
-\section{Conclusion}
+\section{Conclusions and Future Work}
 
 % use section* for acknowledgement
 \section*{Acknowledgment}

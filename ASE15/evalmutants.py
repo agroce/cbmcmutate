@@ -2,6 +2,9 @@ import subprocess
 import glob
 import sys
 import os
+import time
+
+evaltime = time.time()
 
 killed = []
 live = []
@@ -250,6 +253,4 @@ if harnessMode:
 
 mutateAll(mutants, files, originalTime, 0.0, originalTime, 100000000.0, originalTime, 0.0, [], [], [], [], 0)
 
-
-
-
+print "TOTAL ELAPSED TIME:",(time.time()-evaltime)
