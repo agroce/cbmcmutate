@@ -1,0 +1,161 @@
+USAGE: evalmuants.py <prefix> <timeout> [--ignoreKilled <prefix>] [--ignoreSurvived <prefix>] [--cbmc <PATH>] --options <options> --files <files> --mutate <mutant-files> [--harness] [--use-existing] [--check-strength] [--cover]
+PREFIX = bad3
+TIMEOUT = 100000
+False --options
+OPTIONS = -DSIZE=3 --unwind 7 --bounds-check --pointer-check 
+FILES = ['badharness.c']
+MUTATED FILES = ['merge_sorted_nodups.c']
+limit cputime 100000 ; cbmc -DSIZE=3 --unwind 7 --bounds-check --pointer-check 
+SANITY CHECK...
+Original SUCCESSFULLY VERIFIED in 1536.24
+Mutating merge_sorted_nodups.c
+PREFIX: mutant*_
+Checking mutant mutant100001_merge_sorted_nodups.c:  4 :  /* MUTANT (rep_const) */  int apos = 1, bpos = 0, cpos = -1, csize = 0;
+KILLED 0.204
+Checking mutant mutant100002_merge_sorted_nodups.c:  4 :  /* MUTANT (rep_const) */  int apos = -1, bpos = 0, cpos = -1, csize = 0;
+KILLED 0.252
+Checking mutant mutant100003_merge_sorted_nodups.c:  4 :  /* MUTANT (rep_const) */  int apos = 0, bpos = 1, cpos = -1, csize = 0;
+KILLED 1.258
+Checking mutant mutant100004_merge_sorted_nodups.c:  4 :  /* MUTANT (rep_const) */  int apos = 0, bpos = -1, cpos = -1, csize = 0;
+KILLED 0.227
+Checking mutant mutant100005_merge_sorted_nodups.c:  4 :  /* MUTANT (rep_const) */  int apos = 0, bpos = 0, cpos = 0, csize = 0;
+KILLED 0.231
+Checking mutant mutant100006_merge_sorted_nodups.c:  4 :  /* MUTANT (rep_const) */  int apos = 0, bpos = 0, cpos = 1, csize = 0;
+KILLED 0.239
+Checking mutant mutant100007_merge_sorted_nodups.c:  4 :  /* MUTANT (rep_const) */  int apos = 0, bpos = 0, cpos = ((-1)+1), csize = 0;
+KILLED 0.214
+Checking mutant mutant100008_merge_sorted_nodups.c:  4 :  /* MUTANT (rep_const) */  int apos = 0, bpos = 0, cpos = ((-1)-1), csize = 0;
+KILLED 0.394
+Checking mutant mutant100009_merge_sorted_nodups.c:  4 :  /* MUTANT (rep_const) */  int apos = 0, bpos = 0, cpos = -1, csize = 1;
+KILLED 0.18
+Checking mutant mutant100010_merge_sorted_nodups.c:  4 :  /* MUTANT (rep_const) */  int apos = 0, bpos = 0, cpos = -1, csize = -1;
+KILLED 0.219
+Checking mutant mutant100011_merge_sorted_nodups.c:  5 :  /* MUTANT (rep_op) */  while ((apos <= asize) || (bpos < bsize)) {
+KILLED 0.195
+Checking mutant mutant100012_merge_sorted_nodups.c:  5 :  /* MUTANT (rep_op) */  while ((apos > asize) || (bpos < bsize)) {
+KILLED 0.209
+Checking mutant mutant100013_merge_sorted_nodups.c:  5 :  /* MUTANT (rep_op) */  while ((apos >= asize) || (bpos < bsize)) {
+KILLED 0.187
+Checking mutant mutant100014_merge_sorted_nodups.c:  5 :  /* MUTANT (rep_op) */  while ((apos == asize) || (bpos < bsize)) {
+KILLED 0.185
+Checking mutant mutant100015_merge_sorted_nodups.c:  5 :  /* MUTANT (rep_op) */  while ((apos != asize) || (bpos < bsize)) {
+VERIFICATION SUCCESSFUL 202.022
+Checking mutant mutant100016_merge_sorted_nodups.c:  5 :  /* MUTANT (rep_op) */  while ((apos < asize) && (bpos < bsize)) {
+KILLED 0.225
+Checking mutant mutant100017_merge_sorted_nodups.c:  5 :  /* MUTANT (rep_op) */  while ((apos < asize) || (bpos <= bsize)) {
+KILLED 0.188
+Checking mutant mutant100018_merge_sorted_nodups.c:  5 :  /* MUTANT (rep_op) */  while ((apos < asize) || (bpos > bsize)) {
+KILLED 0.204
+Checking mutant mutant100019_merge_sorted_nodups.c:  5 :  /* MUTANT (rep_op) */  while ((apos < asize) || (bpos >= bsize)) {
+KILLED 0.186
+Checking mutant mutant100020_merge_sorted_nodups.c:  5 :  /* MUTANT (rep_op) */  while ((apos < asize) || (bpos == bsize)) {
+KILLED 0.18
+Checking mutant mutant100021_merge_sorted_nodups.c:  5 :  /* MUTANT (rep_op) */  while ((apos < asize) || (bpos != bsize)) {
+VERIFICATION SUCCESSFUL 3540.39
+Checking mutant mutant100022_merge_sorted_nodups.c:  5 :  /* MUTANT (negate) */  while(! ((apos < asize) || (bpos < bsize))) {
+KILLED 0.222
+Checking mutant mutant100023_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos <= asize) && ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+KILLED 0.365
+Checking mutant mutant100024_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos > asize) && ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+KILLED 0.215
+Checking mutant mutant100025_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos >= asize) && ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+KILLED 0.195
+Checking mutant mutant100026_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos == asize) && ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+KILLED 0.19
+Checking mutant mutant100027_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos != asize) && ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+VERIFICATION SUCCESSFUL 389.735
+Checking mutant mutant100028_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos < asize) || ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+KILLED 0.193
+Checking mutant mutant100029_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos <= bsize) || (a[apos] < b[bpos]))) {
+KILLED 0.198
+Checking mutant mutant100030_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos < bsize) || (a[apos] < b[bpos]))) {
+KILLED 0.182
+Checking mutant mutant100031_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos > bsize) || (a[apos] < b[bpos]))) {
+KILLED 0.193
+Checking mutant mutant100032_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos == bsize) || (a[apos] < b[bpos]))) {
+VERIFICATION SUCCESSFUL 257.423
+Checking mutant mutant100033_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos != bsize) || (a[apos] < b[bpos]))) {
+KILLED 0.225
+Checking mutant mutant100034_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) && (a[apos] < b[bpos]))) {
+KILLED 0.225
+Checking mutant mutant100035_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) || (a[apos] <= b[bpos]))) {
+VERIFICATION SUCCESSFUL 695.951
+Checking mutant mutant100036_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) || (a[apos] > b[bpos]))) {
+KILLED 0.188
+Checking mutant mutant100037_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) || (a[apos] >= b[bpos]))) {
+KILLED 0.234
+Checking mutant mutant100038_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) || (a[apos] == b[bpos]))) {
+KILLED 0.195
+Checking mutant mutant100039_merge_sorted_nodups.c:  6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) || (a[apos] != b[bpos]))) {
+KILLED 0.678
+Checking mutant mutant100040_merge_sorted_nodups.c:  6 :  /* MUTANT (negate) */    if(! ((apos < asize) && ((bpos >= bsize) || (a[apos] < b[bpos])))) {
+KILLED 0.186
+Checking mutant mutant100041_merge_sorted_nodups.c:  7 :  /* MUTANT (rep_op) */      if ((cpos != -1) || (c[cpos] != a[apos])) {
+KILLED 0.395
+Checking mutant mutant100042_merge_sorted_nodups.c:  7 :  /* MUTANT (rep_op) */      if ((cpos == -1) && (c[cpos] != a[apos])) {
+KILLED 0.437
+Checking mutant mutant100043_merge_sorted_nodups.c:  7 :  /* MUTANT (rep_op) */      if ((cpos == -1) || (c[cpos] == a[apos])) {
+KILLED 0.195
+Checking mutant mutant100044_merge_sorted_nodups.c:  7 :  /* MUTANT (rep_const) */      if ((cpos == 0) || (c[cpos] != a[apos])) {
+KILLED 0.369
+Checking mutant mutant100045_merge_sorted_nodups.c:  7 :  /* MUTANT (rep_const) */      if ((cpos == 1) || (c[cpos] != a[apos])) {
+KILLED 0.367
+Checking mutant mutant100046_merge_sorted_nodups.c:  7 :  /* MUTANT (rep_const) */      if ((cpos == ((-1)+1)) || (c[cpos] != a[apos])) {
+KILLED 0.374
+Checking mutant mutant100047_merge_sorted_nodups.c:  7 :  /* MUTANT (rep_const) */      if ((cpos == ((-1)-1)) || (c[cpos] != a[apos])) {
+KILLED 0.38
+Checking mutant mutant100048_merge_sorted_nodups.c:  7 :  /* MUTANT (negate) */      if(! ((cpos == -1) || (c[cpos] != a[apos]))) {
+KILLED 0.373
+Checking mutant mutant100049_merge_sorted_nodups.c:  8 :  /* MUTANT (del_stmt) */ /* 	c[++cpos] = a[apos]; */ 
+KILLED 0.238
+Checking mutant mutant100050_merge_sorted_nodups.c:  8 :  /* MUTANT (rep_op) */	c[--cpos] = a[apos];
+KILLED 0.392
+Checking mutant mutant100051_merge_sorted_nodups.c:  9 :  /* MUTANT (del_stmt) */ /* 	csize++; */ 
+KILLED 0.195
+Checking mutant mutant100052_merge_sorted_nodups.c:  9 :  /* MUTANT (rep_op) */	csize--;
+KILLED 0.236
+Checking mutant mutant100053_merge_sorted_nodups.c:  11 :  /* MUTANT (rep_op) */      apos--;
+KILLED 0.246
+Checking mutant mutant100054_merge_sorted_nodups.c:  13 :  /* MUTANT (rep_op) */      if ((cpos != -1) || (c[cpos] != b[bpos])) {
+KILLED 0.427
+Checking mutant mutant100055_merge_sorted_nodups.c:  13 :  /* MUTANT (rep_op) */      if ((cpos == -1) && (c[cpos] != b[bpos])) {
+KILLED 0.382
+Checking mutant mutant100056_merge_sorted_nodups.c:  13 :  /* MUTANT (rep_op) */      if ((cpos == -1) || (c[cpos] == b[bpos])) {
+KILLED 0.198
+Checking mutant mutant100057_merge_sorted_nodups.c:  13 :  /* MUTANT (rep_const) */      if ((cpos == 0) || (c[cpos] != b[bpos])) {
+KILLED 0.516
+Checking mutant mutant100058_merge_sorted_nodups.c:  13 :  /* MUTANT (rep_const) */      if ((cpos == 1) || (c[cpos] != b[bpos])) {
+KILLED 1.235
+Checking mutant mutant100059_merge_sorted_nodups.c:  13 :  /* MUTANT (rep_const) */      if ((cpos == ((-1)+1)) || (c[cpos] != b[bpos])) {
+KILLED 0.515
+Checking mutant mutant100060_merge_sorted_nodups.c:  13 :  /* MUTANT (rep_const) */      if ((cpos == ((-1)-1)) || (c[cpos] != b[bpos])) {
+KILLED 1.0
+Checking mutant mutant100061_merge_sorted_nodups.c:  13 :  /* MUTANT (negate) */      if(! ((cpos == -1) || (c[cpos] != b[bpos]))) {
+KILLED 0.385
+Checking mutant mutant100062_merge_sorted_nodups.c:  14 :  /* MUTANT (del_stmt) */ /* 	c[++cpos] = b[bpos]; */ 
+KILLED 0.281
+Checking mutant mutant100063_merge_sorted_nodups.c:  14 :  /* MUTANT (rep_op) */	c[--cpos] = b[bpos];
+KILLED 0.338
+Checking mutant mutant100064_merge_sorted_nodups.c:  15 :  /* MUTANT (del_stmt) */ /* 	csize++; */ 
+KILLED 0.188
+Checking mutant mutant100065_merge_sorted_nodups.c:  15 :  /* MUTANT (rep_op) */	csize--;
+KILLED 0.215
+Checking mutant mutant100066_merge_sorted_nodups.c:  17 :  /* MUTANT (rep_op) */      bpos--;      
+KILLED 0.221
+66 TOTAL MUTANTS, 61 KILLED, 0 FAILED TO COMPILE 0 TIMED OUT, (92.4242424242% kill rate)
+AVERAGE KILL TIME 0.314081967213
+AVERAGE VERIFY TIME 2341.4564
+MIN/MAX KILL TIME =  0.18 / 1.258
+MIN/MAX SUCCESS TIME =  202.022 / 3540.39
+SURVIVING MUTANTS: 5
+mutant100015_merge_sorted_nodups.c
+5 :  /* MUTANT (rep_op) */  while ((apos != asize) || (bpos < bsize)) {
+mutant100021_merge_sorted_nodups.c
+5 :  /* MUTANT (rep_op) */  while ((apos < asize) || (bpos != bsize)) {
+mutant100027_merge_sorted_nodups.c
+6 :  /* MUTANT (rep_op) */    if ((apos != asize) && ((bpos >= bsize) || (a[apos] < b[bpos]))) {
+mutant100032_merge_sorted_nodups.c
+6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos == bsize) || (a[apos] < b[bpos]))) {
+mutant100035_merge_sorted_nodups.c
+6 :  /* MUTANT (rep_op) */    if ((apos < asize) && ((bpos >= bsize) || (a[apos] <= b[bpos]))) {
+TOTAL ELAPSED TIME: 6666.25250888

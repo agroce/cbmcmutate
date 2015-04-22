@@ -1,0 +1,214 @@
+CBMC version 5.0 64-bit linux
+Parsing harness.c
+Parsing mutant100052_dllinsert.c
+Converting
+Type-checking harness
+file harness.c line 43 function main: function `assert' is not declared
+Type-checking mutant100052_dllinsert
+file mutant100052_dllinsert.c line 15 function insert_node: function `assert' is not declared
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 (4 max) file harness.c line 18 function main thread 0
+Unwinding loop insert_node.0 iteration 1 (4 max) file mutant100052_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop insert_node.0 iteration 2 (4 max) file mutant100052_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop insert_node.0 iteration 3 (4 max) file mutant100052_dllinsert.c line 49 function insert_node thread 0
+Not unwinding loop insert_node.0 iteration 4 (4 max) file mutant100052_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop main.0 iteration 2 (4 max) file harness.c line 18 function main thread 0
+Unwinding loop insert_node.0 iteration 1 (4 max) file mutant100052_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop insert_node.0 iteration 2 (4 max) file mutant100052_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop insert_node.0 iteration 3 (4 max) file mutant100052_dllinsert.c line 49 function insert_node thread 0
+Not unwinding loop insert_node.0 iteration 4 (4 max) file mutant100052_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop main.0 iteration 3 (4 max) file harness.c line 18 function main thread 0
+Unwinding loop insert_node.0 iteration 1 (4 max) file mutant100052_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop insert_node.0 iteration 2 (4 max) file mutant100052_dllinsert.c line 49 function insert_node thread 0
+Unwinding loop insert_node.0 iteration 3 (4 max) file mutant100052_dllinsert.c line 49 function insert_node thread 0
+Not unwinding loop insert_node.0 iteration 4 (4 max) file mutant100052_dllinsert.c line 49 function insert_node thread 0
+Not unwinding loop main.0 iteration 4 (4 max) file harness.c line 18 function main thread 0
+Unwinding loop main.1 iteration 1 (4 max) file harness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 2 (4 max) file harness.c line 27 function main thread 0
+Unwinding loop main.1 iteration 3 (4 max) file harness.c line 27 function main thread 0
+Not unwinding loop main.1 iteration 4 (4 max) file harness.c line 27 function main thread 0
+Unwinding loop main.2 iteration 1 (4 max) file harness.c line 40 function main thread 0
+Unwinding loop main.2 iteration 2 (4 max) file harness.c line 40 function main thread 0
+Unwinding loop main.2 iteration 3 (4 max) file harness.c line 40 function main thread 0
+Not unwinding loop main.2 iteration 4 (4 max) file harness.c line 40 function main thread 0
+size of program expression: 1559 steps
+slicing removed 326 assignments
+Generated 1003 VCC(s), 686 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+54104 variables, 179760 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 0.552s
+Building error trace
+
+Counterexample:
+
+State 6 file harness.c line 15 function main thread 0
+----------------------------------------------------
+  s=3 (00000000000000000000000000000011)
+
+State 9 file harness.c line 19 function main thread 0
+----------------------------------------------------
+  v=1366666519 (01010001011101011010110100010111)
+LOG: ref[0] = 1366666519
+
+
+State 11 file harness.c line 21 function main thread 0
+----------------------------------------------------
+  ref[0]=1366666519 (01010001011101011010110100010111)
+
+State 14 file harness.c line 22 function main thread 0
+----------------------------------------------------
+  value=1366666519 (01010001011101011010110100010111)
+
+State 25 file mutant100052_dllinsert.c line 17 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object1.data=1366666519 (01010001011101011010110100010111)
+
+State 32 file mutant100052_dllinsert.c line 21 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object1.prev=&dynamic_object1.data (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 36 file mutant100052_dllinsert.c line 21 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object1.next=&dynamic_object1.data (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 48 file harness.c line 19 function main thread 0
+----------------------------------------------------
+  v=1366666519 (01010001011101011010110100010111)
+LOG: ref[1] = 1366666519
+
+
+State 50 file harness.c line 21 function main thread 0
+----------------------------------------------------
+  ref[1]=1366666519 (01010001011101011010110100010111)
+
+State 53 file harness.c line 22 function main thread 0
+----------------------------------------------------
+  value=1366666519 (01010001011101011010110100010111)
+
+State 64 file mutant100052_dllinsert.c line 17 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object2.data=1366666519 (01010001011101011010110100010111)
+
+State 92 file mutant100052_dllinsert.c line 46 function insert_node thread 0
+----------------------------------------------------
+  cur_node=&dynamic_object1.data (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 107 file mutant100052_dllinsert.c line 62 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object2.prev=&dynamic_object1.data (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 120 file mutant100052_dllinsert.c line 63 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object1.next=&dynamic_object2.data (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 127 file mutant100052_dllinsert.c line 64 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object1.prev=&dynamic_object2.data (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 134 file harness.c line 22 function main thread 0
+----------------------------------------------------
+  head=&dynamic_object1.data (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 137 file harness.c line 19 function main thread 0
+----------------------------------------------------
+  v=1500884247 (01011001011101011010110100010111)
+LOG: ref[2] = 1500884247
+
+
+State 139 file harness.c line 21 function main thread 0
+----------------------------------------------------
+  ref[2]=1500884247 (01011001011101011010110100010111)
+
+State 142 file harness.c line 22 function main thread 0
+----------------------------------------------------
+  value=1500884247 (01011001011101011010110100010111)
+
+State 153 file mutant100052_dllinsert.c line 17 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object3.data=1500884247 (01011001011101011010110100010111)
+
+State 174 file mutant100052_dllinsert.c line 34 function insert_node thread 0
+----------------------------------------------------
+  cur_node=&dynamic_object1.data (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 191 file mutant100052_dllinsert.c line 46 function insert_node thread 0
+----------------------------------------------------
+  cur_node=&dynamic_object2.data (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 212 file mutant100052_dllinsert.c line 46 function insert_node thread 0
+----------------------------------------------------
+  cur_node=INVALID-130 (1000001000000000000000000000000000000000000000000000000000000000)
+
+State 232 file mutant100052_dllinsert.c line 53 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object3.next=INVALID-130 (1000001000000000000000000000000000000000000000000000000000000000)
+
+State 242 file mutant100052_dllinsert.c line 54 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object3.prev=&dynamic_object1.data (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 255 file mutant100052_dllinsert.c line 55 function insert_node thread 0
+----------------------------------------------------
+  dynamic_object1.next=&dynamic_object3.data (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 262 file mutant100052_dllinsert.c line 56 function insert_node thread 0
+----------------------------------------------------
+  cur_node$object.prev=&dynamic_object3.data (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 270 file harness.c line 22 function main thread 0
+----------------------------------------------------
+  head=&dynamic_object1.data (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 273 file harness.c line 24 function main thread 0
+----------------------------------------------------
+  v=1366666519 (01010001011101011010110100010111)
+LOG: checking 1366666519
+
+
+State 280 file harness.c line 29 function main thread 0
+----------------------------------------------------
+  count=2 (00000000000000000000000000000010)
+LOG: ref count = 2
+
+
+State 287 file harness.c line 33 function main thread 0
+----------------------------------------------------
+  pos=&dynamic_object1.data (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 294 file harness.c line 35 function main thread 0
+----------------------------------------------------
+  curr=1366666519 (01010001011101011010110100010111)
+LOG: head (1366666519) = 1366666519
+
+LOG: moving to next item
+
+
+State 305 file harness.c line 42 function main thread 0
+----------------------------------------------------
+  pos=&dynamic_object3.data (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 313 file harness.c line 44 function main thread 0
+----------------------------------------------------
+  curr=1500884247 (01011001011101011010110100010111)
+LOG: moving to next item
+
+
+State 324 file harness.c line 42 function main thread 0
+----------------------------------------------------
+  pos=INVALID-130 (1000001000000000000000000000000000000000000000000000000000000000)
+
+Violated property:
+  file harness.c line 43 function main
+  assertion pos->data >= curr
+  pos->data >= curr
+
+VERIFICATION FAILED

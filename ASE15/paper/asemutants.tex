@@ -417,10 +417,8 @@ essentially a generalized test harness\footnote{By a harness we mean a
   provides correctness properties, etc.; in CBMC such a harness looks
   very similar to a harness for more traditional software testing.} in
 the language of the Software Under Test (SUT).  Figure
-\ref{fig:harness} shows a CBMC harness for a function that takes two
-sorted arrays as inputs, and outputs a third array containing exactly
-one copy of each item appearing in either array, {\tt
-  merge\_sorted\_nodups}.  This is a simple program, but typical of a
+\ref{fig:harness} shows a CBMC harness for inserting elements in
+sorted order into a doubly linked list.  This is a simple program, but typical of a
 small verification problem:  it is not easy to write an obviously
 bug-free implementation of this routine, and it is non-standard enough
 that no library implementation is likely available.
@@ -428,54 +426,57 @@ that no library implementation is likely available.
 \begin{figure}
 {\scriptsize
 \begin{code}
+\#include <stdio.h>
+\#include "doublelinked.h"
+
+int ref[SIZE];
+
+int nondet\_int();
+
 int main () \{
-  int a[SIZE], b[SIZE], c[SIZE*2];
-  int i, v, i1, i2, csize;
-  int asize = nondet\_int();
-  int bsize = nondet\_int();
-  \_\_CPROVER\_assume ((asize >= 0) \&\& (bsize >=0));
-  \_\_CPROVER\_assume ((asize <= SIZE) \&\& (bsize <= SIZE));
-  for (i = 0; i < asize; i++) \{
-    a[i] = nondet\_int();
-    \_\_CPROVER\_assume((i == 0) || (a[i] >= a[i-1]));
+  struct node * head = NULL;
+  struct node * pos = NULL;
+  int i, v, index, count, lcount, curr;
+  int s = nondet\_int();
+  \_\_CPROVER\_assume((s > 0) \&\& (s <=SIZE));
+
+  for (i = 0; i < s; i++) \{
+    v = nondet\_int();
+    printf ("LOG: ref[\%d] = \%d\\n", i, v);
+    ref[i] = v;
+    head = insert\_node(\&head, v);
   \}
-  for (i = 0; i < bsize; i++) \{
-    b[i] = nondet\_int();
-    \_\_CPROVER\_assume((i == 0) || (b[i] >= b[i-1]));
-  \}
-  csize = merge\_sorted\_nodups(a, asize, b, bsize, c);
-  assert (csize <= (asize + bsize));
-  i1 = nondet\_int();
-  i2 = nondet\_int();
-  \_\_CPROVER\_assume((i1 >= 0) \&\& (i2 >= 0));
-  \_\_CPROVER\_assume((i1 < csize) \& \& (i2 < csize));
-  \_\_CPROVER\_assume(i1 != i2);
-  assert(c[i1] != c[i2]);
   v = nondet\_int();
-  \_\_CPROVER\_assume ((v >= 0) \&\& (v < asize));
-  v = a[v];
-  int found = 0;
-  for (i = 0; i < csize; i++) \{
-    if (c[i] == v)
-      found = 1;
+  count = 0;
+  printf ("LOG: checking \%d\\n", v);
+  for (i = 0; i < s; i++) \{
+    if (ref[i] == v)
+      count++;
   \}
-  assert (found == 1);
-  v = nondet\_int();
-  \_\_CPROVER\_assume ((v >= 0) \&\& (v < bsize));
-  v = b[v];
-  int found = 0;
-  for (i = 0; i < csize; i++) \{
-    if (c[i] == v)
-      found = 1;
+  printf ("LOG: ref count = \%d\\n",count);
+  pos = head;
+  lcount = 0;
+  curr = head->data;
+  printf ("LOG: head = \%d\\n", head->data);
+  if (curr == v)
+    lcount++;
+  for (i = 1; i < s; i++) \{
+    printf ("LOG: moving to next item\\n");
+    pos = pos->next;
+    assert(pos->data >= curr);
+    curr = pos->data;
+    printf ("LOG: data \%d\\n", pos->data);
+    if (curr == v)
+      lcount++;
   \}
-  assert (found == 1);
+  printf("LOG: list count = \%d\\n", lcount);
+  assert (count == lcount);
 \}
 \end{code}
 }
-\caption{Harness for merge\_sorted\_nodups}
+\caption{Harness for insertion sort into a doubly linked list.}
 \label{fig:harness}
 \end{figure}
-
 
 CBMC compiles a harness and the SUT (here a quick sort implementation)
 into a goto-program, instruments
@@ -563,39 +564,9 @@ the SUT itself.
 
 \subsection{A Simple Example Verification}
 
-\begin{figure}
-{\scriptsize
-\begin{code}
-int merge\_sorted\_nodups(int a[], int asize, 
-                        int b[], int bsize, int c[]) \{
-  int apos = 0, bpos = 0, cpos = -1, csize = 0;
-  while ((apos < asize) || (bpos < bsize)) \{
-    if ((apos < asize) \&\& 
-        ((bpos >= bsize) || (a[apos] < b[bpos]))) \{
-      if ((cpos == -1) || (c[cpos] != a[apos])) \{
-	c[++cpos] = a[apos];
-	csize++;
-      \}
-      apos++;
-    \} else \{
-      if ((cpos == -1) || (c[cpos] != b[bpos])) \{
-	c[++cpos] = b[bpos];
-	csize++;
-      \}
-      bpos++;      
-    \}
-  \}
-  return csize;
-\}
-\end{code}
-}
-\caption{Code to merge two sorted arrays into one sorted array with no
-  duplicate elements}
-\label{fig:sortnodup}
-\end{figure}
 
 As an example of the proposed verification methdology, consider again
-the harness shown in Figure \ref{fig:sortharness}.  If we take the
+the harness shown in Figure \ref{fig:harness}.  If we take the
 first hit on Google for ``quick sort in C'' \cite{quicksortcode},
 shown in Figure \ref{fig:qsort}\footnote{In fact, that actual code is
   incorrect, with an access {\tt a[i]} that does not properly
@@ -805,6 +776,87 @@ to \emph{not} match the theory of program behavior.
 
 \section{Algorithms and Techniques}
 
+\begin{figure}
+{\scriptsize
+\begin{code}
+int main () \{
+  int a[SIZE], b[SIZE], c[SIZE*2];
+  int i, v, i1, i2, csize;
+  int asize = nondet\_int();
+  int bsize = nondet\_int();
+  \_\_CPROVER\_assume ((asize >= 0) \&\& (bsize >=0));
+  \_\_CPROVER\_assume ((asize <= SIZE) \&\& (bsize <= SIZE));
+  for (i = 0; i < asize; i++) \{
+    a[i] = nondet\_int();
+    \_\_CPROVER\_assume((i == 0) || (a[i] >= a[i-1]));
+  \}
+  for (i = 0; i < bsize; i++) \{
+    b[i] = nondet\_int();
+    \_\_CPROVER\_assume((i == 0) || (b[i] >= b[i-1]));
+  \}
+  csize = merge\_sorted\_nodups(a, asize, b, bsize, c);
+  assert (csize <= (asize + bsize));
+  i1 = nondet\_int();
+  i2 = nondet\_int();
+  \_\_CPROVER\_assume((i1 >= 0) \&\& (i2 >= 0));
+  \_\_CPROVER\_assume((i1 < csize) \& \& (i2 < csize));
+  \_\_CPROVER\_assume(i1 != i2);
+  assert(c[i1] != c[i2]);
+  v = nondet\_int();
+  \_\_CPROVER\_assume ((v >= 0) \&\& (v < asize));
+  v = a[v];
+  int found = 0;
+  for (i = 0; i < csize; i++) \{
+    if (c[i] == v)
+      found = 1;
+  \}
+  assert (found == 1);
+  v = nondet\_int();
+  \_\_CPROVER\_assume ((v >= 0) \&\& (v < bsize));
+  v = b[v];
+  int found = 0;
+  for (i = 0; i < csize; i++) \{
+    if (c[i] == v)
+      found = 1;
+  \}
+  assert (found == 1);
+\}
+\end{code}
+}
+\caption{Harness for merge\_sorted\_nodups}
+\label{fig:mergeharness}
+\end{figure}
+
+\begin{figure}
+{\scriptsize
+\begin{code}
+int merge\_sorted\_nodups(int a[], int asize, 
+                        int b[], int bsize, int c[]) \{
+  int apos = 0, bpos = 0, cpos = -1, csize = 0;
+  while ((apos < asize) || (bpos < bsize)) \{
+    if ((apos < asize) \&\& 
+        ((bpos >= bsize) || (a[apos] < b[bpos]))) \{
+      if ((cpos == -1) || (c[cpos] != a[apos])) \{
+	c[++cpos] = a[apos];
+	csize++;
+      \}
+      apos++;
+    \} else \{
+      if ((cpos == -1) || (c[cpos] != b[bpos])) \{
+	c[++cpos] = b[bpos];
+	csize++;
+      \}
+      bpos++;      
+    \}
+  \}
+  return csize;
+\}
+\end{code}
+}
+\caption{Code to merge two sorted arrays into one sorted array with no
+  duplicate elements}
+\label{fig:sortnodup}
+\end{figure}
 
 
 Given a mutant of program $P$, $M_i$, the 
