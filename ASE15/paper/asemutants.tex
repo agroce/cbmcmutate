@@ -352,8 +352,11 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{How Verified is My Code?\\Understanding
-  ``Successful'' Verifications}
+\title{How Verified is My Code?\\Falsification-Driven Verification}
+
+% Alt subtitle
+%Understanding
+%  ``Successful'' Verifications}
 
 
 % author names and affiliations
@@ -991,8 +994,19 @@ for basic\_block b in $m'$:
    b = [if !covered[n] \{
            covered[n] = 1;
            total\_covered += 1;
-         \}
-       b]
+        \}
+        b]
+   n = n + 1
+for stmt s in $m'$:
+   if MUTANT(s):
+      s = [\{mutant\_covered = 1;
+            s\}]
+$m'$ = [int total\_covered = 0;
+      int mutant\_covered = 0;
+      int covered[n];
+      $m'$]
+
+return $m'$
 \end{code}
 }
 \caption{Algorithm 3: Instrument mutant for coverage.}
