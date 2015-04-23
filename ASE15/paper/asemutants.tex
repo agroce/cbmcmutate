@@ -1164,7 +1164,9 @@ but passing trace of this run lets us see the problem.
 
 \subsection{Linux Kernel RCU Verification Challenges}
 
-\section{Discussion: Falsification vs. Verification}
+\section{Discussion}
+
+\subsection{Falsification vs. Verification}
 
 The core idea of this paper is that, while successful verification is
 the \emph{result} that a developer seeks when verifying a program, it
@@ -1201,6 +1203,22 @@ example, special relativity is easily falsified in a world where
 special relativity does not in fact hold, is not practical in
 scientific discovery.  It is, however, quite easy in the artificial
 ``science'' of verifying a property of a computer program.
+
+\subsection{The Power of Exhaustive Nondeterminism}
+
+The ability to improve a harness based on surviving mutants (or on
+passing runs of killed mutants) essentially relies on the nature of
+exhaustive bounded model checking based on constraint solving.  In
+non-exhaustive automated testing, the answer to why a mutant is not
+killed is, often, neither ``the oracle is not good enough'' or even
+``the test process is inadequate'' but ``you didn't get lucky.''  That
+is, killing all mutants is, in many cases, not something we can expect
+of non-exhaustive test suites.  Random testing
+\cite{HamletOnly,ICSEDiff} can perform well in general as a
+bug-finding method, but its failure to kill any individual mutant is
+likely to be a matter of probability, rather than a flaw \emph{per se}
+in the testing itself.  In verification, however, there are no
+accidents.
 
 \section{Related Work}
 
