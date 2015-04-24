@@ -1,0 +1,50 @@
+6: /* MUTANT (del_stmt) */ /* int ref[SIZE]; */ 
+8: /* MUTANT (del_stmt) */ /* int nondet_int(); */ 
+11: /* MUTANT (del_stmt) */ /*   int i, v, prev; */ 
+12: /* MUTANT (del_stmt) */ /*   int s = nondet_int(); */ 
+13: /* MUTANT (del_stmt) */ /*   __CPROVER_assume((s > 0) && (s <=SIZE)); */ 
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s <= 0) && (s <=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s < 0) && (s <=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s >= 0) && (s <=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s == 0) && (s <=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s != 0) && (s <=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s > 0) || (s <=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s > 0) && (s <SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s > 0) && (s >SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s > 0) && (s >=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s > 0) && (s ==SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s > 0) && (s !=SIZE));
+13: /* MUTANT (rep_const) */  __CPROVER_assume((s > 1) && (s <=SIZE));
+13: /* MUTANT (rep_const) */  __CPROVER_assume((s > -1) && (s <=SIZE));
+14: /* MUTANT (rep_op) */  for (i = 0; i <= s; i++) {
+14: /* MUTANT (rep_op) */  for (i = 0; i > s; i++) {
+14: /* MUTANT (rep_op) */  for (i = 0; i >= s; i++) {
+14: /* MUTANT (rep_op) */  for (i = 0; i == s; i++) {
+14: /* MUTANT (rep_op) */  for (i = 0; i != s; i++) {
+14: /* MUTANT (rep_op) */  for (i = 0; i < s; i--) {
+14: /* MUTANT (rep_const) */  for (i = 1; i < s; i++) {
+14: /* MUTANT (rep_const) */  for (i = -1; i < s; i++) {
+15: /* MUTANT (del_stmt) */ /*     v = nondet_int(); */ 
+16: /* MUTANT (del_stmt) */ /*     printf ("LOG: ref[%d] = %d\n", i, v); */ 
+17: /* MUTANT (del_stmt) */ /*     ref[i] = v; */ 
+18: /* MUTANT (del_stmt) */ /*     a[i] = v; */ 
+21: /* MUTANT (del_stmt) */ /*   prev = a[0]; */ 
+21: /* MUTANT (rep_const) */  prev = a[1];
+21: /* MUTANT (rep_const) */  prev = a[-1];
+22: /* MUTANT (del_stmt) */ /*   printf ("LOG: checking %d\n", v); */ 
+23: /* MUTANT (rep_op) */  for (i = 0; i <= s; i++) {
+23: /* MUTANT (rep_op) */  for (i = 0; i > s; i++) {
+23: /* MUTANT (rep_op) */  for (i = 0; i >= s; i++) {
+23: /* MUTANT (rep_op) */  for (i = 0; i == s; i++) {
+23: /* MUTANT (rep_op) */  for (i = 0; i != s; i++) {
+23: /* MUTANT (rep_op) */  for (i = 0; i < s; i--) {
+23: /* MUTANT (rep_const) */  for (i = 1; i < s; i++) {
+23: /* MUTANT (rep_const) */  for (i = -1; i < s; i++) {
+24: /* MUTANT (del_stmt) */ /*     printf ("LOG: a[%d] = %d\n", i, a[i]); */ 
+25: /* MUTANT (del_stmt) */ /*     assert (a[i] >= prev); */ 
+25: /* MUTANT (rep_op) */    assert (a[i] <= prev);
+25: /* MUTANT (rep_op) */    assert (a[i] < prev);
+25: /* MUTANT (rep_op) */    assert (a[i] > prev);
+25: /* MUTANT (rep_op) */    assert (a[i] == prev);
+25: /* MUTANT (rep_op) */    assert (a[i] != prev);
+26: /* MUTANT (del_stmt) */ /*     prev = a[i]; */ 

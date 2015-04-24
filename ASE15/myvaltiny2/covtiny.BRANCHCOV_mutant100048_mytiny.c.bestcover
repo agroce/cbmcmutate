@@ -1,0 +1,303 @@
+CBMC version 5.0 64-bit macos
+Parsing BRANCHCOV_mutant100048_mytiny.c
+In file included from BRANCHCOV_mutant100048_mytiny.c:45:
+file ./fake.h line 94: ./fake.h:94:9: warning: 'SIZE_MAX' macro redefined [-Wmacro-redefined]
+file ./fake.h line 94: #define SIZE_MAX        (~(size_t)0)
+file ./fake.h line 94:         ^
+file /usr/include/stdint.h line 153: /usr/include/stdint.h:153:9: note: previous definition is here
+file /usr/include/stdint.h line 153: #define SIZE_MAX          UINT64_MAX
+file /usr/include/stdint.h line 153:         ^
+file /usr/include/stdint.h line 153: 1 warning generated.
+Parsing maxcov.c
+In file included from maxcov.c:23:
+file ./fake.h line 94: ./fake.h:94:9: warning: 'SIZE_MAX' macro redefined [-Wmacro-redefined]
+file ./fake.h line 94: #define SIZE_MAX        (~(size_t)0)
+file ./fake.h line 94:         ^
+file /usr/include/stdint.h line 153: /usr/include/stdint.h:153:9: note: previous definition is here
+file /usr/include/stdint.h line 153: #define SIZE_MAX          UINT64_MAX
+file /usr/include/stdint.h line 153:         ^
+file /usr/include/stdint.h line 153: 1 warning generated.
+Converting
+Type-checking BRANCHCOV_mutant100048_mytiny
+Type-checking maxcov
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+SWITCHING TO ASSUME: !((char **)value_ptr == ((char **)NULL))
+SWITCHING TO ASSUME: !(*((char **)value_ptr) == ((char *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(*((char **)value_ptr))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(*((char **)value_ptr)) < 0 || (unsigned long int)(POINTER_OFFSET(*((char **)value_ptr)) + 1) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(*((char **)value_ptr)) || !(POINTER_OFFSET(*((char **)value_ptr)) < 0 || POINTER_OFFSET(*((char **)value_ptr)) + 1 > OBJECT_SIZE(*((char **)value_ptr)))
+SWITCHING TO ASSUME: !((char **)value_ptr == ((char **)NULL))
+SWITCHING TO ASSUME: !(*((char **)value_ptr) == ((char *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(*((char **)value_ptr))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(*((char **)value_ptr)) < 0 || (unsigned long int)(POINTER_OFFSET(*((char **)value_ptr)) + 1) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(*((char **)value_ptr)) || !(POINTER_OFFSET(*((char **)value_ptr)) < 0 || POINTER_OFFSET(*((char **)value_ptr)) + 1 > OBJECT_SIZE(*((char **)value_ptr)))
+WAS ASSERT
+SWITCHING TO ASSUME: !(thread == ((struct _opaque_pthread_t **)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(thread)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(thread) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(thread) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(thread) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(thread) < 0 || (unsigned long int)(POINTER_OFFSET(thread) + 8) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(thread) || !(POINTER_OFFSET(thread) < 0 || POINTER_OFFSET(thread) + 8 > OBJECT_SIZE(thread))
+SWITCHING TO ASSUME: !(attr == ((const struct _opaque_pthread_attr_t *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(attr)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(attr) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(attr) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(attr) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(attr) < 0 || (unsigned long int)(POINTER_OFFSET(attr) + 64) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(attr) || !(POINTER_OFFSET(attr) < 0 || POINTER_OFFSET(attr) + 64 > OBJECT_SIZE(attr))
+SWITCHING TO ASSUME: !((char **)value_ptr == ((char **)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER((char **)value_ptr)
+SWITCHING TO ASSUME: !(POINTER_OBJECT((char **)value_ptr) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT((char **)value_ptr) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT((char **)value_ptr) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET((char **)value_ptr) < 0 || (unsigned long int)(POINTER_OFFSET((char **)value_ptr) + 8) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT((char **)value_ptr) || !(POINTER_OFFSET((char **)value_ptr) < 0 || POINTER_OFFSET((char **)value_ptr) + 8 > OBJECT_SIZE((char **)value_ptr))
+SWITCHING TO ASSUME: !(*((char **)value_ptr) == ((char *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(*((char **)value_ptr))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(*((char **)value_ptr)) < 0 || (unsigned long int)(POINTER_OFFSET(*((char **)value_ptr)) + 1) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(*((char **)value_ptr)) || !(POINTER_OFFSET(*((char **)value_ptr)) < 0 || POINTER_OFFSET(*((char **)value_ptr)) + 1 > OBJECT_SIZE(*((char **)value_ptr)))
+WAS ASSERT
+WAS ASSERT
+WAS ASSERT
+WAS ASSERT
+SWITCHING TO ASSUME: !(head == ((struct callback_head *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(head)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(head) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(head) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(head) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(head) < 0 || (unsigned long int)(POINTER_OFFSET(head) + 16) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(head) || !(POINTER_OFFSET(head) < 0 || POINTER_OFFSET(head) + 16 > OBJECT_SIZE(head))
+SWITCHING TO ASSUME: !(head == ((struct callback_head *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(head)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(head) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(head) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(head) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(head) < 0 || (unsigned long int)(POINTER_OFFSET(head) + 16) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(head) || !(POINTER_OFFSET(head) < 0 || POINTER_OFFSET(head) + 16 > OBJECT_SIZE(head))
+SWITCHING TO ASSUME: !(rcp == ((struct rcu_ctrlblk *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(rcp)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(rcp) < 0 || (unsigned long int)(POINTER_OFFSET(rcp) + 24) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(rcp) || !(POINTER_OFFSET(rcp) < 0 || POINTER_OFFSET(rcp) + 24 > OBJECT_SIZE(rcp))
+SWITCHING TO ASSUME: !(rcp->curtail == ((struct callback_head **)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(rcp->curtail)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp->curtail) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp->curtail) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(rcp->curtail) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(rcp->curtail) < 0 || (unsigned long int)(POINTER_OFFSET(rcp->curtail) + 8) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(rcp->curtail) || !(POINTER_OFFSET(rcp->curtail) < 0 || POINTER_OFFSET(rcp->curtail) + 8 > OBJECT_SIZE(rcp->curtail))
+SWITCHING TO ASSUME: !(rcp == ((struct rcu_ctrlblk *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(rcp)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(rcp) < 0 || (unsigned long int)(POINTER_OFFSET(rcp) + 24) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(rcp) || !(POINTER_OFFSET(rcp) < 0 || POINTER_OFFSET(rcp) + 24 > OBJECT_SIZE(rcp))
+WAS ASSERT
+WAS ASSERT
+SWITCHING TO ASSUME: !(rcp == ((struct rcu_ctrlblk *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(rcp)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(rcp) < 0 || (unsigned long int)(POINTER_OFFSET(rcp) + 24) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(rcp) || !(POINTER_OFFSET(rcp) < 0 || POINTER_OFFSET(rcp) + 24 > OBJECT_SIZE(rcp))
+SWITCHING TO ASSUME: !(rcp == ((struct rcu_ctrlblk *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(rcp)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(rcp) < 0 || (unsigned long int)(POINTER_OFFSET(rcp) + 24) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(rcp) || !(POINTER_OFFSET(rcp) < 0 || POINTER_OFFSET(rcp) + 24 > OBJECT_SIZE(rcp))
+SWITCHING TO ASSUME: !(start_routine == ((void * (*)(void *))NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(start_routine)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(start_routine) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(start_routine) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(start_routine) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(start_routine) < 0 || (unsigned long int)(POINTER_OFFSET(start_routine) + 0) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(start_routine) || !(POINTER_OFFSET(start_routine) < 0 || POINTER_OFFSET(start_routine) + 0 > OBJECT_SIZE(start_routine))
+WAS ASSERT
+Starting Bounded Model Checking
+Adding SC constraints
+size of program expression: 61643 steps
+no slicing due to threads
+Generated 16 VCC(s), 16 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+365561 variables, 1657829 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 26.291s
+Building error trace
+
+Counterexample:
+
+State 50  thread 0
+----------------------------------------------------
+  argv'[268435456]=irep("(\"nil\")")[268435456] (?)
+
+State 53 file maxcov.c line 218 thread 0
+----------------------------------------------------
+  argc=268435456 (00010000000000000000000000000000)
+
+State 54 file maxcov.c line 218 thread 0
+----------------------------------------------------
+  argv=argv' (0000011100000000000000000000000000000000000000000000000000000000)
+
+State 55 file maxcov.c line 220 function main thread 0
+----------------------------------------------------
+  tu=((struct _opaque_pthread_t *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 56 file maxcov.c line 221 function main thread 0
+----------------------------------------------------
+  tpr=((struct _opaque_pthread_t *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 59 file BRANCHCOV_mutant100048_mytiny.c line 110 function rcu_idle_enter thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 60 file BRANCHCOV_mutant100048_mytiny.c line 111 function rcu_idle_enter thread 0
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 63 file BRANCHCOV_mutant100048_mytiny.c line 113 function rcu_idle_enter thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 66 file maxcov.c line 126 function local_irq_save thread 0
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 69 file maxcov.c line 128 function local_irq_save thread 0
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 77 file BRANCHCOV_mutant100048_mytiny.c line 116 function rcu_idle_enter thread 0
+----------------------------------------------------
+  __covered2=1 (00000000000000000000000000000001)
+
+State 78 file BRANCHCOV_mutant100048_mytiny.c line 116 function rcu_idle_enter thread 0
+----------------------------------------------------
+  total_covered=1 (00000000000000000000000000000001)
+
+State 79 file BRANCHCOV_mutant100048_mytiny.c line 117 function rcu_idle_enter thread 0
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 83 file BRANCHCOV_mutant100048_mytiny.c line 123 function rcu_idle_enter thread 0
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 88 file BRANCHCOV_mutant100048_mytiny.c line 255 function rcu_sched_qs thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 91 file BRANCHCOV_mutant100048_mytiny.c line 257 function rcu_sched_qs thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 94 file maxcov.c line 126 function local_irq_save thread 0
+----------------------------------------------------
+  local_irq_depth=2 (00000000000000000000000000000010)
+
+State 100 file BRANCHCOV_mutant100048_mytiny.c line 258 function rcu_sched_qs thread 0
+----------------------------------------------------
+  rcp=&rcu_sched_ctrlblk.rcucblist (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 112 file BRANCHCOV_mutant100048_mytiny.c line 258 function rcu_sched_qs thread 0
+----------------------------------------------------
+  rcp=&rcu_bh_ctrlblk.rcucblist (0000010100000000000000000000000000000000000000000000000000000000)
+
+State 124 file BRANCHCOV_mutant100048_mytiny.c line 262 function rcu_sched_qs thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 125 file maxcov.c line 139 function local_irq_restore thread 0
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 129 file BRANCHCOV_mutant100048_mytiny.c line 101 function rcu_idle_enter_common thread 0
+----------------------------------------------------
+  rcu_dynticks_nesting=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 133 file BRANCHCOV_mutant100048_mytiny.c line 124 function rcu_idle_enter thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 134 file maxcov.c line 139 function local_irq_restore thread 0
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 135 file maxcov.c line 141 function local_irq_restore thread 0
+----------------------------------------------------
+  irq_lock=0 (00000000000000000000000000000000)
+
+State 233 file <builtin-library>-pthread_create line 20 function __actual_thread_spawn thread 1
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 242 file <builtin-library>-pthread_create line 20 function __actual_thread_spawn thread 2
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 249 file maxcov.c line 66 function fake_acquire_cpu_only thread 2
+----------------------------------------------------
+  cpu_lock=1 (00000000000000000000000000000001)
+
+State 255 file BRANCHCOV_mutant100048_mytiny.c line 196 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 256 file BRANCHCOV_mutant100048_mytiny.c line 197 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 259 file BRANCHCOV_mutant100048_mytiny.c line 199 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 262 file maxcov.c line 126 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 265 file maxcov.c line 66 function fake_acquire_cpu_only thread 1
+----------------------------------------------------
+  cpu_lock=2 (00000000000000000000000000000010)
+
+State 269 file maxcov.c line 128 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 273 file BRANCHCOV_mutant100048_mytiny.c line 200 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 274 file BRANCHCOV_mutant100048_mytiny.c line 201 function rcu_irq_enter thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=1 (0000000000000000000000000000000000000000000000000000000000000001)
+
+State 282 file BRANCHCOV_mutant100048_mytiny.c line 203 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 284 file BRANCHCOV_mutant100048_mytiny.c line 154 function rcu_idle_exit_common thread 2
+----------------------------------------------------
+  mutant_covered=1 (00000000000000000000000000000001)
+
+State 286 file BRANCHCOV_mutant100048_mytiny.c line 156 function rcu_idle_exit_common thread 2
+----------------------------------------------------
+  idle=((struct task_struct *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 287 file BRANCHCOV_mutant100048_mytiny.c line 156 function rcu_idle_exit_common thread 2
+----------------------------------------------------
+  idle=((struct task_struct *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+Violated property:
+  file BRANCHCOV_mutant100048_mytiny.c line 161 function rcu_idle_exit_common
+  assertion !(1) || CK_NOASSERT()
+  FALSE
+
+VERIFICATION FAILED

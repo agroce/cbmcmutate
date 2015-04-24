@@ -1,0 +1,223 @@
+USAGE: evalmuants.py <prefix> <timeout> [--cbmc PATH] --options <options> --files <files> --mutate <mutant-files> [--harness] [--use-existing] [--check-strength]
+PREFIX = bmht4.p4.c4
+TIMEOUT = 10000
+False --options
+OPTIONS = -DTSIZE=4 -DPSIZE=4 -DCSIZE=4 --unwind 5 --bounds-check --pointer-check 
+FILES = ['harness.c']
+MUTATED FILES = ['bmh.c']
+limit cputime 10000 ; cbmc -DTSIZE=4 -DPSIZE=4 -DCSIZE=4 --unwind 5 --bounds-check --pointer-check 
+SANITY CHECK...
+Original SUCCESSFULLY VERIFIED in 0.439
+Mutating bmh.c
+Checking mutant mutant100001_bmh.c:  9 :  /* MUTANT (del_stmt) */ /*   uint8 skip[BMH_CHARSET_SIZE]; */ 
+OTHER RESULT
+Checking mutant mutant100002_bmh.c:  10 :  /* MUTANT (del_stmt) */ /*   jschar c; */ 
+OTHER RESULT
+Checking mutant mutant100003_bmh.c:  12 :  /* MUTANT (del_stmt) */ /*   __CPROVER_assume(0 < patlen && patlen <= BMH_PATLEN_MAX); */ 
+VERIFICATION SUCCESSFUL 0.496
+Checking mutant mutant100004_bmh.c:  12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 <= patlen && patlen <= BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.467
+Checking mutant mutant100005_bmh.c:  12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 > patlen && patlen <= BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.352
+Checking mutant mutant100006_bmh.c:  12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 >= patlen && patlen <= BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.356
+Checking mutant mutant100007_bmh.c:  12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 == patlen && patlen <= BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.352
+Checking mutant mutant100008_bmh.c:  12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 != patlen && patlen <= BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.426
+Checking mutant mutant100009_bmh.c:  12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 < patlen || patlen <= BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.424
+Checking mutant mutant100010_bmh.c:  12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 < patlen && patlen < BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.409
+Checking mutant mutant100011_bmh.c:  12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 < patlen && patlen > BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.342
+Checking mutant mutant100012_bmh.c:  12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 < patlen && patlen >= BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.353
+Checking mutant mutant100013_bmh.c:  12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 < patlen && patlen == BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.34
+Checking mutant mutant100014_bmh.c:  12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 < patlen && patlen != BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.428
+Checking mutant mutant100015_bmh.c:  12 :  /* MUTANT (rep_const) */  __CPROVER_assume(1 < patlen && patlen <= BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.407
+Checking mutant mutant100016_bmh.c:  12 :  /* MUTANT (rep_const) */  __CPROVER_assume(-1 < patlen && patlen <= BMH_PATLEN_MAX);
+VERIFICATION SUCCESSFUL 0.401
+Checking mutant mutant100017_bmh.c:  13 :  /* MUTANT (rep_op) */  for (i = 0; i <= BMH_CHARSET_SIZE; i++)
+KILLED 0.014
+Checking mutant mutant100018_bmh.c:  13 :  /* MUTANT (rep_op) */  for (i = 0; i > BMH_CHARSET_SIZE; i++)
+KILLED 0.394
+Checking mutant mutant100019_bmh.c:  13 :  /* MUTANT (rep_op) */  for (i = 0; i >= BMH_CHARSET_SIZE; i++)
+KILLED 0.38
+Checking mutant mutant100020_bmh.c:  13 :  /* MUTANT (rep_op) */  for (i = 0; i == BMH_CHARSET_SIZE; i++)
+KILLED 0.386
+Checking mutant mutant100021_bmh.c:  13 :  /* MUTANT (rep_op) */  for (i = 0; i != BMH_CHARSET_SIZE; i++)
+VERIFICATION SUCCESSFUL 0.422
+Checking mutant mutant100022_bmh.c:  13 :  /* MUTANT (rep_op) */  for (i = 0; i < BMH_CHARSET_SIZE; i--)
+KILLED 0.014
+Checking mutant mutant100023_bmh.c:  13 :  /* MUTANT (rep_const) */  for (i = 1; i < BMH_CHARSET_SIZE; i++)
+KILLED 0.372
+Checking mutant mutant100024_bmh.c:  13 :  /* MUTANT (rep_const) */  for (i = -1; i < BMH_CHARSET_SIZE; i++)
+KILLED 0.014
+Checking mutant mutant100025_bmh.c:  15 :  /* MUTANT (del_stmt) */ /*   m = patlen - 1; */ 
+KILLED 0.354
+Checking mutant mutant100026_bmh.c:  15 :  /* MUTANT (rep_const) */  m = patlen - 0;
+KILLED 0.383
+Checking mutant mutant100027_bmh.c:  15 :  /* MUTANT (rep_const) */  m = patlen - -1;
+KILLED 0.356
+Checking mutant mutant100028_bmh.c:  15 :  /* MUTANT (rep_const) */  m = patlen - ((1)+1);
+KILLED 0.354
+Checking mutant mutant100029_bmh.c:  16 :  /* MUTANT (rep_op) */  for (i = 0; i <= m; i++) {
+KILLED 0.48
+Checking mutant mutant100030_bmh.c:  16 :  /* MUTANT (rep_op) */  for (i = 0; i > m; i++) {
+KILLED 0.388
+Checking mutant mutant100031_bmh.c:  16 :  /* MUTANT (rep_op) */  for (i = 0; i >= m; i++) {
+KILLED 0.361
+Checking mutant mutant100032_bmh.c:  16 :  /* MUTANT (rep_op) */  for (i = 0; i == m; i++) {
+KILLED 0.365
+Checking mutant mutant100033_bmh.c:  16 :  /* MUTANT (rep_op) */  for (i = 0; i != m; i++) {
+VERIFICATION SUCCESSFUL 0.383
+Checking mutant mutant100034_bmh.c:  16 :  /* MUTANT (rep_op) */  for (i = 0; i < m; i--) {
+KILLED 0.374
+Checking mutant mutant100035_bmh.c:  16 :  /* MUTANT (rep_const) */  for (i = 1; i < m; i++) {
+KILLED 0.393
+Checking mutant mutant100036_bmh.c:  16 :  /* MUTANT (rep_const) */  for (i = -1; i < m; i++) {
+KILLED 0.351
+Checking mutant mutant100037_bmh.c:  17 :  /* MUTANT (del_stmt) */ /*     c = pat[i]; */ 
+KILLED 0.361
+Checking mutant mutant100038_bmh.c:  18 :  /* MUTANT (rep_op) */    if (c <= BMH_CHARSET_SIZE)
+KILLED 0.364
+Checking mutant mutant100039_bmh.c:  18 :  /* MUTANT (rep_op) */    if (c < BMH_CHARSET_SIZE)
+KILLED 0.376
+Checking mutant mutant100040_bmh.c:  18 :  /* MUTANT (rep_op) */    if (c > BMH_CHARSET_SIZE)
+VERIFICATION SUCCESSFUL 0.69
+Checking mutant mutant100041_bmh.c:  18 :  /* MUTANT (rep_op) */    if (c == BMH_CHARSET_SIZE)
+VERIFICATION SUCCESSFUL 0.441
+Checking mutant mutant100042_bmh.c:  18 :  /* MUTANT (rep_op) */    if (c != BMH_CHARSET_SIZE)
+KILLED 0.36
+Checking mutant mutant100043_bmh.c:  18 :  /* MUTANT (negate) */    if(! (c >= BMH_CHARSET_SIZE))
+KILLED 0.408
+Checking mutant mutant100044_bmh.c:  20 :  /* MUTANT (del_stmt) */ /*     skip[c] = (uint8)(m - i); */ 
+KILLED 0.41
+Checking mutant mutant100045_bmh.c:  22 :  /* MUTANT (rep_op) */  for (k = start - m;
+KILLED 0.349
+Checking mutant mutant100046_bmh.c:  22 :  /* MUTANT (rep_op) */  for (k = start * m;
+KILLED 0.334
+Checking mutant mutant100047_bmh.c:  22 :  /* MUTANT (rep_op) */  for (k = start % m;
+KILLED 0.335
+Checking mutant mutant100048_bmh.c:  23 :  /* MUTANT (del_stmt) */ /*        k < textlen; */ 
+OTHER RESULT
+Checking mutant mutant100049_bmh.c:  23 :  /* MUTANT (rep_op) */       k <= textlen;
+KILLED 0.373
+Checking mutant mutant100050_bmh.c:  23 :  /* MUTANT (rep_op) */       k > textlen;
+KILLED 0.366
+Checking mutant mutant100051_bmh.c:  23 :  /* MUTANT (rep_op) */       k >= textlen;
+KILLED 0.364
+Checking mutant mutant100052_bmh.c:  23 :  /* MUTANT (rep_op) */       k == textlen;
+KILLED 0.377
+Checking mutant mutant100053_bmh.c:  23 :  /* MUTANT (rep_op) */       k != textlen;
+KILLED 0.401
+Checking mutant mutant100054_bmh.c:  24 :  /* MUTANT (rep_op) */       k -= ((c = text[k]) >= BMH_CHARSET_SIZE) ? patlen : skip[c]) {
+KILLED 0.364
+Checking mutant mutant100055_bmh.c:  24 :  /* MUTANT (rep_op) */       k *= ((c = text[k]) >= BMH_CHARSET_SIZE) ? patlen : skip[c]) {
+KILLED 0.706
+Checking mutant mutant100056_bmh.c:  24 :  /* MUTANT (rep_op) */       k %= ((c = text[k]) >= BMH_CHARSET_SIZE) ? patlen : skip[c]) {
+KILLED 0.497
+Checking mutant mutant100057_bmh.c:  24 :  /* MUTANT (rep_op) */       k += ((c = text[k]) <= BMH_CHARSET_SIZE) ? patlen : skip[c]) {
+KILLED 0.421
+Checking mutant mutant100058_bmh.c:  24 :  /* MUTANT (rep_op) */       k += ((c = text[k]) < BMH_CHARSET_SIZE) ? patlen : skip[c]) {
+KILLED 0.39
+Checking mutant mutant100059_bmh.c:  24 :  /* MUTANT (rep_op) */       k += ((c = text[k]) > BMH_CHARSET_SIZE) ? patlen : skip[c]) {
+VERIFICATION SUCCESSFUL 0.407
+Checking mutant mutant100060_bmh.c:  24 :  /* MUTANT (rep_op) */       k += ((c = text[k]) == BMH_CHARSET_SIZE) ? patlen : skip[c]) {
+VERIFICATION SUCCESSFUL 0.431
+Checking mutant mutant100061_bmh.c:  24 :  /* MUTANT (rep_op) */       k += ((c = text[k]) != BMH_CHARSET_SIZE) ? patlen : skip[c]) {
+KILLED 0.361
+Checking mutant mutant100062_bmh.c:  25 :  /* MUTANT (rep_op) */    for (i = k, j = m; ; i++, j--) {
+KILLED 0.388
+Checking mutant mutant100063_bmh.c:  25 :  /* MUTANT (rep_op) */    for (i = k, j = m; ; i--, j++) {
+KILLED 0.46
+Checking mutant mutant100064_bmh.c:  26 :  /* MUTANT (rep_op) */      if (j <= 0)
+KILLED 0.39
+Checking mutant mutant100065_bmh.c:  26 :  /* MUTANT (rep_op) */      if (j > 0)
+KILLED 0.388
+Checking mutant mutant100066_bmh.c:  26 :  /* MUTANT (rep_op) */      if (j >= 0)
+KILLED 0.384
+Checking mutant mutant100067_bmh.c:  26 :  /* MUTANT (rep_op) */      if (j == 0)
+KILLED 0.39
+Checking mutant mutant100068_bmh.c:  26 :  /* MUTANT (rep_op) */      if (j != 0)
+KILLED 0.365
+Checking mutant mutant100069_bmh.c:  26 :  /* MUTANT (rep_const) */      if (j < 1)
+KILLED 0.397
+Checking mutant mutant100070_bmh.c:  26 :  /* MUTANT (rep_const) */      if (j < -1)
+KILLED 0.362
+Checking mutant mutant100071_bmh.c:  26 :  /* MUTANT (negate) */      if(! (j < 0))
+KILLED 0.357
+Checking mutant mutant100072_bmh.c:  27 :  /* MUTANT (rep_op) */	return i - 1;
+KILLED 0.34
+Checking mutant mutant100073_bmh.c:  27 :  /* MUTANT (rep_op) */	return i * 1;
+KILLED 0.352
+Checking mutant mutant100074_bmh.c:  27 :  /* MUTANT (rep_op) */	return i % 1;
+KILLED 0.34
+Checking mutant mutant100075_bmh.c:  27 :  /* MUTANT (rep_const) */	return i + 0;
+KILLED 0.395
+Checking mutant mutant100076_bmh.c:  27 :  /* MUTANT (rep_const) */	return i + -1;
+KILLED 0.393
+Checking mutant mutant100077_bmh.c:  27 :  /* MUTANT (rep_const) */	return i + ((1)+1);
+KILLED 0.366
+Checking mutant mutant100078_bmh.c:  28 :  /* MUTANT (rep_op) */      if (text[i] == pat[j])
+KILLED 0.367
+Checking mutant mutant100079_bmh.c:  28 :  /* MUTANT (negate) */      if(! (text[i] != pat[j]))
+KILLED 0.382
+Checking mutant mutant100080_bmh.c:  32 :  /* MUTANT (rep_const) */  return 0;
+KILLED 0.406
+Checking mutant mutant100081_bmh.c:  32 :  /* MUTANT (rep_const) */  return 1;
+KILLED 0.404
+Checking mutant mutant100082_bmh.c:  32 :  /* MUTANT (rep_const) */  return ((-1)+1);
+KILLED 0.359
+Checking mutant mutant100083_bmh.c:  32 :  /* MUTANT (rep_const) */  return ((-1)-1);
+KILLED 0.37
+83 TOTAL MUTANTS, 60 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (72.2891566265% kill rate)
+AVERAGE KILL TIME 0.36675
+AVERAGE VERIFY TIME 0.85465
+MIN/MAX KILL TIME =  0.014 / 0.706
+MIN/MAX SUCCESS TIME =  0.34 / 0.69
+SURVIVING MUTANTS:
+mutant100003_bmh.c
+12 :  /* MUTANT (del_stmt) */ /*   __CPROVER_assume(0 < patlen && patlen <= BMH_PATLEN_MAX); */ 
+mutant100004_bmh.c
+12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 <= patlen && patlen <= BMH_PATLEN_MAX);
+mutant100005_bmh.c
+12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 > patlen && patlen <= BMH_PATLEN_MAX);
+mutant100006_bmh.c
+12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 >= patlen && patlen <= BMH_PATLEN_MAX);
+mutant100007_bmh.c
+12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 == patlen && patlen <= BMH_PATLEN_MAX);
+mutant100008_bmh.c
+12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 != patlen && patlen <= BMH_PATLEN_MAX);
+mutant100009_bmh.c
+12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 < patlen || patlen <= BMH_PATLEN_MAX);
+mutant100010_bmh.c
+12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 < patlen && patlen < BMH_PATLEN_MAX);
+mutant100011_bmh.c
+12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 < patlen && patlen > BMH_PATLEN_MAX);
+mutant100012_bmh.c
+12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 < patlen && patlen >= BMH_PATLEN_MAX);
+mutant100013_bmh.c
+12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 < patlen && patlen == BMH_PATLEN_MAX);
+mutant100014_bmh.c
+12 :  /* MUTANT (rep_op) */  __CPROVER_assume(0 < patlen && patlen != BMH_PATLEN_MAX);
+mutant100015_bmh.c
+12 :  /* MUTANT (rep_const) */  __CPROVER_assume(1 < patlen && patlen <= BMH_PATLEN_MAX);
+mutant100016_bmh.c
+12 :  /* MUTANT (rep_const) */  __CPROVER_assume(-1 < patlen && patlen <= BMH_PATLEN_MAX);
+mutant100021_bmh.c
+13 :  /* MUTANT (rep_op) */  for (i = 0; i != BMH_CHARSET_SIZE; i++)
+mutant100033_bmh.c
+16 :  /* MUTANT (rep_op) */  for (i = 0; i != m; i++) {
+mutant100040_bmh.c
+18 :  /* MUTANT (rep_op) */    if (c > BMH_CHARSET_SIZE)
+mutant100041_bmh.c
+18 :  /* MUTANT (rep_op) */    if (c == BMH_CHARSET_SIZE)
+mutant100059_bmh.c
+24 :  /* MUTANT (rep_op) */       k += ((c = text[k]) > BMH_CHARSET_SIZE) ? patlen : skip[c]) {
+mutant100060_bmh.c
+24 :  /* MUTANT (rep_op) */       k += ((c = text[k]) == BMH_CHARSET_SIZE) ? patlen : skip[c]) {

@@ -1,0 +1,778 @@
+/bin/sh: limit: command not found
+CBMC version 5.0 64-bit macos
+Parsing fakecover.c
+In file included from fakecover.c:23:
+file ./fake.h line 94: ./fake.h:94:9: warning: 'SIZE_MAX' macro redefined [-Wmacro-redefined]
+file ./fake.h line 94: #define SIZE_MAX        (~(size_t)0)
+file ./fake.h line 94:         ^
+file /usr/include/stdint.h line 153: /usr/include/stdint.h:153:9: note: previous definition is here
+file /usr/include/stdint.h line 153: #define SIZE_MAX          UINT64_MAX
+file /usr/include/stdint.h line 153:         ^
+file /usr/include/stdint.h line 153: 1 warning generated.
+Parsing COVER_mutant100074_tiny.c
+In file included from COVER_mutant100074_tiny.c:27:
+file ./fake.h line 94: ./fake.h:94:9: warning: 'SIZE_MAX' macro redefined [-Wmacro-redefined]
+file ./fake.h line 94: #define SIZE_MAX        (~(size_t)0)
+file ./fake.h line 94:         ^
+file /usr/include/stdint.h line 153: /usr/include/stdint.h:153:9: note: previous definition is here
+file /usr/include/stdint.h line 153: #define SIZE_MAX          UINT64_MAX
+file /usr/include/stdint.h line 153:         ^
+file /usr/include/stdint.h line 153: 1 warning generated.
+Converting
+Type-checking COVER_mutant100074_tiny
+Type-checking fakecover
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Adding SC constraints
+size of program expression: 20440 steps
+no slicing due to threads
+Generated 11 VCC(s), 11 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+150185 variables, 670504 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 3.662s
+Building error trace
+
+Counterexample:
+
+State 33  thread 0
+----------------------------------------------------
+  argv'[134217728]=irep("(\"nil\")")[134217728] (?)
+
+State 36 file fakecover.c line 217 thread 0
+----------------------------------------------------
+  argc=134217728 (00001000000000000000000000000000)
+
+State 37 file fakecover.c line 217 thread 0
+----------------------------------------------------
+  argv=argv' (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 38 file fakecover.c line 219 function main thread 0
+----------------------------------------------------
+  tu=((struct _opaque_pthread_t *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 39 file fakecover.c line 220 function main thread 0
+----------------------------------------------------
+  tpr=((struct _opaque_pthread_t *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 42 file COVER_mutant100074_tiny.c line 90 function rcu_idle_enter thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 43 file COVER_mutant100074_tiny.c line 91 function rcu_idle_enter thread 0
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 46 file COVER_mutant100074_tiny.c line 93 function rcu_idle_enter thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 49 file fakecover.c line 125 function local_irq_save thread 0
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 52 file fakecover.c line 127 function local_irq_save thread 0
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 60 file COVER_mutant100074_tiny.c line 97 function rcu_idle_enter thread 0
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 64 file COVER_mutant100074_tiny.c line 100 function rcu_idle_enter thread 0
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 69 file COVER_mutant100074_tiny.c line 227 function rcu_sched_qs thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 72 file COVER_mutant100074_tiny.c line 229 function rcu_sched_qs thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 75 file fakecover.c line 125 function local_irq_save thread 0
+----------------------------------------------------
+  local_irq_depth=2 (00000000000000000000000000000010)
+
+State 81 file COVER_mutant100074_tiny.c line 230 function rcu_sched_qs thread 0
+----------------------------------------------------
+  rcp=&rcu_sched_ctrlblk.rcucblist (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 90 file COVER_mutant100074_tiny.c line 231 function rcu_sched_qs thread 0
+----------------------------------------------------
+  rcp=&rcu_bh_ctrlblk.rcucblist (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 99 file COVER_mutant100074_tiny.c line 233 function rcu_sched_qs thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 100 file fakecover.c line 138 function local_irq_restore thread 0
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 104 file COVER_mutant100074_tiny.c line 81 function rcu_idle_enter_common thread 0
+----------------------------------------------------
+  rcu_dynticks_nesting=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 108 file COVER_mutant100074_tiny.c line 101 function rcu_idle_enter thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 109 file fakecover.c line 138 function local_irq_restore thread 0
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 110 file fakecover.c line 140 function local_irq_restore thread 0
+----------------------------------------------------
+  irq_lock=0 (00000000000000000000000000000000)
+
+State 203 file fakecover.c line 65 function fake_acquire_cpu_only thread 2
+----------------------------------------------------
+  cpu_lock=1 (00000000000000000000000000000001)
+
+State 209 file COVER_mutant100074_tiny.c line 167 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 210 file COVER_mutant100074_tiny.c line 168 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 213 file COVER_mutant100074_tiny.c line 170 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 216 file fakecover.c line 125 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 219 file fakecover.c line 127 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 223 file COVER_mutant100074_tiny.c line 171 function rcu_irq_enter thread 2
+----------------------------------------------------
+  mutant_covered=1 (00000000000000000000000000000001)
+
+State 224 file COVER_mutant100074_tiny.c line 173 function rcu_irq_enter thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=1 (0000000000000000000000000000000000000000000000000000000000000001)
+
+State 232 file COVER_mutant100074_tiny.c line 175 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 238 file COVER_mutant100074_tiny.c line 176 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 239 file fakecover.c line 138 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 240 file fakecover.c line 140 function local_irq_restore thread 2
+----------------------------------------------------
+  irq_lock=0 (00000000000000000000000000000000)
+
+State 249 file COVER_mutant100074_tiny.c line 110 function rcu_irq_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 250 file COVER_mutant100074_tiny.c line 111 function rcu_irq_exit thread 2
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 253 file COVER_mutant100074_tiny.c line 113 function rcu_irq_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 256 file fakecover.c line 125 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 259 file fakecover.c line 127 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 263 file COVER_mutant100074_tiny.c line 114 function rcu_irq_exit thread 2
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 271 file COVER_mutant100074_tiny.c line 116 function rcu_irq_exit thread 2
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 276 file COVER_mutant100074_tiny.c line 227 function rcu_sched_qs thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 279 file COVER_mutant100074_tiny.c line 229 function rcu_sched_qs thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 282 file fakecover.c line 125 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=2 (00000000000000000000000000000010)
+
+State 288 file COVER_mutant100074_tiny.c line 230 function rcu_sched_qs thread 2
+----------------------------------------------------
+  rcp=&rcu_sched_ctrlblk.rcucblist (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 297 file COVER_mutant100074_tiny.c line 231 function rcu_sched_qs thread 2
+----------------------------------------------------
+  rcp=&rcu_bh_ctrlblk.rcucblist (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 306 file COVER_mutant100074_tiny.c line 233 function rcu_sched_qs thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 307 file fakecover.c line 138 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 314 file COVER_mutant100074_tiny.c line 81 function rcu_idle_enter_common thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 318 file COVER_mutant100074_tiny.c line 117 function rcu_irq_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 319 file fakecover.c line 138 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 320 file fakecover.c line 140 function local_irq_restore thread 2
+----------------------------------------------------
+  irq_lock=0 (00000000000000000000000000000000)
+
+State 326 file fakecover.c line 92 function fake_release_cpu_only thread 2
+----------------------------------------------------
+  cpu_lock=0 (00000000000000000000000000000000)
+
+State 337 file fakecover.c line 65 function fake_acquire_cpu_only thread 1
+----------------------------------------------------
+  cpu_lock=1 (00000000000000000000000000000001)
+
+State 343 file COVER_mutant100074_tiny.c line 147 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 344 file COVER_mutant100074_tiny.c line 148 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 347 file COVER_mutant100074_tiny.c line 150 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 350 file fakecover.c line 125 function local_irq_save thread 1
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 353 file fakecover.c line 65 function fake_acquire_cpu_only thread 2
+----------------------------------------------------
+  cpu_lock=2 (00000000000000000000000000000010)
+
+State 356 file fakecover.c line 66 function fake_acquire_cpu_only thread 2
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 362 file COVER_mutant100074_tiny.c line 147 function rcu_idle_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 363 file COVER_mutant100074_tiny.c line 148 function rcu_idle_exit thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 366 file COVER_mutant100074_tiny.c line 150 function rcu_idle_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 369 file fakecover.c line 125 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 372 file fakecover.c line 127 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 376 file COVER_mutant100074_tiny.c line 151 function rcu_idle_exit thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 383 file COVER_mutant100074_tiny.c line 156 function rcu_idle_exit thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=90071992547409920 (0000000101000000000000000000000000000000000000000000000000000000)
+
+State 386 file COVER_mutant100074_tiny.c line 157 function rcu_idle_exit thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 392 file COVER_mutant100074_tiny.c line 158 function rcu_idle_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 393 file fakecover.c line 138 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 394 file fakecover.c line 140 function local_irq_restore thread 2
+----------------------------------------------------
+  irq_lock=0 (00000000000000000000000000000000)
+
+State 405 file fakecover.c line 162 function rcu_reader thread 2
+----------------------------------------------------
+  __unbuffered_tpr_x=0 (00000000000000000000000000000000)
+
+State 407 file fakecover.c line 127 function local_irq_save thread 1
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 411 file fakecover.c line 168 function rcu_reader thread 2
+----------------------------------------------------
+  __unbuffered_tpr_y=0 (00000000000000000000000000000000)
+
+State 419 file COVER_mutant100074_tiny.c line 167 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 420 file COVER_mutant100074_tiny.c line 168 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=2 (0000000000000000000000000000000000000000000000000000000000000010)
+
+State 423 file COVER_mutant100074_tiny.c line 170 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 426 file fakecover.c line 125 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 429 file fakecover.c line 127 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 432 file fakecover.c line 128 function local_irq_save thread 2
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 436 file COVER_mutant100074_tiny.c line 151 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=90071992547409920 (0000000101000000000000000000000000000000000000000000000000000000)
+
+State 438 file COVER_mutant100074_tiny.c line 171 function rcu_irq_enter thread 2
+----------------------------------------------------
+  mutant_covered=1 (00000000000000000000000000000001)
+
+State 444 file COVER_mutant100074_tiny.c line 154 function rcu_idle_exit thread 1
+----------------------------------------------------
+  rcu_dynticks_nesting=162129586585337856 (0000001001000000000000000000000000000000000000000000000000000000)
+
+State 448 file COVER_mutant100074_tiny.c line 157 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=90071992547409920 (0000000101000000000000000000000000000000000000000000000000000000)
+
+State 454 file COVER_mutant100074_tiny.c line 158 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 455 file fakecover.c line 138 function local_irq_restore thread 1
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 456 file COVER_mutant100074_tiny.c line 173 function rcu_irq_enter thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=90071992547409921 (0000000101000000000000000000000000000000000000000000000000000001)
+
+State 464 file COVER_mutant100074_tiny.c line 175 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=2 (0000000000000000000000000000000000000000000000000000000000000010)
+
+State 470 file COVER_mutant100074_tiny.c line 176 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 471 file fakecover.c line 138 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 472 file fakecover.c line 140 function local_irq_restore thread 2
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 478 file COVER_mutant100074_tiny.c line 110 function rcu_irq_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 479 file COVER_mutant100074_tiny.c line 111 function rcu_irq_exit thread 2
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 482 file COVER_mutant100074_tiny.c line 113 function rcu_irq_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 485 file fakecover.c line 125 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 488 file fakecover.c line 127 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 491 file fakecover.c line 128 function local_irq_save thread 2
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 495 file COVER_mutant100074_tiny.c line 114 function rcu_irq_exit thread 2
+----------------------------------------------------
+  newval=90071992547409920 (0000000101000000000000000000000000000000000000000000000000000000)
+
+State 503 file COVER_mutant100074_tiny.c line 116 function rcu_irq_exit thread 2
+----------------------------------------------------
+  newval=90071992547409920 (0000000101000000000000000000000000000000000000000000000000000000)
+
+State 505 file COVER_mutant100074_tiny.c line 64 function rcu_idle_enter_common thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=90071992547409920 (0000000101000000000000000000000000000000000000000000000000000000)
+
+State 510 file COVER_mutant100074_tiny.c line 117 function rcu_irq_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 511 file fakecover.c line 138 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 512 file fakecover.c line 140 function local_irq_restore thread 1
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 517 file fakecover.c line 176 function thread_update thread 1
+----------------------------------------------------
+  x=1 (00000000000000000000000000000001)
+
+State 527 file COVER_mutant100074_tiny.c line 90 function rcu_idle_enter thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 528 file COVER_mutant100074_tiny.c line 91 function rcu_idle_enter thread 1
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 531 file COVER_mutant100074_tiny.c line 93 function rcu_idle_enter thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 534 file fakecover.c line 125 function local_irq_save thread 1
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 537 file fakecover.c line 127 function local_irq_save thread 1
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 540 file fakecover.c line 128 function local_irq_save thread 1
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 550 file COVER_mutant100074_tiny.c line 97 function rcu_idle_enter thread 1
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 554 file COVER_mutant100074_tiny.c line 100 function rcu_idle_enter thread 1
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 559 file COVER_mutant100074_tiny.c line 227 function rcu_sched_qs thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 562 file COVER_mutant100074_tiny.c line 229 function rcu_sched_qs thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 565 file fakecover.c line 125 function local_irq_save thread 1
+----------------------------------------------------
+  local_irq_depth=2 (00000000000000000000000000000010)
+
+State 571 file COVER_mutant100074_tiny.c line 230 function rcu_sched_qs thread 1
+----------------------------------------------------
+  rcp=&rcu_sched_ctrlblk.rcucblist (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 580 file COVER_mutant100074_tiny.c line 231 function rcu_sched_qs thread 1
+----------------------------------------------------
+  rcp=&rcu_bh_ctrlblk.rcucblist (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 589 file COVER_mutant100074_tiny.c line 233 function rcu_sched_qs thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 590 file fakecover.c line 138 function local_irq_restore thread 1
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 594 file COVER_mutant100074_tiny.c line 81 function rcu_idle_enter_common thread 1
+----------------------------------------------------
+  rcu_dynticks_nesting=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 598 file COVER_mutant100074_tiny.c line 101 function rcu_idle_enter thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 599 file fakecover.c line 138 function local_irq_restore thread 1
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 600 file fakecover.c line 140 function local_irq_restore thread 1
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 606 file fakecover.c line 92 function fake_release_cpu_only thread 1
+----------------------------------------------------
+  cpu_lock=1 (00000000000000000000000000000001)
+
+State 617 file fakecover.c line 65 function fake_acquire_cpu_only thread 1
+----------------------------------------------------
+  cpu_lock=2 (00000000000000000000000000000010)
+
+State 620 file fakecover.c line 66 function fake_acquire_cpu_only thread 1
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 626 file COVER_mutant100074_tiny.c line 147 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 627 file COVER_mutant100074_tiny.c line 148 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 630 file COVER_mutant100074_tiny.c line 150 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 633 file fakecover.c line 125 function local_irq_save thread 1
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 636 file fakecover.c line 127 function local_irq_save thread 1
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 639 file fakecover.c line 128 function local_irq_save thread 1
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 643 file COVER_mutant100074_tiny.c line 151 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 650 file COVER_mutant100074_tiny.c line 156 function rcu_idle_exit thread 1
+----------------------------------------------------
+  rcu_dynticks_nesting=90071992547409920 (0000000101000000000000000000000000000000000000000000000000000000)
+
+State 653 file COVER_mutant100074_tiny.c line 157 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 659 file COVER_mutant100074_tiny.c line 158 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 660 file fakecover.c line 138 function local_irq_restore thread 1
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 661 file fakecover.c line 140 function local_irq_restore thread 1
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 669 file fakecover.c line 180 function thread_update thread 1
+----------------------------------------------------
+  y=1 (00000000000000000000000000000001)
+
+State 674 file COVER_mutant100074_tiny.c line 90 function rcu_idle_enter thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 675 file COVER_mutant100074_tiny.c line 91 function rcu_idle_enter thread 1
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 678 file COVER_mutant100074_tiny.c line 93 function rcu_idle_enter thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 681 file fakecover.c line 125 function local_irq_save thread 1
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 684 file fakecover.c line 127 function local_irq_save thread 1
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 687 file fakecover.c line 128 function local_irq_save thread 1
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 692 file fakecover.c line 140 function local_irq_restore thread 2
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 700 file COVER_mutant100074_tiny.c line 90 function rcu_idle_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 701 file COVER_mutant100074_tiny.c line 91 function rcu_idle_enter thread 2
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 704 file COVER_mutant100074_tiny.c line 93 function rcu_idle_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 707 file fakecover.c line 125 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 714 file fakecover.c line 127 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 717 file fakecover.c line 128 function local_irq_save thread 2
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 723 file COVER_mutant100074_tiny.c line 97 function rcu_idle_enter thread 1
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 727 file COVER_mutant100074_tiny.c line 100 function rcu_idle_enter thread 1
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 732 file COVER_mutant100074_tiny.c line 227 function rcu_sched_qs thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 735 file COVER_mutant100074_tiny.c line 229 function rcu_sched_qs thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 738 file fakecover.c line 125 function local_irq_save thread 1
+----------------------------------------------------
+  local_irq_depth=2 (00000000000000000000000000000010)
+
+State 744 file COVER_mutant100074_tiny.c line 230 function rcu_sched_qs thread 1
+----------------------------------------------------
+  rcp=&rcu_sched_ctrlblk.rcucblist (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 750 file COVER_mutant100074_tiny.c line 97 function rcu_idle_enter thread 2
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 754 file COVER_mutant100074_tiny.c line 100 function rcu_idle_enter thread 2
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 759 file COVER_mutant100074_tiny.c line 227 function rcu_sched_qs thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 762 file COVER_mutant100074_tiny.c line 229 function rcu_sched_qs thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 765 file fakecover.c line 125 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=2 (00000000000000000000000000000010)
+
+State 771 file COVER_mutant100074_tiny.c line 230 function rcu_sched_qs thread 2
+----------------------------------------------------
+  rcp=&rcu_sched_ctrlblk.rcucblist (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 780 file COVER_mutant100074_tiny.c line 231 function rcu_sched_qs thread 1
+----------------------------------------------------
+  rcp=&rcu_bh_ctrlblk.rcucblist (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 789 file COVER_mutant100074_tiny.c line 231 function rcu_sched_qs thread 2
+----------------------------------------------------
+  rcp=&rcu_bh_ctrlblk.rcucblist (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 798 file COVER_mutant100074_tiny.c line 233 function rcu_sched_qs thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 799 file fakecover.c line 138 function local_irq_restore thread 1
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 811 file COVER_mutant100074_tiny.c line 233 function rcu_sched_qs thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 812 file fakecover.c line 138 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 816 file COVER_mutant100074_tiny.c line 81 function rcu_idle_enter_common thread 1
+----------------------------------------------------
+  rcu_dynticks_nesting=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 820 file COVER_mutant100074_tiny.c line 101 function rcu_idle_enter thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 821 file fakecover.c line 138 function local_irq_restore thread 1
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 822 file fakecover.c line 140 function local_irq_restore thread 1
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 828 file fakecover.c line 92 function fake_release_cpu_only thread 1
+----------------------------------------------------
+  cpu_lock=1 (00000000000000000000000000000001)
+
+State 838 file COVER_mutant100074_tiny.c line 81 function rcu_idle_enter_common thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 842 file COVER_mutant100074_tiny.c line 101 function rcu_idle_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 843 file fakecover.c line 138 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 844 file fakecover.c line 140 function local_irq_restore thread 2
+----------------------------------------------------
+  irq_lock=0 (00000000000000000000000000000000)
+
+State 855 file <builtin-library>-pthread_create line 20 function __actual_thread_spawn thread 2
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 861 file fakecover.c line 92 function fake_release_cpu_only thread 2
+----------------------------------------------------
+  cpu_lock=0 (00000000000000000000000000000000)
+
+Violated property:
+  file fakecover.c line 235 function main
+  assertion !mutant_covered
+  FALSE
+
+VERIFICATION FAILED

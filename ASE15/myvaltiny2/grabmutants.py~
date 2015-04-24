@@ -1,0 +1,12 @@
+import subprocess
+
+for l in open("coveredmutants"):
+    ls = l.split()
+    fname = ls[2]
+    print fname
+    copy = "covtiny." + fname + ".bestcover"
+    print copy
+    cp1 = "cp " + fname + " for_paul/"
+    cp2 = "cp " + copy + " for_paul/"
+    subprocess.call ([cp1], shell=True)
+    subprocess.call ([cp2], shell=True)

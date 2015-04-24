@@ -1,0 +1,62 @@
+6: /* MUTANT (del_stmt) */ /* int ref[SIZE]; */ 
+8: /* MUTANT (del_stmt) */ /* int nondet_int(); */ 
+11: /* MUTANT (del_stmt) */ /*   int i, v, count, qcount, prev; */ 
+12: /* MUTANT (del_stmt) */ /*   int s = nondet_int(); */ 
+13: /* MUTANT (del_stmt) */ /*   __CPROVER_assume((s > 0) && (s <=SIZE)); */ 
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s <= 0) && (s <=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s < 0) && (s <=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s >= 0) && (s <=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s == 0) && (s <=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s != 0) && (s <=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s > 0) || (s <=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s > 0) && (s <SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s > 0) && (s >SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s > 0) && (s >=SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s > 0) && (s ==SIZE));
+13: /* MUTANT (rep_op) */  __CPROVER_assume((s > 0) && (s !=SIZE));
+13: /* MUTANT (rep_const) */  __CPROVER_assume((s > 1) && (s <=SIZE));
+13: /* MUTANT (rep_const) */  __CPROVER_assume((s > -1) && (s <=SIZE));
+14: /* MUTANT (rep_op) */  for (i = 0; i <= s; i++) {
+14: /* MUTANT (rep_op) */  for (i = 0; i > s; i++) {
+14: /* MUTANT (rep_op) */  for (i = 0; i >= s; i++) {
+14: /* MUTANT (rep_op) */  for (i = 0; i == s; i++) {
+14: /* MUTANT (rep_op) */  for (i = 0; i != s; i++) {
+14: /* MUTANT (rep_op) */  for (i = 0; i < s; i--) {
+14: /* MUTANT (rep_const) */  for (i = 1; i < s; i++) {
+14: /* MUTANT (rep_const) */  for (i = -1; i < s; i++) {
+15: /* MUTANT (del_stmt) */ /*     v = nondet_int(); */ 
+16: /* MUTANT (del_stmt) */ /*     ref[i] = v; */ 
+17: /* MUTANT (del_stmt) */ /*     a[i] = v; */ 
+20: /* MUTANT (del_stmt) */ /*   v = nondet_int(); */ 
+21: /* MUTANT (del_stmt) */ /*   count = 0; */ 
+21: /* MUTANT (rep_const) */  count = 1;
+21: /* MUTANT (rep_const) */  count = -1;
+22: /* MUTANT (del_stmt) */ /*   qcount = 0; */ 
+22: /* MUTANT (rep_const) */  qcount = 1;
+22: /* MUTANT (rep_const) */  qcount = -1;
+23: /* MUTANT (del_stmt) */ /*   prev = a[0]; */ 
+23: /* MUTANT (rep_const) */  prev = a[1];
+23: /* MUTANT (rep_const) */  prev = a[-1];
+24: /* MUTANT (rep_op) */  for (i = 0; i <= s; i++) {
+24: /* MUTANT (rep_op) */  for (i = 0; i > s; i++) {
+24: /* MUTANT (rep_op) */  for (i = 0; i >= s; i++) {
+24: /* MUTANT (rep_op) */  for (i = 0; i == s; i++) {
+24: /* MUTANT (rep_op) */  for (i = 0; i != s; i++) {
+24: /* MUTANT (rep_op) */  for (i = 0; i < s; i--) {
+24: /* MUTANT (rep_const) */  for (i = 1; i < s; i++) {
+24: /* MUTANT (rep_const) */  for (i = -1; i < s; i++) {
+25: /* MUTANT (rep_op) */    if (ref[i] != v) {
+25: /* MUTANT (negate) */    if(! (ref[i] == v)) {
+26: /* MUTANT (del_stmt) */ /*       count++; */ 
+26: /* MUTANT (rep_op) */      count--;
+28: /* MUTANT (rep_op) */    if (a[i] != v) {
+28: /* MUTANT (negate) */    if(! (a[i] == v)) {
+29: /* MUTANT (del_stmt) */ /*       qcount++; */ 
+29: /* MUTANT (rep_op) */      qcount--;
+31: /* MUTANT (rep_op) */    assert (a[i] <= prev);
+31: /* MUTANT (rep_op) */    assert (a[i] < prev);
+31: /* MUTANT (rep_op) */    assert (a[i] > prev);
+31: /* MUTANT (rep_op) */    assert (a[i] == prev);
+31: /* MUTANT (rep_op) */    assert (a[i] != prev);
+32: /* MUTANT (del_stmt) */ /*     prev = a[i]; */ 
+34: /* MUTANT (rep_op) */  assert (count != qcount);

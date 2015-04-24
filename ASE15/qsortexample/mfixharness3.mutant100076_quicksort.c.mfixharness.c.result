@@ -1,0 +1,184 @@
+/bin/sh: limit: command not found
+CBMC version 5.0 64-bit macos
+Parsing mfixharness.c
+Parsing mutant100076_quicksort.c
+Converting
+Type-checking mfixharness
+file mfixharness.c line 31 function main: function `assert' is not declared
+Type-checking mutant100076_quicksort
+file mutant100076_quicksort.c line 6 function quickSort: function `printf' is not declared
+file mutant100076_quicksort.c line 12 function quickSort: function `partition' is not declared
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 (4 max) file mfixharness.c line 14 function main thread 0
+Unwinding loop main.0 iteration 2 (4 max) file mfixharness.c line 14 function main thread 0
+Unwinding loop main.0 iteration 3 (4 max) file mfixharness.c line 14 function main thread 0
+Not unwinding loop main.0 iteration 4 (4 max) file mfixharness.c line 14 function main thread 0
+Unwinding loop main.1 iteration 1 (4 max) file mfixharness.c line 24 function main thread 0
+Unwinding loop main.1 iteration 2 (4 max) file mfixharness.c line 24 function main thread 0
+Unwinding loop main.1 iteration 3 (4 max) file mfixharness.c line 24 function main thread 0
+Not unwinding loop main.1 iteration 4 (4 max) file mfixharness.c line 24 function main thread 0
+size of program expression: 183 steps
+simple slicing removed 4 assignments
+Generated 39 VCC(s), 11 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+1929 variables, 5564 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 0.012s
+Building error trace
+
+Counterexample:
+
+State 19 file mfixharness.c line 11 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 20 file mfixharness.c line 11 function main thread 0
+----------------------------------------------------
+  v=0 (00000000000000000000000000000000)
+
+State 21 file mfixharness.c line 11 function main thread 0
+----------------------------------------------------
+  count=0 (00000000000000000000000000000000)
+
+State 22 file mfixharness.c line 11 function main thread 0
+----------------------------------------------------
+  qcount=0 (00000000000000000000000000000000)
+
+State 23 file mfixharness.c line 11 function main thread 0
+----------------------------------------------------
+  prev=0 (00000000000000000000000000000000)
+
+State 24 file mfixharness.c line 12 function main thread 0
+----------------------------------------------------
+  s=0 (00000000000000000000000000000000)
+
+State 25 file mfixharness.c line 12 function main thread 0
+----------------------------------------------------
+  s=3 (00000000000000000000000000000011)
+
+State 27 file mfixharness.c line 14 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 29 file mfixharness.c line 15 function main thread 0
+----------------------------------------------------
+  v=163787303 (00001001110000110011001000100111)
+
+State 30 file mfixharness.c line 16 function main thread 0
+----------------------------------------------------
+  ref[0]=163787303 (00001001110000110011001000100111)
+
+State 31 file mfixharness.c line 17 function main thread 0
+----------------------------------------------------
+  a[0]=163787303 (00001001110000110011001000100111)
+
+State 32 file mfixharness.c line 14 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 35 file mfixharness.c line 15 function main thread 0
+----------------------------------------------------
+  v=163787303 (00001001110000110011001000100111)
+
+State 36 file mfixharness.c line 16 function main thread 0
+----------------------------------------------------
+  ref[1]=163787303 (00001001110000110011001000100111)
+
+State 37 file mfixharness.c line 17 function main thread 0
+----------------------------------------------------
+  a[1]=163787303 (00001001110000110011001000100111)
+
+State 38 file mfixharness.c line 14 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+State 41 file mfixharness.c line 15 function main thread 0
+----------------------------------------------------
+  v=159592999 (00001001100000110011001000100111)
+
+State 42 file mfixharness.c line 16 function main thread 0
+----------------------------------------------------
+  ref[2]=159592999 (00001001100000110011001000100111)
+
+State 43 file mfixharness.c line 17 function main thread 0
+----------------------------------------------------
+  a[2]=159592999 (00001001100000110011001000100111)
+
+State 44 file mfixharness.c line 14 function main thread 0
+----------------------------------------------------
+  i=3 (00000000000000000000000000000011)
+
+State 49 file mfixharness.c line 19 function main thread 0
+----------------------------------------------------
+  a=a (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 50 file mfixharness.c line 19 function main thread 0
+----------------------------------------------------
+  size=3 (00000000000000000000000000000011)
+
+State 52 file mfixharness.c line 20 function main thread 0
+----------------------------------------------------
+  v=163787303 (00001001110000110011001000100111)
+
+State 53 file mfixharness.c line 21 function main thread 0
+----------------------------------------------------
+  count=0 (00000000000000000000000000000000)
+
+State 54 file mfixharness.c line 22 function main thread 0
+----------------------------------------------------
+  qcount=0 (00000000000000000000000000000000)
+
+State 55 file mfixharness.c line 23 function main thread 0
+----------------------------------------------------
+  prev=163787303 (00001001110000110011001000100111)
+
+State 56 file mfixharness.c line 24 function main thread 0
+----------------------------------------------------
+  i=0 (00000000000000000000000000000000)
+
+State 59 file mfixharness.c line 26 function main thread 0
+----------------------------------------------------
+  count=1 (00000000000000000000000000000001)
+
+State 61 file mfixharness.c line 29 function main thread 0
+----------------------------------------------------
+  qcount=1 (00000000000000000000000000000001)
+
+State 63 file mfixharness.c line 32 function main thread 0
+----------------------------------------------------
+  prev=163787303 (00001001110000110011001000100111)
+
+State 64 file mfixharness.c line 24 function main thread 0
+----------------------------------------------------
+  i=1 (00000000000000000000000000000001)
+
+State 68 file mfixharness.c line 26 function main thread 0
+----------------------------------------------------
+  count=2 (00000000000000000000000000000010)
+
+State 70 file mfixharness.c line 29 function main thread 0
+----------------------------------------------------
+  qcount=2 (00000000000000000000000000000010)
+
+State 72 file mfixharness.c line 32 function main thread 0
+----------------------------------------------------
+  prev=163787303 (00001001110000110011001000100111)
+
+State 73 file mfixharness.c line 24 function main thread 0
+----------------------------------------------------
+  i=2 (00000000000000000000000000000010)
+
+Violated property:
+  file mfixharness.c line 31 function main
+  assertion a[(signed long int)i] >= prev
+  a[(signed long int)i] >= prev
+
+VERIFICATION FAILED

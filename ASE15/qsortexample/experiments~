@@ -1,0 +1,11 @@
+python ../evalmutants.py harness1 10000 --options -DSIZE=1 --unwind 2 --pointer-check --bounds-check --files harness.c --mutate quicksort.c >& harness1.out
+python ../evalmutants.py harness2 10000 --ignoreKilled harness1 --options -DSIZE=2 --unwind 3 --pointer-check --bounds-check --files harness.c --mutate quicksort.c >& harness2.out
+python ../evalmutants.py harness3 10000 --ignoreKilled harness2 --options -DSIZE=3 --unwind 4 --pointer-check --bounds-check --files harness.c --mutate quicksort.c >& harness3.out
+python ../evalmutants.py harness4 10000 --ignoreKilled harness3 --options -DSIZE=4 --unwind 5 --pointer-check --bounds-check --files harness.c --mutate quicksort.c >& harness4.out
+
+python ../evalmutants.py fixharness1 10000 --options -DSIZE=1 --unwind 2 --pointer-check --bounds-check --files fixharness.c --mutate quicksort.c >& fixharness1.out
+python ../evalmutants.py fixharness2 10000 --ignoreKilled fixharness1 --options -DSIZE=2 --unwind 3 --pointer-check --bounds-check --files fixharness.c --mutate quicksort.c >& fixharness2.out
+python ../evalmutants.py fixharness3 10000 --ignoreKilled fixharness2 --options -DSIZE=3 --unwind 4 --pointer-check --bounds-check --files fixharness.c --mutate quicksort.c >& fixharness3.out
+python ../evalmutants.py fixharness4 10000 --ignoreKilled fixharness3 --options -DSIZE=4 --unwind 5 --pointer-check --bounds-check --files fixharness.c --mutate quicksort.c >& fixharness4.out
+
+

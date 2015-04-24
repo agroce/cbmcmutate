@@ -1,0 +1,889 @@
+CBMC version 5.0 64-bit macos
+Parsing BRANCHCOV_mutant100097_mytiny.c
+In file included from BRANCHCOV_mutant100097_mytiny.c:45:
+file ./fake.h line 94: ./fake.h:94:9: warning: 'SIZE_MAX' macro redefined [-Wmacro-redefined]
+file ./fake.h line 94: #define SIZE_MAX        (~(size_t)0)
+file ./fake.h line 94:         ^
+file /usr/include/stdint.h line 153: /usr/include/stdint.h:153:9: note: previous definition is here
+file /usr/include/stdint.h line 153: #define SIZE_MAX          UINT64_MAX
+file /usr/include/stdint.h line 153:         ^
+file /usr/include/stdint.h line 153: 1 warning generated.
+Parsing maxcov.c
+In file included from maxcov.c:23:
+file ./fake.h line 94: ./fake.h:94:9: warning: 'SIZE_MAX' macro redefined [-Wmacro-redefined]
+file ./fake.h line 94: #define SIZE_MAX        (~(size_t)0)
+file ./fake.h line 94:         ^
+file /usr/include/stdint.h line 153: /usr/include/stdint.h:153:9: note: previous definition is here
+file /usr/include/stdint.h line 153: #define SIZE_MAX          UINT64_MAX
+file /usr/include/stdint.h line 153:         ^
+file /usr/include/stdint.h line 153: 1 warning generated.
+Converting
+Type-checking BRANCHCOV_mutant100097_mytiny
+Type-checking maxcov
+Generating GOTO Program
+Adding CPROVER library
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+SWITCHING TO ASSUME: !((char **)value_ptr == ((char **)NULL))
+SWITCHING TO ASSUME: !(*((char **)value_ptr) == ((char *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(*((char **)value_ptr))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(*((char **)value_ptr)) < 0 || (unsigned long int)(POINTER_OFFSET(*((char **)value_ptr)) + 1) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(*((char **)value_ptr)) || !(POINTER_OFFSET(*((char **)value_ptr)) < 0 || POINTER_OFFSET(*((char **)value_ptr)) + 1 > OBJECT_SIZE(*((char **)value_ptr)))
+SWITCHING TO ASSUME: !((char **)value_ptr == ((char **)NULL))
+SWITCHING TO ASSUME: !(*((char **)value_ptr) == ((char *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(*((char **)value_ptr))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(*((char **)value_ptr)) < 0 || (unsigned long int)(POINTER_OFFSET(*((char **)value_ptr)) + 1) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(*((char **)value_ptr)) || !(POINTER_OFFSET(*((char **)value_ptr)) < 0 || POINTER_OFFSET(*((char **)value_ptr)) + 1 > OBJECT_SIZE(*((char **)value_ptr)))
+WAS ASSERT
+SWITCHING TO ASSUME: !(thread == ((struct _opaque_pthread_t **)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(thread)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(thread) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(thread) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(thread) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(thread) < 0 || (unsigned long int)(POINTER_OFFSET(thread) + 8) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(thread) || !(POINTER_OFFSET(thread) < 0 || POINTER_OFFSET(thread) + 8 > OBJECT_SIZE(thread))
+SWITCHING TO ASSUME: !(attr == ((const struct _opaque_pthread_attr_t *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(attr)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(attr) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(attr) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(attr) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(attr) < 0 || (unsigned long int)(POINTER_OFFSET(attr) + 64) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(attr) || !(POINTER_OFFSET(attr) < 0 || POINTER_OFFSET(attr) + 64 > OBJECT_SIZE(attr))
+SWITCHING TO ASSUME: !((char **)value_ptr == ((char **)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER((char **)value_ptr)
+SWITCHING TO ASSUME: !(POINTER_OBJECT((char **)value_ptr) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT((char **)value_ptr) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT((char **)value_ptr) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET((char **)value_ptr) < 0 || (unsigned long int)(POINTER_OFFSET((char **)value_ptr) + 8) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT((char **)value_ptr) || !(POINTER_OFFSET((char **)value_ptr) < 0 || POINTER_OFFSET((char **)value_ptr) + 8 > OBJECT_SIZE((char **)value_ptr))
+SWITCHING TO ASSUME: !(*((char **)value_ptr) == ((char *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(*((char **)value_ptr))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(*((char **)value_ptr)) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(*((char **)value_ptr)) < 0 || (unsigned long int)(POINTER_OFFSET(*((char **)value_ptr)) + 1) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(*((char **)value_ptr)) || !(POINTER_OFFSET(*((char **)value_ptr)) < 0 || POINTER_OFFSET(*((char **)value_ptr)) + 1 > OBJECT_SIZE(*((char **)value_ptr)))
+WAS ASSERT
+WAS ASSERT
+WAS ASSERT
+WAS ASSERT
+SWITCHING TO ASSUME: !(head == ((struct callback_head *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(head)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(head) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(head) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(head) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(head) < 0 || (unsigned long int)(POINTER_OFFSET(head) + 16) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(head) || !(POINTER_OFFSET(head) < 0 || POINTER_OFFSET(head) + 16 > OBJECT_SIZE(head))
+SWITCHING TO ASSUME: !(head == ((struct callback_head *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(head)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(head) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(head) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(head) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(head) < 0 || (unsigned long int)(POINTER_OFFSET(head) + 16) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(head) || !(POINTER_OFFSET(head) < 0 || POINTER_OFFSET(head) + 16 > OBJECT_SIZE(head))
+SWITCHING TO ASSUME: !(rcp == ((struct rcu_ctrlblk *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(rcp)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(rcp) < 0 || (unsigned long int)(POINTER_OFFSET(rcp) + 24) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(rcp) || !(POINTER_OFFSET(rcp) < 0 || POINTER_OFFSET(rcp) + 24 > OBJECT_SIZE(rcp))
+SWITCHING TO ASSUME: !(rcp->curtail == ((struct callback_head **)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(rcp->curtail)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp->curtail) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp->curtail) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(rcp->curtail) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(rcp->curtail) < 0 || (unsigned long int)(POINTER_OFFSET(rcp->curtail) + 8) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(rcp->curtail) || !(POINTER_OFFSET(rcp->curtail) < 0 || POINTER_OFFSET(rcp->curtail) + 8 > OBJECT_SIZE(rcp->curtail))
+SWITCHING TO ASSUME: !(rcp == ((struct rcu_ctrlblk *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(rcp)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(rcp) < 0 || (unsigned long int)(POINTER_OFFSET(rcp) + 24) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(rcp) || !(POINTER_OFFSET(rcp) < 0 || POINTER_OFFSET(rcp) + 24 > OBJECT_SIZE(rcp))
+WAS ASSERT
+WAS ASSERT
+SWITCHING TO ASSUME: !(rcp == ((struct rcu_ctrlblk *)NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(rcp)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(rcp) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(rcp) < 0 || (unsigned long int)(POINTER_OFFSET(rcp) + 24) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(rcp) || !(POINTER_OFFSET(rcp) < 0 || POINTER_OFFSET(rcp) + 24 > OBJECT_SIZE(rcp))
+SWITCHING TO ASSUME: !(start_routine == ((void * (*)(void *))NULL))
+SWITCHING TO ASSUME: !INVALID-POINTER(start_routine)
+SWITCHING TO ASSUME: !(POINTER_OBJECT(start_routine) == POINTER_OBJECT(__CPROVER_deallocated))
+SWITCHING TO ASSUME: !(POINTER_OBJECT(start_routine) == POINTER_OBJECT(__CPROVER_dead_object))
+SWITCHING TO ASSUME: POINTER_OBJECT(start_routine) == POINTER_OBJECT(__CPROVER_malloc_object) ==> !(POINTER_OFFSET(start_routine) < 0 || (unsigned long int)(POINTER_OFFSET(start_routine) + 0) > __CPROVER_malloc_size)
+SWITCHING TO ASSUME: DYNAMIC_OBJECT(start_routine) || !(POINTER_OFFSET(start_routine) < 0 || POINTER_OFFSET(start_routine) + 0 > OBJECT_SIZE(start_routine))
+WAS ASSERT
+Starting Bounded Model Checking
+Adding SC constraints
+size of program expression: 38277 steps
+no slicing due to threads
+Generated 11 VCC(s), 11 remaining after simplification
+Passing problem to propositional reduction
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.0 with simplifier
+287523 variables, 1283562 clauses
+SAT checker: negated claim is SATISFIABLE, i.e., does not hold
+Runtime decision procedure: 290.611s
+Building error trace
+
+Counterexample:
+
+State 50  thread 0
+----------------------------------------------------
+  argv'[268435456]=irep("(\"nil\")")[268435456] (?)
+
+State 53 file maxcov.c line 218 thread 0
+----------------------------------------------------
+  argc=268435456 (00010000000000000000000000000000)
+
+State 54 file maxcov.c line 218 thread 0
+----------------------------------------------------
+  argv=argv' (0000011100000000000000000000000000000000000000000000000000000000)
+
+State 55 file maxcov.c line 220 function main thread 0
+----------------------------------------------------
+  tu=((struct _opaque_pthread_t *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 56 file maxcov.c line 221 function main thread 0
+----------------------------------------------------
+  tpr=((struct _opaque_pthread_t *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 59 file BRANCHCOV_mutant100097_mytiny.c line 110 function rcu_idle_enter thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 60 file BRANCHCOV_mutant100097_mytiny.c line 111 function rcu_idle_enter thread 0
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 63 file BRANCHCOV_mutant100097_mytiny.c line 113 function rcu_idle_enter thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 66 file maxcov.c line 126 function local_irq_save thread 0
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 69 file maxcov.c line 128 function local_irq_save thread 0
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 77 file BRANCHCOV_mutant100097_mytiny.c line 116 function rcu_idle_enter thread 0
+----------------------------------------------------
+  __covered2=1 (00000000000000000000000000000001)
+
+State 78 file BRANCHCOV_mutant100097_mytiny.c line 116 function rcu_idle_enter thread 0
+----------------------------------------------------
+  total_covered=1 (00000000000000000000000000000001)
+
+State 79 file BRANCHCOV_mutant100097_mytiny.c line 117 function rcu_idle_enter thread 0
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 83 file BRANCHCOV_mutant100097_mytiny.c line 123 function rcu_idle_enter thread 0
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 88 file BRANCHCOV_mutant100097_mytiny.c line 255 function rcu_sched_qs thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 91 file BRANCHCOV_mutant100097_mytiny.c line 257 function rcu_sched_qs thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 94 file maxcov.c line 126 function local_irq_save thread 0
+----------------------------------------------------
+  local_irq_depth=2 (00000000000000000000000000000010)
+
+State 100 file BRANCHCOV_mutant100097_mytiny.c line 258 function rcu_sched_qs thread 0
+----------------------------------------------------
+  rcp=&rcu_sched_ctrlblk.rcucblist (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 101 file BRANCHCOV_mutant100097_mytiny.c line 239 function rcu_qsctr_help thread 0
+----------------------------------------------------
+  mutant_covered=1 (00000000000000000000000000000001)
+
+State 113 file BRANCHCOV_mutant100097_mytiny.c line 258 function rcu_sched_qs thread 0
+----------------------------------------------------
+  rcp=&rcu_bh_ctrlblk.rcucblist (0000010100000000000000000000000000000000000000000000000000000000)
+
+State 114 file BRANCHCOV_mutant100097_mytiny.c line 239 function rcu_qsctr_help thread 0
+----------------------------------------------------
+  mutant_covered=1 (00000000000000000000000000000001)
+
+State 126 file BRANCHCOV_mutant100097_mytiny.c line 262 function rcu_sched_qs thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 127 file maxcov.c line 139 function local_irq_restore thread 0
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 131 file BRANCHCOV_mutant100097_mytiny.c line 101 function rcu_idle_enter_common thread 0
+----------------------------------------------------
+  rcu_dynticks_nesting=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 135 file BRANCHCOV_mutant100097_mytiny.c line 124 function rcu_idle_enter thread 0
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 136 file maxcov.c line 139 function local_irq_restore thread 0
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 137 file maxcov.c line 141 function local_irq_restore thread 0
+----------------------------------------------------
+  irq_lock=0 (00000000000000000000000000000000)
+
+State 198 file <builtin-library>-pthread_create line 20 function __actual_thread_spawn thread 1
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 242 file maxcov.c line 66 function fake_acquire_cpu_only thread 1
+----------------------------------------------------
+  cpu_lock=1 (00000000000000000000000000000001)
+
+State 248 file BRANCHCOV_mutant100097_mytiny.c line 172 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 249 file BRANCHCOV_mutant100097_mytiny.c line 173 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 252 file BRANCHCOV_mutant100097_mytiny.c line 175 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 255 file maxcov.c line 126 function local_irq_save thread 1
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 258 file maxcov.c line 128 function local_irq_save thread 1
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 262 file BRANCHCOV_mutant100097_mytiny.c line 176 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 271 file <builtin-library>-pthread_create line 20 function __actual_thread_spawn thread 2
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 278 file maxcov.c line 66 function fake_acquire_cpu_only thread 2
+----------------------------------------------------
+  cpu_lock=2 (00000000000000000000000000000010)
+
+State 282 file maxcov.c line 67 function fake_acquire_cpu_only thread 2
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 288 file BRANCHCOV_mutant100097_mytiny.c line 196 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 289 file BRANCHCOV_mutant100097_mytiny.c line 197 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 292 file BRANCHCOV_mutant100097_mytiny.c line 199 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 295 file maxcov.c line 126 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 298 file maxcov.c line 128 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 304 file maxcov.c line 129 function local_irq_save thread 2
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 308 file BRANCHCOV_mutant100097_mytiny.c line 200 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 309 file BRANCHCOV_mutant100097_mytiny.c line 201 function rcu_irq_enter thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=1 (0000000000000000000000000000000000000000000000000000000000000001)
+
+State 317 file BRANCHCOV_mutant100097_mytiny.c line 203 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 323 file BRANCHCOV_mutant100097_mytiny.c line 204 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 324 file maxcov.c line 139 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 326 file BRANCHCOV_mutant100097_mytiny.c line 183 function rcu_idle_exit thread 1
+----------------------------------------------------
+  __covered7=1 (00000000000000000000000000000001)
+
+State 327 file BRANCHCOV_mutant100097_mytiny.c line 183 function rcu_idle_exit thread 1
+----------------------------------------------------
+  total_covered=2 (00000000000000000000000000000010)
+
+State 328 file BRANCHCOV_mutant100097_mytiny.c line 184 function rcu_idle_exit thread 1
+----------------------------------------------------
+  rcu_dynticks_nesting=90071992547409920 (0000000101000000000000000000000000000000000000000000000000000000)
+
+State 331 file BRANCHCOV_mutant100097_mytiny.c line 186 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 337 file BRANCHCOV_mutant100097_mytiny.c line 187 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 338 file maxcov.c line 139 function local_irq_restore thread 1
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 339 file maxcov.c line 141 function local_irq_restore thread 2
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 348 file BRANCHCOV_mutant100097_mytiny.c line 133 function rcu_irq_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 349 file BRANCHCOV_mutant100097_mytiny.c line 134 function rcu_irq_exit thread 2
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 352 file BRANCHCOV_mutant100097_mytiny.c line 136 function rcu_irq_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 355 file maxcov.c line 126 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 358 file maxcov.c line 128 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 361 file maxcov.c line 129 function local_irq_save thread 2
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 365 file BRANCHCOV_mutant100097_mytiny.c line 137 function rcu_irq_exit thread 2
+----------------------------------------------------
+  newval=90071992547409919 (0000000100111111111111111111111111111111111111111111111111111111)
+
+State 373 file BRANCHCOV_mutant100097_mytiny.c line 139 function rcu_irq_exit thread 2
+----------------------------------------------------
+  newval=90071992547409919 (0000000100111111111111111111111111111111111111111111111111111111)
+
+State 375 file maxcov.c line 141 function local_irq_restore thread 1
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 381 file maxcov.c line 177 function thread_update thread 1
+----------------------------------------------------
+  x=1 (00000000000000000000000000000001)
+
+State 391 file BRANCHCOV_mutant100097_mytiny.c line 110 function rcu_idle_enter thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 392 file BRANCHCOV_mutant100097_mytiny.c line 111 function rcu_idle_enter thread 1
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 395 file BRANCHCOV_mutant100097_mytiny.c line 113 function rcu_idle_enter thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 398 file maxcov.c line 126 function local_irq_save thread 1
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 400 file BRANCHCOV_mutant100097_mytiny.c line 80 function rcu_idle_enter_common thread 2
+----------------------------------------------------
+  __covered0=1 (00000000000000000000000000000001)
+
+State 402 file maxcov.c line 128 function local_irq_save thread 1
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 405 file maxcov.c line 129 function local_irq_save thread 1
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 410 file BRANCHCOV_mutant100097_mytiny.c line 80 function rcu_idle_enter_common thread 2
+----------------------------------------------------
+  total_covered=3 (00000000000000000000000000000011)
+
+State 417 file BRANCHCOV_mutant100097_mytiny.c line 117 function rcu_idle_enter thread 1
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 421 file BRANCHCOV_mutant100097_mytiny.c line 123 function rcu_idle_enter thread 1
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 426 file BRANCHCOV_mutant100097_mytiny.c line 255 function rcu_sched_qs thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 429 file BRANCHCOV_mutant100097_mytiny.c line 257 function rcu_sched_qs thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 432 file maxcov.c line 126 function local_irq_save thread 1
+----------------------------------------------------
+  local_irq_depth=2 (00000000000000000000000000000010)
+
+State 438 file BRANCHCOV_mutant100097_mytiny.c line 258 function rcu_sched_qs thread 1
+----------------------------------------------------
+  rcp=&rcu_sched_ctrlblk.rcucblist (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 439 file BRANCHCOV_mutant100097_mytiny.c line 239 function rcu_qsctr_help thread 1
+----------------------------------------------------
+  mutant_covered=1 (00000000000000000000000000000001)
+
+State 449 file BRANCHCOV_mutant100097_mytiny.c line 258 function rcu_sched_qs thread 1
+----------------------------------------------------
+  rcp=&rcu_bh_ctrlblk.rcucblist (0000010100000000000000000000000000000000000000000000000000000000)
+
+State 450 file BRANCHCOV_mutant100097_mytiny.c line 239 function rcu_qsctr_help thread 1
+----------------------------------------------------
+  mutant_covered=1 (00000000000000000000000000000001)
+
+State 460 file BRANCHCOV_mutant100097_mytiny.c line 262 function rcu_sched_qs thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 461 file maxcov.c line 139 function local_irq_restore thread 1
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 465 file BRANCHCOV_mutant100097_mytiny.c line 101 function rcu_idle_enter_common thread 1
+----------------------------------------------------
+  rcu_dynticks_nesting=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 469 file BRANCHCOV_mutant100097_mytiny.c line 124 function rcu_idle_enter thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 470 file maxcov.c line 139 function local_irq_restore thread 1
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 471 file maxcov.c line 141 function local_irq_restore thread 1
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 477 file BRANCHCOV_mutant100097_mytiny.c line 83 function rcu_idle_enter_common thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=90071992547409919 (0000000100111111111111111111111111111111111111111111111111111111)
+
+State 482 file BRANCHCOV_mutant100097_mytiny.c line 140 function rcu_irq_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 483 file maxcov.c line 139 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 484 file maxcov.c line 93 function fake_release_cpu_only thread 1
+----------------------------------------------------
+  cpu_lock=1 (00000000000000000000000000000001)
+
+State 495 file maxcov.c line 66 function fake_acquire_cpu_only thread 1
+----------------------------------------------------
+  cpu_lock=2 (00000000000000000000000000000010)
+
+State 498 file maxcov.c line 67 function fake_acquire_cpu_only thread 1
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 504 file BRANCHCOV_mutant100097_mytiny.c line 172 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 505 file BRANCHCOV_mutant100097_mytiny.c line 173 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 508 file BRANCHCOV_mutant100097_mytiny.c line 175 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 511 file maxcov.c line 126 function local_irq_save thread 1
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 514 file maxcov.c line 128 function local_irq_save thread 1
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 517 file maxcov.c line 129 function local_irq_save thread 1
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 521 file BRANCHCOV_mutant100097_mytiny.c line 176 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=90071992547409919 (0000000100111111111111111111111111111111111111111111111111111111)
+
+State 527 file maxcov.c line 141 function local_irq_restore thread 2
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 533 file maxcov.c line 93 function fake_release_cpu_only thread 2
+----------------------------------------------------
+  cpu_lock=1 (00000000000000000000000000000001)
+
+State 544 file maxcov.c line 66 function fake_acquire_cpu_only thread 2
+----------------------------------------------------
+  cpu_lock=2 (00000000000000000000000000000010)
+
+State 548 file maxcov.c line 67 function fake_acquire_cpu_only thread 2
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 554 file BRANCHCOV_mutant100097_mytiny.c line 172 function rcu_idle_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 555 file BRANCHCOV_mutant100097_mytiny.c line 173 function rcu_idle_exit thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 558 file BRANCHCOV_mutant100097_mytiny.c line 175 function rcu_idle_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 561 file maxcov.c line 126 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 564 file maxcov.c line 128 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 567 file maxcov.c line 129 function local_irq_save thread 2
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 571 file BRANCHCOV_mutant100097_mytiny.c line 176 function rcu_idle_exit thread 2
+----------------------------------------------------
+  oldval=90071992547409919 (0000000100111111111111111111111111111111111111111111111111111111)
+
+State 580 file BRANCHCOV_mutant100097_mytiny.c line 179 function rcu_idle_exit thread 1
+----------------------------------------------------
+  __covered6=1 (00000000000000000000000000000001)
+
+State 581 file BRANCHCOV_mutant100097_mytiny.c line 179 function rcu_idle_exit thread 1
+----------------------------------------------------
+  total_covered=4 (00000000000000000000000000000100)
+
+State 582 file BRANCHCOV_mutant100097_mytiny.c line 179 function rcu_idle_exit thread 2
+----------------------------------------------------
+  __covered6=1 (00000000000000000000000000000001)
+
+State 583 file BRANCHCOV_mutant100097_mytiny.c line 180 function rcu_idle_exit thread 1
+----------------------------------------------------
+  rcu_dynticks_nesting=162129586585337855 (0000001000111111111111111111111111111111111111111111111111111111)
+
+State 587 file BRANCHCOV_mutant100097_mytiny.c line 186 function rcu_idle_exit thread 1
+----------------------------------------------------
+  oldval=90071992547409919 (0000000100111111111111111111111111111111111111111111111111111111)
+
+State 589 file BRANCHCOV_mutant100097_mytiny.c line 179 function rcu_idle_exit thread 2
+----------------------------------------------------
+  total_covered=5 (00000000000000000000000000000101)
+
+State 590 file BRANCHCOV_mutant100097_mytiny.c line 180 function rcu_idle_exit thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=234187180623265791 (0000001100111111111111111111111111111111111111111111111111111111)
+
+State 594 file BRANCHCOV_mutant100097_mytiny.c line 186 function rcu_idle_exit thread 2
+----------------------------------------------------
+  oldval=90071992547409919 (0000000100111111111111111111111111111111111111111111111111111111)
+
+State 598 file BRANCHCOV_mutant100097_mytiny.c line 148 function rcu_idle_exit_common thread 1
+----------------------------------------------------
+  __covered4=1 (00000000000000000000000000000001)
+
+State 599 file BRANCHCOV_mutant100097_mytiny.c line 148 function rcu_idle_exit_common thread 2
+----------------------------------------------------
+  __covered4=1 (00000000000000000000000000000001)
+
+State 600 file BRANCHCOV_mutant100097_mytiny.c line 148 function rcu_idle_exit_common thread 2
+----------------------------------------------------
+  total_covered=6 (00000000000000000000000000000110)
+
+State 605 file BRANCHCOV_mutant100097_mytiny.c line 187 function rcu_idle_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 606 file maxcov.c line 139 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 607 file maxcov.c line 141 function local_irq_restore thread 2
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 618 file maxcov.c line 163 function rcu_reader thread 2
+----------------------------------------------------
+  __unbuffered_tpr_x=1 (00000000000000000000000000000001)
+
+State 619 file maxcov.c line 169 function rcu_reader thread 2
+----------------------------------------------------
+  __unbuffered_tpr_y=0 (00000000000000000000000000000000)
+
+State 627 file BRANCHCOV_mutant100097_mytiny.c line 196 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 628 file BRANCHCOV_mutant100097_mytiny.c line 197 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 631 file BRANCHCOV_mutant100097_mytiny.c line 199 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 634 file maxcov.c line 126 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 636 file BRANCHCOV_mutant100097_mytiny.c line 148 function rcu_idle_exit_common thread 1
+----------------------------------------------------
+  total_covered=7 (00000000000000000000000000000111)
+
+State 641 file BRANCHCOV_mutant100097_mytiny.c line 187 function rcu_idle_exit thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 642 file maxcov.c line 139 function local_irq_restore thread 1
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 644 file maxcov.c line 128 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 647 file maxcov.c line 129 function local_irq_save thread 2
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 651 file BRANCHCOV_mutant100097_mytiny.c line 200 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=234187180623265791 (0000001100111111111111111111111111111111111111111111111111111111)
+
+State 652 file BRANCHCOV_mutant100097_mytiny.c line 201 function rcu_irq_enter thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=234187180623265792 (0000001101000000000000000000000000000000000000000000000000000000)
+
+State 660 file BRANCHCOV_mutant100097_mytiny.c line 203 function rcu_irq_enter thread 2
+----------------------------------------------------
+  oldval=234187180623265791 (0000001100111111111111111111111111111111111111111111111111111111)
+
+State 667 file BRANCHCOV_mutant100097_mytiny.c line 204 function rcu_irq_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 668 file maxcov.c line 139 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 669 file maxcov.c line 141 function local_irq_restore thread 2
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 675 file BRANCHCOV_mutant100097_mytiny.c line 133 function rcu_irq_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 676 file BRANCHCOV_mutant100097_mytiny.c line 134 function rcu_irq_exit thread 2
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 679 file BRANCHCOV_mutant100097_mytiny.c line 136 function rcu_irq_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 682 file maxcov.c line 126 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 685 file maxcov.c line 128 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 688 file maxcov.c line 129 function local_irq_save thread 2
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 692 file BRANCHCOV_mutant100097_mytiny.c line 137 function rcu_irq_exit thread 2
+----------------------------------------------------
+  newval=234187180623265791 (0000001100111111111111111111111111111111111111111111111111111111)
+
+State 700 file BRANCHCOV_mutant100097_mytiny.c line 139 function rcu_irq_exit thread 2
+----------------------------------------------------
+  newval=234187180623265791 (0000001100111111111111111111111111111111111111111111111111111111)
+
+State 703 file BRANCHCOV_mutant100097_mytiny.c line 83 function rcu_idle_enter_common thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=234187180623265791 (0000001100111111111111111111111111111111111111111111111111111111)
+
+State 708 file BRANCHCOV_mutant100097_mytiny.c line 140 function rcu_irq_exit thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 709 file maxcov.c line 139 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 710 file maxcov.c line 141 function local_irq_restore thread 1
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 718 file maxcov.c line 181 function thread_update thread 1
+----------------------------------------------------
+  y=1 (00000000000000000000000000000001)
+
+State 723 file BRANCHCOV_mutant100097_mytiny.c line 110 function rcu_idle_enter thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 724 file BRANCHCOV_mutant100097_mytiny.c line 111 function rcu_idle_enter thread 1
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 727 file BRANCHCOV_mutant100097_mytiny.c line 113 function rcu_idle_enter thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 730 file maxcov.c line 126 function local_irq_save thread 1
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 733 file maxcov.c line 128 function local_irq_save thread 1
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 736 file maxcov.c line 141 function local_irq_restore thread 2
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 744 file BRANCHCOV_mutant100097_mytiny.c line 110 function rcu_idle_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 745 file BRANCHCOV_mutant100097_mytiny.c line 111 function rcu_idle_enter thread 2
+----------------------------------------------------
+  newval=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 748 file BRANCHCOV_mutant100097_mytiny.c line 113 function rcu_idle_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 751 file maxcov.c line 126 function local_irq_save thread 2
+----------------------------------------------------
+  local_irq_depth=1 (00000000000000000000000000000001)
+
+State 753 file maxcov.c line 129 function local_irq_save thread 1
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 759 file maxcov.c line 128 function local_irq_save thread 2
+----------------------------------------------------
+  irq_lock=2 (00000000000000000000000000000010)
+
+State 766 file maxcov.c line 129 function local_irq_save thread 2
+----------------------------------------------------
+  noassert=1 (00000000000000000000000000000001)
+
+State 779 file BRANCHCOV_mutant100097_mytiny.c line 120 function rcu_idle_enter thread 1
+----------------------------------------------------
+  __covered3=1 (00000000000000000000000000000001)
+
+State 780 file BRANCHCOV_mutant100097_mytiny.c line 120 function rcu_idle_enter thread 2
+----------------------------------------------------
+  __covered3=1 (00000000000000000000000000000001)
+
+State 781 file BRANCHCOV_mutant100097_mytiny.c line 120 function rcu_idle_enter thread 1
+----------------------------------------------------
+  total_covered=8 (00000000000000000000000000001000)
+
+State 782 file BRANCHCOV_mutant100097_mytiny.c line 120 function rcu_idle_enter thread 2
+----------------------------------------------------
+  total_covered=9 (00000000000000000000000000001001)
+
+State 783 file BRANCHCOV_mutant100097_mytiny.c line 121 function rcu_idle_enter thread 2
+----------------------------------------------------
+  newval=162129586585337855 (0000001000111111111111111111111111111111111111111111111111111111)
+
+State 786 file BRANCHCOV_mutant100097_mytiny.c line 123 function rcu_idle_enter thread 2
+----------------------------------------------------
+  newval=162129586585337855 (0000001000111111111111111111111111111111111111111111111111111111)
+
+State 789 file BRANCHCOV_mutant100097_mytiny.c line 121 function rcu_idle_enter thread 1
+----------------------------------------------------
+  newval=162129586585337855 (0000001000111111111111111111111111111111111111111111111111111111)
+
+State 792 file BRANCHCOV_mutant100097_mytiny.c line 123 function rcu_idle_enter thread 1
+----------------------------------------------------
+  newval=162129586585337855 (0000001000111111111111111111111111111111111111111111111111111111)
+
+State 795 file BRANCHCOV_mutant100097_mytiny.c line 83 function rcu_idle_enter_common thread 2
+----------------------------------------------------
+  rcu_dynticks_nesting=162129586585337855 (0000001000111111111111111111111111111111111111111111111111111111)
+
+State 800 file BRANCHCOV_mutant100097_mytiny.c line 124 function rcu_idle_enter thread 2
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 801 file maxcov.c line 139 function local_irq_restore thread 2
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 802 file BRANCHCOV_mutant100097_mytiny.c line 83 function rcu_idle_enter_common thread 1
+----------------------------------------------------
+  rcu_dynticks_nesting=162129586585337855 (0000001000111111111111111111111111111111111111111111111111111111)
+
+State 807 file BRANCHCOV_mutant100097_mytiny.c line 124 function rcu_idle_enter thread 1
+----------------------------------------------------
+  flags=0 (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 808 file maxcov.c line 139 function local_irq_restore thread 1
+----------------------------------------------------
+  local_irq_depth=0 (00000000000000000000000000000000)
+
+State 809 file maxcov.c line 141 function local_irq_restore thread 1
+----------------------------------------------------
+  irq_lock=1 (00000000000000000000000000000001)
+
+State 815 file maxcov.c line 93 function fake_release_cpu_only thread 1
+----------------------------------------------------
+  cpu_lock=1 (00000000000000000000000000000001)
+
+State 825 file maxcov.c line 141 function local_irq_restore thread 2
+----------------------------------------------------
+  irq_lock=0 (00000000000000000000000000000000)
+
+State 833 file maxcov.c line 93 function fake_release_cpu_only thread 2
+----------------------------------------------------
+  cpu_lock=0 (00000000000000000000000000000000)
+
+Violated property:
+  file maxcov.c line 237 function main
+  assertion !mutant_covered
+  FALSE
+
+VERIFICATION FAILED
