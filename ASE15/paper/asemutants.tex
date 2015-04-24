@@ -787,7 +787,7 @@ set all elements in all arrays to 0, and to generally provide an
 uninformative example of a successful execution.  The requirement to
 cover a mutant (and as much other code as possible) helps guide CBMC
 to a successful execution that is \emph{likely to be incorrect},
-because the mutant changes the original program.  Moreover, while the
+because a non-equivalent mutant \emph{changes the original program's behavior}.  Moreover, while the
 problem with the harness in this case is simple, understanding
 arbitrary ``passing'' but wrong executions can be very difficult
 without the ability to think about \emph{a specific bug} the model
@@ -796,9 +796,11 @@ mutants allows us to compare harnesses even over killed mutants:  if
 one harness reduces the set of passing executions for a mutant, it is
 arguably a better verification of correctness than one allowing more
 executions of the mutant, even if both produce a counterexample
-killing the mutant.  A harness is most effective with respect to a
+killing the mutant.  Unlike traditional mutation analysis, we can take
+the question ``how killed is this mutant'' seriously because we aim at
+exhaustive testing.  A harness is most effective with respect to a
 mutant if it allows \emph{no} executions covering the mutant to pass,
-or (in practice) only those such that the behavior is still identical
+or, to be precise, only those such that the relevant behavior is still identical
 to the correct program.
 
 The witness tells us that the sorting harness needs to be modified.
@@ -806,22 +808,23 @@ It is too \emph{weak}.  We say that harness is weak if it fails to
 detect incorrect executions.  One harness is stronger than another if
 it detects more failures; we can indirectly estimate strength by
 determining how many mutants a harness can kill at a given problem
-size, or how many executions covering killed mutants can still satisfy the
-harness.  Figure \ref{fig:added} shows how to modify the sorting harness to
-check this additional critical property\footnote{In fact, if we choose
-  a {\tt val} to check before we assign to {\tt ref} and count that
-  value's appearances, we can completely dispense with storing {\tt
-    ref} at all.  In practice, this is more difficult for non-CBMC
-  experts to understand, and makes model checking only slightly faster.} .  Because CBMC is exhaustive,
-instead of performing a complete check for permutation, we can detect
-violation of the property by letting {\tt v} be any value, and
-ensuring that both {\tt a} and {\tt ref} contain the same
-\emph{number} of elements equal to {\tt v}.  If {\tt a} is \emph{not}
-a permutation of {\tt ref}, $\exists {\tt v}$ such that this is not
-true, and we can rely on CBMC to report it as part of a
-counterexample.  This is a useful reminder that while a CBMC harness
-resembles a C program to test the SUT, it can make use of approaches
-to testing that are not viable in a non-exhaustive context.
+size, and how executions covering killed mutants can still satisfy the
+harness.  Figure \ref{fig:added} shows how to modify the sorting
+harness to check this additional critical property\footnote{In fact,
+  if we choose a {\tt val} to check before we assign to {\tt ref} and
+  count that value's appearances, we can completely dispense with
+  storing {\tt ref} at all.  In practice, this is more difficult for
+  non-CBMC experts to understand, and makes model checking only
+  slightly faster.} .  Because CBMC is exhaustive, instead of
+performing a complete check for permutation, we can detect violation
+of the property by letting {\tt v} be any value, and ensuring that
+both {\tt a} and {\tt ref} contain the same \emph{number} of elements
+equal to {\tt v}.  If {\tt a} is \emph{not} a permutation of {\tt
+  ref}, $\exists {\tt v}$ such that this is not true, and we can rely
+on CBMC to report it as part of a counterexample.  This is a useful
+reminder that while a CBMC harness resembles a C program to test the
+SUT, it can make use of approaches to testing that are not viable in a
+non-exhaustive context.
 
 If we modify the harness as above, we can re-check our mutants.  In
 practice, we would remove the two we determined are equivalent based
