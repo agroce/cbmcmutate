@@ -416,8 +416,8 @@ aggressive search for bugs and, at best, prove correctness of their
 code.  Tools such as CBMC \cite{CBMCp} (the C Bounded Model Checker)
 allow a software engineer to model check code by writing what is
 essentially a generalized test harness\footnote{By a harness we mean a
-  program that defines the environment in which a program is verified,
-  provides correctness properties, etc.; in CBMC such a harness looks
+  program that defines the environment in which the software is verified,
+  defines the form of valid tests, and provides correctness properties; in CBMC such a harness looks
   very similar to a harness for more traditional software testing.} in
 the language of the Software Under Test (SUT).  Figure
 \ref{fig:sortharness} shows a CBMC harness for sorting routines.  This is
@@ -898,20 +898,21 @@ that of the harness.
 
 \subsection{Contributions}
 
-Our primary contribution in this paper is a detailed examination of
-the extension of traditional mutation testing to understand successful
-(and ``successful'') verification results, and determine when a
-harness is not actually sufficiently powerful to ensure correctness.
-To support this approach, we show how to use mutation testing to
-choose bounds in bounded model checking, how to
+Our primary contribution in this paper is a falsification-driven
+approach to verification: an extension of traditional mutation testing
+that aids the user of a model checker in understanding successful (and
+``successful'') verification results, determining when a harness is
+not actually strong enough to ensure correctness, and correcting the
+verification harness.  To support this approach, we show how to use
+mutation testing to choose a problem size in bounded model checking, how to
 mutate a harness to determine if any similar harnesses have an equal
-(or better) mutation kill rate, and most importantly, how to
-modify CBMC to automatically
-produce \emph{successful high-coverage executions covering mutated code}
-in order to understand mutant behavior and find subtle harness flaws.  We also propose the use of
-mutation analysis to gain limited confidence in program correctness even
-past model checker scalability limits. At a more general level, we
-discuss the fundamental nature of ``verification'' in a real-world
+(or better) mutation kill rate, and most importantly, how to modify
+CBMC to automatically produce \emph{successful high-coverage
+  executions covering mutated code} in order to understand mutant
+behavior and find subtle harness flaws.  We also propose the use of
+mutation analysis to gain limited confidence in program correctness
+even past model checker scalability limits. At a more general level,
+we discuss the fundamental nature of ``verification'' in a real-world
 context where specifications are never known to be complete. We
 propose that falsification, as in certain theories of natural science,
 is a more useful conceptual framework for most software verification
@@ -1221,24 +1222,36 @@ of non-exhaustive test suites.  Random testing
 bug-finding method, but its failure to kill any individual mutant is
 likely to be a matter of probability, rather than a flaw \emph{per se}
 in the testing itself.  In verification, however, there are no
-accidents.
+accidents: if a harness verifies an incorrect program, either the
+assumptions, the specification, or the problem size are neccessarily
+in need of correction.
 
 \section{Related Work}
 
 The idea that a ``successful verification'' often simply indicates an
 inadequate property is long-standing \cite{PracticalCov,Hoskote}. Use
-of mutants \cite{MutSpec,MutCov} to provide a coverage measure dates back
-both to these early explorations and relatively recent work
+of mutants \cite{MutSpec,MutCov} to provide a coverage measure dates
+back both to these early explorations and relatively recent work
 \cite{MutInterp}.  However, in these efforts the mutation was usually
 applied to hardware models, and (critically) the surviving mutants
 were used to identify ``uncovered'' portions of a model, rather than
 presented to a developer for examination and understanding directly.
 To our knowledge, no previous work presented passing executions of a
-source code mutant as a guide to understanding specification
-weakness.  Our modification of the harness is a source-code analogue
-to attempts to modify logical formulas, e.g., the effort to (in a
-narrow, vacuity-based sense) produce the \emph{strongest passing LTL
-  formula} of Chockler et al. \cite{BeyondVac}.  
+source code mutant as a guide to understanding specification weakness.
+Our modification of the harness is a source-code analogue to attempts
+to modify logical formulas, e.g., the effort to (in a narrow,
+vacuity-based sense) produce the \emph{strongest passing LTL formula}
+of Chockler et al. \cite{BeyondVac}.  We are not the first to note
+that model checking, at present, due to the ``many obstacles'' in
+proving a system correct, is primarily used for falsification
+\cite{AbsFals}.  Previous work on the topic \cite{AbsFals} focused on
+abstractions based on underapproximation, to ensure counterexamples
+were not spurious. We instead preserve the goal of
+verification\footnote{Note that we use a model checking approach that
+  already guarantees non-spurious counterexamples, and provides
+  bounded rather than full verification.},
+but drive the verification process, from the human point of view, by
+repeated falsification of incorrect systems.
 
 Our idea of examining successful executions to better understand
 surviving (and even killed) mutants is a peculiar variation of the
