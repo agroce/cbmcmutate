@@ -856,7 +856,22 @@ surviving mutants are semantically equivalent to the original program
 we propose the developer \emph{mutate the test harness itself}.  The
 idea is to check that 1) most mutants of the harness reject the SUT
 and 2) the remaining mutants have a mutant kill rate no greater than
-that of the harness.  
+that of the harness.  For our fixed harness, there are 61 mutants, of
+which 2 do not compile.  Of these, 40 produce an incorrect
+counterexample for the original, correct, quick sort.  An additional
+10 have mutant kill rates much worse than the original harness (from
+as low as 5\% of mutants killed to only a few percent worse than the
+fixed harness).  The remaining 9 mutants have the same ability to kill
+mutants as the original harness.  Most of these involve modifying a
+relational operator in a loop or an assumption in a way that does not
+change the verification problem.  The only interesting surviving
+harness mutant is one that removes the assignment of a fresh
+non-deterministic value to {\tt v} after the call to {\tt sort}.  This
+means the check for permutation difference will always be performed on
+the last element of {\tt ref}.  On reflection, it seems plausible
+that this is sufficient to produce a counterexample for all the quick
+sort mutants, but it is clearly not an improvement to the harness, in
+terms of either verification strength or clarity.
 
 \begin{comment}
 
