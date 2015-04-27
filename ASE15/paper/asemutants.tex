@@ -901,6 +901,38 @@ that this is sufficient to produce a counterexample for all the quick
 sort mutants, but it is clearly not an improvement to the harness, in
 terms of either verification strength or clarity.
 
+In addition to showing the current harness is at least a ``local
+minima'' with respect to mutants, mutation analysis of the harness
+also provides some evidence of our technique's ability to detect
+subtle specification and environment flaws.  In particular, it shows
+the value of \emph{inspecting all surviving mutants}.  One mutant
+modifies the assumption on {\tt s} to be {\tt < SIZE} rather than {\tt
+  <= SIZE}, which is the same as lowering the {\tt SIZE} by one; this
+is  a fairly easy mistake to make in a harness, and likely not much more
+uncommon than off-by-one bugs in actual code.  This
+reduces the effectiveness of the verification by 19 mutants, so is
+likely not to escape notice, and would also (in our framework) simply
+result in a higher size being chosen as mutant-stable.
+
+Another harness mutant, however, only kills 4 fewer mutants than the
+original harness: deleting the assignment {\tt prev = a[i]}.
+Traditional coverage and some variants of model checking coverage
+cannot detect this problem: because of the assignment to {\tt prev}
+outside the loop, the variable is used in the specification, and in
+fact used to detect many faults (it eliminates any mutants that can
+cause {\tt a[0]} to not be the least element in the array).  The
+specification ``covers'' the behavior of quick sort in general, since
+the permutation requirement remains in place.  However, it misses
+version of quick sort that 1) preserve permutation 2) make the first
+element always the minimum but 3) don't always sort the array correctly.  In
+particular, the call to {\tt quickSort} with {\tt j + 1} can be
+removed or modified to {\tt j + 2} without detection.  Some loop bound
+mutants the ``true'' harness kills also survive, but examining the
+deleted/removed recursive calls would inform the user of the problem
+in this case.  Our modified CBMC can, as for our first harness bug,
+produce a witness showing a permutated array with correct {\tt a[0]}
+ordering but with out-of-order later elements.
+
 \begin{comment}
 
 \begin{enumerate}
