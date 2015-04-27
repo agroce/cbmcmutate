@@ -629,7 +629,7 @@ to \emph{not} match the theory of program behavior.
 \label{fig:qsort}
 \end{figure}
 
-As an example of the proposed verification methdology, consider again
+As an example of the proposed verification methodology, consider again
 the harness shown in Figure \ref{fig:sortharness}.  If we take the
 first hit on Google for ``quick sort in C'' \cite{quicksortcode},
 shown in Figure \ref{fig:qsort}\footnote{In fact, that actual code is
@@ -638,7 +638,7 @@ shown in Figure \ref{fig:qsort}\footnote{In fact, that actual code is
   detected this, and we fixed it for this paper.}, we can model check
 it using the harness, defining {\tt SIZE=2} and setting the unwinding
 bound to 3 (we need one more unwinding than the largest possible
-number of items in the array).  CBMC reports {\tt VERIFICATON
+number of items in the array).  CBMC reports {\tt VERIFICATION
   SUCCESSFUL} in less than a second.  Does this mean we have verified
 what we want to verify?  How do we understand this ``successful''
 verification result better?
@@ -1157,7 +1157,7 @@ Even a killed mutant (e.g., a mutant the harness detects) can shed
 critical light on harness vulnerabilities.  For example, the code in
 Figure \ref{fig:mergeharness} is a portion of a harness to verify
 code that merges two sorted arrays, removing all duplicates (the
-source arrays may contain duplciates or shared items, the output array
+source arrays may contain duplicates or shared items, the output array
 is guaranteed to be sorted and have all-unique values).  This harness
 detects all non-equivalent mutants of the source code.  However, as is
 well known, many software faults \cite{justmutants} are not
@@ -1224,7 +1224,10 @@ is seeing significant use in userspace applications.
 That said, it is clear that validation and verification is a first-class
 concern for RCU implementations.
 
-\emph{Should we cite this? \url{http://conf.researchr.org/event/pldi2015/pldi2015-papers-verifying-read-copy-update-in-a-logic-for-weak-memory}}
+\begin{comment}
+\emph{Should we cite this? 
+\url{http://conf.researchr.org/event/pldi2015/pldi2015-papers-verifying-read-copy-update-in-a-logic-for-weak-memory}}
+\end{comment}
 
 Because both RCU and the Linux kernel are moving targets, any validation
 and verification must be both automated and repeatable, that is, must be
@@ -1295,7 +1298,7 @@ This allows \co{synchronize_rcu()} to atomically XOR
 execution has waited for all pre-existing readers (over-approximated
 by checking the absence of all readers), with \co{SET_NOASSERT()}
 being invoked to suppress all future assertions.
-Although this model has a number of shortcomings, perhsps most prominently
+Although this model has a number of shortcomings, perhaps most prominently
 excessive read-side ordering, it is capable of detecting common
 RCU-usage bugs, including failure to wait for an RCU grace period,
 failure to enclose read-side references in an RCU read-side critical
@@ -1307,7 +1310,7 @@ a class that might some day expand to include useful verifications.
 
 (And of course, CBMC proved capable of handling simple variable-pair
 litmus tests, as well as single-threaded examples involving linked lists,
-but proved incapable of handling multithreaded tests involving linked
+but proved incapable of handling multi-threaded tests involving linked
 lists.
 The maintainers of CBMC are working to improve its handling of pointers.)
 
@@ -1367,7 +1370,7 @@ bug-finding method, but its failure to kill any individual mutant is
 likely to be a matter of probability, rather than a flaw \emph{per se}
 in the testing itself.  In verification, however, there are no
 accidents: if a harness verifies an incorrect program, either the
-assumptions, the specification, or the problem size are neccessarily
+assumptions, the specification, or the problem size are necessarily
 in need of correction.
 
 \section{Related Work}
@@ -1389,7 +1392,7 @@ of Chockler et al. \cite{BeyondVac}.  We are not the first to note
 that model checking, at present, due to the ``many obstacles'' in
 proving a system correct, is primarily used for falsification
 \cite{AbsFals}.  Previous work on the topic \cite{AbsFals} focused on
-abstractions based on underapproximation, to ensure counterexamples
+abstractions based on under-approximation, to ensure counterexamples
 were not spurious. We instead preserve the goal of
 verification\footnote{Note that we use a model checking approach that
   already guarantees non-spurious counterexamples, and provides
@@ -1406,7 +1409,7 @@ surviving mutants) and 2) has an obviously known location.
 
 \section{Conclusions and Future Work}
 
-% use section* for acknowledgement
+% use section* for acknowledgment
 \section*{Acknowledgment}
 
 
