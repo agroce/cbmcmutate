@@ -353,7 +353,7 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{How Verified is My Code?\\Falsification-Driven Verification}
+\title{Falsification-Driven Verification}
 
 % Alt subtitle
 %Understanding
@@ -578,7 +578,9 @@ is a more useful conceptual framework for most software verification
 efforts: rather than focusing on what can be proven about a program,
 it may be best to focus on how a verification effort distinguishes the
 ``real'' program from similar alternative programs that can be shown
-to \emph{not} match the theory of program behavior.
+to \emph{not} match the theory of program behavior.  This approach
+aims at verification, but continually evaluates a verification effort
+by its ability to \emph{falsify} rather than to verify.
 
 \section{A Simple Example Verification}
 
@@ -1403,22 +1405,28 @@ likely to be a matter of probability, rather than a flaw \emph{per se}
 in the testing itself.  In verification, however, there are no
 accidents: if a harness verifies an incorrect program, either the
 assumptions, the specification, or the problem size are necessarily
-in need of correction.
+in need of correction.  However, the approach we propose is most
+suited to the analysis space in which CBMC is situated: on the one
+hand, within a known bound, its results are exhaustive; on the other
+hand, the method behaves much like a dynamic analysis, in that there
+are no false positives, and counterexamples are basically concrete,
+never-spurious, test cases.
 
 \section{Related Work}
 
-The idea that a ``successful verification'' often simply indicates an
-inadequate property is long-standing \cite{PracticalCov,Hoskote}. Use
-of mutants \cite{MutSpec,MutCov} to provide a coverage measure dates
-back both to these early explorations and relatively recent work
-\cite{MutInterp}.  However, in these efforts the mutation was usually
-applied to hardware models, and (critically) the surviving mutants
-were used to identify ``uncovered'' portions of a model, rather than
-presented to a developer for examination and understanding directly.
-To our knowledge, no previous work presented passing executions of a
-source code mutant as a guide to understanding specification weakness.
-Our modification of the harness is a source-code analogue to attempts
-to modify logical formulas, e.g., the effort to (in a narrow,
+The idea that a ``successful verification'' in model checking (or even
+theorem proving) often simply indicates an inadequate property is
+long-standing \cite{PracticalCov,Hoskote}. Use of mutants
+\cite{MutSpec,MutCov} to provide a coverage measure dates back both to
+these early explorations and relatively recent work \cite{MutInterp}.
+However, in these efforts the mutation was usually applied to hardware
+models, and (critically) the surviving mutants were used to identify
+``uncovered'' portions of a model, rather than presented to a
+developer for examination and understanding directly.  To our
+knowledge, no previous work presented passing executions of a source
+code mutant as a guide to understanding specification weakness.  Our
+modification of the harness is a source-code analogue to attempts to
+modify logical formulas, e.g., the effort to (in a narrow,
 vacuity-based sense) produce the \emph{strongest passing LTL formula}
 of Chockler et al. \cite{BeyondVac}.  We are not the first to note
 that model checking, at present, due to the ``many obstacles'' in
@@ -1428,9 +1436,22 @@ abstractions based on under-approximation, to ensure counterexamples
 were not spurious. We instead preserve the goal of
 verification\footnote{Note that we use a model checking approach that
   already guarantees non-spurious counterexamples, and provides
-  bounded rather than full verification.},
-but drive the verification process, from the human point of view, by
-repeated falsification of incorrect systems.
+  bounded rather than full verification.}, but \emph{drive} the verification
+process, from the human point of view, by repeated falsification of
+incorrect systems.
+
+More distantly related is the general effort to determine the quality
+not only of test suites (which is often focused on missing tests
+within the ``range'' of testing, not a problem for CBMC) but of test
+oracles and entire testing infrastructures.  The problem of ``testing
+the tester'' \cite{WODA09} is fundamental to all efforts
+to improve software quality.  Recent efforts of most interest have
+focused on measuring \emph{checked coverage} \cite{CheckedCov,CheckedJournal,ThereYet}, where
+a metric tries to make sure the code under test potentially changes
+the value of an assert, using dynamic slicing \cite{DynSlice,Tip}.  This is weaker than requiring the oracle kill
+a mutant, our goal, but more manageable for testing, where complete
+behavioral coverage is less feasible than in model checking (and where
+source code sizes combined with test inadequacy may make hand mutation analysis infeasible).
 
 Our idea of examining successful executions to better understand
 surviving (and even killed) mutants is a peculiar variation of the
