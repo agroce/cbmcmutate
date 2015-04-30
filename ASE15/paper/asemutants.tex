@@ -1102,6 +1102,7 @@ return trace
 \label{alg:maxcover}
 \end{figure}
 
+\begin{comment}
 \begin{figure}
 {\scriptsize
 \begin{code}
@@ -1183,6 +1184,7 @@ int merge\_sorted\_nodups(int a[], int asize,
   duplicate elements}
 \label{fig:sortnodup}
 \end{figure}
+\end{comment}
 
 \begin{comment}
 Given a mutant of program $P$, $M_i$, the 
@@ -1219,6 +1221,139 @@ but passing trace of this run lets us see the problem.
 \subsubsection{Merge With Duplicate Removal}
 
 \subsection{SpiderMonkey Boyer-Moore-Horspool Implementation}
+
+\begin{figure}
+{\scriptsize
+\begin{code}
+jsint
+js\_BoyerMooreHorspool(const jschar *text, jsint textlen,
+                      const jschar *pat, jsint patlen,
+                      jsint start)
+\{
+  jsint i, j, k, m;
+  uint8 skip[BMH\_CHARSET\_SIZE];
+  jschar c;
+
+  JS\_ASSERT(0 < patlen && patlen <= BMH\_PATLEN\_MAX);
+  for (i = 0; i < BMH\_CHARSET\_SIZE; i++)
+    skip[i] = (uint8)patlen;
+  m = patlen - 1;
+  for (i = 0; i < m; i++) \{
+    c = pat[i];
+    if (c >= BMH\_CHARSET\_SIZE)
+      return BMH\_BAD\_PATTERN;
+    skip[c] = (uint8)(m - i);
+  \}
+  for (k = start + m;
+       k < textlen;
+       k += ((c = text[k]) >= BMH\_CHARSET\_SIZE) ? 
+             patlen : skip[c]) \{
+    for (i = k, j = m; ; i--, j--) \{
+      if (j < 0)
+	return i + 1;
+      if (text[i] != pat[j])
+	break;
+    \}
+  \}
+  return -1;
+\}
+\end{code}
+}
+\caption{SpiderMonkey 1.6 Boyer-Moore-Horspool code.}
+\label{fig:bmh}
+\end{figure}
+
+\begin{figure}
+{\scriptsize
+\begin{code}
+\#include "bmh.h"
+
+int nondet\_int();
+unsigned int nondet\_uint();
+
+int main() \{
+  int i;
+  unsigned int v;
+
+  char itext[TSIZE];
+  char ipat[PSIZE];
+
+  unsigned int itext\_s = nondet\_uint();
+  \_\_CPROVER\_assume(itext\_s < TSIZE);
+  unsigned int ipat\_s = nondet\_uint();
+  \_\_CPROVER\_assume(ipat\_s < PSIZE);
+
+  printf ("LOG: size text=\%u, pat=\%u\\n", itext\_s, ipat\_s);
+
+  for (i = 0; i < itext\_s; i++) \{
+    v = nondet\_unit();
+    \_\_CPROVER\_assume((long)v < (long)BMH\_CHARSET\_SIZE);
+    itext[i] = v;
+    printf ("LOG: text[\%d] = \%u\\n", i, itext[i]);
+    \_\_CPROVER\_assume(itext[i] < BMH\_CHARSET\_SIZE);
+  \}
+
+  for (i = 0; i < ipat\_s; i++) \{
+    v = nondet\_uint();
+    \_\_CPROVER\_assume((long)v < (long)BMH\_CHARSET\_SIZE);
+    ipat[i] = v;
+    printf ("LOG: pat[\%d] = \%u\\n", i, ipat[i]);
+    \_\_CPROVER\_assume(ipat[i] < BMH\_CHARSET\_SIZE);
+  \}
+
+  jsint r = js\_BoyerMooreHorspool(itext, itext\_s, 
+                ipat, ipat\_s, 0);
+
+  printf ("LOG: return = \%d\\n", r);
+  
+  int pos, ppos, found;
+
+  v = nondet\_uint();
+  printf ("LOG: looking at \%u\\n", v);
+  \_\_CPROVER\_assume(v >= 0);
+  
+  if (r == -1) \{
+    \_\_CPROVER\_assume(v < itext\_s);
+    pos = v; ppos = 0; found = 1;
+    while (ppos < ipat\_s) \{
+      printf ("LOG: itext[\%d] = \%u, ipat[\%d] = \%u\\n",
+                 pos, itext[pos], ppos, ipat[ppos]);      
+      if ((pos>=itext\_s)||(itext[pos]!=ipat[ppos])) \{
+	found = 0;
+	break;
+      \}
+      pos++; ppos++;
+    \}
+    assert (!found);
+  \} else \{
+    pos = r; ppos = 0;
+    while (ppos < ipat\_s) \{
+      assert (itext[pos] == ipat[ppos]);
+      pos++; ppos++;
+    \}
+    v = nondet\_uint();
+    printf ("LOG: looking at \%u\\n", v);
+    \_\_CPROVER\_assume(v < r);
+    pos = v; ppos = 0; found = 1;
+    while (ppos < ipat\_s) \{
+      printf ("LOG: itext[\%d] = \%u, ipat[\%d] = \%u\\n",
+                 pos, itext[pos], ppos, ipat[ppos]);
+      if ((pos>=itext\_s)||(itext[pos]!=ipat[ppos])) \{
+	found = 0;
+	break;
+      \}
+      pos++; ppos++;
+    \}
+    assert (!found);
+  \}
+\}
+\end{code}
+}
+\caption{Boyer-Moore-Horspool harness.}
+\label{bmhharn}
+\end{figure}
+
+
 
 \subsection{Linux Kernel RCU Verification Challenges}
 
@@ -1396,20 +1531,20 @@ passing runs of killed mutants) essentially relies on the nature of
 exhaustive bounded model checking based on constraint solving.  In
 non-exhaustive automated testing, the answer to why a mutant is not
 killed is, often, neither ``the oracle is not good enough'' or even
-``the test process is inadequate'' but ``you didn't get lucky.''  That
-is, killing all mutants is, in many cases, not something we can expect
-of non-exhaustive test suites.  Random testing
-\cite{HamletOnly,ICSEDiff} can perform well in general as a
+``the test process is inadequate and needs to be modified'' but ``you
+didn't get lucky.''  That is, killing all mutants is, in many cases,
+not something we can expect of non-exhaustive test suites.  Random
+testing \cite{HamletOnly,ICSEDiff} can perform well in general as a
 bug-finding method, but its failure to kill any individual mutant is
 likely to be a matter of probability, rather than a flaw \emph{per se}
 in the testing itself.  In verification, however, there are no
 accidents: if a harness verifies an incorrect program, either the
-assumptions, the specification, or the problem size are necessarily
-in need of correction.  However, the approach we propose is most
-suited to the analysis space in which CBMC is situated: on the one
-hand, within a known bound, its results are exhaustive; on the other
-hand, the method behaves much like a dynamic analysis, in that there
-are no false positives, and counterexamples are basically concrete,
+assumptions, the specification, or the problem size are \emph{necessarily} in
+need of correction.  However, the approach we propose is most suited
+to the analysis space in which CBMC is situated: on the one hand,
+within a known bound, its results are exhaustive; on the other hand,
+the method behaves much like a dynamic analysis, in that there are no
+false positives, and counterexamples are basically concrete,
 never-spurious, test cases.
 
 \section{Related Work}
