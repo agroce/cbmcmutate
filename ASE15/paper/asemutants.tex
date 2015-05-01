@@ -568,7 +568,11 @@ mutate a harness to determine if any similar harnesses have an equal
 (or better) mutation kill rate, and most importantly, how to modify
 CBMC to automatically produce \emph{successful high-coverage
   executions covering mutated code} in order to understand mutant
-behavior and find subtle harness flaws.  We also propose the use of
+behavior and find subtle harness flaws.  This approach, unlike a
+simpler method of searching for cases where the mutated code and
+original code behave differently for the same inputs, applies even to verification of
+reactive and concurrent systems, where there is no easily obtained
+notion of ``for the same inputs.''  We also propose the use of
 mutation analysis to gain limited confidence in program correctness
 even past model checker scalability limits. At a more general level,
 we discuss the fundamental nature of ``verification'' in a real-world
@@ -874,6 +878,22 @@ only finds more bugs in the SUT, it often \emph{speeds up
   verification} by making the set of satisfying instances larger for
 the SAT solver.  Even UNSAT is easier to prove when the possible
 executions to consider are reduced, in many cases.
+
+As briefly mentioned in the introduction, it is also possible to
+understand a mutant by modifying the harness to call both the mutated
+code and the original code on the same inputs, and search for
+witnesses where 1) the execution is passing but 2) the return value(s)
+for the mutated code differ(s) from the original code.  However, this
+increases the complexity of the model checking problem (checking
+equivalence of two functions is often much harder than a harness
+specification of valid runs) and does not easily apply to any verifications other
+than simple function calls on given data.  For example, forcing the
+same interleavings in concurrent executions, or detecting all
+differences in state-modification for more reactive code is often
+infeasible or requires significant human intervention.  While we do
+apply differential checks in some cases below, and describe an
+algorithm for the approach, we do not propose this as a core technique
+suitable for general-purpose falsification-driven verification.
 
 \subsection{Mutating the Harness}
 
@@ -1218,6 +1238,8 @@ but passing trace of this run lets us see the problem.
 
 \subsubsection{AVL Tree}
 
+\subsubsection{Dijkstra's Algorithm}
+
 \subsubsection{Merge With Duplicate Removal}
 
 \subsection{SpiderMonkey Boyer-Moore-Horspool Implementation}
@@ -1350,10 +1372,13 @@ int main() \{
 \end{code}
 }
 \caption{Boyer-Moore-Horspool harness.}
-\label{bmhharn}
+\label{fig:bmhharn}
 \end{figure}
 
-
+Figures \ref{fig:bmh} and \ref{fig:bmhharn} show, respectively, the
+source code and an initial harness for verification of the
+Boyer-Moore-Horspool substring finding algorithm \cite{BMH,CFV13} in
+version 1.6 of Mozilla's SpiderMonkey JavaScript engine.
 
 \subsection{Linux Kernel RCU Verification Challenges}
 
