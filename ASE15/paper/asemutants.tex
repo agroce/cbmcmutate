@@ -1230,13 +1230,6 @@ but passing trace of this run lets us see the problem.
 
 \section{Experimental Results and Case Studies}
 
-\begin{figure}
-\includegraphics[width=\columnwidth]{sattimes}
-\caption{Average times for killed mutants (SAT) vs. unkilled mutants 
-  (UNSAT) for all experiments.}
-\label{fig:sattimes}
-\end{figure}
-
 Figure \ref{fig:sattimes} shows 
 
 \subsection{Algorithm Implementations}
@@ -1517,6 +1510,52 @@ but proved incapable of handling multi-threaded tests involving linked
 lists.
 The maintainers of CBMC are working to improve its handling of pointers.)
 
+\subsection{Plausible Verification by Failure to Falsify}
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{sattimes}
+\caption{Average times for killed mutants (SAT) vs. unkilled mutants 
+  (UNSAT) for all experiments.}
+\label{fig:sattimes}
+\end{figure}
+
+A key problem in model checking is the state explosion problem, or,
+more simply (and more accurately, in that number of states is not
+always the determining factor in symbolic methods) the problem of
+scalability.  As discussed above, even proving binary search correct
+over the full domain of integer inputs is not possibly within a
+reasonable time frame.  Even when receiving a ``VERIFICATION
+SUCCESSFUL'' report is impossible at the desired problem size,
+however, falsification can provide some confidence in the correctness
+of a program.  In particular, we observe from all of our experiments
+that the average time, for any program and harness pair, to verify the
+original code and surviving mutants is \emph{much higher} than the
+average time to produce a counterexample for killed mutants.  Showing
+that a constraint is satisfiable is, usually, easier than proving it
+is unsatisfiable.  This is not limited to SAT solvers; we used SAT
+rather than SMT in our experiments because we generally found Z3 to be
+slower in almost all cases, but Z3 also aims to be fast at producing
+satisfying assignments, not proving UNSAT \cite{z3}.
+
+Figure \ref{fig:sattimes} shows (with log scales on both axes) the
+average running times for all experiments (including faulty versions
+of the harness, incorrect runtime parameters, etc.) performed in the
+course of this work.  The general trend is clear: time to verify is
+usually worse than time to kill, and the worst average time to kill
+(about 350 seconds) is much better than many average verification
+times.  One use of this relationship is that, in cases where all
+(non-equivalent) mutants of the SUT are killed, but the SUT
+verification fails, the SUT might be considered provisionally
+verified. In particular, the larger the ratio between the timeout for
+failed verification and the longest kill time for any mutant, the
+``more likely'' to be correct we can consider the SUT (or the same
+with respect to memory use limits). This belief can be further
+justified by modifying the harness to force the kills to use large
+problem sizes, violating the usual inclusiveness rule (that way, if
+the new size allows a counterexample not previously existing, the
+mutant killing problem for mutants killable at smaller sizes better
+approximates the counterexample construction problem for the actual
+fault).
 
 \section{Discussion}
 
