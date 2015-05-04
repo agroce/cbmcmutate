@@ -670,7 +670,7 @@ Core i7, using only one core).  CBMC reports that 6 mutants do not
 compile (these remove variable declarations, for the most part), 4 are
 detected by the harness (a counterexample is produced: we say the
 mutant is \emph{killed}), and 71 mutants pass without detection (the
-verification is successful, in which case we say the mutant \emph{survives}.
+verification is successful, in which case we say the mutant \emph{survives}).
 Clearly length 1 arrays are not sufficient to detect even the most
 glaring bugs in a sort algorithm (no surprise; all size 1 arrays are
 sorted).  What about our choice of size 2?  Re-running the mutants
@@ -693,7 +693,7 @@ size until the number of mutants killed does not increase with a step
 up in size (we call such a size \emph{mutant-stable}).  However, in
 many cases, such as this one, the time required to check mutants
 starts growing unacceptably.  We propose a more efficient algorithm
-for finding a mutant-stable size below (Figure \ref{alg:unwind}, and
+for finding a mutant-stable size below (Figure \ref{alg:unwind}), and
 mutations can be checked in parallel, but the fundamental problem for
 size 4 (and above) is that some individual mutants require hours to
 produce a {\tt VERIFICATION SUCCESSFUL} result.  What is a developer
@@ -814,11 +814,11 @@ LOG: a[2] = 2147480408
 
 We might have discovered this problem by a different method: if we
 remove the call to {\tt sort} in the harness, and replace it by a loop
-assigning {\tt nondet\_int} to every element in {\tt a} (a kind of
+assigning {\tt nondet\_int} to every element in array {\tt a} (a kind of
 most-general any-order type-correct ``mutant'' of {\tt sort}), we can run
 the modified CBMC and see examples of executions our harness allows,
 which should include \emph{any sorted} array.  The problem with this
-method is that, while it sometimes works, CBMC is also free to choose
+method is that, while it sometimes works, CBMC is also free to
 set all elements in all arrays to 0, and to generally provide an
 uninformative example of a successful execution.  The requirement to
 cover a mutant (and as much other code as possible) helps guide CBMC
@@ -851,7 +851,7 @@ harness to check this additional critical property\footnote{In fact,
   count that value's appearances, we can completely dispense with
   storing {\tt ref} at all.  In practice, this is more difficult for
   non-CBMC experts to understand, and makes model checking only
-  slightly faster.} .  Because CBMC is exhaustive, instead of
+  slightly faster.}.  Because CBMC is exhaustive, instead of
 performing a complete check for permutation, we can detect violation
 of the property by letting {\tt v} be any value, and ensuring that
 both {\tt a} and {\tt ref} contain the same \emph{number} of elements
@@ -878,8 +878,8 @@ stable.  Checking this by running all surviving mutants at {\tt SIZE}
 magnitude faster than with the weaker harness.  A stronger harness not
 only finds more bugs in the SUT, it often \emph{speeds up
   verification} by making the set of satisfying instances larger for
-the SAT solver.  Even UNSAT is easier to prove when the possible
-executions to consider are reduced, in many cases.
+the SAT solver.  Unsatisfiability  is sometimes easier to prove when the possible
+executions to consider are reduced.
 
 As briefly mentioned in the introduction, it is also possible to
 understand a mutant by modifying the harness to call both the mutated
@@ -890,7 +890,7 @@ increases the complexity of the model checking problem (checking
 equivalence of two functions is often much harder than a harness
 specification of valid runs) and does not easily apply to any verifications other
 than simple function calls on given data.  For example, forcing the
-same interleavings in concurrent executions, or detecting all
+same interleavings in threaded programs, or detecting all
 differences in state-modification for more reactive code is often
 infeasible or requires significant human intervention.  While we do
 apply differential checks in some cases below, and describe an
@@ -911,7 +911,7 @@ and 2) the remaining mutants have a mutant kill rate no greater than
 that of the harness.  For our fixed harness, there are 61 mutants, of
 which 2 do not compile.  Of these, 40 produce an incorrect
 counterexample for the original, correct, quick sort.  An additional
-10 have mutant kill rates much worse than the original harness (from
+10 have mutant kill rates worse than the original harness (from
 as low as 5\% of mutants killed to only a few percent worse than the
 fixed harness).  The remaining 9 mutants have the same ability to kill
 mutants as the original harness.  Most of these involve modifying a
@@ -947,8 +947,8 @@ fact used to detect many faults (it eliminates any mutants that can
 cause {\tt a[0]} to not be the least element in the array).  The
 specification ``covers'' the behavior of quick sort in general, since
 the permutation requirement remains in place.  However, it cannot detect
-versions of quick sort that 1) preserve permutation 2) make the first
-element always the minimum but 3) don't always sort the array correctly.  In
+versions of quick sort that 1) preserve permutation and 2) make the first
+element always the minimum, but 3) don't always sort the array correctly.  In
 particular, the call to {\tt quickSort} with {\tt j + 1} can be
 removed or modified to {\tt j + 2} without detection.  Some loop bound
 mutants the ``true'' harness kills also survive, but examining the
@@ -998,6 +998,14 @@ ordering but with out-of-order later elements.
 
 
 \section{Algorithms and Techniques}
+
+Falsification-driven verificaiton is a semi-automated approach that
+relies heavily on algorithmic and tool support.  While the typically
+smaller scope of code targeted for verification makes the work easier,
+it is not likely feasible without automation of many of the subtasks
+in the basic flow, shown in Figure \ref{flow}.
+
+\begin{figure}
 
 \begin{figure}
 {\scriptsize 
