@@ -488,8 +488,7 @@ iteration where the bound is exceeded).
 When a model checker produces a counterexample, a developer's task is
 straightforward, if sometimes difficult: either the SUT has a fault,
 or the harness itself is flawed.  In both cases, the status of the
-verification effort is clear and the resulting output (a detailed
-trace, including the output of any print statements) is full of
+verification effort is the counterxample trace, is full of
 evidence as to the reason for the failure to verify the SUT. Moreover,
 any solution (fix to SUT or harness) is easily checked: if it is
 correct, the model checker stops reporting the previous
@@ -505,7 +504,7 @@ Formal verification is not only subject to the many issues that make
 ``no faults detected'' results dubious in testing \cite{WODA09,CovDisc}, but
 also to more subtle problems.  For example, an incorrect \emph{assume}
 statement may constrain a system so that not only are there no
-counterexamples, there are no allowable executions of the system at
+counterexamples, there are no (interesting) executions of the system at
 all.
 
 This problem has concerned the model checking community for some time
@@ -529,7 +528,7 @@ mutation kill rate is not enough.  The typical small scope of the code to be
 verified, and the presumed importance of code targeted for verification suggests
 an approach in which \emph{individual mutants} are examined by the
 developer.  Without additional assistance, such an approach cannot
-scale.  We show that the capabilities of the model checking tool, the
+scale.  We propose that the capabilities of the model checking tool, the
 nature of formal verification, and the adoption of certain best
 practices can make this seemingly too-demanding approach in fact
 practical for real verification tasks.
@@ -557,33 +556,34 @@ harness reject the SUT itself.
 \subsection{Contributions}
 \end{comment}
 
-Our primary contribution in this paper is a falsification-driven
-approach to verification: an extension of traditional mutation testing
-that aids the user of a model checker in understanding successful (and
-``successful'') verification results, determining when a harness is
-not actually strong enough to ensure correctness, and correcting the
-verification harness.  To support this approach, we show how to use
-mutation testing to choose a problem size in bounded model checking, how to
-mutate a harness to determine if any similar harnesses have an equal
-(or better) mutation kill rate, and most importantly, how to modify
-CBMC to automatically produce \emph{successful high-coverage
-  executions covering mutated code} in order to understand mutant
-behavior and find subtle harness flaws.  This approach, unlike a
-simpler method of searching for cases where the mutated code and
-original code behave differently for the same inputs, applies even to verification of
+Our primary contribution in this paper is a
+\emph{falsification-driven} approach to verification: an extension of
+traditional mutation testing that aids the user of a model checker in
+understanding successful (and ``successful'') verification results,
+determining when a harness is not actually strong enough to ensure
+correctness, and correcting the verification harness.  To support this
+approach, we show how to use mutation testing to choose a problem size
+in bounded model checking, how to mutate a harness to determine if any
+similar harnesses have an equal (or better) mutation kill rate, and
+most importantly, how to modify CBMC, a harness, and mutants to
+automatically produce \emph{successful high-coverage executions
+  covering mutated code} in order to understand mutant behavior and
+find subtle harness flaws.  This approach, unlike a simpler method of
+searching for cases where the mutated code and original code behave
+differently for the same inputs, applies even to verification of
 reactive and concurrent systems, where there is no easily obtained
 notion of ``for the same inputs.''  We also propose the use of
 mutation analysis to gain limited confidence in program correctness
 even past model checker scalability limits. At a more general level,
 we discuss the fundamental nature of ``verification'' in a real-world
 context where specifications are never known to be complete. We
-propose that falsification, as in certain theories of natural science,
+propose that falsification, as in Popper's philosophy of science \cite{Popper},
 is a more useful conceptual framework for most software verification
 efforts: rather than focusing on what can be proven about a program,
 it may be best to focus on how a verification effort distinguishes the
 ``real'' program from similar alternative programs that can be shown
 to \emph{not} match the theory of program behavior.  This approach
-aims at verification, but continually evaluates a verification effort
+aims at verification, but continually evaluates and refines verification effort
 by its ability to \emph{falsify} rather than to verify.
 
 \section{A Simple Example Verification}
@@ -668,7 +668,9 @@ less than a second.  We then run the harness with unwinding bound 2
 than a minute and a half (on a Macbook Pro with dual-core 3.1GHz Intel
 Core i7, using only one core).  CBMC reports that 6 mutants do not
 compile (these remove variable declarations, for the most part), 4 are
-detected by the harness, and 71 mutants pass without detection.
+detected by the harness (a counterexample is produced: we say the
+mutant is \emph{killed}), and 71 mutants pass without detection (the
+verification is successful, in which case we say the mutant \emph{survives}.
 Clearly length 1 arrays are not sufficient to detect even the most
 glaring bugs in a sort algorithm (no surprise; all size 1 arrays are
 sorted).  What about our choice of size 2?  Re-running the mutants
