@@ -681,7 +681,14 @@ could inspect these mutants by hand, but it seems highly unlikely that
 a \emph{complete verification} over all possible arrays with a good
 specification for sorting would produce such a poor mutation kill rate.
 If we up the size limit to 3 (the verification taking just over 33
-minutes), only 8 mutants survive. 
+minutes), only 8 mutants survive.  Note that each problem, due to the
+harness' assignment of {\tt s} to any size smaller than the current
+size, include all smaller problem sizes. This makes the behavior of
+the verification problem size setting match that of CBMC where an unwinding bound is a maximum, rather than
+a fixed size.  We assume in all cases below\footnote{There is
+  one noted exception in Section \ref{sec:sattimes}.} that harnesses are
+constructed so that increasing problem size includes all smaller
+problems as a best practice.
 
 At this point, we can increase {\tt SIZE} to 4 (which will kill one
 additional mutant), but the time required to check the remaining
@@ -1001,11 +1008,41 @@ ordering but with out-of-order later elements.
 
 Falsification-driven verificaiton is a semi-automated approach that
 relies heavily on algorithmic and tool support.  While the typically
-smaller scope of code targeted for verification makes the work easier,
-it is not likely feasible without automation of many of the subtasks
-in the basic flow, shown in Figure \ref{flow}.
+smaller scope of code targeted for verification (vs. testing) makes the work easier,
+it is not likely to be feasible without automation of many
+subtasks. Existing tools make producing a set of mutants and checking
+them using a harness relatively easy, but other tasks require new algorithms
+and tools.  Figure \ref{fig:flow} shows the basic flow, which is directed
+not by a fixed algorithm but by the intelligence and experience
+\cite{NeroWolfe} of the
+developer.  Novel tools or techniques are on the left side of the
+diagram (mutation analysis itself is not novel, but our tool for integrating
+this with the model checker and recording results for use by other
+parts of the toolchain is non-standard), other than the model checker
+itself. We show only top-level functionality that a developer uses,
+not supporting algorithms for instrumentation of SUT and harness (mutants).
+
+One important need is a version of CBMC capable of applying built-in
+assertions checks (e.g, bounds checks, pointer dereference, divsion by
+zero) as \emph{assumptions} rather than assertions.  Converting
+assertions to assumptions is the means by which we produce
+\emph{passing} executions showing how a harness can fail to detect a
+mutant.  For developer-provided harnesses, this can be performed by
+automatic source-to-source transformation of the harness, but CBMC's
+internal constraints have to be handled inside the model checker.  We
+implemented a new CBMC command-line option, {\tt --find-success} that
+transforms all CBMC-generated assertions into assumptions.  In all
+algorithms in this paper, {\tt check} means applying standard model
+checking, with any needed automatic property checks, while {\tt
+  scheck} indicates applying our modified CBMC with {\tt find-success}
+enabled.  In Figure \ref{fig:flow} we assume the use of a modified
+version of CBMC.
 
 \begin{figure}
+\includegraphics[width=\columnwidth]{TestFlow}
+\caption{Basic flow of falsification-driven verification.}
+\label{fig:flow}
+\end{figure}
 
 \begin{figure}
 {\scriptsize 
@@ -1132,6 +1169,38 @@ return trace
 \label{alg:maxcover}
 \end{figure}
 
+\begin{figure}
+{\scriptsize 
+\begin{code}
+report check-harness($SUT$, $M$, $H$, $M(H)$, $S$) 
+\vspace{0.1in}
+
+K$_H$ = killed($M$, $H$, $S$) 
+
+Hkills = $\emptyset$
+Hequal = $\emptyset$
+Hbetter = $\emptyset$
+
+for H$_i$ in $M(H)$:
+   original = check($H_i$, $SUT$, $U(S)$, $O(S)$)
+   // ``kills'' the SUT -- an invalid harness
+   if original == VERIFICATION FAILED: 
+      Hkills += H$_i$
+   else: // check if this kills fewer mutants
+      kills = killed($M$, $H$, $S$)
+      if |kills| > |Hkills|:
+         Hbetter += H$_i$
+      if |kills| == |Hkills|:
+         Hequal += H$_i$
+      else:
+         Hkills += H$_i$
+return (Hkills, Hequal, Hbetter)
+\end{code}
+}
+\caption{Algorithm 5: Analyze a harness.}
+\label{alg:harnesscheck}
+\end{figure}
+
 \begin{comment}
 \begin{figure}
 {\scriptsize
@@ -1239,8 +1308,6 @@ but passing trace of this run lets us see the problem.
 \end{comment}
 
 \section{Experimental Results and Case Studies}
-
-Figure \ref{fig:sattimes} shows 
 
 \subsection{Algorithm Implementations}
 
@@ -1521,6 +1588,7 @@ lists.
 The maintainers of CBMC are working to improve its handling of pointers.)
 
 \subsection{Plausible Verification by Failure to Falsify}
+\label{sec:sattimes}
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{sattimes}
@@ -1533,19 +1601,20 @@ A key problem in model checking is the state explosion problem, or,
 more simply (and more accurately, in that number of states is not
 always the determining factor in symbolic methods) the problem of
 scalability.  As discussed above, even proving binary search correct
-over the full domain of integer inputs is not possibly within a
-reasonable time frame.  Even when receiving a ``VERIFICATION
-SUCCESSFUL'' report is impossible at the desired problem size,
-however, falsification can provide some confidence in the correctness
-of a program.  In particular, we observe from all of our experiments
-that the average time, for any program and harness pair, to verify the
-original code and surviving mutants is \emph{much higher} than the
-average time to produce a counterexample for killed mutants.  Showing
-that a constraint is satisfiable is, usually, easier than proving it
-is unsatisfiable.  This is not limited to SAT solvers; we used SAT
-rather than SMT in our experiments because we generally found Z3 to be
-slower in almost all cases, but Z3 also aims to be fast at producing
-satisfying assignments, not proving UNSAT \cite{z3}.
+over the full domain of integer inputs is not possible within a
+reasonable time frame.  Even when verification is impossible at the
+desired problem size falsification can provide limited
+confidence in the correctness of a program.  In particular, we observe
+from all of our experiments that the average time, for any program and
+harness pair, to verify the original code and all surviving mutants is
+\emph{much higher} than the average time to produce a counterexample
+for killed mutants.  Showing that a constraint is satisfiable is,
+usually, easier than proving it is unsatisfiable.  This is not limited
+to SAT solvers; we used SAT rather than SMT in our experiments because
+we generally found Z3 to be slower than CBMC's built in version of
+MiniSAT\cite{minisat} in almost all cases, but Z3 also
+aims to be fast at producing satisfying assignments, not proving UNSAT
+\cite{z3}, and our few runs with Z3 showed the same pattern.
 
 Figure \ref{fig:sattimes} shows (with log scales on both axes) the
 average running times for all experiments (including faulty versions
@@ -1555,17 +1624,17 @@ usually worse than time to kill, and the worst average time to kill
 (about 350 seconds) is much better than many average verification
 times.  One use of this relationship is that, in cases where all
 (non-equivalent) mutants of the SUT are killed, but the SUT
-verification fails, the SUT might be considered provisionally
-verified. In particular, the larger the ratio between the timeout for
-failed verification and the longest kill time for any mutant, the
-``more likely'' to be correct we can consider the SUT (or the same
-with respect to memory use limits). This belief can be further
-justified by modifying the harness to force the kills to use large
-problem sizes, violating the usual inclusiveness rule (that way, if
-the new size allows a counterexample not previously existing, the
-mutant killing problem for mutants killable at smaller sizes better
-approximates the counterexample construction problem for the actual
-fault).
+verification fails to complete, the SUT might be considered
+\emph{provisionally} verified. In particular, the larger the ratio
+between the timeout for failed verification and the longest kill time
+for any mutant, the ``more likely'' to be correct we can consider the
+SUT (the same holds with respect to memory use limits). This belief can
+be further justified by modifying the harness to force mutant kills to
+use large problem sizes, violating the usual inclusiveness rule (that
+way, if the new size allows a counterexample not previously existing,
+the mutant killing problem for mutants killable at smaller sizes
+better approximates the counterexample construction problem for the
+actual fault).
 
 \section{Discussion}
 
@@ -1605,7 +1674,7 @@ Of course, generating alternative worlds and showing that, for
 example, special relativity is easily falsified in a world where
 special relativity does not in fact hold, is not practical in
 scientific discovery.  It is, however, quite easy in the artificial
-``science'' of verifying a property of a computer program.
+``scientific discovery'' sense of verifying properties of computer programs.
 
 \subsection{The Power of Exhaustive Nondeterminism}
 
@@ -1627,7 +1696,7 @@ need of correction.  However, the approach we propose is most suited
 to the analysis space in which CBMC is situated: on the one hand,
 within a known bound, its results are exhaustive; on the other hand,
 the method behaves much like a dynamic analysis, in that there are no
-false positives, and counterexamples are basically concrete,
+false positives, and counterexamples and success witnesses are concrete,
 never-spurious, test cases.
 
 \section{Related Work}
@@ -1680,11 +1749,15 @@ surviving mutants) and 2) has an obviously known location.
 
 \section{Conclusions and Future Work}
 
+Our CBMC patch for {\tt find-success} mode, the various verification harnesses, and our
+experimental results are all available at {\tt \url{https://github.com/agroce/cbmcmutate}}.
+
 % use section* for acknowledgment
-\section*{Acknowledgment}
+%\section*{Acknowledgment}
 
 
-The authors would like to thank...
+%
+%The authors would like to thank...
 
 
 
