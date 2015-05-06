@@ -650,6 +650,7 @@ what we want to verify?  How do we understand this ``successful''
 verification result better?
 
 \subsection{Finding a Good Problem Size}
+\label{sec:unwind}
 
 The first question we face is whether 2 is really a good maximum array
 size to examine.  The problem of determining a \emph{completeness
@@ -708,6 +709,7 @@ to do?
 
 
 \subsection{Examining Surviving Mutants}
+\label{sec:maxcover}
 
 The developer should turn to the surviving mutants.  The 8 surviving
 mutants for size 3 are shown in Figure \ref{fig:survivors}.
@@ -905,6 +907,7 @@ algorithm for the approach, we do not propose this as a core technique
 suitable for general-purpose falsification-driven verification.
 
 \subsection{Mutating the Harness}
+\label{sec:checkharness}
 
 Previous efforts to understand model checking results have also
 considered mutants to the property, usually given as a temporal logic
@@ -1037,6 +1040,16 @@ checking, with any needed automatic property checks, while {\tt
   scheck} indicates applying our modified CBMC with {\tt find-success}
 enabled.  In Figure \ref{fig:flow} we assume the use of a modified
 version of CBMC.
+
+Figure \ref{alg:unwind}-\ref{alg:checkharness} show core algorithms
+(implemented as prototype tools in our framework).  Two of these are
+support algorithms for instrumentation, used in the production of witnesses for
+understanding surviving mutants (Figures \ref{alg:invert} and
+\ref{alg:covermut}), while the other three (Figures \ref{alg:unwind},
+\ref{alg:maxcover}, and \ref{alg:checkharness}) face developers.  The uses
+of these algorithms are described at a high level in the introductory
+example (in Sections \ref{sec:unwind}, \ref{sec:maxcover}, and
+\ref{sec:checkharness}, respectively), and in the case studies below.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{TestFlow}
@@ -1198,7 +1211,7 @@ return (Hkills, Hequal, Hbetter)
 \end{code}
 }
 \caption{Algorithm 5: Analyze a harness.}
-\label{alg:harnesscheck}
+\label{alg:checkharness}
 \end{figure}
 
 \begin{comment}
