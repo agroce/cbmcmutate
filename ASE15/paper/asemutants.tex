@@ -1472,6 +1472,57 @@ source code and an initial harness for verification of the
 Boyer-Moore-Horspool substring finding algorithm \cite{BMH,CFV13} in
 version 1.6 of Mozilla's SpiderMonkey JavaScript engine.
 
+Verifying this code presents one immediate issue that is not unusual
+in verification: how to handle an {\tt assert} in the code being
+verified.  An {\tt assert} at the end of a function or in the main
+body is typically an additional part of the specification, and is
+often best left unchanged.  An {\tt assert} at the beginning of a
+function's body, however, is typically a preconditon for the code,
+indicating that when it is violated the code will not behave
+correctly.  It is natural to consider changing such an assertion into
+an {\tt assume} and ignoring any problems produced by calling the code
+with non-conforming inputs.
+
+While this can be a useful technique, for instance when it is hard to
+write a harness that only produces valid inputs, but easy to filter
+out the invalid inputs and only verify behavior for those, it is also
+a dangerous technique.  Mutation analysis of the harness shows that 4
+is a mutant-stable size (where the same size is used for text length,
+pattern length, and character set size), with a kill rate of 72.3\%.
+On initial examination, the 20 surviving mutants do not seem
+problematic.  A large number involve the {\tt JS\_ASSERT} converted to
+a {\tt \_\_CPROVER\_assume}, showing the harness cannot tell if the
+assumption is incorrect, which is not surprising (the harness only
+generates good inputs, and some of the mutants simply discard too many
+inputs).
+
+At this point, we were satisfied with our harness, and ran a check on
+mutants of the harness itself.  To our surprise, three mutants of the
+harness had a \emph{better} kill rate than the ``correct'' harness,
+killing 73.5\% of mutants.  Investigating these ``better'' harnessess
+showed mutants that broke processing of some return values in such a
+way that, while these harnessess failed to detect certain major bugs
+in the code, they were able to detect some assumption mutants.  Guided
+by this, we produced a revised harness that raised the kill rate to
+79.52\%.  However, on examining the surviving mutants, we realized
+that our verification was unsatisfactory as a good regression for the
+Boyer-Moore-Horspool code:  in particular, if the assertion were ever
+modified to allow bad inputs to pass through, or otherwise incorrectly
+changed, we would miss some mutants.  We then changed the {\tt
+  JS\_ASSERT} into code that returned a special value to signal
+assertion failure, and modified the harness once more,
+allowing some incorrect values to pass through and checking that
+assertion failure happened if, and only if, the inputs were invalid.
+This harness killed 89.2\% of mutants, and the six surviving mutants
+were easily understood to be equivalent to the BMH code under all
+valid inputs (in one case we weren't certain about, we had CBMC verify
+that for all non-assertion violating inputs, this was true up to a
+large bound).  The new harness, informed by the harness mutations, in
+fact had a better mutant kill rate for size 3 (80.7\%) than our first harness
+had at the mutant-stable point.  It was this example that convinced us
+that harness mutation was an important technique, not only for
+evaluating our methodology, but in its own right.
+
 \subsection{Linux Kernel RCU Verification Challenges}
 
 \subsubsection{Introduction to RCU}
