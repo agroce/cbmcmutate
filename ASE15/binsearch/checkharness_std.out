@@ -1,0 +1,1424 @@
+USAGE: evalmuants.py <prefix> <timeout> [--ignoreKilled <prefix>] [--ignoreSurvived <prefix>] [--cbmc <PATH>] --options <options> --files <files> --mutate <mutant-files> [--harness] [--use-existing] [--check-strength] [--cover]
+PREFIX = checkharness_std
+TIMEOUT = 10000
+False --options
+OPTIONS = --unwind 10 --bounds-check --pointer-check sortarray.c 
+FILES = ['binsearch_std.c']
+MUTATED FILES = ['harness_std.c']
+limit cputime 10000 ; cbmc --unwind 10 --bounds-check --pointer-check sortarray.c 
+SANITY CHECK...
+Original SUCCESSFULLY VERIFIED in 19.647
+Computing base harness kill rate
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   KILLED 2.427
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   KILLED 2.025
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 14.986
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 17.808
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   KILLED 1.369
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   KILLED 1.503
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   KILLED 1.466
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   KILLED 1.383
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   KILLED 1.403
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.386
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   KILLED 1.471
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   KILLED 1.519
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   KILLED 1.852
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   KILLED 2.339
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   KILLED 1.468
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   KILLED 1.443
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   KILLED 1.29
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   KILLED 1.319
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   KILLED 1.607
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   KILLED 1.563
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   KILLED 1.315
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   KILLED 1.322
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   KILLED 1.29
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   KILLED 1.319
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   KILLED 1.314
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   KILLED 1.394
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   KILLED 1.367
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   KILLED 1.409
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   KILLED 1.322
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   KILLED 1.324
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   KILLED 1.621
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   KILLED 1.509
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   KILLED 1.345
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 16.157
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   KILLED 1.389
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   KILLED 1.58
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   KILLED 1.43
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   KILLED 1.375
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.402
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.425
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.398
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.337
+   45 TOTAL MUTANTS, 39 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (86.6666666667% kill rate)
+   AVERAGE KILL TIME 1.48769230769
+   AVERAGE VERIFY TIME 39.183
+   MIN/MAX KILL TIME =  1.29 / 2.427
+   MIN/MAX SUCCESS TIME =  14.986 / 19.647
+-------------------------------------------------
+Done computing base kill rate
+Mutating harness_std.c
+PREFIX: mutant*_
+Checking mutant mutant100001_harness_std.c:  6 :  /* MUTANT (del_stmt) */ /*   __CPROVER_assume(s > 0); */ 
+VERIFICATION SUCCESSFUL 14.556
+Mutated harness survived, checking kill rate for mutant100001_harness_std.c
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   KILLED 1.579
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   KILLED 1.766
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 17.469
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 13.018
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   KILLED 1.478
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   KILLED 1.332
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   KILLED 1.335
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   KILLED 1.437
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   KILLED 1.317
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.382
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   KILLED 1.363
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   KILLED 1.29
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   KILLED 1.609
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   KILLED 3.289
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   KILLED 1.374
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   KILLED 1.435
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   KILLED 1.306
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   KILLED 1.355
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   KILLED 1.383
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   KILLED 1.373
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   KILLED 1.298
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   KILLED 1.322
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   KILLED 1.386
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   KILLED 1.301
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   KILLED 1.392
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   KILLED 1.364
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   KILLED 1.333
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   KILLED 1.419
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   KILLED 1.371
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   KILLED 1.346
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   KILLED 1.379
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   KILLED 1.379
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   KILLED 1.478
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 14.923
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   KILLED 1.639
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   KILLED 1.339
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   KILLED 1.374
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   KILLED 1.316
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.254
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.402
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.241
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.291
+   45 TOTAL MUTANTS, 39 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (86.6666666667% kill rate)
+   AVERAGE KILL TIME 1.43658974359
+   AVERAGE VERIFY TIME 30.2733333333
+   MIN/MAX KILL TIME =  1.241 / 3.289
+   MIN/MAX SUCCESS TIME =  13.018 / 17.469
+Done checking kill rate for mutant100001_harness_std.c
+Mutated harness preserves kill rate.
+-------------------------------------------------
+Checking mutant mutant100002_harness_std.c:  6 :  /* MUTANT (rep_op) */  __CPROVER_assume(s <= 0);
+VERIFICATION SUCCESSFUL 1.253
+Mutated harness survived, checking kill rate for mutant100002_harness_std.c
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   VERIFICATION SUCCESSFUL 1.275
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   KILLED 1.279
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 1.252
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 1.268
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   VERIFICATION SUCCESSFUL 1.264
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   VERIFICATION SUCCESSFUL 1.237
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   KILLED 1.33
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   KILLED 1.251
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   VERIFICATION SUCCESSFUL 1.227
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.316
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   KILLED 1.31
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   VERIFICATION SUCCESSFUL 1.246
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   VERIFICATION SUCCESSFUL 1.509
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   VERIFICATION SUCCESSFUL 1.627
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   VERIFICATION SUCCESSFUL 1.266
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   VERIFICATION SUCCESSFUL 1.25
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   VERIFICATION SUCCESSFUL 1.432
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   VERIFICATION SUCCESSFUL 1.269
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   VERIFICATION SUCCESSFUL 1.263
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   VERIFICATION SUCCESSFUL 1.263
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   VERIFICATION SUCCESSFUL 1.268
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   VERIFICATION SUCCESSFUL 1.241
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   VERIFICATION SUCCESSFUL 1.27
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   VERIFICATION SUCCESSFUL 1.257
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   VERIFICATION SUCCESSFUL 1.252
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   VERIFICATION SUCCESSFUL 1.217
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   VERIFICATION SUCCESSFUL 1.254
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   VERIFICATION SUCCESSFUL 1.265
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   VERIFICATION SUCCESSFUL 1.259
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   VERIFICATION SUCCESSFUL 1.268
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   VERIFICATION SUCCESSFUL 1.228
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   VERIFICATION SUCCESSFUL 1.216
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   VERIFICATION SUCCESSFUL 1.273
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 1.377
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   VERIFICATION SUCCESSFUL 1.282
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   VERIFICATION SUCCESSFUL 1.253
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   VERIFICATION SUCCESSFUL 1.283
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   VERIFICATION SUCCESSFUL 1.306
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.252
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.272
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.264
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.264
+   45 TOTAL MUTANTS, 9 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (20.0% kill rate)
+   AVERAGE KILL TIME 1.282
+   AVERAGE VERIFY TIME 2.57072727273
+   MIN/MAX KILL TIME =  1.251 / 1.33
+   MIN/MAX SUCCESS TIME =  1.216 / 1.627
+Done checking kill rate for mutant100002_harness_std.c
+Mutated harness has worse kill rate than base harness. (KILLED)
+-------------------------------------------------
+Checking mutant mutant100003_harness_std.c:  6 :  /* MUTANT (rep_op) */  __CPROVER_assume(s < 0);
+VERIFICATION SUCCESSFUL 1.257
+Mutated harness survived, checking kill rate for mutant100003_harness_std.c
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   VERIFICATION SUCCESSFUL 1.275
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   VERIFICATION SUCCESSFUL 1.283
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 1.237
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 1.249
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   VERIFICATION SUCCESSFUL 1.257
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   VERIFICATION SUCCESSFUL 1.241
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   KILLED 1.309
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   KILLED 1.48
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   VERIFICATION SUCCESSFUL 1.321
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.34
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   KILLED 1.312
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   VERIFICATION SUCCESSFUL 1.256
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   VERIFICATION SUCCESSFUL 1.489
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   VERIFICATION SUCCESSFUL 1.79
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   VERIFICATION SUCCESSFUL 1.26
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   VERIFICATION SUCCESSFUL 1.256
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   VERIFICATION SUCCESSFUL 1.247
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   VERIFICATION SUCCESSFUL 1.226
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   VERIFICATION SUCCESSFUL 1.25
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   VERIFICATION SUCCESSFUL 1.253
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   VERIFICATION SUCCESSFUL 1.253
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   VERIFICATION SUCCESSFUL 1.222
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   VERIFICATION SUCCESSFUL 1.237
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   VERIFICATION SUCCESSFUL 1.22
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   VERIFICATION SUCCESSFUL 1.255
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   VERIFICATION SUCCESSFUL 1.23
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   VERIFICATION SUCCESSFUL 1.241
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   VERIFICATION SUCCESSFUL 1.247
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   VERIFICATION SUCCESSFUL 1.264
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   VERIFICATION SUCCESSFUL 1.24
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   VERIFICATION SUCCESSFUL 1.315
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   VERIFICATION SUCCESSFUL 1.286
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   VERIFICATION SUCCESSFUL 1.264
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 1.261
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   VERIFICATION SUCCESSFUL 1.255
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   VERIFICATION SUCCESSFUL 1.274
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   VERIFICATION SUCCESSFUL 1.27
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   VERIFICATION SUCCESSFUL 1.254
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.377
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.332
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.27
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.281
+   45 TOTAL MUTANTS, 8 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (17.7777777778% kill rate)
+   AVERAGE KILL TIME 1.337625
+   AVERAGE VERIFY TIME 2.55752941176
+   MIN/MAX KILL TIME =  1.27 / 1.48
+   MIN/MAX SUCCESS TIME =  1.22 / 1.79
+Done checking kill rate for mutant100003_harness_std.c
+Mutated harness has worse kill rate than base harness. (KILLED)
+-------------------------------------------------
+Checking mutant mutant100004_harness_std.c:  6 :  /* MUTANT (rep_op) */  __CPROVER_assume(s >= 0);
+VERIFICATION SUCCESSFUL 11.076
+Mutated harness survived, checking kill rate for mutant100004_harness_std.c
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   KILLED 1.356
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   KILLED 2.77
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 13.92
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 10.18
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   KILLED 1.337
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   KILLED 1.326
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   KILLED 1.264
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   KILLED 1.296
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   KILLED 1.258
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.293
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   KILLED 1.304
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   KILLED 1.367
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   KILLED 1.571
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   KILLED 1.667
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   KILLED 1.556
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   KILLED 1.6
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   KILLED 1.393
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   KILLED 1.29
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   KILLED 1.334
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   KILLED 1.368
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   KILLED 1.281
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   KILLED 1.36
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   KILLED 1.408
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   KILLED 1.324
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   KILLED 1.352
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   KILLED 1.249
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   KILLED 1.417
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   KILLED 1.331
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   KILLED 1.39
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   KILLED 1.354
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   KILLED 1.299
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   KILLED 1.279
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   KILLED 1.366
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 12.824
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   KILLED 1.259
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   KILLED 1.314
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   KILLED 1.309
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   KILLED 1.314
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.248
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.354
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.299
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.338
+   45 TOTAL MUTANTS, 39 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (86.6666666667% kill rate)
+   AVERAGE KILL TIME 1.38961538462
+   AVERAGE VERIFY TIME 24.616
+   MIN/MAX KILL TIME =  1.248 / 2.77
+   MIN/MAX SUCCESS TIME =  10.18 / 13.92
+Done checking kill rate for mutant100004_harness_std.c
+Mutated harness preserves kill rate.
+-------------------------------------------------
+Checking mutant mutant100005_harness_std.c:  6 :  /* MUTANT (rep_op) */  __CPROVER_assume(s == 0);
+VERIFICATION SUCCESSFUL 1.319
+Mutated harness survived, checking kill rate for mutant100005_harness_std.c
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   VERIFICATION SUCCESSFUL 1.276
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   KILLED 1.31
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 1.292
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 1.402
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   VERIFICATION SUCCESSFUL 1.312
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   VERIFICATION SUCCESSFUL 1.338
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   VERIFICATION SUCCESSFUL 1.272
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   VERIFICATION SUCCESSFUL 1.415
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   VERIFICATION SUCCESSFUL 1.225
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.253
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   VERIFICATION SUCCESSFUL 1.326
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   VERIFICATION SUCCESSFUL 1.294
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   VERIFICATION SUCCESSFUL 1.579
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   VERIFICATION SUCCESSFUL 1.714
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   VERIFICATION SUCCESSFUL 1.302
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   VERIFICATION SUCCESSFUL 1.246
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   VERIFICATION SUCCESSFUL 1.306
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   VERIFICATION SUCCESSFUL 1.302
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   VERIFICATION SUCCESSFUL 1.294
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   VERIFICATION SUCCESSFUL 1.257
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   VERIFICATION SUCCESSFUL 1.36
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   VERIFICATION SUCCESSFUL 1.265
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   VERIFICATION SUCCESSFUL 1.266
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   VERIFICATION SUCCESSFUL 1.318
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   VERIFICATION SUCCESSFUL 1.379
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   VERIFICATION SUCCESSFUL 1.303
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   VERIFICATION SUCCESSFUL 1.234
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   VERIFICATION SUCCESSFUL 1.273
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   VERIFICATION SUCCESSFUL 1.3
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   VERIFICATION SUCCESSFUL 1.268
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   VERIFICATION SUCCESSFUL 1.227
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   VERIFICATION SUCCESSFUL 1.264
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   VERIFICATION SUCCESSFUL 1.248
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 1.279
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   VERIFICATION SUCCESSFUL 1.265
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   VERIFICATION SUCCESSFUL 1.283
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   VERIFICATION SUCCESSFUL 1.3
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   VERIFICATION SUCCESSFUL 1.255
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.254
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.333
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.222
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.268
+   45 TOTAL MUTANTS, 6 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (13.3333333333% kill rate)
+   AVERAGE KILL TIME 1.27333333333
+   AVERAGE VERIFY TIME 2.62438888889
+   MIN/MAX KILL TIME =  1.222 / 1.333
+   MIN/MAX SUCCESS TIME =  1.225 / 1.714
+Done checking kill rate for mutant100005_harness_std.c
+Mutated harness has worse kill rate than base harness. (KILLED)
+-------------------------------------------------
+Checking mutant mutant100006_harness_std.c:  6 :  /* MUTANT (rep_op) */  __CPROVER_assume(s != 0);
+VERIFICATION SUCCESSFUL 15.242
+Mutated harness survived, checking kill rate for mutant100006_harness_std.c
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   KILLED 1.552
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   KILLED 1.498
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 12.811
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 13.455
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   KILLED 1.255
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   KILLED 1.263
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   KILLED 1.387
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   KILLED 1.255
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   KILLED 1.231
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.272
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   KILLED 1.259
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   KILLED 1.272
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   KILLED 1.689
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   KILLED 1.826
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   KILLED 1.488
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   KILLED 1.385
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   KILLED 1.511
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   KILLED 1.389
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   KILLED 1.239
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   KILLED 1.394
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   KILLED 1.273
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   KILLED 1.461
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   KILLED 1.306
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   KILLED 1.277
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   KILLED 1.277
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   KILLED 1.233
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   KILLED 1.278
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   KILLED 1.439
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   KILLED 1.341
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   KILLED 1.519
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   KILLED 1.341
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   KILLED 1.357
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   KILLED 1.3
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 11.882
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   KILLED 1.378
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   KILLED 1.336
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   KILLED 1.344
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   KILLED 1.306
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.276
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.305
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.309
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.311
+   45 TOTAL MUTANTS, 39 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (86.6666666667% kill rate)
+   AVERAGE KILL TIME 1.36235897436
+   AVERAGE VERIFY TIME 25.432
+   MIN/MAX KILL TIME =  1.231 / 1.826
+   MIN/MAX SUCCESS TIME =  11.882 / 13.455
+Done checking kill rate for mutant100006_harness_std.c
+Mutated harness preserves kill rate.
+-------------------------------------------------
+Checking mutant mutant100007_harness_std.c:  6 :  /* MUTANT (rep_const) */  __CPROVER_assume(s > 1);
+VERIFICATION SUCCESSFUL 13.893
+Mutated harness survived, checking kill rate for mutant100007_harness_std.c
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   KILLED 1.332
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   KILLED 2.16
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 15.165
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 14.618
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   KILLED 1.353
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   KILLED 1.272
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   KILLED 1.277
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   KILLED 1.315
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   KILLED 1.231
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.351
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   KILLED 1.249
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   KILLED 1.277
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   KILLED 1.622
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   KILLED 2.328
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   KILLED 1.813
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   KILLED 1.729
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   KILLED 1.342
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   KILLED 1.248
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   KILLED 1.303
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   KILLED 1.3
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   KILLED 1.333
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   KILLED 1.558
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   KILLED 1.36
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   KILLED 1.375
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   KILLED 1.396
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   KILLED 1.291
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   KILLED 1.281
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   KILLED 1.284
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   KILLED 1.284
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   KILLED 1.261
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   KILLED 1.299
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   KILLED 1.281
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   KILLED 1.367
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 15.618
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   KILLED 1.273
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   KILLED 1.267
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   KILLED 1.344
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   KILLED 1.266
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.248
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.31
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.275
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.359
+   45 TOTAL MUTANTS, 39 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (86.6666666667% kill rate)
+   AVERAGE KILL TIME 1.3901025641
+   AVERAGE VERIFY TIME 30.2673333333
+   MIN/MAX KILL TIME =  1.231 / 2.328
+   MIN/MAX SUCCESS TIME =  14.618 / 15.618
+Done checking kill rate for mutant100007_harness_std.c
+Mutated harness preserves kill rate.
+-------------------------------------------------
+Checking mutant mutant100008_harness_std.c:  6 :  /* MUTANT (rep_const) */  __CPROVER_assume(s > -1);
+VERIFICATION SUCCESSFUL 11.829
+Mutated harness survived, checking kill rate for mutant100008_harness_std.c
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   KILLED 1.995
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   KILLED 2.452
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 16.623
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 20.977
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   KILLED 1.525
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   KILLED 1.45
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   KILLED 1.313
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   KILLED 1.291
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   KILLED 1.266
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.292
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   KILLED 1.248
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   KILLED 1.281
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   KILLED 1.616
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   KILLED 1.843
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   KILLED 1.687
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   KILLED 1.622
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   KILLED 1.416
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   KILLED 1.291
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   KILLED 1.282
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   KILLED 1.267
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   KILLED 1.289
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   KILLED 1.621
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   KILLED 1.298
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   KILLED 1.308
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   KILLED 1.306
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   KILLED 1.271
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   KILLED 1.29
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   KILLED 1.272
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   KILLED 1.427
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   KILLED 1.335
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   KILLED 1.355
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   KILLED 1.29
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   KILLED 1.263
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 11.461
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   KILLED 1.256
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   KILLED 1.28
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   KILLED 1.26
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   KILLED 1.285
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.24
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.254
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.239
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.271
+   45 TOTAL MUTANTS, 39 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (86.6666666667% kill rate)
+   AVERAGE KILL TIME 1.39864102564
+   AVERAGE VERIFY TIME 32.7073333333
+   MIN/MAX KILL TIME =  1.239 / 2.452
+   MIN/MAX SUCCESS TIME =  11.461 / 20.977
+Done checking kill rate for mutant100008_harness_std.c
+Mutated harness preserves kill rate.
+-------------------------------------------------
+Checking mutant mutant100009_harness_std.c:  7 :  /* MUTANT (del_stmt) */ /*   value_t k = nondet_value(); */ 
+OTHER RESULT
+Checking mutant mutant100010_harness_std.c:  8 :  /* MUTANT (del_stmt) */ /*   long bret = binsearch(k, s); */ 
+OTHER RESULT
+Checking mutant mutant100011_harness_std.c:  9 :  /* MUTANT (rep_op) */  if (bret == -1)
+KILLED 1.256
+Checking mutant mutant100012_harness_std.c:  9 :  /* MUTANT (rep_const) */  if (bret != 0)
+KILLED 1.287
+Checking mutant mutant100013_harness_std.c:  9 :  /* MUTANT (rep_const) */  if (bret != 1)
+KILLED 1.293
+Checking mutant mutant100014_harness_std.c:  9 :  /* MUTANT (rep_const) */  if (bret != ((-1)+1))
+KILLED 1.274
+Checking mutant mutant100015_harness_std.c:  9 :  /* MUTANT (rep_const) */  if (bret != ((-1)-1))
+KILLED 1.284
+Checking mutant mutant100016_harness_std.c:  9 :  /* MUTANT (negate) */  if(! (bret != -1))
+KILLED 1.331
+Checking mutant mutant100017_harness_std.c:  10 :  /* MUTANT (rep_op) */    assert (a(bret) != k);
+KILLED 1.241
+Checking mutant mutant100018_harness_std.c:  12 :  /* MUTANT (del_stmt) */ /*     index_t i = nondet_index(); */ 
+OTHER RESULT
+Checking mutant mutant100019_harness_std.c:  13 :  /* MUTANT (del_stmt) */ /*     __CPROVER_assume ((i < s) && (i >= 0)); */ 
+KILLED 1.556
+Checking mutant mutant100020_harness_std.c:  13 :  /* MUTANT (rep_op) */    __CPROVER_assume ((i <= s) && (i >= 0));
+KILLED 1.357
+Checking mutant mutant100021_harness_std.c:  13 :  /* MUTANT (rep_op) */    __CPROVER_assume ((i > s) && (i >= 0));
+KILLED 1.37
+Checking mutant mutant100022_harness_std.c:  13 :  /* MUTANT (rep_op) */    __CPROVER_assume ((i >= s) && (i >= 0));
+KILLED 1.456
+Checking mutant mutant100023_harness_std.c:  13 :  /* MUTANT (rep_op) */    __CPROVER_assume ((i == s) && (i >= 0));
+KILLED 1.834
+Checking mutant mutant100024_harness_std.c:  13 :  /* MUTANT (rep_op) */    __CPROVER_assume ((i != s) && (i >= 0));
+KILLED 1.286
+Checking mutant mutant100025_harness_std.c:  13 :  /* MUTANT (rep_op) */    __CPROVER_assume ((i < s) || (i >= 0));
+KILLED 1.274
+Checking mutant mutant100026_harness_std.c:  13 :  /* MUTANT (rep_op) */    __CPROVER_assume ((i < s) && (i <= 0));
+KILLED 1.403
+Checking mutant mutant100027_harness_std.c:  13 :  /* MUTANT (rep_op) */    __CPROVER_assume ((i < s) && (i < 0));
+KILLED 1.277
+Checking mutant mutant100028_harness_std.c:  13 :  /* MUTANT (rep_op) */    __CPROVER_assume ((i < s) && (i > 0));
+VERIFICATION SUCCESSFUL 14.736
+Mutated harness survived, checking kill rate for mutant100028_harness_std.c
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   VERIFICATION SUCCESSFUL 12.609
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   KILLED 1.409
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 11.949
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 13.234
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   KILLED 1.731
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   KILLED 1.357
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   KILLED 1.368
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   KILLED 1.385
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   KILLED 1.777
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.606
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   KILLED 1.449
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   KILLED 1.409
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   KILLED 1.813
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   KILLED 2.329
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   KILLED 1.713
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   KILLED 1.844
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   KILLED 1.548
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   KILLED 1.673
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   KILLED 1.46
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   KILLED 1.488
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   KILLED 1.495
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   KILLED 1.489
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   KILLED 1.476
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   KILLED 1.494
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   KILLED 1.376
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   KILLED 1.328
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   KILLED 1.425
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   KILLED 1.37
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   KILLED 1.424
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   KILLED 1.415
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   KILLED 1.427
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   KILLED 1.4
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   KILLED 1.336
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 12.847
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   KILLED 1.374
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   KILLED 1.368
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   KILLED 1.463
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   KILLED 1.373
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.306
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.32
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.444
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.344
+   45 TOTAL MUTANTS, 38 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (84.4444444444% kill rate)
+   AVERAGE KILL TIME 1.49489473684
+   AVERAGE VERIFY TIME 25.3195
+   MIN/MAX KILL TIME =  1.306 / 2.329
+   MIN/MAX SUCCESS TIME =  11.949 / 13.234
+Done checking kill rate for mutant100028_harness_std.c
+Mutated harness has worse kill rate than base harness. (KILLED)
+-------------------------------------------------
+Checking mutant mutant100029_harness_std.c:  13 :  /* MUTANT (rep_op) */    __CPROVER_assume ((i < s) && (i == 0));
+VERIFICATION SUCCESSFUL 8.458
+Mutated harness survived, checking kill rate for mutant100029_harness_std.c
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   KILLED 1.489
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   KILLED 2.015
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 8.491
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 7.767
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   KILLED 1.383
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   KILLED 1.481
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   KILLED 1.545
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   KILLED 1.476
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   KILLED 1.444
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.338
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   KILLED 1.365
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   KILLED 1.419
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   KILLED 2.148
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   KILLED 2.244
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   KILLED 1.674
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   KILLED 1.629
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   KILLED 1.376
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   KILLED 1.364
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   KILLED 1.333
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   KILLED 1.574
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   KILLED 1.525
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   KILLED 1.429
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   KILLED 1.327
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   KILLED 1.408
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   KILLED 1.36
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   KILLED 1.535
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   KILLED 1.485
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   KILLED 1.401
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   VERIFICATION SUCCESSFUL 5.746
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   KILLED 1.369
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   KILLED 1.322
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   KILLED 1.319
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   KILLED 1.403
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 7.045
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   KILLED 1.451
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   KILLED 1.561
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   KILLED 1.592
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   KILLED 1.52
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.397
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.338
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.546
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.516
+   45 TOTAL MUTANTS, 38 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (84.4444444444% kill rate)
+   AVERAGE KILL TIME 1.50265789474
+   AVERAGE VERIFY TIME 14.5245
+   MIN/MAX KILL TIME =  1.319 / 2.244
+   MIN/MAX SUCCESS TIME =  5.746 / 8.491
+Done checking kill rate for mutant100029_harness_std.c
+Mutated harness has worse kill rate than base harness. (KILLED)
+-------------------------------------------------
+Checking mutant mutant100030_harness_std.c:  13 :  /* MUTANT (rep_op) */    __CPROVER_assume ((i < s) && (i != 0));
+KILLED 1.365
+Checking mutant mutant100031_harness_std.c:  13 :  /* MUTANT (rep_const) */    __CPROVER_assume ((i < s) && (i >= 1));
+VERIFICATION SUCCESSFUL 18.977
+Mutated harness survived, checking kill rate for mutant100031_harness_std.c
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   VERIFICATION SUCCESSFUL 25.197
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   KILLED 2.389
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 21.725
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 18.814
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   KILLED 1.985
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   KILLED 1.409
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   KILLED 1.418
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   KILLED 1.43
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   KILLED 1.38
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.386
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   KILLED 1.427
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   KILLED 1.458
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   KILLED 2.312
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   KILLED 2.089
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   KILLED 1.982
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   KILLED 2.02
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   KILLED 1.44
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   KILLED 1.419
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   KILLED 1.46
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   KILLED 1.362
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   KILLED 1.377
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   KILLED 1.533
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   KILLED 1.561
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   KILLED 1.649
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   KILLED 1.418
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   KILLED 1.363
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   KILLED 1.377
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   KILLED 1.323
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   KILLED 1.363
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   KILLED 1.338
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   KILLED 1.332
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   KILLED 1.399
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   KILLED 1.38
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 12.033
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   KILLED 1.356
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   KILLED 1.362
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   KILLED 1.417
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   KILLED 1.439
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.366
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.311
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.343
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.358
+   45 TOTAL MUTANTS, 38 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (84.4444444444% kill rate)
+   AVERAGE KILL TIME 1.51923684211
+   AVERAGE VERIFY TIME 38.8845
+   MIN/MAX KILL TIME =  1.311 / 2.389
+   MIN/MAX SUCCESS TIME =  12.033 / 25.197
+Done checking kill rate for mutant100031_harness_std.c
+Mutated harness has worse kill rate than base harness. (KILLED)
+-------------------------------------------------
+Checking mutant mutant100032_harness_std.c:  13 :  /* MUTANT (rep_const) */    __CPROVER_assume ((i < s) && (i >= -1));
+KILLED 1.346
+Checking mutant mutant100033_harness_std.c:  14 :  /* MUTANT (del_stmt) */ /*     assert (a(i) != k); */ 
+VERIFICATION SUCCESSFUL 5.589
+Mutated harness survived, checking kill rate for mutant100033_harness_std.c
+-------------------------------------------------
+   Mutating binsearch_std.c
+PREFIX: mutant*_
+   Checking mutant mutant100001_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = 1;
+   VERIFICATION SUCCESSFUL 5.049
+   Checking mutant mutant100002_binsearch_std.c:  4 :  /* MUTANT (rep_const) */  long low = -1;
+   KILLED 1.246
+   Checking mutant mutant100003_binsearch_std.c:  5 :  /* MUTANT (del_stmt) */ /*   long high = size - 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100004_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - 0;
+   VERIFICATION SUCCESSFUL 5.117
+   Checking mutant mutant100005_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - -1;
+   VERIFICATION SUCCESSFUL 4.459
+   Checking mutant mutant100006_binsearch_std.c:  5 :  /* MUTANT (rep_const) */  long high = size - ((1)+1);
+   VERIFICATION SUCCESSFUL 4.692
+   Checking mutant mutant100007_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low < high) {
+   VERIFICATION SUCCESSFUL 2.693
+   Checking mutant mutant100008_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low > high) {
+   VERIFICATION SUCCESSFUL 1.272
+   Checking mutant mutant100009_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low >= high) {
+   KILLED 1.15
+   Checking mutant mutant100010_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low == high) {
+   VERIFICATION SUCCESSFUL 1.152
+   Checking mutant mutant100011_binsearch_std.c:  7 :  /* MUTANT (rep_op) */  while (low != high) {
+   KILLED 1.201
+   Checking mutant mutant100012_binsearch_std.c:  7 :  /* MUTANT (negate) */  while(! (low <= high)) {
+   VERIFICATION SUCCESSFUL 1.105
+   Checking mutant mutant100013_binsearch_std.c:  8 :  /* MUTANT (del_stmt) */ /*     long mid = ((unsigned long)low + (unsigned long)high) >> 1; */ 
+   OTHER RESULT
+   Checking mutant mutant100014_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low - (unsigned long)high) >> 1;
+   KILLED 1.411
+   Checking mutant mutant100015_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low * (unsigned long)high) >> 1;
+   KILLED 1.613
+   Checking mutant mutant100016_binsearch_std.c:  8 :  /* MUTANT (rep_op) */    long mid = ((unsigned long)low % (unsigned long)high) >> 1;
+   KILLED 2.13
+   Checking mutant mutant100017_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> 0;
+   KILLED 1.405
+   Checking mutant mutant100018_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> -1;
+   KILLED 1.336
+   Checking mutant mutant100019_binsearch_std.c:  8 :  /* MUTANT (rep_const) */    long mid = ((unsigned long)low + (unsigned long)high) >> ((1)+1);
+   KILLED 1.213
+   Checking mutant mutant100020_binsearch_std.c:  9 :  /* MUTANT (del_stmt) */ /*     value_t midVal = a(mid); */ 
+   OTHER RESULT
+   Checking mutant mutant100021_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal <= key)
+   VERIFICATION SUCCESSFUL 2.264
+   Checking mutant mutant100022_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal > key)
+   KILLED 1.179
+   Checking mutant mutant100023_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal >= key)
+   KILLED 1.8
+   Checking mutant mutant100024_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal == key)
+   KILLED 1.172
+   Checking mutant mutant100025_binsearch_std.c:  11 :  /* MUTANT (rep_op) */    if (midVal != key)
+   VERIFICATION SUCCESSFUL 2.515
+   Checking mutant mutant100026_binsearch_std.c:  11 :  /* MUTANT (negate) */    if(! (midVal < key))
+   KILLED 1.727
+   Checking mutant mutant100027_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid - 1;
+   KILLED 1.296
+   Checking mutant mutant100028_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid * 1;
+   KILLED 1.163
+   Checking mutant mutant100029_binsearch_std.c:  12 :  /* MUTANT (rep_op) */      low = mid % 1;
+   KILLED 1.129
+   Checking mutant mutant100030_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + 0;
+   KILLED 1.137
+   Checking mutant mutant100031_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + -1;
+   KILLED 1.215
+   Checking mutant mutant100032_binsearch_std.c:  12 :  /* MUTANT (rep_const) */      low = mid + ((1)+1);
+   VERIFICATION SUCCESSFUL 3.183
+   Checking mutant mutant100033_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal <= key)
+   KILLED 1.16
+   Checking mutant mutant100034_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal < key)
+   KILLED 1.224
+   Checking mutant mutant100035_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal >= key)
+   VERIFICATION SUCCESSFUL 2.181
+   Checking mutant mutant100036_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal == key)
+   KILLED 1.133
+   Checking mutant mutant100037_binsearch_std.c:  13 :  /* MUTANT (rep_op) */    else if (midVal != key)
+   VERIFICATION SUCCESSFUL 4.518
+   Checking mutant mutant100038_binsearch_std.c:  13 :  /* MUTANT (negate) */    else if(! (midVal > key))
+   KILLED 1.169
+   Checking mutant mutant100039_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - 0;
+   KILLED 1.17
+   Checking mutant mutant100040_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - -1;
+   KILLED 1.193
+   Checking mutant mutant100041_binsearch_std.c:  14 :  /* MUTANT (rep_const) */      high = mid - ((1)+1);
+   VERIFICATION SUCCESSFUL 4.177
+   Checking mutant mutant100042_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 0;  // key not found.
+   KILLED 1.158
+   Checking mutant mutant100043_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return 1;  // key not found.
+   KILLED 1.133
+   Checking mutant mutant100044_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)+1);  // key not found.
+   KILLED 1.175
+   Checking mutant mutant100045_binsearch_std.c:  18 :  /* MUTANT (rep_const) */  return ((-1)-1);  // key not found.
+   KILLED 1.198
+   45 TOTAL MUTANTS, 28 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (62.2222222222% kill rate)
+   AVERAGE KILL TIME 1.29414285714
+   AVERAGE VERIFY TIME 6.33957142857
+   MIN/MAX KILL TIME =  1.129 / 2.13
+   MIN/MAX SUCCESS TIME =  1.105 / 5.117
+Done checking kill rate for mutant100033_harness_std.c
+Mutated harness has worse kill rate than base harness. (KILLED)
+-------------------------------------------------
+Checking mutant mutant100034_harness_std.c:  14 :  /* MUTANT (rep_op) */    assert (a(i) == k);
+KILLED 1.386
+34 TOTAL MUTANTS, 26 KILLED, 3 FAILED TO COMPILE 0 TIMED OUT, (76.4705882353% kill rate)
+AVERAGE KILL TIME 0.995230769231
+AVERAGE VERIFY TIME 27.5664
+MIN/MAX KILL TIME =  1.241 / 1.834
+MIN/MAX SUCCESS TIME =  1.253 / 19.647
+SURVIVING MUTANTS: 5
+(SAME KILL RATE)
+mutant100001_harness_std.c
+6 :  /* MUTANT (del_stmt) */ /*   __CPROVER_assume(s > 0); */ 
+mutant100004_harness_std.c
+6 :  /* MUTANT (rep_op) */  __CPROVER_assume(s >= 0);
+mutant100006_harness_std.c
+6 :  /* MUTANT (rep_op) */  __CPROVER_assume(s != 0);
+mutant100007_harness_std.c
+6 :  /* MUTANT (rep_const) */  __CPROVER_assume(s > 1);
+mutant100008_harness_std.c
+6 :  /* MUTANT (rep_const) */  __CPROVER_assume(s > -1);
+(** BETTER KILL RATE **)
+TOTAL ELAPSED TIME: 2232.75878
