@@ -1009,7 +1009,7 @@ ordering but with out-of-order later elements.
 
 \section{Algorithms and Techniques}
 
-Falsification-driven verificaiton is a semi-automated approach that
+Falsification-driven verification is a semi-automated approach that
 relies heavily on algorithmic and tool support.  While the typically
 smaller scope of code targeted for verification (vs. testing) makes the work easier,
 it is not likely to be feasible without automation of many
@@ -1018,7 +1018,7 @@ them using a harness relatively easy, but other tasks require new algorithms
 and tools.  Figure \ref{fig:flow} shows the basic flow, which is directed
 not by a fixed algorithm but by the intelligence and experience
 \cite{NeroWolfe} of the
-developer.  Novel tools or techniques are on the left side of the
+developer.  Novel tools or techniques are on the right side of the
 diagram (mutation analysis itself is not novel, but our tool for integrating
 this with the model checker and recording results for use by other
 parts of the toolchain is non-standard), other than the model checker
@@ -1050,6 +1050,15 @@ understanding surviving mutants (Figures \ref{alg:invert} and
 of these algorithms are described at a high level in the introductory
 example (in Sections \ref{sec:unwind}, \ref{sec:maxcover}, and
 \ref{sec:checkharness}, respectively), and in the case studies below.
+In the actual implementations, these tools perform considerable
+record-keeping and logging, communicating through the file system.
+For example, harness analysis records the actual killing runs and set
+of survivors (as well as executions times and other statistics) for
+each run.  There are also convenient top-level functions, for instance
+a tool to automatically call {\tt maxcover} on all (surviving)
+mutants.  While not polished enough for release, these tools
+(implemented as Python scripts) have proven robust enough for our
+internal use and are available for examination online.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{TestFlow}
@@ -1154,7 +1163,7 @@ return $m'$
 \begin{figure}
 {\scriptsize 
 \begin{code}
-trace maxcover($m$, $H$, $S$) 
+trace maxcover($m$, $H$, $S$, $O$, $U$) 
 \vspace{0.1in}
 
 $m'$ = coverinst($m$)
@@ -1185,7 +1194,7 @@ return trace
 \begin{figure}
 {\scriptsize 
 \begin{code}
-report check-harness($SUT$, $M$, $H$, $M(H)$, $S$) 
+report check-harness($SUT$, $M$, $H$, $M(H)$, $S$, $O$, $U$) 
 \vspace{0.1in}
 
 K$_H$ = killed($M$, $H$, $S$) 
@@ -1320,9 +1329,24 @@ detected.  No mutant produces such behavior, but noting an incorrect
 but passing trace of this run lets us see the problem.
 \end{comment}
 
-\section{Experimental Results and Case Studies}
+\section{Case Studies and Experimental Results}
 
 \subsection{Algorithm Implementations}
+
+Our initial experiments involved relatively small verification
+problems, based on implementations taken from the web or student code for popular
+algorithms and data structures.  In each example we first applied a
+plausible but incorrect implementation, and checked whether 1)
+surviving mutants revealed the problem and 2) whether the trace output
+could help guide a user to a correct harness and 3) analysis of the
+harness showed that there were mutants of the final, correct (to our
+knowledge) harness that mutants could detect.  The existence of
+harness mutants that are only exposed by a few mutants shows the
+virtues of falsification-driven verification: without some technique
+for detecting subtle harness flaws, it is likely that a weak harness
+will pass through the verification process uncorrected, since it
+correctly verifies the original program, and is likely difficult to
+detect by manual inspection or human-controlled fault injection.
 
 \subsubsection{Binary Search}
 
@@ -1529,37 +1553,34 @@ evaluating our methodology, but in its own right.
 \label{sec:Introduction to RCU}
 
 RCU is a synchronization mechanism that is sometimes used as a replacement
-for reader-writer locking for linked structures, but with extremely
-lightweight readers~\cite{McKenney:2013:SDS:2483852.2483867}.
+for reader-writer locking for linked structures, allowing extremely
+lightweight readers \cite{McKenney:2013:SDS:2483852.2483867}.
 In the limiting case, which is achieved in server-class builds of the
 Linux kernel, the overhead of entering and exiting an \emph{RCU read-side
 critical section} (using \co{rcu_read_lock()} and \co{rcu_read_unlock()},
-respectively) is exactly zero~\cite{McKenney98}.
-Thus, RCU can achieve excellent performance, scalability, real-time
-response, and energy efficiency for read-mostly
-workloads~\cite{McKenney:2013:SDS:2483852.2483867,DinakarGuniguntala2008IBMSysJ,PaulMcKenney2013AMPenergyHOTPAR}.
+respectively) is exactly zero \cite{McKenney98}, making RCU an
+excellent choice for read-mostly workloads \cite{McKenney:2013:SDS:2483852.2483867,DinakarGuniguntala2008IBMSysJ,PaulMcKenney2013AMPenergyHOTPAR}.
 
 However, lightweight readers imply that updaters cannot exclude readers,
-which means that updaters must take care to avoid disrupting readers.
+so must take care to avoid disrupting readers.
 Updaters typically maintain multiple versions of the portion of the
 data structure being updated, removing old versions only when
 readers are no longer accessing them.
 To this end, RCU provides \co{synchronize_rcu()}, which waits for a
-\emph{grace period}, that is, for all pre-existing RCU readers to complete.
-RCU updaters typically removes a data element (thus rendering it
-inaccessible to new readers), invokes \co{synchronize_rcu()},
-and then reclaims the newly removed element.
-Production-quality implementations of \co{synchronize_rcu()} use batching
+\emph{grace period}: when all pre-existing RCU readers complete.
+RCU updaters typically remove a data element (thus rendering it
+inaccessible to new readers), invoke \co{synchronize_rcu()},
+and then reclaim the newly removed element.
+\begin{comment}Production-quality implementations of \co{synchronize_rcu()} use batching
 techniques to achieve extremely scalability, so that a single underlying
 grace period can satisfy more than 1,000 concurrent updates in the
-Linux kernel~\cite{Sarma04c}.
-
+Linux kernel~\cite{Sarma04c}.\end{comment}
 The Linux kernel contains more than 10,000 uses of the RCU
-API~\cite{PaulEMcKenneyRCUusagePage}, and a userspace RCU
-library~\cite{MathieuDesnoyers2009URCU,MathieuDesnoyers2012URCU}
-is seeing significant use in userspace applications.
-That said, it is clear that validation and verification is a first-class
-concern for RCU implementations.
+API \cite{PaulEMcKenneyRCUusagePage}, and a userspace RCU
+library \cite{MathieuDesnoyers2009URCU,MathieuDesnoyers2012URCU}
+is seeing significant use.  Validation and verification of RCU is a
+major concern for each implementation, and a topic of considerable
+interest in the PL/verification community now \cite{PLDI15RCU}.
 
 \begin{comment}
 \emph{Should we cite this? 
@@ -1567,9 +1588,14 @@ concern for RCU implementations.
 \end{comment}
 
 Because both RCU and the Linux kernel are moving targets, any validation
-and verification must be both automated and repeatable, that is, must be
-something that could be included in a regression-test suite.
-The \co{rcutorture} stress-test suite qualifies, but it would be
+and verification must be both automated and repeatable, for inclusion
+on a regression-test suite.  At present the \co{rcutorture}
+stress-test provides some assurance in the form of automated testing,
+but ideally would be complemented by some formal verification of the
+implementation(s) in the kernel.  An important question is whether
+available formal verification tools can provide effective additional
+regression checking for RCU.
+\begin{comment}{The \co{rcutorture} stress-test suite qualifies, but it would be
 good to evaluate its effectiveness on the one hand
 (via permutation analysis)
 and to include formal verification on the other.
@@ -1583,7 +1609,8 @@ the following properties:
 Failing to provide any of these requirements provides unacceptable
 vulnerability to human error.
 This raise the question of whether readily available formal-verification
-tools meet these requirements.
+tools meet these requirements.}
+\end{comment}
 
 \begin{figure}[tb]
 { \scriptsize
@@ -1615,32 +1642,31 @@ tools meet these requirements.
 \label{fig:Approximate Model of RCU}
 \end{figure}
 
-We use a pair of RCU-related benchmarks to provide the beginnings of
-an answer to this question.
-The first benchmark applies formal verification to the simplest of
-the Linux kernel's RCU implementations, Tiny
-RCU~\cite{PaulEMcKenney2009BloatwatchRCU}, which targets single-CPU
-systems.
-This model includes Tiny RCU's handling of idle CPUs as well as
-the its (trivial) grace-period detection scheme.
-The second benchmark creates the trivial model approximating an RCU
-implementation for multiprocessor systems shown in
-Figure~\ref{fig:Approximate Model of RCU}.
-In this model, the number of RCU read-side critical sections currently
-in flight is tracked by the global variable \co{rcu_read_nesting_global},
-which is atomically incremented by \co{rcu_read_lock()} and atomically
-decremented by \co{rcu_read_unlock()}.
-This allows \co{synchronize_rcu()} to atomically XOR
-\co{rcu_read_nesting_global}'s bottom bit to detect whether the current
-execution has waited for all pre-existing readers (over-approximated
-by checking the absence of all readers), with \co{SET_NOASSERT()}
-being invoked to suppress all future assertions.
-Although this model has a number of shortcomings, perhaps most prominently
-excessive read-side ordering, it is capable of detecting common
-RCU-usage bugs, including failure to wait for an RCU grace period,
-failure to enclose read-side references in an RCU read-side critical
-section.
+We use a pair of RCU-related benchmarks \cite{PaulBlog1,PaulBlog2} to
+provide the beginnings of an answer to this question.  The first
+benchmark applies formal verification to the simplest of the Linux
+kernel's RCU implementations, Tiny RCU
+\cite{PaulEMcKenney2009BloatwatchRCU}, which targets single-CPU
+systems.  This model includes Tiny RCU's handling of idle CPUs as well
+as its (trivial) grace-period detection scheme.  The second benchmark
+creates the trivial model approximating an RCU implementation for
+multiprocessor systems shown in Figure \ref{fig:Approximate Model of
+  RCU}.  In this model, the number of RCU read-side critical sections
+currently in flight is tracked by the global variable
+\co{rcu_read_nesting_global}, which is atomically incremented by
+\co{rcu_read_lock()} and atomically decremented by
+\co{rcu_read_unlock()}.  This allows \co{synchronize_rcu()} to
+atomically XOR \co{rcu_read_nesting_global}'s bottom bit to detect
+whether the current execution has waited for all pre-existing readers
+(over-approximated by checking the absence of all readers), with
+\co{SET_NOASSERT()} being invoked to suppress all future assertions.
+Although this model has a number of shortcomings, perhaps most
+prominently excessive read-side ordering, it is capable of detecting
+common RCU-usage bugs, including failure to wait for an RCU grace
+period, failure to enclose read-side references in an RCU read-side
+critical section.
 
+\begin{comment}
 Nevertheless, it is important to note that these two benchmarks are not
 examples of useful verifications, but rather the simplest examples of
 a class that might some day expand to include useful verifications.
@@ -1650,8 +1676,9 @@ litmus tests, as well as single-threaded examples involving linked lists,
 but proved incapable of handling multi-threaded tests involving linked
 lists.
 The maintainers of CBMC are working to improve its handling of pointers.)
+\end{comment}
 
-\subsection{Plausible Verification by Failure to Falsify}
+\subsection{Experiments: Plausible Verification by Failure to Falsify}
 \label{sec:sattimes}
 
 \begin{figure}
@@ -1682,23 +1709,32 @@ aims to be fast at producing satisfying assignments, not proving UNSAT
 
 Figure \ref{fig:sattimes} shows (with log scales on both axes) the
 average running times for all experiments (including faulty versions
-of the harness, incorrect runtime parameters, etc.) performed in the
-course of this work.  The general trend is clear: time to verify is
-usually worse than time to kill, and the worst average time to kill
-(about 350 seconds) is much better than many average verification
-times.  One use of this relationship is that, in cases where all
-(non-equivalent) mutants of the SUT are killed, but the SUT
-verification fails to complete, the SUT might be considered
-\emph{provisionally} verified. In particular, the larger the ratio
-between the timeout for failed verification and the longest kill time
-for any mutant, the ``more likely'' to be correct we can consider the
-SUT (the same holds with respect to memory use limits). This belief can
-be further justified by modifying the harness to force mutant kills to
-use large problem sizes, violating the usual inclusiveness rule (that
-way, if the new size allows a counterexample not previously existing,
-the mutant killing problem for mutants killable at smaller sizes
-better approximates the counterexample construction problem for the
-actual fault).
+of the harness, incorrect runtime parameters, harness mutation checks,
+etc.) performed in the course of this work.  The general trend is
+clear: time to verify is usually worse than time to kill, and the
+worst average time to kill (about 350 seconds) is much better than
+many average verification times.  One use of this relationship is
+that, in cases where all (non-equivalent) mutants of the SUT are
+killed, but the SUT verification fails to complete, the SUT might be
+considered \emph{provisionally} verified. In particular, the larger
+the ratio between the timeout for failed verification and the longest
+kill time for any mutant, the ``more likely'' to be correct we can
+consider the SUT (the same holds with respect to memory use
+limits). This belief can be further justified by modifying the harness
+to force mutant kills to use large problem sizes, violating the usual
+inclusiveness rule (that way, if the new size allows a counterexample
+not previously existing, the mutant killing problem for mutants
+killable at smaller sizes better approximates the counterexample
+construction problem for the actual fault).
+
+Additionally, the times shown here (with mean mutant kill time of 16.4
+seconds and median mutant kill time of 0.54 seconds) show the general
+feasibility of the falsification-based approach.  Most of the time,
+killing mutants is cost-effective.  The outliers come from a few
+difficult problems, arising from buggy harnesses (or harness mutants
+that resemble buggy harnesses).  The much worse cost for surviving
+mutants is due to a few expensive stubborn mutants: the median
+verification success time is only 1.5 seconds.
 
 \section{Discussion}
 
