@@ -1330,11 +1330,11 @@ but passing trace of this run lets us see the problem.
 Our initial experiments involved relatively small verification
 problems, based on implementations taken from the web or student code for popular
 algorithms and data structures.  In each example we first applied a
-plausible but incorrect implementation, and checked whether 1)
-surviving mutants revealed the problem and 2) whether the trace output
-could help guide a user to a correct harness and 3) analysis of the
+plausible but weak harness, and checked whether 1)
+surviving mutants revealed the problem, 2) the trace output
+could help guide a user to a correct harness, and 3) analysis of the
 harness showed that there were mutants of the final, correct (to our
-knowledge) harness that mutants could detect.  The existence of
+knowledge) harness that mutant suvivals could detect.  The existence of
 harness mutants that are only exposed by a few mutants shows the
 virtues of falsification-driven verification: without some technique
 for detecting subtle harness flaws, it is likely that a weak harness
@@ -1344,7 +1344,59 @@ detect by manual inspection or human-controlled fault injection.
 
 \subsubsection{Binary Search}
 
-\subsubsection{Doubly-linked List Insertion Sort}
+The ideas in this paper grew out of a side project of the first
+author: to write a follow-up to Jon Bentley's article on verifying
+binary search \cite{Bentley} in the context of modern software
+verification tools (and Joshua Bloch's discovery of a bug in the
+assumptions behind Bentley's proof \cite{Bloch}).  The modeling
+required is moderately complex (to scale well, an abstract ``sorted
+array'' that represents all sorted arrays but only introduces
+variables equal to the number of probes made by the search is
+essential).  In this case, we did not produce an initial, weaker
+version of the harness, but checked out existing harness using
+mutants, and determined that all 3 surviving mutants are equivalent to
+a true binary search.
+
+Checking harness mutants produced results confirming the belief this is a
+good harness.  Of the 31 compiling harness mutants, 19 failed to verify
+the correct binary search, and 7 had worse kill rates than the
+original harness.  The remaining 5 harnesses, all with equal kill
+rates of 86.7\%, all modify an assumption to allow the harness to also
+check size 0 arrays.  This doesn't kill any additional mutants, but is
+harmless as expected.  Of the harness mutants with worse kill rates,
+three are mutants of the assumptions on the nondeterministic value used to
+make sure that if binary search returns -1, no index in the array
+actually contains the searched-for item.  Two of these mutants are
+off-by-one-errors that exclude item 0 from the check, an easy-to-make
+mistake.  Both of these fail to kill \emph{exactly} one mutant killed by the
+correct harness: the mutant that sets the lower bound
+initially to 1 instead of 0.  Traces of passing runs for these mutants show the
+underlying problem easily (the sought item is at location 0).
+
+\subsubsection{Doubly-linked-list Insertion Sort}
+
+Another example, making use of recursive data structures and pointer
+validity checks, is a simple piece of code for inserting an item (in
+sorted order) into a doubly-linked list \cite{DLLInsert}.  Our initial
+harness omitted a check for correctness of {\tt prev} pointers.  This
+problem didn't directly prevent mutants from being detected, but
+pushed the stable size larger, as with the quick sort example above.
+Looking at a trace of a size 3 run that fails to kill a clearly
+problematic mutant easily reveals the problem (the results are correct
+up to {\tt prev} pointers).  This example also showed another use of
+mutants, in that some seemingly problematic surviving mutants actually
+just showed a pointless redundancy in the implementation, enabling the
+removal of an entire conditional branch.  A harness check shows that of
+the 105 compiling harness mutants, 92 fail to verify the original
+code.  Another 2 have a worse kill rate than the original (which kills
+81\% of mutants, a low rate due to the code redundancy), and 11
+survive.  The large number of survivors is due to a redundancy of the
+final harness, which checks sortedness and the permutation property
+for both a forward {\tt next} traversal of the list and a {\tt prev}
+traversal.  Omitting any \emph{one} of these can still detect all
+mutants.  Removing two, however, fails to kill mutants.  The two
+harness mutants with worse kill rates have such poor kill rates ($<50$\% and $<25$\% respectively) that they do not show possible
+erroneous versions of the harness.
 
 \subsubsection{AVL Tree}
 
@@ -1482,9 +1534,9 @@ int main() \{
 Figures \ref{fig:bmh} and \ref{fig:bmhharn} show, respectively, the
 source code and an initial harness for verification of the
 Boyer-Moore-Horspool substring finding algorithm \cite{BMH,CFV13} in
-version 1.6 of Mozilla's SpiderMonkey JavaScript engine.
-Verifying this code presents one immediate issue that is not unusual
-in verification: how to handle an {\tt assert} in the code being
+version 1.6 of Mozilla's SpiderMonkey JavaScript engine.  Verifying
+this code presents one immediate issue that is not unusual in
+verification: how to handle an {\tt assert} in the code being
 verified.  An {\tt assert} at the end of a function or in the main
 body is typically an additional part of the specification, and is
 often best left unchanged.  An {\tt assert} at the beginning of a
@@ -1492,20 +1544,18 @@ function's body, however, is typically a preconditon for the code,
 indicating that when it is violated the code will not behave
 correctly.  It is natural to consider changing such an assertion into
 an {\tt assume} and ignoring any problems produced by calling the code
-with non-conforming inputs.
-
-While this can be a useful technique (for instance when it is hard to
-write a harness that only produces valid inputs, but easy to filter
-out the invalid inputs and only verify behavior for those) it is also
-a dangerous technique.  Mutation analysis of the harness shows that 4
-is a mutant-stable size (where the same size is used for text length,
-pattern length, and character set size), with a kill rate of 72.3\%.
-On initial examination, the 20 surviving mutants do not seem
-problematic.  A large number involve the {\tt JS\_ASSERT} converted to
-a {\tt \_\_CPROVER\_assume}, showing the harness cannot tell if the
-assumption is incorrect, which is not surprising (the harness only
-generates good inputs, and some of the mutants simply discard too many
-inputs).
+with non-conforming inputs.  While this can be a useful technique (for
+instance when it is hard to write a harness that only produces valid
+inputs, but easy to filter out the invalid inputs and only verify
+behavior for those) it is also a dangerous technique.  Mutation
+analysis of the harness shows that 4 is a mutant-stable size (where
+the same size is used for text length, pattern length, and character
+set size), with a kill rate of 72.3\%.  On initial examination, the 20
+surviving mutants do not seem problematic.  A large number involve the
+{\tt JS\_ASSERT} converted to a {\tt \_\_CPROVER\_assume}, showing the
+harness cannot tell if the assumption is incorrect, which is not
+surprising (the harness only generates good inputs, and some of the
+mutants simply discard too many inputs).
 
 At this point, we were satisfied with our harness, and ran a check on
 mutants of the harness itself.  To our surprise, three mutants of the
@@ -1513,17 +1563,17 @@ harness had a \emph{better} kill rate than the ``correct'' harness,
 killing 73.5\% of mutants.  Investigating these ``better'' harnessess
 showed mutants that broke processing of some return values in such a
 way that, while these harnessess failed to detect certain major bugs
-in the code, they were able to detect some assumption mutants.  Guided
+in the code, they were able to detect some {\tt JS\_ASSERT} assumption mutants.  Guided
 by this, we produced a revised harness that raised the kill rate to
 79.52\%.  However, on examining the surviving mutants, we realized
-that our verification was unsatisfactory as a good regression for the
+that our verification was still unsatisfactory as a good regression for the
 Boyer-Moore-Horspool code:  in particular, if the assertion were ever
 modified to allow bad inputs to pass through, or otherwise incorrectly
 changed, we would miss some mutants.  We then changed the {\tt
   JS\_ASSERT} into code that returned a special value to signal
 assertion failure, and modified the harness once more,
 allowing some incorrect values to pass through and checking that
-assertion failure happened if, and only if, the inputs were invalid.
+``assertion failure'' happened if, and only if, the inputs were invalid.
 This harness killed 89.2\% of mutants, and the six surviving mutants
 were easily understood to be equivalent to the BMH code under all
 valid inputs (in one case we weren't certain about, we had CBMC verify
@@ -1672,7 +1722,7 @@ The maintainers of CBMC are working to improve its handling of pointers.)
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{sattimes}
-\caption{Average times for killed mutants (SAT) vs. unkilled mutants 
+\caption{Average times for killed mutants (SAT) vs. surviving mutants 
   (UNSAT) for all experiments.}
 \label{fig:sattimes}
 \end{figure}
