@@ -1007,7 +1007,11 @@ diagram (mutation analysis itself is not novel, but our tool for integrating
 this with the model checker and recording results for use by other
 parts of the toolchain is non-standard), other than the model checker
 itself. We show only top-level functionality that a developer uses,
-not supporting algorithms for instrumentation of SUT and harness (mutants).
+not supporting algorithms for instrumentation of SUT and harness
+(mutants).  Also omitted are techniques sometimes useful, easily
+implemented using these tools, such as pure-nondeterminstic
+``most-general mutants'' and reference checking to find an input where
+a function and its mutant differ on the same input.
 
 One important need is a version of CBMC capable of applying built-in
 assertions checks (e.g, bounds checks, pointer dereference, divsion by
@@ -1018,37 +1022,37 @@ mutant.  For developer-provided harnesses, this can be performed by
 automatic source-to-source transformation of the harness, but CBMC's
 internal constraints have to be handled inside the model checker.  We
 implemented a new CBMC command-line option, {\tt --find-success} that
-transforms all CBMC-generated assertions into assumptions.  In all
-algorithms in this paper, {\tt check} means applying standard model
-checking, with any needed automatic property checks, while {\tt
-  scheck} indicates applying our modified CBMC with {\tt find-success}
-enabled.  In Figure \ref{fig:flow} we assume the use of a modified
-version of CBMC.
+provides this functionality.  In all algorithms, {\tt check} means
+running CBMC as usual, with any needed automatic property
+checks, while {\tt scheck} indicates running CBMC with
+{\tt find-success} enabled.  In Figure \ref{fig:flow} we assume the
+use of a modified version of CBMC.
 
 Figure \ref{alg:unwind}-\ref{alg:checkharness} show core algorithms
 (implemented as prototype tools in our framework).  Two of these are
-support algorithms for instrumentation, used in the production of witnesses for
-understanding surviving mutants (Figures \ref{alg:invert} and
-\ref{alg:covermut}), while the other three (Figures \ref{alg:unwind},
-\ref{alg:maxcover}, and \ref{alg:checkharness}) face developers.  The uses
-of these algorithms are described at a high level in the introductory
-example (in Sections \ref{sec:unwind}, \ref{sec:maxcover}, and
-\ref{sec:checkharness}, respectively), and in the case studies below.
-In the actual implementations, these tools perform considerable
-record-keeping and logging, communicating through the file system.
-For example, harness analysis records the actual killing runs and set
-of survivors (as well as executions times and other statistics) for
-each run.  There are also convenient top-level functions, for instance
-a tool to automatically call {\tt maxcover} on all (surviving)
-mutants.  Running {\tt maxcover} on all mutants also conveniently
-provides a measure of how strong a harness is that is more
-fine-grained than a simple kill rate; two harnesses can be compared by
-the maximum coverage of all surviving/killed mutants they allow, even
-if they have the same kill rate.  If one harness produces executions
-with lower coverage (or no executions at all) for some killed mutants,
-it is stronger.  While not polished enough for release, these tools
-(implemented as Python scripts) have proven robust enough for our
-internal use and are available for examination online.
+support algorithms for instrumentation, used in the production of
+witnesses for understanding surviving mutants (Figures
+\ref{alg:invert} and \ref{alg:covermut}), while the other three
+(Figures \ref{alg:unwind}, \ref{alg:maxcover}, and
+\ref{alg:checkharness}) face developers.  The uses of these algorithms
+are described at a high level in the introductory example (in Sections
+\ref{sec:unwind}, \ref{sec:maxcover}, and \ref{sec:checkharness},
+respectively), and in the case studies below.  In the actual
+implementations, these tools perform considerable record-keeping and
+logging, communicating through the file system.  For example, harness
+analysis records killing counterexamples and set of survivors (as well
+as executions times and other statistics) for each run.  There are
+also convenient scripts in the toolchain, for instance a tool to
+automatically call {\tt maxcover} on all (surviving) mutants.  Running
+{\tt maxcover} on \emph{all} mutants provides a measure of harness
+strength that is more fine-grained than a simple kill rate: harnesses
+can be compared by the maximum coverage of \emph{all} mutants, even if
+they have the same kill rate.  If one harness produces executions with
+lower coverage (or no executions at all) for some killed mutants, it
+is stronger.  For some mutants, \emph{any} passing executions show a harness
+flaw. While not polished enough for release, these tools (implemented
+as Python scripts) have proven robust enough for our internal use and
+are available for examination online.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{TestFlow}
@@ -1479,7 +1483,6 @@ Figures \ref{fig:bmh} and \ref{fig:bmhharn} show, respectively, the
 source code and an initial harness for verification of the
 Boyer-Moore-Horspool substring finding algorithm \cite{BMH,CFV13} in
 version 1.6 of Mozilla's SpiderMonkey JavaScript engine.
-
 Verifying this code presents one immediate issue that is not unusual
 in verification: how to handle an {\tt assert} in the code being
 verified.  An {\tt assert} at the end of a function or in the main
@@ -1491,9 +1494,9 @@ correctly.  It is natural to consider changing such an assertion into
 an {\tt assume} and ignoring any problems produced by calling the code
 with non-conforming inputs.
 
-While this can be a useful technique, for instance when it is hard to
+While this can be a useful technique (for instance when it is hard to
 write a harness that only produces valid inputs, but easy to filter
-out the invalid inputs and only verify behavior for those, it is also
+out the invalid inputs and only verify behavior for those) it is also
 a dangerous technique.  Mutation analysis of the harness shows that 4
 is a mutant-stable size (where the same size is used for text length,
 pattern length, and character set size), with a kill rate of 72.3\%.
