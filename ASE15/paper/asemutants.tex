@@ -1353,7 +1353,7 @@ required is moderately complex (to scale well, an abstract ``sorted
 array'' that represents all sorted arrays but only introduces
 variables equal to the number of probes made by the search is
 essential).  In this case, we did not produce an initial, weaker
-version of the harness, but checked out existing harness using
+version of the harness, but checked the existing harness using
 mutants, and determined that all 3 surviving mutants are equivalent to
 a true binary search.
 
@@ -1400,9 +1400,9 @@ erroneous versions of the harness.
 
 \subsubsection{AVL Tree}
 
-\subsubsection{Dijkstra's Algorithm}
+%\subsubsection{Dijkstra's Algorithm}
 
-\subsubsection{Merge With Duplicate Removal}
+%\subsubsection{Merge With Duplicate Removal}
 
 \subsection{SpiderMonkey Boyer-Moore-Horspool Implementation}
 
@@ -1768,7 +1768,7 @@ construction problem for the actual fault).
 
 Additionally, the times shown here (with mean mutant kill time of 16.4
 seconds and median mutant kill time of 0.54 seconds) show the general
-feasibility of the falsification-based approach.  Most of the time,
+feasibility of the falsification-driven approach.  Most of the time,
 killing mutants is cost-effective.  The outliers come from a few
 difficult problems, arising from buggy harnesses (or harness mutants
 that resemble buggy harnesses).  The much worse cost for surviving
@@ -1835,8 +1835,7 @@ need of correction.  However, the approach we propose is most suited
 to the analysis space in which CBMC is situated: on the one hand,
 within a known bound, its results are exhaustive; on the other hand,
 the method behaves much like a dynamic analysis, in that there are no
-false positives, and counterexamples and success witnesses are concrete,
-never-spurious, test cases.
+false positives.
 
 \section{Related Work}
 
@@ -1879,14 +1878,46 @@ a mutant, our goal, but more manageable for testing, where complete
 behavioral coverage is less feasible than in model checking (and where
 source code sizes combined with test inadequacy may make hand mutation analysis infeasible).
 
+\begin{comment}
 Our idea of examining successful executions to better understand
 surviving (and even killed) mutants is a peculiar variation of the
 fault localization and error explanation problem in model checking
 \cite{GroceDist}, with the twist being that we are ``explaining'' an
 artificial fault that 1) typically does not cause a test failure (for
 surviving mutants) and 2) has an obviously known location.
+\end{comment}
 
 \section{Conclusions and Future Work}
+
+This paper proposes a \emph{falsification-driven} methodology for
+formal verification, particularly when verification is performed by
+the developers of critical software systems.  These developers are not
+experts in formal verification, but in the systems they are
+verifying.  Verification is, we claim, always provisional, in that the
+potential flaws in our assumptions, specification, and understanding
+of system behavior tend to leave room for doubt about the correctness
+of any verification result.  Verification of code is not
+self-explanatory, unlike a counterexample.  We propose to take
+advantage of the use of counterexamples and witnesses and center
+verification around the \emph{incorrect programs a verification fails
+  to prove incorrect}.  An obvious source of such programs is mutants;
+we also suggest that known-flawed versions of code be included in this
+set, which all of our tools support, but the key to the method is the
+generation of a large set of potential buggy versions without
+developer effort.  Given these versions, a developer can examine
+mutants that a verification effort fails to detect, and (with the
+algorithms and tools presented in this paper) examine executions showing
+precisely how a program mutant can ``make it through'' a verification
+without being detected, with assurance that these executions will have
+high coverage (and thus likely be non-trivial), including of the
+mutant itself.  Developers can also check that a verification harness
+does not have any mutants that 1) verify the SUT but 2) kill
+\emph{more} mutants than their harness.  This can help detect very
+subtle flaws in harnesses, especially those based on bad reasoning
+about ``equivalent'' mutants.  We demonstrate, as a proof-of-concept,
+that our approach can be useful for simple verification efforts, and
+can contribute to serious systems verification and modeling efforts for the Linux
+kernel RCU implementations.
 
 Our CBMC patch for {\tt find-success} mode, the various verification harnesses, and our
 experimental results are all available at {\tt \url{https://github.com/agroce/cbmcmutate}}.
