@@ -1329,18 +1329,7 @@ but passing trace of this run lets us see the problem.
 
 Our initial experiments involved relatively small verification
 problems, based on implementations taken from the web or student code for popular
-algorithms and data structures.  In each example we first applied a
-plausible but weak harness, and checked whether 1)
-surviving mutants revealed the problem, 2) the trace output
-could help guide a user to a correct harness, and 3) analysis of the
-harness showed that there were mutants of the final, correct (to our
-knowledge) harness that mutant suvivals could detect.  The existence of
-harness mutants that are only exposed by a few mutants shows the
-virtues of falsification-driven verification: without some technique
-for detecting subtle harness flaws, it is likely that a weak harness
-will pass through the verification process uncorrected, since it
-correctly verifies the original program, and is likely difficult to
-detect by manual inspection or human-controlled fault injection.
+algorithms and data structures.
 
 \subsubsection{Binary Search}
 
@@ -1357,7 +1346,8 @@ version of the harness, but checked the existing harness using
 mutants, and determined that all 3 surviving mutants are equivalent to
 a true binary search.
 
-Checking harness mutants produced results confirming the belief this is a
+Checking harness mutants (which took 37 minutes, including computing
+the kills for the original harness) produced results confirming the belief this is a
 good harness.  Of the 31 compiling harness mutants, 19 failed to verify
 the correct binary search, and 7 had worse kill rates than the
 original harness.  The remaining 5 harnesses, all with equal kill
@@ -1386,21 +1376,28 @@ problematic mutant easily reveals the problem (the results are correct
 up to {\tt prev} pointers).  This example also showed another use of
 mutants, in that some seemingly problematic surviving mutants actually
 just showed a pointless redundancy in the implementation, enabling the
-removal of an entire conditional branch.  A harness check shows that of
-the 105 compiling harness mutants, 92 fail to verify the original
-code.  Another 2 have a worse kill rate than the original (which kills
-81\% of mutants, a low rate due to the code redundancy), and 11
-survive.  The large number of survivors is due to a redundancy of the
-final harness, which checks sortedness and the permutation property
-for both a forward {\tt next} traversal of the list and a {\tt prev}
-traversal.  Omitting any \emph{one} of these can still detect all
-mutants.  Removing two, however, fails to kill mutants.  The two
-harness mutants with worse kill rates have such poor kill rates ($<50$\% and $<25$\% respectively) that they do not show possible
-erroneous versions of the harness.
+removal of an entire conditional branch.  A harness check (requiring
+30 minutes, including computing the mutant kills for the original
+harness) showed that of the 105 compiling harness mutants, 92 fail to
+verify the original code.  Another 2 have a worse kill rate than the
+original (which kills 81\% of mutants, a low rate due to the code
+redundancy), and 11 survive.  The large number of survivors is due to
+a redundancy of the final harness, which checks sortedness and the
+permutation property for both a forward {\tt next} traversal of the
+list and a {\tt prev} traversal.  Omitting any \emph{one} of these
+(e.g. {\tt prev} sortedness or {\tt next} permutation) the harness can
+still detect all mutants.  Removing two, however, fails to kill
+mutants.  The two harness mutants with worse kill rates have such poor
+kill rates ($<50$\% and $<25$\% respectively) that they do not show
+possible erroneous versions of the harness.
+
+\subsubsection{Dijkstra's Algorithm}
+
+A student in our model checking seminar proposed a verification of an
+implementation of Dijkstra's shortest path algorithm.
 
 \subsubsection{AVL Tree}
 
-%\subsubsection{Dijkstra's Algorithm}
 
 %\subsubsection{Merge With Duplicate Removal}
 
