@@ -1715,8 +1715,11 @@ ignore executions that violate locking semantics.  The native mutex
 version allows much faster verification, and catches the original,
 hand-constructed checks to ensure the harness can detect faults in
 Tiny RCU.  However, the native mutex version fails to kill \emph{any}
-mutants, a fact we are currently investigating.  In support of the
-verification, we generated passing maximal-coverage executions for all
+mutants, a fact we are currently investigating:  without mutants, we
+would not have been aware of this possibly critical problem, which may
+be a CBMC bug (in the course of this paper's work, we have uncovered
+several CBMC bugs) or a harness flaw.  In support of the
+verification, we also generated passing maximal-coverage executions for all
 mutants of the Tiny RCU code.  For 97 of the mutants, there is no
 passing execution; in many cases, these are not killed: the mutant
 modifies the concurrency semantics so CBMC has no valid executions to
