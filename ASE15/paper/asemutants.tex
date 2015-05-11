@@ -487,15 +487,15 @@ verification effort is the counterxample trace, which is full of
 evidence as to the reason for the failure to verify the SUT. Moreover,
 any solution (fix to SUT or harness) is easily checked: if it is
 correct, the model checker stops reporting the previous
-counterexample.  This is essentially a normal debugging problem, but
-with the advantage that solutions are easily checked.
+counterexample.  
+%This is essentially a normal debugging problem, but
+%with the advantage that solutions are easily checked.
 
 Unfortunately, model checkers do not invariably report
 counterexamples: eventually the SUT is likely to satisfy the
 properties encoded in the harness!  It is in this case that problems
-arise: what, precisely, has been verified?  Does the harness in fact
-specify all aspects of correctness required?  Is the SUT correct?
-Formal verification is not only subject to the many issues that make
+arise: what, precisely, has been verified?  Is the SUT actually correct?
+Formal verification is not only subject to the problems that make
 ``no faults detected'' results dubious in testing \cite{WODA09,CovDisc}, but
 also to more subtle problems.  For example, an incorrect \emph{assume}
 statement may constrain a system so that not only are there no
@@ -513,9 +513,9 @@ verification.  A \emph{mutant} of a program is a version of the program that
 introduces a small syntactic change.  The idea behind mutation testing
 is that a good test suite will be able to detect when (as is usually
 the case) such a change introduces a bug in the SUT.  In the case of
-bounded model checking, since we aim at \emph{verification} rather
-than merely good testing, it seems clear that surviving mutants are
-likely to indicate a weakness of the verification.
+bounded model checking, since we aim at (bounded) \emph{verification} rather
+than merely good testing, surviving mutants are
+likely to indicate a real problem.
 
 The use of mutation testing most often seen in the software
 engineering literature is simply noting a mutation kill rate. This is
@@ -523,10 +523,10 @@ not enough for verification.  The typically small scope of the code to
 be verified, and the presumed importance of code targeted for
 verification suggests an approach in which \emph{individual mutants}
 are examined by the developer.  Without additional assistance, such an
-approach cannot scale.  We propose that the capabilities of the model
+approach cannot scale.  New capabilities for the model
 checking tool, the nature of formal verification, and the adoption of
-certain best practices can make this seemingly too-demanding approach
-in fact practical for real verification tasks.
+certain best practices and tools, however, can make this seemingly too-demanding approach
+practical for real verification tasks.
 
 \begin{comment}
 Our basic idea is to use mutants \emph{throughout the verification
@@ -554,18 +554,18 @@ harness reject the SUT itself.
 The contribution of this paper is a \emph{falsification-driven}
 verification methodology that uses mutants to aid the user of a model
 checker in understanding ``successful'' verification
-results, determining when a harness is flawed, and correcting harness.
-To support this approach, we show how to use mutation testing to
+results, determining when a harness is flawed, and correcting a harness.
+We show how to use mutation testing to
 choose a problem size in bounded model checking, how to mutate a
 harness to determine if any similar harnesses have an equal (or
 better) mutation kill rate, and most importantly, how to modify CBMC,
 a harness, and mutants to automatically produce \emph{successful
   high-coverage executions covering mutated code} in order to
-understand mutant behavior and find subtle harness flaws.  This
+understand mutant (and thus harness) behavior.  This
 approach, unlike a simpler method of searching for cases where the
-mutated code and original code behave differently for the same inputs,
-applies even to verification of reactive and concurrent systems, where
-there is no easily obtained notion of ``for the same inputs.''  
+mutated original code behave differently for the same inputs,
+applies to verification of reactive and concurrent systems, where
+there is no simple notion of ``for the same inputs.''  
 %We also propose the use of mutation analysis to gain limited confidence
 %in program correctness even past model checker scalability limits. 
 At a more general level, we discuss the fundamental nature of
@@ -573,10 +573,10 @@ At a more general level, we discuss the fundamental nature of
 never known to be complete. We propose that falsification, as in
 Popper's philosophy of science \cite{Popper}, is a useful conceptual
 framework for verification efforts: rather than focusing on what can
-be proven about a program, it may be best to focus on how a
+be proven about a program, we focus on how a
 verification distinguishes the ``real'' program from similar
 alternative programs that do \emph{not} match the theory of program
-behavior.  This approach aims at verification, but continually
+behavior.  This approach still aims at verification, but continually
 evaluates and refines a verification effort by its ability to
 \emph{falsify} rather than to verify.
 
@@ -666,7 +666,7 @@ detected by the harness (a counterexample is produced: we say the
 mutant is \emph{killed}), and 71 mutants pass without detection (the
 verification is successful, in which case we say the mutant \emph{survives}).
 Clearly length 1 arrays are not sufficient to detect even the most
-glaring bugs in a sort algorithm (no surprise; all size 1 arrays are
+glaring bugs in a sort algorithm (no surprise: all size 1 arrays are
 sorted).  What about our choice of size 2?  Re-running the mutants
 (dropping those already killed by the smaller bound) takes slightly
 over 13 minutes (due to one mutant requiring over 8 minutes
@@ -674,7 +674,7 @@ to model check) and reduces the number of surviving mutants to 26.  We
 could inspect these mutants by hand, but it seems highly unlikely that
 a \emph{complete verification} over all possible arrays with a good
 specification for sorting would produce such a poor mutation kill rate.
-If we up the size limit to 3 (the verification taking just over 33
+If we up the size limit to 3 and unwinding 4 (the verification taking just over 33
 minutes), only 8 mutants survive.  Note that each problem, due to the
 harness' assignment of {\tt s} to any size smaller than the current
 size, include all smaller problem sizes. This makes the behavior of
@@ -750,7 +750,7 @@ is maximized (to avoid degenerate executions, e.g., over size 1
 arrays) and 3) the execution is \emph{not a counterexample}.  We have
 modified CBMC, and written instrumentation tools that produce a
 modified mutant and harness, allowing us to pose such queries (see
-Section \ref{sec:algs}.  Running CBMC in this mode, with the target of maximum branch
+Section \ref{sec:algs}).  Running CBMC in this mode, with the target of maximum branch
 coverage and statement coverage of the {\tt del\_stmt} mutant
 (actually the statement after it, since it no longer exists),
 we produce the witness in Figure \ref{fig:witness1} in less
@@ -843,12 +843,9 @@ One harness is stronger than another if it detects more failures; we
 can indirectly estimate strength by determining how many mutants a
 harness can kill at a given problem size, and how executions covering
 killed mutants can still satisfy the harness.  Figure \ref{fig:added}
-shows how to modify the sorting harness to check for permutations
-\footnote{In fact, if we choose a {\tt val} to check
-  before we assign to {\tt ref} and count that value's appearances, we
-  can completely dispense with storing {\tt ref} at all.  In practice,
-  this is more difficult for non-CBMC experts to understand, and makes
-  model checking only slightly faster.}.  Because CBMC is exhaustive,
+shows how to modify the sorting harness to check for permutations\footnote{In fact, if we choose a {\tt val} to check
+  before we assign to {\tt ref}, we
+  could completely dispense with storing {\tt ref} at all.}.  Because CBMC is exhaustive,
 instead of performing a complete check for permutation, we can detect
 violation of the property by letting {\tt v} be any value, and
 ensuring that both {\tt a} and {\tt ref} contain the same
@@ -881,13 +878,13 @@ As briefly mentioned in the introduction, it is also possible to
 understand a mutant by modifying the harness to call both the mutated
 code and the original code on the same inputs, and search for
 witnesses where 1) the execution is passing but 2) the return value(s)
-for the mutated code differ(s) from the original code.  However, this
+for the mutant differ(s) from the original.  However, this
 increases the complexity of the model checking problem (checking
-equivalence of two functions is often much harder than simply
+equivalence of two functions is often harder than
 specifying valid executions) and does not easily apply to any
 verifications other than simple function calls.  For example, forcing
 the same interleavings in threaded programs, or detecting all
-differences in state-modification for more reactive code is often
+differences in state-modification for reactive code is often
 infeasible or requires significant human intervention.  While we do
 apply differential checks in some cases below, we do not propose this
 as a core technique suitable for general-purpose falsification-driven
@@ -912,8 +909,8 @@ counterexample for the original, correct, quick sort.  An additional
 as low as 5\% of mutants killed to only a few percent worse than the
 fixed harness).  The remaining 9 mutants have the same ability to kill
 mutants as the original harness.  Most of these involve modifying a
-relational operator in a loop or an assumption in a way that does not
-change the verification problem.  The only interesting surviving
+relational operator in a loop or an assumption in a way that preserves
+semantics.  The only interesting surviving
 harness mutant is one that removes the assignment of a fresh
 non-deterministic value to {\tt v} after the call to {\tt sort}.  This
 means the check for permutation difference will always be performed on
@@ -929,8 +926,7 @@ subtle specification and environment flaws.  In particular, it shows
 the value of \emph{inspecting all surviving mutants}.  One mutant
 modifies the assumption on {\tt s} to be {\tt < SIZE} rather than {\tt
   <= SIZE}, which is the same as lowering the {\tt SIZE} by one; this
-is a fairly easy mistake to make in a harness, and likely not much
-more uncommon than off-by-one bugs in actual code.  This reduces the
+is a fairly easy mistake to make in a harness (or any code).  This reduces the
 effectiveness of the verification by 19 mutants, so is likely not to
 escape notice, and would also (in our framework) simply result in a
 higher size being chosen as mutant-stable.  Deleting the assignment
@@ -946,8 +942,7 @@ the first element correct, but 3) don't always sort the
 array correctly.  In particular, the call to {\tt quickSort} with {\tt
   j + 1} can be removed or modified to {\tt j + 2}.
 Examining the deleted/removed recursive calls shows the user of
-the problem in this case.  Our modified CBMC can, as for our first
-harness bug, produce a witness showing a permutated array with correct
+the problem in this case.  Our modified CBMC easily produces a witness showing a permutated array with correct
 {\tt a[0]} but with out-of-order later elements.
 
 \begin{comment}
@@ -1008,7 +1003,7 @@ this with the model checker and recording results for use by other
 parts of the toolchain is non-standard), other than the model checker
 itself. We show only top-level functionality that a developer uses,
 not supporting algorithms for instrumentation of SUT and harness
-(mutants).  Also omitted are techniques sometimes useful, easily
+or mutants.  Also omitted are techniques sometimes useful, easily
 implemented using these tools, such as pure-nondeterminstic
 ``most-general mutants'' and reference checking to find an input where
 a function and its mutant differ on the same input.
@@ -1330,8 +1325,18 @@ but passing trace of this run lets us see the problem.
 Our initial experiments involved relatively small verification
 problems, based on implementations taken from the web or student code for popular
 algorithms and data structures.  Here we highlight the most
-interesting of these; we also successfully applied the method to bubble sort and a
-duplicate-removing array merge function.
+interesting of these; we also successfully applied the method to
+bubble sort, a duplicate-removing array merge function, an AVL
+tree, and a student's harness for verifying a version of Dijksta's
+shortest path algorithm that enables path reconstruction \cite{dijkstrasp}.  In the case of the AVL tree, the harness we were working with
+was unable to reach a mutant-stable unwinding without exhausting
+memory on the verification of the main program (for AVL trees of up to
+size 5).  We are investigating a more efficient harness encoding,
+based on the inability to reach mutant-stability.  For the Dijkstra
+harness, the low mutant kill rate of only 58\% showed that while the
+harness checks incorrect returned paths, it cannot detect when return
+values indicate there is no path but one exists.  Improving the
+harness is a substantial exercise, but can be guided by the survival witnesses.
 
 \subsubsection{Binary Search}
 
@@ -1368,7 +1373,7 @@ problem clearly (the sought item at index 0).
 \subsubsection{Doubly-linked-list Insertion Sort}
 
 Another example, making use of recursive data structures and pointer
-validity checks, is a simple piece of code for inserting an item (in
+validity checks, is code for inserting an item (in
 sorted order) into a doubly-linked list \cite{DLLInsert}.  Our initial
 harness omitted a check for correctness of {\tt prev} pointers.  This
 problem didn't directly prevent mutants from being detected, but
@@ -1389,17 +1394,9 @@ permutation property for both a forward {\tt next} traversal of the
 list and a {\tt prev} traversal.  Omitting any \emph{one} of these
 (e.g. {\tt prev} sortedness or {\tt next} permutation) the harness can
 still detect all mutants.  Removing two, however, fails to kill
-mutants.  The two harness mutants with worse kill rates have such poor
-kill rates ($<50$\% and $<25$\% respectively) that they do not show
-possible erroneous versions of the harness.
-
-\subsubsection{Dijkstra's Algorithm}
-
-A student in our model checking seminar proposed a verification of an
-implementation of Dijkstra's shortest path algorithm, with the added
-record-keeping to reconstruct all paths \cite{dijkstrasp}.
-
-\subsubsection{AVL Tree}
+mutants.  The two harness mutants with worse kill rates have extremely poor
+kill rates ($<50$\% and $<25$\%).
+%\subsubsection{AVL Tree}
 
 
 %\subsubsection{Merge With Duplicate Removal}
@@ -1540,9 +1537,7 @@ verification: how to handle an {\tt assert} in the code being
 verified.  An {\tt assert} at the end of a function or in the main
 body is typically an additional part of the specification, and is
 often best left unchanged.  An {\tt assert} at the beginning of a
-function's body, however, is typically a preconditon for the code,
-indicating that when it is violated the code will not behave
-correctly.  It is natural to consider changing such an assertion into
+function's body, however, is typically a preconditon for the code \cite{CFV13}.  It is natural to consider changing such an assertion into
 an {\tt assume} and ignoring any problems produced by calling the code
 with non-conforming inputs.  While this can be a useful technique (for
 instance when it is hard to write a harness that only produces valid
@@ -1586,29 +1581,28 @@ evaluating our methodology, but in its own right.
 
 \subsection{Linux Kernel RCU Verification Challenges}
 
-\subsubsection{Introduction to RCU}
-\label{sec:Introduction to RCU}
+%\subsubsection{Introduction to RCU}
 
-RCU is a synchronization mechanism that is sometimes used as a replacement
+
+RCU is a synchronization mechanism sometimes used as a replacement
 for reader-writer locking for linked structures, allowing extremely
 lightweight readers \cite{McKenney:2013:SDS:2483852.2483867}.
-In the limiting case, which is achieved in server-class builds of the
-Linux kernel, the overhead of entering and exiting an \emph{RCU read-side
-critical section} (using \co{rcu_read_lock()} and \co{rcu_read_unlock()},
+In the limiting case, achieved in server-class builds of the
+Linux kernel, overhead for entering and exiting an \emph{RCU read-side
+critical section} (using {\tt rcu\_read\_lock()} and {\tt rcu\_read\_unlock()},
 respectively) is exactly zero \cite{McKenney98}, making RCU an
 excellent choice for read-mostly workloads \cite{McKenney:2013:SDS:2483852.2483867,DinakarGuniguntala2008IBMSysJ,PaulMcKenney2013AMPenergyHOTPAR}.
-
 However, lightweight readers imply that updaters cannot exclude readers,
 so must take care to avoid disrupting readers.
 Updaters typically maintain multiple versions of the portion of the
 data structure being updated, removing old versions only when
 readers are no longer accessing them.
-To this end, RCU provides \co{synchronize_rcu()}, which waits for a
+To this end, RCU provides {\tt synchronize\_rcu()}, which waits for a
 \emph{grace period}: when all pre-existing RCU readers complete.
-RCU updaters typically remove a data element (thus rendering it
-inaccessible to new readers), invoke \co{synchronize_rcu()},
-and then reclaim the newly removed element.
-\begin{comment}Production-quality implementations of \co{synchronize_rcu()} use batching
+RCU updaters typically remove a data element (rendering it
+inaccessible to new readers), invoke {\tt synchronize\_rcu()},
+and then reclaim a removed element.
+\begin{comment}Production-quality implementations of {\tt synchronize\_rcu()} use batching
 techniques to achieve extremely scalability, so that a single underlying
 grace period can satisfy more than 1,000 concurrent updates in the
 Linux kernel~\cite{Sarma04c}.\end{comment}
@@ -1624,15 +1618,8 @@ interest in the PL/verification community now \cite{PLDI15RCU}.
 \url{http://conf.researchr.org/event/pldi2015/pldi2015-papers-verifying-read-copy-update-in-a-logic-for-weak-memory}}
 \end{comment}
 
-Because both RCU and the Linux kernel are moving targets, any validation
-and verification must be both automated and repeatable, for inclusion
-on a regression-test suite.  At present the \co{rcutorture}
-stress-test provides some assurance in the form of automated testing,
-but ideally would be complemented by some formal verification of the
-implementation(s) in the kernel.  An important question is whether
-available formal verification tools can provide effective additional
-regression checking for RCU.
-\begin{comment}{The \co{rcutorture} stress-test suite qualifies, but it would be
+
+\begin{comment}{The {\tt rcutorture} stress-test suite qualifies, but it would be
 good to evaluate its effectiveness on the one hand
 (via permutation analysis)
 and to include formal verification on the other.
@@ -1679,6 +1666,14 @@ tools meet these requirements.}
 \label{fig:Approximate Model of RCU}
 \end{figure}
 
+Because both RCU and the Linux kernel are moving targets, any validation
+and verification must be both automated and repeatable, for inclusion
+on a regression-test suite.  At present the {\tt rcutorture}
+stress-test provides some assurance in the form of automated testing,
+but ideally would be complemented by some formal verification of the
+implementation(s) in the kernel.  An important question is whether
+available formal verification tools can provide effective additional
+regression checking for RCU.
 We use a pair of RCU-related benchmarks \cite{PaulBlog1,PaulBlog2} to
 provide the beginnings of an answer to this question.  The first
 benchmark applies formal verification to the simplest of the Linux
@@ -1690,19 +1685,57 @@ creates the trivial model approximating an RCU implementation for
 multiprocessor systems shown in Figure \ref{fig:Approximate Model of
   RCU}.  In this model, the number of RCU read-side critical sections
 currently in flight is tracked by the global variable
-\co{rcu_read_nesting_global}, which is atomically incremented by
-\co{rcu_read_lock()} and atomically decremented by
-\co{rcu_read_unlock()}.  This allows \co{synchronize_rcu()} to
-atomically XOR \co{rcu_read_nesting_global}'s bottom bit to detect
+{\tt rcu\_read\_nesting\_global}, which is atomically incremented by
+{\tt rcu\_read\_lock()} and atomically decremented by
+{\tt rcu\_read\_unlock()}.  This allows {\tt synchronize\_rcu()} to
+atomically XOR {\tt rcu\_read\_nesting\_global}'s bottom bit to detect
 whether the current execution has waited for all pre-existing readers
 (over-approximated by checking the absence of all readers), with
-\co{SET_NOASSERT()} being invoked to suppress all future assertions.
+{\tt SET\_NOASSERT()} being invoked to suppress all future assertions.
 Although this model has a number of shortcomings, perhaps most
 prominently excessive read-side ordering, it is capable of detecting
 common RCU-usage bugs, including failure to wait for an RCU grace
 period and failure to enclose read-side references in an RCU read-side
-critical section.
+critical section.  Can falsification aid in these two complex,
+in-progress, verification efforts?
 
+Our efforts are ongoing, due to the complexity of the targeted code
+(even with support from the primary developer, a co-author of this
+paper).  At this time the
+investigation of mutants has already provided valuable information
+about these verifications benchmarks.  First, there are two versions
+of the Tiny RCU verification.  The earliest, very preliminary version,
+kills only 10 of 169 Tiny RCU mutants.  Adding code to the harness to
+account for interrupts in the dyntick-idle handling kills an
+additional 12 mutants, confirming that the modification increases the
+strength of the harness.  More importantly, the modeling of
+concurrency in the harness has two versions, one using CBMC support
+for pthread mutex locks, the other using disabling of assertions to
+ignore executions that violate locking semantics.  The native mutex
+version allows much faster verification, and catches the original,
+hand-constructed checks to ensure the harness can detect faults in
+Tiny RCU.  However, the native mutex version fails to kill \emph{any}
+mutants, a fact we are currently investigating.  In support of the
+verification, we generated passing maximal-coverage executions for all
+mutants of the Tiny RCU code.  For 97 of the mutants, there is no
+passing execution; in many cases, these are not killed: the mutant
+modifies the concurrency semantics so CBMC has no valid executions to
+analyze (potentially invalid in some cases, which must be
+investigated).  For 79 mutants the maximal-coverage passing runs are
+currently being examined, to determine the best next steps in
+improving the Tiny RCU harness.
+For the second benchmark, we have computed mutant kills and find that
+the kill rates range between 40\% and 46\%.  While these benchmarks
+are far from complete, and over-simplify the modeling process, they
+are already able to catch a substantial number of potential RCU usage
+errors.  Again, we have produced passing runs for the surviving
+mutants to use in enhancing the process.  The good news is that while
+the RCU verification is much more substantial than the above case
+studies, the time to analyze mutants is not prohibitive.  No single
+model checking run for the Tiny RCU benchmark takes more than 40
+seconds, and \emph{total runtime} for all mutants in the usage
+benchmarks ranges from just over 12 seconds for a basic litmus test to
+less than 5 minutes for the most complex of the benchmarks.
 
 
 \begin{comment}
@@ -1918,6 +1951,18 @@ about ``equivalent'' mutants.  We demonstrate, as a proof-of-concept,
 that our approach can be useful for simple verification efforts, and
 can contribute to serious systems verification and modeling efforts for the Linux
 kernel RCU implementations.
+
+In future work we plan to continue to apply this falsification-driven
+approach to the RCU verification, and to other critical
+systems-software targets as well.  In the process we expect to
+discover new supporting algorithms and methods that use a model
+checker's ability to ask ``what if'' questions about program
+executions \cite{GroceDist,MakeMost} to improve developer
+understanding of verification efforts.  We would also like to
+integrate falsification-driven verification support into the CBMC
+Eclipse tools, and use speculative model checking calls and
+incremental SAT to make mutant analysis available to developers
+continuously as part of their development/debugging process.
 
 Our CBMC patch for {\tt find-success} mode, the various verification harnesses, and our
 experimental results are all available at {\tt \url{https://github.com/agroce/cbmcmutate}}.
