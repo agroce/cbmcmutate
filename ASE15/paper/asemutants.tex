@@ -102,7 +102,7 @@ int main () \{
 \label{fig:sortharness}
 \end{figure}
 
-CBMC compiles a harness and the SUT (here a quick sort implementation)
+CBMC compiles a harness and the SUT (here a quicksort implementation)
 into a goto-program, instruments this program with property checks for
 assertions, array bounds violations, etc., and then unrolls loops
 based on a user-provided \emph{unwinding bound} to produce a SAT
@@ -140,7 +140,9 @@ Formal verification is not only subject to the problems that make
 also to more subtle problems.  For example, an incorrect \emph{assume}
 statement may constrain a system so that not only are there no
 counterexamples, there are no (interesting) executions of the system at
-all.
+all.  Moreover, formal verificaiton tools are themselves extremely
+complex software artifacts, and, like production compilers \cite{csmith}, may
+themselves have serious bugs that produce wrong results \cite{statanalbug}.
 
 This problem has concerned the model checking community for some time
 \cite{Hoskote,PracticalCov}, and resulted in efforts to define \emph{coverage
@@ -163,10 +165,9 @@ not enough for verification.  The typically small scope of the code to
 be verified, and the presumed importance of code targeted for
 verification suggests an approach in which \emph{individual mutants}
 are examined by the developer.  Without additional assistance, such an
-approach cannot scale.  New capabilities for the model
-checking tool, the nature of formal verification, and the adoption of
-certain best practices and tools, however, can make this seemingly too-demanding approach
-practical for real verification tasks.
+approach cannot scale.  This paper aims to describe how to make this
+seemingly too-demanding approach practical for real verification
+tasks.
 
 \begin{comment}
 Our basic idea is to use mutants \emph{throughout the verification
@@ -265,13 +266,13 @@ evaluates and refines a verification effort by its ability to
  \}
 \end{code}
 }
-\caption{Quick sort code.}
+\caption{Quicksort code.}
 \label{fig:qsort}
 \end{figure}
 
 As an example of the proposed verification methodology, consider again
 the harness shown in Figure \ref{fig:sortharness}.  If we take the
-first hit on Google for ``quick sort in C'' \cite{quicksortcode},
+first hit on Google for ``quicksort in C'' \cite{quicksortcode},
 shown in Figure \ref{fig:qsort}\footnote{In fact, that actual code is
   incorrect, with an access {\tt a[i]} that does not properly use
   short circuiting logical operators to protect array bounds; CBMC
@@ -321,8 +322,7 @@ size, include all smaller problem sizes. This makes the behavior of
 the verification problem size setting match that of CBMC where an unwinding bound is a maximum, rather than
 a fixed size.  We assume in all cases below\footnote{There is
   one noted exception in Section \ref{sec:sattimes}.} that harnesses are
-constructed so that increasing problem size includes all smaller
-problems as a best practice.
+constructed so that problem sizes are inclusive.
 
 At this point, we can increase {\tt SIZE} to 4 (which will kill one
 additional mutant), but the time required to check the remaining
@@ -376,12 +376,12 @@ for equivalence with the original program \cite{TCE}.  We suggest
 always pruning mutants via Trivial Compiler Equivalence (TCE).  The remaining 6 mutants produce different
 binaries when compiled with an optimizing compiler, so require manual
 analysis.  The 5 {\tt rep\_op} mutations all alter comparison
-operators by changing their value on one corner case, and we may suspect that quick sort is robust to,
+operators by changing their value on one corner case, and we may suspect that quicksort is robust to,
 for example, changing {\tt i <= r} to {\tt i != r} since {\tt i} is
 initially set to {\tt l}, which we know to be less than {\tt r}.
 
 The {\tt del\_stmt} mutant, however, is clearly problematic.  How can
-quick sort be correct if the inner loop's swapping of {\tt a[i]} and
+quicksort be correct if the inner loop's swapping of {\tt a[i]} and
 {\tt a[j]} is changed to instead copy {\tt a[i]} to {\tt a[j]}?  The
 consequences of this mutant are clearly drastic, but why are they not
 detected by our harness?  We find out by asking CBMC to produce an
@@ -473,9 +473,7 @@ executions of the mutant, even if both produce a counterexample
 killing the mutant.  Unlike traditional mutation analysis, we can take
 the question ``how killed is this mutant?'' seriously because we aim at
 exhaustive testing.  A harness is most effective with respect to a
-mutant if it allows \emph{no} executions covering the mutant to pass,
-or, to be precise, only those such that the relevant behavior is still identical
-to the correct program.
+mutant if it allows \emph{no} executions covering the mutant to pass.
 
 The witness tells us that the sorting harness is too \emph{weak}.  We
 say that a harness is weak if it fails to detect incorrect executions.
@@ -544,7 +542,7 @@ idea is to check that 1) most mutants of the harness reject the SUT
 and 2) the remaining mutants have a mutant kill rate no greater than
 that of the harness.  For the fixed sort harness, there are 61 mutants, of
 which 2 do not compile.  Of these, 40 produce an incorrect
-counterexample for the original, correct, quick sort.  An additional
+counterexample for the original, correct, quicksort.  An additional
 10 have mutant kill rates worse than the original harness (from
 as low as 5\% of mutants killed to only a few percent worse than the
 fixed harness).  The remaining 9 mutants have the same ability to kill
@@ -575,14 +573,14 @@ original harness.  Traditional coverage and some model checking coverages
 cannot detect this problem: because of the assignment to {\tt prev}
 outside the loop, the variable \emph{is} used in the specification, and in
 fact used to detect many faults (it eliminates any mutants that can
-cause {\tt a[0]} to not be the least element).  The harness ``covers'' all behavior of quick sort in general, since
+cause {\tt a[0]} to not be the least element).  The harness ``covers'' all behavior of quicksort in general, since
 the permutation requirement remains in place.  However, it cannot
-detect versions of quick sort that 1) preserve permutation and 2) make
+detect versions of quicksort that 1) preserve permutation and 2) make
 the first element correct, but 3) don't always sort the
 array correctly.  In particular, the call to {\tt quickSort} with {\tt
   j + 1} can be removed or modified to {\tt j + 2}.
 Examining the deleted/removed recursive calls shows the user of
-the problem in this case.  Our modified CBMC easily produces a witness showing a permutated array with correct
+the problem in this case.  Our modified CBMC easily produces a witness showing a permuted array with correct
 {\tt a[0]} but with out-of-order later elements.
 
 \begin{comment}
@@ -1017,7 +1015,7 @@ validity checks, is code for inserting an item (in
 sorted order) into a doubly-linked list \cite{DLLInsert}.  Our initial
 harness omitted a check for correctness of {\tt prev} pointers.  This
 problem didn't directly prevent mutants from being detected, but
-pushed the stable size larger, as with the quick sort example above.
+pushed the stable size larger, as with the quicksort example above.
 Looking at a trace of a size 3 run that fails to kill a clearly
 problematic mutant easily reveals the problem (the results are correct
 up to {\tt prev} pointers).  This example also showed another use of
@@ -1307,7 +1305,7 @@ tools meet these requirements.}
 
 Because both RCU and the Linux kernel are moving targets, any validation
 and verification must be both automated and repeatable, for inclusion
-on a regression-test suite.  At present the {\tt rcutorture}
+in a regression-test suite.  At present the {\tt rcutorture}
 stress-test provides some assurance in the form of automated testing,
 but ideally would be complemented by some formal verification of the
 implementation(s) in the kernel.  An important question is whether
@@ -1323,7 +1321,7 @@ as its (trivial) grace-period detection scheme.  The second benchmark
 creates the trivial model approximating an RCU implementation for
 multiprocessor systems shown in Figure \ref{fig:Approximate Model of
   RCU}.  In this model, the number of RCU read-side critical sections
-currently in flight is tracked by the global variable
+currently in flight is tracked by the global
 {\tt rcu\_read\_nesting\_global}, which is atomically incremented by
 {\tt rcu\_read\_lock()} and atomically decremented by
 {\tt rcu\_read\_unlock()}.  This allows {\tt synchronize\_rcu()} to
@@ -1462,7 +1460,7 @@ is one that \emph{prohibits} certain execution sequences.  This is not
 controversial; a good property is defined by its rejection of bad
 behavior.  However, in most verification efforts, there is a focus on
 arriving at a successful verification, which sheds very little light
-on what, exactly is verified.  By focusing on mutants throughout the
+on exactly \emph{what} has been verified.  By focusing on mutants throughout the
 verification process, our approach shifts the emphasis to one of
 ``verifying'' the verification itself by repeatedly \emph{falsifying}
 claims that various incorrect programs satisfy the property.  This is,
@@ -1496,7 +1494,7 @@ The ability to improve a harness based on surviving mutants (or on
 passing runs of killed mutants) essentially relies on the nature of
 exhaustive bounded model checking based on constraint solving.  In
 non-exhaustive automated testing, the answer to why a mutant is not
-killed is, often, neither ``the oracle is not good enough'' or even
+killed is, often, neither ``the oracle is not good enough'' nor even
 ``the test process is inadequate and needs to be modified'' but ``you
 didn't get lucky.''  That is, killing all mutants is, in many cases,
 not something we can expect of non-exhaustive test suites.  Random
@@ -1567,32 +1565,36 @@ surviving mutants) and 2) has an obviously known location.
 This paper proposes a \emph{falsification-driven} methodology for
 formal verification, particularly when verification is performed by
 the developers of critical software systems.  These developers are not
-experts in formal verification, but in the systems they are
-verifying.  Verification is, we claim, always provisional, in that the
-potential flaws in our assumptions, specification, and understanding
-of system behavior tend to leave room for doubt about the correctness
-of any verification result.  Verification of code is not
-self-explanatory, unlike a counterexample.  We propose to take
-advantage of the use of counterexamples and witnesses and center
-verification around the \emph{incorrect programs a verification fails
-  to prove incorrect}.  An obvious source of such programs is mutants;
-we also suggest that known-flawed versions of code be included in this
-set, which all of our tools support, but the key to the method is the
-generation of a large set of potential buggy versions without
-developer effort.  Given these versions, a developer can examine
-mutants that a verification effort fails to detect, and (with the
-algorithms and tools presented in this paper) examine executions showing
-precisely how a program mutant can ``make it through'' a verification
-without being detected, with assurance that these executions will have
-high coverage (and thus likely be non-trivial), including of the
-mutant itself.  Developers can also check that a verification harness
-does not have any mutants that 1) verify the SUT but 2) kill
-\emph{more} mutants than their harness.  This can help detect very
-subtle flaws in harnesses, especially those based on bad reasoning
-about ``equivalent'' mutants.  We demonstrate, as a proof-of-concept,
-that our approach can be useful for simple verification efforts, and
-can contribute to serious systems verification and modeling efforts for the Linux
-kernel RCU implementations.
+experts in formal verification, but in the systems they are verifying.
+Verification is, we claim, always provisional, in that the potential
+flaws in our assumptions, specification, and understanding of system
+behavior tend to leave room for doubt about the correctness of any
+verification result.  Verification of code is not self-explanatory,
+unlike a counterexample.  We propose to take advantage of the use of
+counterexamples and witnesses and center verification around the
+\emph{incorrect programs a verification fails to prove incorrect}.  An
+obvious source of such programs is mutants; we also suggest that
+known-flawed versions of code be included in this set, which all of
+our tools support, but the key to the method is the generation of a
+large set of potential buggy versions without developer effort.  Given
+these versions, a developer can examine mutants that a verification
+effort fails to detect, and (with the algorithms and tools presented
+in this paper) examine executions showing precisely how a program
+mutant can ``make it through'' a verification without being detected,
+with assurance that these executions will have high coverage (and thus
+likely be non-trivial).  Developers can also check that a verification
+harness does not have any mutants that 1) verify the SUT but 2) kill
+\emph{more} mutants than the original harness.  This can help detect
+very subtle flaws in harnesses, especially those based on bad
+reasoning about ``equivalent'' mutants.  We demonstrate, as a
+proof-of-concept, that our approach can be useful for simple but
+realistic verification efforts, and can contribute to serious systems
+verification and modeling efforts for complex code such as the Linux
+kernel RCU implementations.  The bigger picture is that our approach
+attempts to apply the ideas of Karl Popper's falsification-centered
+approach to the philosophy of science to the understanding of software
+systems.  In this view, verification is always provisional, but we can best
+gain confidence in it by making serious attempts to prove its inadequacy.
 
 In future work we plan to continue to apply this falsification-driven
 approach to the RCU verification, and to other critical
@@ -1605,10 +1607,9 @@ integrate falsification-driven verification support into the CBMC
 Eclipse tools, and use speculative model checking calls and
 incremental SAT to make mutant analysis available to developers
 continuously as part of their development/debugging process.  Finally,
-these techniques should also be applicable to verification using Java
+these techniques should also be applicable to verification using, e.g., Java
 Pathfinder \cite{JPF2} (at least in symbolic mode; in pure explicit-state
-exploration the problems of test generation vs. exhaustive exploration
-may be a problem) and other model checkers.
+exploration the problems of non-exhaustive exploration may dominate).
 
 Our CBMC patch for {\tt find-success} mode, the various verification harnesses, and our
 experimental results are all available at {\tt \url{https://github.com/agroce/cbmcmutate}}.
