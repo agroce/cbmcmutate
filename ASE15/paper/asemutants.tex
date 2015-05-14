@@ -22,7 +22,7 @@
 
 
 \begin{document}
-\title{Falsification-Driven Verification}
+\title{How Verified is My Code?\\Falsification-Driven Verification}
 
 \author{\IEEEauthorblockN{Alex Groce, Iftekhar Ahmed, Carlos Jensen}
 \IEEEauthorblockA{School of Electrical Engineering and Computer  Science\\
@@ -49,25 +49,23 @@ Email: paulmck@linux.vnet.ibm.com}
 \section{Introduction}
 
 Software model checking \cite{ModelChecking} has recently, thanks to
-improvements in model checking tools as well as SAT and SMT solvers,
-and the large amount of memory available even on commodity
-workstations, become a potentially valuable tool for developers of
-critical software modules who want to, at minimum, perform a very
-aggressive search for bugs and, at best, prove correctness of their
-code.  Tools such as CBMC \cite{CBMCp} (the C Bounded Model Checker)
-allow a software engineer to model check code by writing what is
-essentially a generalized test harness\footnote{By a harness we mean a
-  program that defines an environment and the form of valid tests, and provides correctness
-  properties.} in the language of the
-Software Under Test (SUT).  Figure \ref{fig:sortharness} shows an
-example CBMC harness for sorting routines.  Only a few aspects differ
-from normal testing.  First, {\tt nondet\_int} in CBMC can return
-\emph{any value}.  It is not equivalent to a ``random''
-choice but true nondeterminism: CBMC will explore all values of the type.
-The {\tt \_\_CPROVER\_assume} statement is used to restrict
-program executions: it has the usual {\tt assume} semantics
-\cite{EWD:Discipline,exploit}, so CBMC ignores all executions that
-violate assumptions.
+improvements in model checking tools (and advanced SAT/SMT solvers), become
+a potentially valuable tool for developers of critical software
+modules who want to either perform a very aggressive search for
+bugs or, ideally, prove correctness of their code.  Tools such as
+CBMC \cite{CBMCp} (the C Bounded Model Checker) allow a software
+engineer to model check code by writing what is essentially a
+generalized test harness\footnote{By a harness we mean a program that
+  defines an environment and the form of valid tests, and provides
+  correctness properties.} in the language of the Software Under Test
+(SUT).  Figure \ref{fig:sortharness} shows an example CBMC harness for
+sorting routines.  Only a few aspects differ from normal testing.
+First, {\tt nondet\_int} in CBMC can return any value.  It is
+not equivalent to a ``random'' choice but true nondeterminism: CBMC
+will explore all values of the type.  The {\tt \_\_CPROVER\_assume}
+statement has the usual
+{\tt assume} semantics \cite{EWD:Discipline,exploit}: CBMC ignores
+all executions that violate assumptions.
 
 \begin{figure}
 {\scriptsize
@@ -105,10 +103,10 @@ int main () \{
 CBMC compiles a harness and the SUT (here a quicksort implementation)
 into a goto-program, instruments this program with property checks for
 assertions, array bounds violations, etc., and then unrolls loops
-based on a user-provided \emph{unwinding bound} to produce a SAT
+based on a user-provided unwinding bound to produce a SAT
 problem or SMT constraint such that satisfying assignments are
 representations of a trace demonstrating a property violation, known
-as a \emph{counterexample} \cite{CountWitness}.  For CBMC, this means
+as a counterexample \cite{CountWitness}.  For CBMC, this means
 that if \emph{any possible execution allowed by the harness} violates
 any properties checked, a counterexample will be produced.  This
 includes user-specified assertions and automatically generated
@@ -116,8 +114,8 @@ properties such as array bounds and pointer validity checks. One
 generated property is that no loop in the program executes more than
 the \emph{unwinding bound} times.  For example, if we run CBMC on the
 harness shown and set the unwinding bound to 3 and add {\tt -DSIZE=2},
-we will check the correctness of the SUT over \emph{all possible
-  arrays} of size 2 or less, including checking that sorting never
+we will check the correctness of the SUT over all possible
+  arrays of size 2 or less, including checking that sorting never
 requires passing through any loop more than 3 times.
 
 When a model checker produces a counterexample, a developer's task is
@@ -137,33 +135,32 @@ properties encoded in the harness!  It is in this case that problems
 arise: what, precisely, has been verified?  Is the SUT actually correct?
 Formal verification is not only subject to the problems that make
 ``no faults detected'' results dubious in testing \cite{WODA09,CovDisc}, but
-also to more subtle problems.  For example, an incorrect \emph{assume}
+also to more subtle problems.  For example, an incorrect {\tt assume}
 statement may constrain a system so that not only are there no
 counterexamples, there are no (interesting) executions of the system at
-all.  Moreover, formal verificaiton tools are themselves extremely
+all.  Moreover, formal verification tools are themselves extremely
 complex software artifacts, and, like production compilers \cite{csmith}, may
 themselves have serious bugs that produce wrong results \cite{statanalbug}.
 
-This problem has concerned the model checking community for some time
-\cite{Hoskote,PracticalCov}, and resulted in efforts to define \emph{coverage
-  metrics} for model checking.  While such metrics are interesting and
+The problem of checking verification results has concerned the model checking community for some time, and resulted in efforts to define \emph{coverage
+  metrics} for model checking \cite{Hoskote,PracticalCov}.  While such metrics are interesting and
 useful, they have typically been aimed at hardware
 verification, and most useful to experts in
 formal verification.  In this paper, we adapt traditional mutation
 testing \cite{mutation1,mutation2} to the problem of software
-verification.  A \emph{mutant} of a program is a version of the program that
-introduces a small syntactic change.  The idea behind mutation testing
+verification.  A mutant of a program is a version of the program with
+a small syntactic change.  The idea behind mutation testing
 is that a good test suite will be able to detect when (as is usually
 the case) such a change introduces a bug in the SUT.  In the case of
-bounded model checking, since we aim at (bounded) \emph{verification} rather
+bounded model checking, since we aim at (bounded) verification rather
 than merely good testing, surviving mutants are
 likely to indicate a real problem.
 
-The use of mutation testing most often seen in the software
-engineering literature is simply noting a mutation kill rate. This is
+In software engineering research, mutation is often used only as a way
+to compare competing test suites by comparing kill rates\cite{ISSTA13,TOSEM14}.  This is
 not enough for verification.  The typically small scope of the code to
-be verified, and the presumed importance of code targeted for
-verification suggests an approach in which \emph{individual mutants}
+be verified, and the presumed importance of verified code
+suggests an approach in which \emph{individual mutants}
 are examined by the developer.  Without additional assistance, such an
 approach cannot scale.  This paper aims to describe how to make this
 seemingly too-demanding approach practical for real verification
@@ -193,15 +190,15 @@ harness reject the SUT itself.
 \end{comment}
 
 The contribution of this paper is a \emph{falsification-driven}
-verification methodology that uses mutants to aid the user of a model
-checker in understanding ``successful'' verification
-results, determining when a harness is flawed, and correcting a harness.
+verification methodology that uses mutants to aid developers 
+ in understanding ``successful'' verification
+results, determining when a harness is flawed, and correcting the harness.
 We show how to use mutation testing to
 choose a problem size in bounded model checking, how to mutate a
 harness to determine if any similar harnesses have an equal (or
 better) mutation kill rate, and most importantly, how to modify CBMC,
-a harness, and mutants to automatically produce \emph{successful
-  high-coverage executions covering mutated code} in order to
+a harness, and mutants to automatically produce successful
+  high-coverage executions covering mutated code in order to
 understand mutant (and thus harness) behavior.  This
 approach, unlike a simpler method of searching for cases where the
 mutated original code behave differently for the same inputs,
@@ -271,24 +268,24 @@ evaluates and refines a verification effort by its ability to
 \end{figure}
 
 As an example of the proposed verification methodology, consider again
-the harness shown in Figure \ref{fig:sortharness}.  If we take the
-first hit on Google for ``quicksort in C'' \cite{quicksortcode},
+the harness shown in Figure \ref{fig:sortharness}.  If we take an
+early Google result for ``quicksort in C'' \cite{quicksortcode},
 shown in Figure \ref{fig:qsort}\footnote{In fact, that actual code is
   incorrect, with an access {\tt a[i]} that does not properly use
   short circuiting logical operators to protect array bounds; CBMC
   detected this, and we fixed it for this paper.}, we can model check
 it using the harness, defining {\tt SIZE=2} and setting the unwinding
-bound to 3 (we need one more unwinding than the largest possible
+bound to 3 (we need one more unwinding than the maximum
 number of items in the array).  CBMC reports {\tt VERIFICATION
-  SUCCESSFUL} in less than a second.  Does this mean we have verified
+  SUCCESSFUL} in less than a second.  Have we have verified
 what we want to verify?
 
 \subsection{Finding a Good Problem Size}
 \label{sec:unwind}
 
-The first question we face is whether 2 is really a good maximum array
-size to examine.  The problem of determining a \emph{completeness
-  threshold} (an execution-length bound sufficient to prove correctness
+The first question we face is whether 2 is a good maximum array
+size to examine.  The problem of determining a completeness
+  threshold (an execution-length bound sufficient to prove correctness
 in all cases for a given property) for bounded model checking is
 fundamentally difficult \cite{CTDaniel} and is, for real-world C
 programs, more an art than a science at present\footnote{In our own
@@ -300,12 +297,12 @@ an array size?  In order to find out, we generate a set of mutants for
 Jamie Andrews \cite{mutant}, we can produce 81 mutants of this code in
 less than a second.  We then run the harness with unwinding bound 2
 (and {\tt SIZE=1}) on each of the 81 mutants.  The process takes less
-than a minute and a half (on a Macbook Pro with dual-core 3.1GHz Intel
+than a minute and a half (on a Macbook Pro with 16GB RAM and dual-core 3.1GHz Intel
 Core i7, using only one core).  CBMC reports that 6 mutants do not
 compile (these remove variable declarations, for the most part), 4 are
 detected by the harness (a counterexample is produced: we say the
-mutant is \emph{killed}), and 71 mutants pass without detection (the
-verification is successful, in which case we say the mutant \emph{survives}).
+mutant is killed), and 71 mutants pass without detection (the
+verification is successful, in which case we say the mutant survives).
 Clearly length 1 arrays are not sufficient to detect even the most
 glaring bugs in a sort algorithm (no surprise: all size 1 arrays are
 sorted).  What about our choice of size 2?  Re-running the mutants
@@ -313,22 +310,22 @@ sorted).  What about our choice of size 2?  Re-running the mutants
 over 13 minutes (due to one mutant requiring over 8 minutes
 to model check) and reduces the number of surviving mutants to 26.  We
 could inspect these mutants by hand, but it seems highly unlikely that
-a \emph{complete verification} over all possible arrays with a good
+a complete verification over all possible arrays with a good
 specification for sorting would produce such a poor mutation kill rate.
-If we up the size limit to 3 and unwinding 4 (the verification taking just over 33
+If we increase the size limit to 3 and unwinding 4 (analysis takes just over 33
 minutes), only 8 mutants survive.  Note that each problem, due to the
 harness' assignment of {\tt s} to any size smaller than the current
-size, include all smaller problem sizes. This makes the behavior of
+size, includes all smaller problem sizes. This makes the behavior of
 the verification problem size setting match that of CBMC where an unwinding bound is a maximum, rather than
-a fixed size.  We assume in all cases below\footnote{There is
-  one noted exception in Section \ref{sec:sattimes}.} that harnesses are
-constructed so that problem sizes are inclusive.
+a fixed size.  We assume in this paper\footnote{There is
+  one noted exception in Section \ref{sec:sattimes}.} that
+problem sizes are inclusive.
 
 At this point, we can increase {\tt SIZE} to 4 (which will kill one
 additional mutant), but the time required to check the remaining
 mutants is growing rapidly.  In fact, completing the check for size 4,
 even though only the original program and 8 mutants have to be
-checked, requires \emph{nearly 9 hours}.  When the model checking
+checked, requires nearly 9 hours.  When the model checking
 difficulty grows more slowly with problem size, we propose increasing
 size until the number of mutants killed does not increase with a step
 up in size (we call such a size \emph{mutant-stable}).  However, in
@@ -337,8 +334,7 @@ starts growing unacceptably.  We propose a more efficient algorithm
 for finding a mutant-stable size below (Figure \ref{alg:unwind}), and
 mutations can be checked in parallel, but the fundamental problem for
 size 4 (and above) is that some individual mutants require hours to
-model check.  What is a developer
-to do?
+model check.  What is a developer to do?
 
 
 \subsection{Examining Surviving Mutants}
@@ -364,8 +360,7 @@ to do?
 
 The developer should turn to the surviving mutants.  The 8 surviving  
 mutants for size 3 are shown in Figure \ref{fig:survivors}.  
-The comment indicates the type of mutant, and the line \# in the quick
-sort file is also given for reference.  The relevant lines are marked
+The comment indicates the type of mutant, and the line number in the quicksort file is also given for reference.  The relevant lines are marked
 in Figure \ref{fig:qsort}.  Some of these mutants are easily seen to
 be equivalent to the original code.  For example, the two {\tt
   rep\_const} mutations simply change a {\tt while(1)} into an
@@ -387,7 +382,7 @@ consequences of this mutant are clearly drastic, but why are they not
 detected by our harness?  We find out by asking CBMC to produce an
 execution such that 1) the mutated code is covered 2) other coverage
 is maximized (to avoid degenerate executions, e.g., over size 1
-arrays) and 3) the execution is \emph{not a counterexample}.  We have
+arrays) and 3) the execution is not a counterexample.  We have
 modified CBMC, and written instrumentation tools that produce a
 modified mutant and harness, allowing us to pose such queries (see
 Section \ref{sec:algs}).  Running CBMC in this mode, with the target of maximum branch
@@ -395,10 +390,8 @@ coverage and statement coverage of the {\tt del\_stmt} mutant
 (actually the statement after it, since it no longer exists),
 we produce the witness in Figure \ref{fig:witness1} in less
 than a minute\footnote{We show the output of the print statements, not
-  the full CBMC trace, in the interest of space and ease of
-  understanding; examining this output alone, initially, is the most
-  likely course of action for a developer as well.}.  Our harness
-checks that the array {\tt a} is \emph{sorted} after the call to {\tt
+  the full CBMC trace: this is what a developer will examine first.}.  Our harness
+checks that the array {\tt a} is sorted after the call to {\tt
   sort}, but it does not check that it is a permutation of the input!
 
 \begin{figure}
@@ -455,16 +448,16 @@ remove the call to {\tt sort} in the harness, and replace it by a loop
 assigning {\tt nondet\_int} to every element in array {\tt a} (a kind of
 most-general any-order type-correct ``mutant'' of {\tt sort}), we can run
 the modified CBMC and see examples of executions our harness allows,
-which should include \emph{any sorted} array.  The problem with this
+which should include any sorted array.  The problem with this
 method is that, while it sometimes works, CBMC is also free to
 set all elements in all arrays to 0, and to generally provide an
 uninformative example of a successful execution.  The requirement to
 cover a mutant (and as much other code as possible) helps guide CBMC
-to a successful execution that is \emph{likely to be incorrect},
-because a non-equivalent mutant \emph{changes the original program's behavior}.  Moreover, while the
+to a successful execution that is likely to be incorrect,
+because a non-equivalent mutant changes the original program's behavior.  Moreover, while the
 problem with the harness in this case is simple, understanding
 arbitrary ``passing'' but wrong executions can be very difficult
-without the ability to think about \emph{a specific bug} the model
+without the ability to think about a specific bug the model
 checker is missing.  Moreover, basing the production of witnesses on
 mutants allows us to compare harnesses even over killed mutants:  if
 one harness reduces the set of passing executions for a mutant, it is
@@ -473,9 +466,9 @@ executions of the mutant, even if both produce a counterexample
 killing the mutant.  Unlike traditional mutation analysis, we can take
 the question ``how killed is this mutant?'' seriously because we aim at
 exhaustive testing.  A harness is most effective with respect to a
-mutant if it allows \emph{no} executions covering the mutant to pass.
+mutant if it allows no executions covering the mutant to pass.
 
-The witness tells us that the sorting harness is too \emph{weak}.  We
+The witness tells us that the sorting harness is too weak.  We
 say that a harness is weak if it fails to detect incorrect executions.
 One harness is stronger than another if it detects more failures; we
 can indirectly estimate strength by determining how many mutants a
@@ -487,7 +480,7 @@ shows how to modify the sorting harness to check for permutations\footnote{In fa
 instead of performing a complete check for permutation, we can detect
 violation of the property by letting {\tt v} be any value, and
 ensuring that both {\tt a} and {\tt ref} contain the same
-\emph{number} of elements equal to {\tt v}.  If {\tt a} is \emph{not}
+number of elements equal to {\tt v}.  If {\tt a} is not
 a permutation of {\tt ref}, $\exists {\tt v}$ such that this is not
 true, and we can rely on CBMC to report it as part of a
 counterexample.  While a CBMC harness
@@ -505,7 +498,7 @@ survived, after only 14 minutes, not much longer than at {\tt SIZE} 2
 with the weaker harness.  The {\tt SIZE} 3 verification is stable.
 Checking stability by running {\tt SIZE} 4 now only requires slightly
 more than an hour, nearly an order of magnitude faster than before.  A stronger harness not only finds more bugs in the
-SUT, it often \emph{speeds up verification}.
+SUT, it often speeds up verification.
 
 %by making the set of
 %satisfying instances larger for the SAT solver.  Unsatisfiability is
@@ -537,7 +530,7 @@ formula \cite{MutSpec}.  Once a developer is satisfied with a harness,
 has a mutant-stable bound for verification, and is convinced all
 surviving mutants are semantically equivalent to the original program
 (or, if not equivalent, also satisfy the same correct specification),
-we propose the developer \emph{mutate the test harness itself}.  The
+we propose the developer mutate the test harness itself.  The
 idea is to check that 1) most mutants of the harness reject the SUT
 and 2) the remaining mutants have a mutant kill rate no greater than
 that of the harness.  For the fixed sort harness, there are 61 mutants, of
@@ -545,7 +538,7 @@ which 2 do not compile.  Of these, 40 produce an incorrect
 counterexample for the original, correct, quicksort.  An additional
 10 have mutant kill rates worse than the original harness (from
 as low as 5\% of mutants killed to only a few percent worse than the
-fixed harness).  The remaining 9 mutants have the same ability to kill
+fixed harness).  The remaining 9 harness mutants have the same ability to kill
 mutants as the original harness.  Most of these involve modifying a
 relational operator in a loop or an assumption in a way that preserves
 semantics.  The only interesting surviving
@@ -553,15 +546,14 @@ harness mutant is one that removes the assignment of a fresh
 non-deterministic value to {\tt v} after the call to {\tt sort}.  This
 means the check for permutation difference will always be performed on
 the last element of {\tt ref}.  On reflection, it seems plausible
-that this is sufficient to produce a counterexample for all the quick
-sort mutants, but it is clearly not an improvement to the harness, in
+that this is sufficient to produce a counterexample for all the quicksort mutants, but it is clearly not an improvement to the harness, in
 terms of either verification strength or clarity.
 
 In addition to showing the current harness is at least a ``local
 minima'' with respect to mutants, mutation analysis of the harness
 also provides some evidence of our technique's ability to detect
 subtle specification and environment flaws.  In particular, it shows
-the value of \emph{inspecting all surviving mutants}.  One mutant
+the value of inspecting all surviving mutants.  One mutant
 modifies the assumption on {\tt s} to be {\tt < SIZE} rather than {\tt
   <= SIZE}, which is the same as lowering the {\tt SIZE} by one; this
 is a fairly easy mistake to make in a harness (or any code).  This reduces the
@@ -639,29 +631,17 @@ developer.  Novel tools or techniques are on the right side of the
 diagram (mutation analysis itself is not novel, but our tool for integrating
 this with the model checker and recording results for use by other
 parts of the tool-chain is non-standard), other than the model checker
-itself. We show only top-level functionality that a developer uses,
+itself. 
+\begin{comment}
+We show only top-level functionality that a developer uses,
 not supporting algorithms for instrumentation of SUT and harness
 or mutants.  Also omitted are techniques sometimes useful, easily
-implemented using these tools, such as pure-nondeterminstic
+implemented using these tools, such as pure-nondeterministic
 ``most-general mutants'' and reference checking to find an input where
 a function and its mutant differ on the same input.
+\end{comment}
 
-One important need is a version of CBMC capable of applying built-in
-assertions checks (e.g, bounds checks, pointer dereference, division by
-zero) as \emph{assumptions} rather than assertions.  Converting
-assertions to assumptions is the means by which we produce
-\emph{passing} executions showing how a harness can fail to detect a
-mutant.  For developer-provided harnesses, this can be performed by
-automatic source-to-source transformation of the harness, but CBMC's
-internal constraints have to be handled inside the model checker.  We
-implemented a new CBMC command-line option, {\tt --find-success} that
-provides this functionality.  In all algorithms, {\tt check} means
-running CBMC as usual, with any needed automatic property
-checks, while {\tt scheck} indicates running CBMC with
-{\tt find-success} enabled.  In Figure \ref{fig:flow} we assume the
-use of a modified version of CBMC.
-
-Figure \ref{alg:unwind}-\ref{alg:checkharness} show core algorithms
+Figures \ref{alg:unwind}-\ref{alg:checkharness} show core algorithms
 (implemented as prototype tools in our framework).  Two of these are
 support algorithms for instrumentation, used in the production of
 witnesses for understanding surviving mutants (Figures
@@ -670,22 +650,61 @@ witnesses for understanding surviving mutants (Figures
 \ref{alg:checkharness}) face developers.  The uses of these algorithms
 are described at a high level in the introductory example (in Sections
 \ref{sec:unwind}, \ref{sec:maxcover}, and \ref{sec:checkharness},
-respectively), and in the case studies below.  In the actual
-implementations, these tools perform considerable record-keeping and
-logging, communicating through the file system.  For example, harness
-analysis records killing counterexamples and set of survivors (as well
-as executions times and other statistics) for each run.  There are
-also convenient scripts in the tool-chain, for instance a tool to
-automatically call {\tt maxcover} on all (surviving) mutants.  Running
-{\tt maxcover} on \emph{all} mutants provides a measure of harness
+respectively), and in the case studies below.   One additional requirement is a version of CBMC capable of converting built-in
+assertions checks (e.g, bounds checks, pointer dereference, division by
+zero) to assumptions.  For harness assumptions, this is done by
+automatic source-to-source transformation (Figure \ref{alg:invert}, but CBMC's
+internal constraints have to be handled inside the model checker.  We
+implemented a new CBMC command-line option, {\tt --find-success} that
+provides this functionality.  In all algorithms, {\tt check} means
+running CBMC as usual, with any needed automatic property
+checks, while {\tt scheck} indicates running CBMC with
+{\tt find-success} enabled.  In Figure \ref{fig:flow} we assume the
+use of a modified version of CBMC.
+
+The {\tt find-size} algorithm (Figure \ref{alg:unwind}) finds a
+suitable problem size and returns the set of surviving mutants for a
+harness and program, performing as few model checker calls as possible
+(once we know a bound is not stable, we move on to the next bound).
+This algorithm can be easily parallelized by running mutants in the
+{\tt for} loop at the same time, with any {\tt goto TOP} killing all
+CBMC runs not terminated.  The {\tt maxcover} algorithm (Figure
+\ref{alg:maxcover} returns for a given mutant and harness, a witness
+program trace that 1) covers the mutant and 2) covers as much other
+code as possible (in terms of branch coverage), using the {\tt
+  cover-harness} and {\tt cover-mutant} (Figures \ref{alg:invert} and
+\ref{alg:covermut}) algorithms to instrument harness and mutant; it
+proceeds by starting with a minimal constraint on coverage (the trace
+must cover the mutated code) and increases this bound by incrementing
+it to one more than the actual coverage of the last witness found,
+until the model checker can prove the coverage is impossible.  Other
+strategies for maximal coverage are possible (trying maximal coverage
+first, and decreasing the required coverage as attempts fail) but this
+approach minimizes the number of model checker runs that will fail to
+produce a witness, which is critical for performance reasons (see
+Section \ref{sec:sattimes}).  The the {\tt check-harness} algorithm
+(Figure \ref{alg:checkharness}) analyzes harness mutants, producing a
+report of 1) harness mutants that are killed (either they do not
+verify the SUT or they have worse kill rates than the original
+harness), that are equal to the original harness in strength, and that
+are stronger than the original harness.  It also returns information
+on all mutants killed by any harness mutant (except those that reject
+the SUT) that are not killed by the original harness.  The algorithm
+{\tt killed}, not shown, simply returns the set of mutants killed by a
+given harness.  In our implementations, these tools perform additional
+record-keeping. For example, harness analysis records killing
+counterexamples and execution times for each run.  We also make use of
+convenience scripts such as a tool to automatically call {\tt
+  maxcover} on all mutants, which provides a measure of harness
 strength that is more fine-grained than a simple kill rate: harnesses
 can be compared by the maximum coverage of \emph{all} mutants, even if
 they have the same kill rate.  If one harness produces executions with
 lower coverage (or no executions at all) for some killed mutants, it
-is stronger.  For some mutants, \emph{any} passing executions show a harness
-flaw. While not polished enough for release, these tools (implemented
-as Python scripts) have proven robust enough for our internal use and
-are available for examination online.
+is stronger.  For some mutants, \emph{any} passing executions show a
+harness flaw. While not polished enough for release, these tools
+(implemented as Python scripts) have proven robust in our experiments
+and are available, along with our experimental data and CBMC patch, at
+{\tt \url{https://github.com/agroce/cbmcmutate}}.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{TestFlow}
@@ -702,37 +721,34 @@ are available for examination online.
 \vspace{0.1in}
 S = $S_0$-1 
 r' = \{\}
-changed = False 
-while changed:
-   TOP:
-   S = S + 1 
-   changed = False 
-   r = r' 
-   r' = \{\}
-   for $m \in M$:
-      if $m \not\in r$:
-         r[m] = check($H$,$m$,$U(S)$,$O(S)$) 
-         if r[m] == VERIFICATION FAILED:
-            //once killed, assume always killed 
-            $M$ = $M \\ m$
-      if r[m] == VERIFICATION SUCCESSFUL:
-         r'[m] = check($H$,$m$,$U(S+1)$,$O(S+1)$) 
-         if r'[m] == VERIFICATION FAILED:
-            $M$ = $M \\ m$
-            changed = True 
-            goto TOP 
+TOP:
+S = S + 1 
+r = r' 
+r' = \{\}
+for $m \in M$:
+   if $m \not\in r$:
+      r[m] = check($H$,$m$,$U(S)$,$O(S)$) 
+      if r[m] == VERIFICATION FAILED:
+         //once killed, assume always killed 
+         $M$ = $M \\ m$
+   if r[m] == VERIFICATION SUCCESSFUL:
+      r'[m] = check($H$,$m$,$U(S+1)$,$O(S+1)$) 
+      if r'[m] == VERIFICATION FAILED:
+         $M$ = $M \\ m$
+         goto TOP 
 // No result changed, so S is mutant-stable 
 return (S-1, $M$) 
 \end{code}
 }
-\caption{Algorithm 1: Finding size/unwinding bound and surviving mutants.}
+\caption{Algorithm 1: Finding size/unwinding bound and surviving
+  mutants.}
 \label{alg:unwind}
 \end{figure}
 
 \begin{figure}
 {\scriptsize 
 \begin{code}
-harness covering($H$, $TARGET$) 
+harness cover-harness($H$, $TARGET$) 
 \vspace{0.1in}
 $H'$ = $H$
 
@@ -742,8 +758,7 @@ for stmt $\in H'$:
 
 cover = [
   assume(total\_coverage >= $TARGET$); 
-  assert(!mutant\_covered);
-]
+  assert(!mutant\_covered);]
 
 insert cover at end of $H'$.main() 
 
@@ -757,7 +772,7 @@ return $H'$
 \begin{figure}
 {\scriptsize 
 \begin{code}
-mutant coverinst($m$) 
+mutant cover-mutant($m$) 
 \vspace{0.1in}
 n = 0
 $m'$ = $m$
@@ -793,22 +808,18 @@ return $m'$
 trace maxcover($m$, $H$, $S$, $O$, $U$) 
 \vspace{0.1in}
 
-$m'$ = coverinst($m$)
+$m'$ = cover-mutant($m$)
 
 T = 0
 trace = $\emptyset$
 failed = False
 while (not failed)
-   $H'$ = covering($H$, T)
+   $H'$ = cover-harness($H$, T)
    r = scheck($H$,$m'$,$U(S)$,$O(S)$)
    if r == VERIFICATION SUCCESSFUL:
-     // Can't achieve this level of coverage
      failed = True
    else if r == VERIFICATION FAILED:
      trace = r.trace
-     // Instead of incrementing by 1, see
-     // what actual coverage was and
-     // increase by one from that baseline.
      T = trace.read(total\_covered) + 1
 return trace
 \end{code}
@@ -826,24 +837,23 @@ report check-harness($SUT$, $M$, $H$, $M(H)$, $S$, $O$, $U$)
 
 K$_H$ = killed($M$, $H$, $S$) 
 
-Hkills = $\emptyset$
-Hequal = $\emptyset$
-Hbetter = $\emptyset$
+Hkills = $\emptyset$; Hequal = $\emptyset$; Hbetter = $\emptyset$; N = $\emptyset$
 
 for H$_i$ in $M(H)$:
    original = check($H_i$, $SUT$, $U(S)$, $O(S)$)
-   // ``kills'' the SUT -- an invalid harness
    if original == VERIFICATION FAILED: 
       Hkills += H$_i$
    else: // check if this kills fewer mutants
       K$_{H_i}$ = killed($M$, $H$, $S$)
+      for k $\in$ K$_{H_i}$:
+         if k $\not\in$ K$_H$: N += ($H_i$, k)
       if |K$_{H_i}$| > |K$_H$|:
-         Hbetter += H$_i$
+         Hbetter += (H$_i$, K$_{H_i}$)
       if |K$_{H_i}$| == |K$_H$|:
-         Hequal += H$_i$
+         Hequal += (H$_i$, K$_{H_i}$)
       else:
-         Hkills += H$_i$
-return (Hkills, Hequal, Hbetter)
+         Hkills += (H$_i$, K$_{H_i}$)
+return (Hkills, Hequal, Hbetter, N)
 \end{code}
 }
 \caption{Algorithm 5: Analyze a harness.}
@@ -1192,36 +1202,36 @@ mutants simply discard too many inputs).
 
 At this point, we were satisfied with our harness, and ran a check on
 mutants of the harness itself.  To our surprise, three mutants of the
-harness had a \emph{better} kill rate than the ``correct'' harness,
-killing 73.5\% of mutants.  Investigating these ``better'' harnesses
-showed mutants that broke processing of some return values in such a
-way that, while these harnesses failed to detect certain major bugs
-in the code, they were able to detect some {\tt JS\_ASSERT} assumption mutants.  Guided
-by this, we produced a revised harness that raised the kill rate to
-79.52\%.  However, on examining the surviving mutants, we realized
-that our verification was still unsatisfactory as a good regression for the
-Boyer-Moore-Horspool code:  in particular, if the assertion were ever
-modified to allow bad inputs to pass through, or otherwise incorrectly
-changed, we would miss some mutants.  We then changed the {\tt
-  JS\_ASSERT} into code that returned a special value to signal
-assertion failure, and modified the harness once more,
+harness had a better kill rate than the ``correct'' harness, killing
+73.5\% of mutants.  Investigating these ``better'' harnesses showed
+mutants that broke processing of some return values in such a way
+that, while these harnesses failed to detect certain major bugs in the
+code, they were able to detect some {\tt JS\_ASSERT} assumption
+mutants.  Guided by this, we produced a revised harness that raised
+the kill rate to 79.52\%.  However, on examining the surviving
+mutants, we realized that our verification was still unsatisfactory as
+a good regression for the Boyer-Moore-Horspool code: in particular, if
+the assertion were ever modified to allow bad inputs to pass through,
+or otherwise incorrectly changed, we would miss some mutants.  We then
+changed the {\tt JS\_ASSERT} into code that returned a special value
+to signal assertion failure, and modified the harness once more,
 allowing some incorrect values to pass through and checking that
-``assertion failure'' happened if, and only if, the inputs were invalid.
-This harness killed 89.2\% of mutants, and the six surviving mutants
-were easily understood to be equivalent to the BMH code under all
-valid inputs (in one case we weren't certain about, we had CBMC verify
-that for all non-assertion violating inputs, this was true up to a
-large bound).  The new harness, informed by the harness mutations, in
-fact had a better mutant kill rate for size 3 (80.7\%) than our first harness
-had at the mutant-stable point.  This examples serves as our best
-evidence of the value of harness mutation.
+``assertion failure'' happened if, and only if, the inputs were
+invalid.  This harness killed 89.2\% of mutants, and the six surviving
+mutants were easily understood to be equivalent to the BMH code under
+all valid inputs (in one case we weren't certain about, we had CBMC
+verify that for all non-assertion violating inputs, this was true up
+to size 10).  The new harness, informed by the harness mutations, in
+fact had a better mutant kill rate for size 3 (80.7\%) than our first
+harness had at the mutant-stable point.  This examples serves as our
+best evidence of the value of harness mutation.
 
 \subsection{Linux Kernel RCU Verification Challenges}
 
 %\subsubsection{Introduction to RCU}
 
 
-RCU is a synchronization mechanism sometimes used as a replacement
+Read-Copy-Update (RCU) is a synchronization mechanism sometimes used as a replacement
 for reader-writer locking for linked structures, allowing extremely
 lightweight readers \cite{McKenney:2013:SDS:2483852.2483867}.
 In the limiting case, achieved in server-class builds of the
@@ -1229,7 +1239,7 @@ Linux kernel, overhead for entering and exiting an \emph{RCU read-side
 critical section} (using {\tt rcu\_read\_lock()} and {\tt rcu\_read\_unlock()},
 respectively) is exactly zero \cite{McKenney98}, making RCU an
 excellent choice for read-mostly workloads \cite{McKenney:2013:SDS:2483852.2483867,DinakarGuniguntala2008IBMSysJ,PaulMcKenney2013AMPenergyHOTPAR}.
-However, lightweight readers imply that updaters cannot exclude readers,
+However, lightweight readers mean updaters cannot exclude readers,
 so must take care to avoid disrupting readers.
 Updaters typically maintain multiple versions of the portion of the
 data structure being updated, removing old versions only when
@@ -1351,7 +1361,7 @@ for pthread mutex locks, the other using disabling of assertions to
 ignore executions that violate locking semantics.  The native mutex
 version allows much faster verification, and catches the original,
 hand-constructed checks to ensure the harness can detect faults in
-Tiny RCU.  However, the native mutex version fails to kill \emph{any}
+Tiny RCU.  However, the native mutex version fails to kill any
 mutants, a fact we are currently investigating:  without mutants, we
 would not have been aware of this possibly critical problem, which may
 be a CBMC bug (in the course of this paper's work, we have uncovered
@@ -1373,7 +1383,7 @@ mutants to use in enhancing the process.  The good news is that while
 the RCU verification is much more substantial than the above case
 studies, the time to analyze mutants is not prohibitive.  No single
 model checking run for the Tiny RCU benchmark takes more than 40
-seconds, and \emph{total runtime} for all mutants in the usage
+seconds, and total runtime for all mutants in the usage
 benchmarks ranges from just over 12 seconds for a basic litmus test to
 less than 5 minutes for the most complex of the benchmarks.
 
@@ -1395,8 +1405,7 @@ The maintainers of CBMC are working to improve its handling of pointers.)
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{sattimes}
-\caption{Average times for killed mutants (SAT) vs. surviving mutants 
-  (UNSAT) for all experiments.}
+\caption{Average times for killing/verifying mutants, in seconds.}
 \label{fig:sattimes}
 \end{figure}
 
@@ -1410,7 +1419,7 @@ desired problem size falsification can provide limited
 confidence in the correctness of a program.  In particular, we observe
 from all of our experiments that the average time, for any program and
 harness pair, to verify the original code and all surviving mutants is
-\emph{much higher} than the average time to produce a counterexample
+much higher than the average time to produce a counterexample
 for killed mutants.  Showing that a constraint is satisfiable is,
 usually, easier than proving it is unsatisfiable.  This is not limited
 to SAT solvers; we used SAT rather than SMT in our experiments because
@@ -1428,7 +1437,7 @@ worst average time to kill (about 350 seconds) is much better than
 many average verification times.  One use of this relationship is
 that, in cases where all (non-equivalent) mutants of the SUT are
 killed, but the SUT verification fails to complete, the SUT might be
-considered \emph{provisionally} verified. In particular, the larger
+considered provisionally verified. In particular, the larger
 the ratio between the timeout for failed verification and the longest
 kill time for any mutant, the ``more likely'' to be correct we can
 consider the SUT (the same holds with respect to memory use
@@ -1454,13 +1463,13 @@ verification success time is only 1.5 seconds.
 
 The core idea of this paper is that, while successful verification is
 the \emph{result} that a developer seeks when verifying a program, it
-is most meaningful in a context provided by many failed verifications.
+is most meaningful in a context provided by many \emph{failed} verifications.
 The useful model checking harness (e.g., specification) essentially,
-is one that \emph{prohibits} certain execution sequences.  This is not
+is one that prohibits certain execution sequences.  This is not
 controversial; a good property is defined by its rejection of bad
 behavior.  However, in most verification efforts, there is a focus on
 arriving at a successful verification, which sheds very little light
-on exactly \emph{what} has been verified.  By focusing on mutants throughout the
+on exactly what has been verified.  By focusing on mutants throughout the
 verification process, our approach shifts the emphasis to one of
 ``verifying'' the verification itself by repeatedly \emph{falsifying}
 claims that various incorrect programs satisfy the property.  This is,
@@ -1476,7 +1485,7 @@ with the harness taken to be the ``theory'' of the empirical behavior
 of the world.  Mutants, in this view, are counterfactual worlds that
 are likely to violate any correct theory of the actual world.  A
 ``scientific theory'' (that is, a harness) is proven effective by its
-ability to be \emph{shown to be false} in these counterfactual worlds.
+ability to be shown to be false in these counterfactual worlds.
 If we can prove a theory is incorrect for an ``incorrect'' world and
 cannot prove it is incorrect for the real world, that gives us greater
 confidence (always provisional, since our understanding of the world,
@@ -1503,7 +1512,7 @@ bug-finding method, but its failure to kill any individual mutant is
 likely to be a matter of probability, rather than a flaw \emph{per se}
 in the testing itself.  In verification, however, there are no
 accidents: if a harness verifies an incorrect program, either the
-assumptions, the specification, or the problem size are \emph{necessarily} in
+assumptions, the specification, or the problem size are necessarily in
 need of correction.  However, the approach we propose is most suited
 to the analysis space in which CBMC is situated: on the one hand,
 within a known bound, its results are exhaustive; on the other hand,
@@ -1525,7 +1534,7 @@ knowledge, no previous work presented passing executions of a source
 code mutant as a guide to understanding specification weakness.  Our
 modification of the harness is a source-code analogue to attempts to
 modify logical formulas, e.g., the effort to (in a narrow,
-vacuity-based sense) produce the \emph{strongest passing LTL formula}
+vacuity-based sense) produce the strongest passing LTL formula
 of Chockler et al. \cite{BeyondVac}.  We are not the first to note
 that model checking, at present, due to the ``many obstacles'' in
 proving a system correct, is primarily used for falsification
@@ -1534,7 +1543,7 @@ abstractions based on under-approximation, to ensure counterexamples
 were not spurious. We instead preserve the goal of
 verification\footnote{Note that we use a model checking approach that
   already guarantees non-spurious counterexamples, and provides
-  bounded rather than full verification.}, but \emph{drive} the verification
+  bounded rather than full verification.}, but drive the verification
 process, from the human point of view, by repeated falsification of
 incorrect systems.
 
@@ -1572,19 +1581,21 @@ behavior tend to leave room for doubt about the correctness of any
 verification result.  Verification of code is not self-explanatory,
 unlike a counterexample.  We propose to take advantage of the use of
 counterexamples and witnesses and center verification around the
-\emph{incorrect programs a verification fails to prove incorrect}.  An
-obvious source of such programs is mutants; we also suggest that
+incorrect programs a verification fails to prove incorrect.  A
+verification is considered effective when it finds no faults in the
+SUT and detects every faulty variation of the SUT.  An
+obvious source of faulty SUT variations is mutants; we also suggest that
 known-flawed versions of code be included in this set, which all of
 our tools support, but the key to the method is the generation of a
-large set of potential buggy versions without developer effort.  Given
-these versions, a developer can examine mutants that a verification
+large set of potential buggy versions without additional developer effort.  Given
+these faulty versions, a developer can examine mutants that a verification
 effort fails to detect, and (with the algorithms and tools presented
 in this paper) examine executions showing precisely how a program
 mutant can ``make it through'' a verification without being detected,
 with assurance that these executions will have high coverage (and thus
 likely be non-trivial).  Developers can also check that a verification
 harness does not have any mutants that 1) verify the SUT while 2) killing
-\emph{more} mutants than the original harness.  This can help detect
+more mutants than the original harness.  This can help detect
 very subtle flaws in harnesses, especially those based on bad
 reasoning about ``equivalent'' mutants.  We demonstrate, as a
 proof-of-concept, that our approach can be useful for simple but
@@ -1598,21 +1609,30 @@ gain considerable confidence in a verification by making serious attempts to pro
 
 In future work we plan to continue to apply this falsification-driven
 approach to the RCU verification, and to other critical
-systems-software targets as well.  In the process we expect to
-discover new supporting algorithms and methods that use a model
-checker's ability to ask ``what if'' questions about program
-executions \cite{GroceDist,MakeMost} to improve developer
-understanding of verification efforts.  We would also like to
+systems-software targets, which we expect will lead to discovery of
+new ways a model checker's ability to ask ``what if'' questions about
+program behavior \cite{GroceDist,MakeMost} can improve developer
+understanding of verification efforts.   We would also like to
 integrate falsification-driven verification support into the CBMC
 Eclipse tools, and use speculative model checking calls and
 incremental SAT to make mutant analysis available to developers
 continuously as part of their development/debugging process.  Finally,
-these techniques should also be applicable to verification using, e.g., Java
-Pathfinder \cite{JPF2} (at least in symbolic mode; in pure explicit-state
-exploration the problems of non-exhaustive exploration may dominate).
+these techniques should also be applicable to verification using,
+e.g., Java Pathfinder \cite{JPF2}  (at least in symbolic mode \cite{SymJPF}; in pure
+explicit-state exploration the problems of non-exhaustive exploration
+may dominate).
+\begin{comment}
+We would also like to
+integrate falsification-driven verification support into the CBMC
+Eclipse tools, and use speculative model checking calls and
+incremental SAT to make mutant analysis available to developers
+continuously as part of their development/debugging process.  Finally,
+these techniques should also be applicable to verification using,
+e.g., Java Pathfinder \cite{JPF2} (at least in symbolic mode \cite{SymJPF}; in pure
+explicit-state exploration the problems of non-exhaustive exploration
+may dominate).
+\end{comment}
 
-Our CBMC patch for {\tt find-success} mode, the various verification harnesses, and our
-experimental results are all available at {\tt \url{https://github.com/agroce/cbmcmutate}}.
 
 % use section* for acknowledgment
 %\section*{Acknowledgment}
