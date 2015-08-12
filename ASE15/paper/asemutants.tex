@@ -647,10 +647,10 @@ support algorithms for instrumentation, used in the production of
 witnesses for understanding surviving mutants (Figures
 \ref{alg:invert} and \ref{alg:covermut}), while the other three
 (Figures \ref{alg:unwind}, \ref{alg:maxcover}, and
-\ref{alg:checkharness}) face developers.  The uses of these algorithms
-are described at a high level in the introductory example (in Sections
-\ref{sec:unwind}, \ref{sec:maxcover}, and \ref{sec:checkharness},
-respectively), and in the case studies below.   One additional requirement is a version of CBMC capable of converting built-in
+\ref{alg:checkharness}) face developers.  Note that $O(S)$is a
+function mapping an abstract size into particular options,
+e.g. {\tt -DSIZE}. The uses of these algorithms
+are described at a high level in the introductory example, and in the case studies below.   One additional requirement is a version of CBMC capable of converting built-in
 assertions checks (e.g, bounds checks, pointer dereference, division by
 zero) to assumptions.  For harness assumptions, this is done by
 automatic source-to-source transformation (Figure \ref{alg:invert}, but CBMC's
@@ -1525,10 +1525,9 @@ The idea that a ``successful verification'' in model checking (or even
 theorem proving) often simply indicates an inadequate property is
 long-standing \cite{PracticalCov,Hoskote}. Use of mutants
 \cite{MutSpec,MutCov} to provide a coverage measure dates back both to
-these early explorations and relatively recent work \cite{MutInterp},
-if mostly in hardware verification \cite{MutTheory,Arbiters}.
+these early explorations and relatively recent work \cite{MutTheory,Arbiters,MutInterp}.
 However, in these efforts the mutation was usually applied to hardware
-models, and (critically) the surviving mutants were used to identify
+models, and (critically) the surviving mutants were used to, e.g., identify
 ``uncovered'' portions of a model, rather than presented to a
 developer for examination and understanding directly.  To our
 knowledge, no previous work presented passing executions of a source
