@@ -277,7 +277,7 @@ shown in Figure \ref{fig:qsort}\footnote{In fact, that actual code is
 it using the harness, defining {\tt SIZE=2} and setting the unwinding
 bound to 3 (we need one more unwinding than the maximum
 number of items in the array).  CBMC reports {\tt VERIFICATION
-  SUCCESSFUL} in less than a second.  Have we have verified
+  SUCCESSFUL} in less than a second.  Have we verified
 what we want to verify?
 
 \subsection{Finding a Good Problem Size}
@@ -305,30 +305,32 @@ mutant is killed), and 71 mutants pass without detection (the
 verification is successful, in which case we say the mutant survives).
 Clearly length 1 arrays are not sufficient to detect even the most
 glaring bugs in a sort algorithm (no surprise: all size 1 arrays are
-sorted).  What about our choice of size 2?  Re-running the mutants
+sorted).  What about our choice of size 2?  Re-checking the mutants
+with this bound
 (dropping those already killed by the smaller bound) takes slightly
 over 13 minutes (due to one mutant requiring over 8 minutes
 to model check) and reduces the number of surviving mutants to 26.  We
 could inspect these mutants by hand, but it seems highly unlikely that
 a complete verification over all possible arrays with a good
 specification for sorting would produce such a poor mutation kill rate.
-If we increase the size limit to 3 and unwinding 4 (analysis takes just over 33
+If we increase the size limit to 3 and unwinding 4 (now the analysis takes just over 33
 minutes), only 8 mutants survive.  Note that each problem, due to the
 harness' assignment of {\tt s} to any size smaller than the current
 size, includes all smaller problem sizes. This makes the behavior of
 the verification problem size setting match that of CBMC where an unwinding bound is a maximum, rather than
-a fixed size.  We assume in this paper\footnote{There is
-  one noted exception in Section \ref{sec:sattimes}.} that
-problem sizes are inclusive.
+a fixed size.  We assume inclusiveness in this paper\footnote{There is
+  one noted exception in Section \ref{sec:sattimes}.}.
 
 At this point, we can increase {\tt SIZE} to 4 (which will kill one
 additional mutant), but the time required to check the remaining
 mutants is growing rapidly.  In fact, completing the check for size 4,
 even though only the original program and 8 mutants have to be
 checked, requires nearly 9 hours.  When the model checking
-difficulty grows more slowly with problem size, we propose increasing
+difficulty grows more slowly with problem size, we propose the simple
+heuristic of increasing
 size until the number of mutants killed does not increase with a step
-up in size (we call such a size \emph{mutant-stable}).  However, in
+up in size (we call such a size
+\emph{mutant-stable}).  However, in
 many cases, such as this one, the time required to check mutants
 starts growing unacceptably.  We propose a more efficient algorithm
 for finding a mutant-stable size below (Figure \ref{alg:unwind}), and
@@ -481,7 +483,7 @@ instead of performing a complete check for permutation, we can detect
 violation of the property by letting {\tt v} be any value, and
 ensuring that both {\tt a} and {\tt ref} contain the same
 number of elements equal to {\tt v}.  If {\tt a} is not
-a permutation of {\tt ref}, $\exists {\tt v}$ such that this is not
+a permutation of {\tt ref}, there exists a {\tt v} such that this is not
 true, and we can rely on CBMC to report it as part of a
 counterexample.  While a CBMC harness
 resembles a program to test the SUT, it can make use of unusual specifications
@@ -492,14 +494,12 @@ If we modify the harness as shown, we can re-check our mutants
 checking mutants at {\tt SIZE=1} takes slightly longer (8 more
 seconds) and kills the same number of mutants, since the problem is
 the size, not the harness.  At {\tt SIZE=2} mutant kill results are
-again unchanged, but now completes in about 5 minutes.  Finally, at
+again unchanged, but analysis now completes in about 5 minutes.  Finally, at
 {\tt SIZE=3}, we kill the {\tt del\_stmt} mutant that previously
 survived, after only 14 minutes, not much longer than at {\tt SIZE} 2
 with the weaker harness.  The {\tt SIZE} 3 verification is stable.
 Checking stability by running {\tt SIZE} 4 now only requires slightly
-more than an hour, nearly an order of magnitude faster than before.  A stronger harness not only finds more bugs in the
-SUT, it often speeds up verification.
-
+more than an hour, nearly an order of magnitude faster than before.  
 %by making the set of
 %satisfying instances larger for the SAT solver.  Unsatisfiability is
 %sometimes easier to prove when the possible executions to  are
@@ -554,8 +554,8 @@ minima'' with respect to mutants, mutation analysis of the harness
 also provides some evidence of our technique's ability to detect
 subtle specification and environment flaws.  In particular, it shows
 the value of inspecting all surviving mutants.  One mutant
-modifies the assumption on {\tt s} to be {\tt < SIZE} rather than {\tt
-  <= SIZE}, which is the same as lowering the {\tt SIZE} by one; this
+modifies the assumption on {\tt s} to be {\tt s < SIZE} rather than {\tt
+s <= SIZE}, which is the same as lowering the {\tt SIZE} by one; this
 is a fairly easy mistake to make in a harness (or any code).  This reduces the
 effectiveness of the verification by 19 mutants, so is likely not to
 escape notice, and would also (in our framework) simply result in a
@@ -669,7 +669,7 @@ harness and program, performing as few model checker calls as possible
 This algorithm can be easily parallelized by running mutants in the
 {\tt for} loop at the same time, with any {\tt goto TOP} killing all
 CBMC runs not terminated.  The {\tt maxcover} algorithm (Figure
-\ref{alg:maxcover} returns for a given mutant and harness, a witness
+\ref{alg:maxcover}) returns for a given mutant and harness, a witness
 program trace that 1) covers the mutant and 2) covers as much other
 code as possible (in terms of branch coverage), using the {\tt
   cover-harness} and {\tt cover-mutant} (Figures \ref{alg:invert} and
@@ -1300,12 +1300,12 @@ tools meet these requirements.}
 12 
 13 static void synchronize_rcu(void)
 14 {
-15   for (;;) {
-16     if (__sync_fetch_and_xor(&rcu_read_nesting_global, 1) < 2)
-17       return;
-18     SET_NOASSERT();
-19     return;
-20   }
+15  for (;;) {
+16   if (__sync_fetch_and_xor(&rcu_read_nesting_global, 1)<2)
+17     return;
+18   SET_NOASSERT();
+19   return;
+20  }
 21 }
 \end{verbatim}
 }
@@ -1525,7 +1525,8 @@ The idea that a ``successful verification'' in model checking (or even
 theorem proving) often simply indicates an inadequate property is
 long-standing \cite{PracticalCov,Hoskote}. Use of mutants
 \cite{MutSpec,MutCov} to provide a coverage measure dates back both to
-these early explorations and relatively recent work \cite{MutInterp}.
+these early explorations and relatively recent work \cite{MutInterp},
+if mostly in hardware verification \cite{MutTheory,Arbiters}.
 However, in these efforts the mutation was usually applied to hardware
 models, and (critically) the surviving mutants were used to identify
 ``uncovered'' portions of a model, rather than presented to a
