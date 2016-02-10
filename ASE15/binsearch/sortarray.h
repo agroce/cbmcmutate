@@ -1,4 +1,4 @@
-typedef short index_t;
+typedef int index_t;
 typedef char value_t;
 
 #define MAX_ITEMS ((sizeof(index_t)*8)+1)

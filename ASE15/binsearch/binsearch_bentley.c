@@ -5,7 +5,7 @@ index_t binsearch(value_t key, index_t size, int* found) {
   index_t high = size - 1;
   
   while (low <= high) {
-    index_t mid = (low + high) / 2; BUGGY
+    index_t mid = (low + high) / 2; // BUGGY
     value_t midVal = a(mid);
 
     if (midVal < key)
