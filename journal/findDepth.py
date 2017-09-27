@@ -30,6 +30,7 @@ lastKills = -1
 neverKilled = set(allMutants)
 
 while not stable:
+    thisNotKilled = set(allMutants)
     print "="*50
     print "DEPTH =",depth
     sys.stdout.flush()
@@ -50,7 +51,8 @@ while not stable:
                 killed = True
                 break
         if killed:
-            neverKilled.remove(m)
+            neverKilled.discard(m)
+            thisNotKilled.discard(m)
             kills += 1
             sys.stdout.write("X")
         else:
@@ -67,7 +69,10 @@ while not stable:
         depth += INCREMENT
 
 print "REACHED STABILITY AT",depth,"WITH",kills,"KILLS"
-print "NEVER KILLED:"
+print "NEVER KILLED AT ANY DEPTH:"
 for m in neverKilled:
+    print m
+print "NOT KILLED AT STABLE DEPTH:"
+for m in thisNotKilled:
     print m
     
