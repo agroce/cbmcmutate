@@ -27,7 +27,7 @@
   Verification and Testing}
 
 \author{Alex Groce \and Iftekhar Ahmed \and Carlos Jensen \and Paul
-  E. McKenney}
+  E. McKenney \and Josie Holmes}
 
 \institute{Alex Groce \at Northern Arizona University}
 
@@ -196,11 +196,13 @@ harness reject the SUT itself.
 \subsection{Contributions}
 \end{comment}
 
-The contribution of this paper is a \emph{falsification-driven}
+This paper is an extension of a paper presented at ASE in 2015
+\cite{ase15}.  
+The contribution of that paper was a \emph{falsification-driven}
 verification methodology that uses mutants to aid developers 
  in understanding ``successful'' verification
 results, determining when a harness is flawed, and correcting the harness.
-We show how to use mutation testing to
+We showed how to use mutation testing to
 choose a problem size in bounded model checking, how to mutate a
 harness to determine if any similar harnesses have an equal (or
 better) mutation kill rate, and most importantly, how to modify CBMC,
@@ -213,17 +215,28 @@ applies to verification of reactive and concurrent systems, where
 there is no simple notion of identical inputs.  
 %We also propose the use of mutation analysis to gain limited confidence
 %in program correctness even past model checker scalability limits. 
-At a more general level, we discuss the fundamental nature of
+At a more general level, we discussed the fundamental nature of
 ``verification'' in a real-world context where specifications are
-never known to be complete. We propose that falsification, as in
+never known to be complete. We proposed that falsification, as in
 Popper's philosophy of science \cite{Popper}, is a useful conceptual
 framework for verification efforts: rather than focusing on what can
 be proven about a program, we focus on how a
 verification distinguishes the ``real'' program from similar
 alternative programs that do \emph{not} match the theory of program
-behavior.  This approach still aims at verification, but continually
+behavior.  Our approach still aims at verification, but continually
 evaluates and refines a verification effort by its ability to
 \emph{falsify} rather than to verify.
+
+In this paper, we extend the contributions of the previous work by
+further elaborating the approach to bounded model checking presented
+there, but, most significantly, by extending the ideas to automated
+software testing, where there are new challenges and it is less clear
+that the underlying concepts are sound.  In our previous work, we
+dismissed the possibility of using our approach for testing, because
+when a typical test generation approach fails to find a failing test
+(that is, testing's version of a counterexample), it does not mean the
+property is insufficient, or even that the generation is weak.
+Testing is usually essentially probabilistic.  
 
 \section{A Simple Example Verification}
 
@@ -583,7 +596,10 @@ Examining the deleted/removed recursive calls shows the developer
 the problem in this case.  Our modified CBMC easily produces a witness showing a permuted array with correct
 {\tt a[0]} but with out-of-order later elements.
 
-\begin{comment}
+%\begin{comment}
+
+The basic flow of our approach, for bounded model checking, can be
+summarized as follows:
 
 \begin{enumerate}
 \item Generate mutant set $M = m_1 \ldots m_n$ for the program $P$.
@@ -612,14 +628,14 @@ the problem in this case.  Our modified CBMC easily produces a witness showing a
   witness to an incorrect, mutant-covering behavior is produced.  Use
   this to modify $H$ and move newly killed mutants from $S$ to $K$.
 \item Take mutants in $m_i \in K$, and check whether there exists a successful
-  execution of $m_i$ satisfying $H$.  Examine and constraint each such
+  execution of $m_i$ satisfying $H$.  Examine and constrain each such
   execution to remove degenerate solutions, modifying $H$ as needed.
 \item Compute mutants $M_H$ of the harness, and check that all mutants
   either:  produce a counterexample for the original program $P$ or
   have a kill rate $\leq$ the kill rate for $H$.
 \end{enumerate}
 
-\end{comment}
+%\end{comment}
 
 
 
