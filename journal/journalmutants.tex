@@ -879,6 +879,133 @@ report {\underline{check-harness}} ($SUT$, $M$, $H$, $M(H)$, $S$, $O$, $U$)
 \label{alg:checkharness}
 \end{figure}
 
+
+\subsection{Adapting Falsification-Based Approaches to Automated Test
+  Generation}
+
+A key insight is that when estimating how hard a mutant is, a single
+run that either takes a long time to kill the mutant or a run that
+fails to kill a (known-killable) mutant is sufficient evidence to
+assume the mutant is difficult, and helps establish a lower bound on
+test budget needed to reduce risk of missing faults; in contrast, a
+single run that quickly kills a mutant does not establish that the
+mutant is in fact easy:  even hard mutants can sometimes be easy to
+detect.  In part we base this idea on empirical evidence (see below),
+but it can also be justified by a simple theoretical model of test
+generation.  
+
+The difficulty of detecting a fault (or killing a mutant, which is
+equivalent) can be simply expressed by a probability of detection,
+e.g. a trivial fault is detected with almost every generated test
+(99/100 tests), a typical easy fault is detected frequently (1/100
+tests), and a hard fault is detected two orders of magnitude or more
+less frequently (1/5000 tests).  In fact, real faults often seem to
+fall into such coarse ``buckets'' of detection ease, though this is not
+required for our analysis \cite{PLDI13}.  
+
+Figure \ref{fig:probmodel} shows how the minimum number of tests, mean
+number of tests, and maximum number of tests needed for detection,
+over 100 runs each consisting of 10,000 tests, vary as the difficulty
+of a mutant or fault changes.  For simplicity, we measure difficulty
+by increasing $N$, where the probability of detection is $1/N$.  As
+you can see, while the maximum number of tests required increases
+rapidly, and the mean number of tests also increases steadily with
+difficulty, the minimum number of tests required increases very
+slowly.  A concrete example shows why: the chance of getting ``lucky'' and hitting a test with
+difficulty $1000$ on the first test is small, only $1/1000$.  However, the
+chance of getting ``unlucky'' and failing to detect a test with
+difficulty $1/10$ for even as few as 100 tests is less than $1/30,000$.
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{probsmodel}
+\caption{Tests required for detection as difficult of fault/mutant increases.}
+\label{fig:probmodel}
+\end{figure}
+
+\section{Case Studies and Experimental Results}
+
+\subsection{Algorithm Implementations}
+
+Our initial experiments involved relatively small verification
+problems, based on implementations taken from the web or student code for popular
+algorithms and data structures.  Here we highlight the most
+interesting of these; we also successfully applied the method to
+bubble sort and a student's harness for verifying a version of Dijkstra's
+shortest path algorithm that enables path reconstruction \cite{dijkstrasp}.  For the Dijkstra
+harness, the low mutant kill rate of only 58\% showed that while the
+harness checks incorrect returned paths, it cannot detect when return
+values indicate there is no path but one exists.  Improving the
+harness is a substantial exercise, but can be guided by the survival witnesses.
+
+\subsubsection{Binary Search}
+
+The ideas in this paper grew out of a side project of the first
+author: to write a follow-up to Jon Bentley's article on verifying
+binary search \cite{Bentley} in the context of modern software
+verification tools (and Joshua Bloch's discovery of a bug in the
+assumptions behind Bentley's proof \cite{Bloch}).  The modeling
+required is moderately complex (to scale well, an abstract ``sorted
+array'' that represents all sorted arrays but only introduces
+variables equal to the number of probes made by the search is
+essential).  In this case, we did not produce an initial, weaker
+version of the harness, but checked the existing harness using
+mutants, and determined that all 3 surviving mutants are equivalent to
+a true binary search.
+
+Checking harness mutants (which took 37 minutes, including computing
+the kills for the original harness) produced results confirming the belief this is a
+good harness.  Of the 31 compiling harness mutants, 19 failed to verify
+the correct binary search, and 7 had worse kill rates than the
+original harness.  The remaining 5 harnesses, all with equal kill
+rates of 86.7\%, all modify an assumption to allow the harness to also
+check size 0 arrays.  This doesn't kill any additional mutants, but is
+harmless as expected.  Of the harness mutants with worse kill rates,
+three are mutants of the assumptions on the nondeterministic value used to
+make sure that if binary search returns -1, no index in the array
+actually contains the searched-for item.  Two of these mutants are
+off-by-one-errors that exclude item 0 from the check, an easy-to-make
+mistake.  Both of these fail to kill \emph{exactly} one mutant killed by the
+correct harness: the mutant that sets the lower bound
+initially to 1 instead of 0.  Traces of passing runs for these mutants show the
+problem clearly (the sought item at index 0).
+
+\subsubsection{Doubly-linked-list Insertion Sort}
+
+Another example, making use of recursive data structures and pointer
+validity checks, is code for inserting an item (in
+sorted order) into a doubly-linked list \cite{DLLInsert}.  Our initial
+harness omitted a check for correctness of {\tt prev} pointers.  This
+problem didn't directly prevent mutants from being detected, but
+pushed the stable size larger, as with the quicksort example above.
+Looking at a trace of a size 3 run that fails to kill a clearly
+problematic mutant easily reveals the problem (the results are correct
+up to {\tt prev} pointers).  This example also showed another use of
+mutants, in that some seemingly problematic surviving mutants actually
+just showed a pointless redundancy in the implementation, enabling the
+removal of an entire conditional branch.  A harness check (requiring
+30 minutes, including computing the mutant kills for the original
+harness) showed that of the 105 compiling harness mutants, 92 fail to
+verify the original code.  Another 2 have a worse kill rate than the
+original (which kills 81\% of mutants, a low rate due to the code
+redundancy), and 11 survive.  The large number of survivors is due to
+a redundancy of the final harness, which checks sortedness and the
+permutation property for both a forward {\tt next} traversal of the
+list and a {\tt prev} traversal.  Omitting any \emph{one} of these
+(e.g. {\tt prev} sortedness or {\tt next} permutation) the harness can
+still detect all mutants.  Removing two, however, fails to kill
+mutants.  The two harness mutants with worse kill rates have extremely poor
+kill rates ($<50$\% and $<25$\%).
+
+\subsubsection{AVL Tree}
+
+In the case of the AVL tree, the harness we were working with
+was unable to reach a mutant-stable unwinding without exhausting
+memory on the verification of the main program (for AVL trees of up to
+size 5).  We are investigating a more efficient harness encoding,
+based on the inability to reach mutant-stability. 
+
+
+\subsubsection{Merge With Duplicate Removal}
 \begin{figure}
 {\scriptsize
 \begin{code}
@@ -962,13 +1089,16 @@ int merge\_sorted\_nodups(int a[], int asize,
 \end{figure}
 
 
-Even a killed mutant (e.g., a mutant the harness detects) can shed
+Even a killed mutant---one the harness does detect---can shed
 critical light on harness vulnerabilities.  For example, the code in
 Figure \ref{fig:mergeharness} is a portion of a harness to verify
 code that merges two sorted arrays, removing all duplicates (the
 source arrays may contain duplicates or shared items, the output array
 is guaranteed to be sorted and have all-unique values).  This harness
-detects all non-equivalent mutants of the source code.  However, as is
+detects all non-equivalent mutants of the source code with an
+unwinding depth of only 2 (the check requires less than a minute).
+
+However, as is
 well known, many software faults \cite{justmutants} are not
 represented by a mutant.  Because we are model checking, we want our
 harness to actually rule out \emph{all} bad runs of the program under
@@ -978,92 +1108,7 @@ we have written the duplicate check in fact \emph{assume}s away
 \emph{all executions}!  We check no properties of size 1 output
 arrays, and a fault that only appears with size = 1 will never be
 detected.  No mutant produces such behavior, but noting an incorrect
-but passing trace of this run lets us see the problem.
-
-\subsection{Adapting Falsification-Based Approaches to Automated Test Generation}
-
-\section{Case Studies and Experimental Results}
-
-\subsection{Algorithm Implementations}
-
-Our initial experiments involved relatively small verification
-problems, based on implementations taken from the web or student code for popular
-algorithms and data structures.  Here we highlight the most
-interesting of these; we also successfully applied the method to
-bubble sort, a duplicate-removing array merge function, an AVL
-tree, and a student's harness for verifying a version of Dijkstra's
-shortest path algorithm that enables path reconstruction \cite{dijkstrasp}.  In the case of the AVL tree, the harness we were working with
-was unable to reach a mutant-stable unwinding without exhausting
-memory on the verification of the main program (for AVL trees of up to
-size 5).  We are investigating a more efficient harness encoding,
-based on the inability to reach mutant-stability.  For the Dijkstra
-harness, the low mutant kill rate of only 58\% showed that while the
-harness checks incorrect returned paths, it cannot detect when return
-values indicate there is no path but one exists.  Improving the
-harness is a substantial exercise, but can be guided by the survival witnesses.
-
-\subsubsection{Binary Search}
-
-The ideas in this paper grew out of a side project of the first
-author: to write a follow-up to Jon Bentley's article on verifying
-binary search \cite{Bentley} in the context of modern software
-verification tools (and Joshua Bloch's discovery of a bug in the
-assumptions behind Bentley's proof \cite{Bloch}).  The modeling
-required is moderately complex (to scale well, an abstract ``sorted
-array'' that represents all sorted arrays but only introduces
-variables equal to the number of probes made by the search is
-essential).  In this case, we did not produce an initial, weaker
-version of the harness, but checked the existing harness using
-mutants, and determined that all 3 surviving mutants are equivalent to
-a true binary search.
-
-Checking harness mutants (which took 37 minutes, including computing
-the kills for the original harness) produced results confirming the belief this is a
-good harness.  Of the 31 compiling harness mutants, 19 failed to verify
-the correct binary search, and 7 had worse kill rates than the
-original harness.  The remaining 5 harnesses, all with equal kill
-rates of 86.7\%, all modify an assumption to allow the harness to also
-check size 0 arrays.  This doesn't kill any additional mutants, but is
-harmless as expected.  Of the harness mutants with worse kill rates,
-three are mutants of the assumptions on the nondeterministic value used to
-make sure that if binary search returns -1, no index in the array
-actually contains the searched-for item.  Two of these mutants are
-off-by-one-errors that exclude item 0 from the check, an easy-to-make
-mistake.  Both of these fail to kill \emph{exactly} one mutant killed by the
-correct harness: the mutant that sets the lower bound
-initially to 1 instead of 0.  Traces of passing runs for these mutants show the
-problem clearly (the sought item at index 0).
-
-\subsubsection{Doubly-linked-list Insertion Sort}
-
-Another example, making use of recursive data structures and pointer
-validity checks, is code for inserting an item (in
-sorted order) into a doubly-linked list \cite{DLLInsert}.  Our initial
-harness omitted a check for correctness of {\tt prev} pointers.  This
-problem didn't directly prevent mutants from being detected, but
-pushed the stable size larger, as with the quicksort example above.
-Looking at a trace of a size 3 run that fails to kill a clearly
-problematic mutant easily reveals the problem (the results are correct
-up to {\tt prev} pointers).  This example also showed another use of
-mutants, in that some seemingly problematic surviving mutants actually
-just showed a pointless redundancy in the implementation, enabling the
-removal of an entire conditional branch.  A harness check (requiring
-30 minutes, including computing the mutant kills for the original
-harness) showed that of the 105 compiling harness mutants, 92 fail to
-verify the original code.  Another 2 have a worse kill rate than the
-original (which kills 81\% of mutants, a low rate due to the code
-redundancy), and 11 survive.  The large number of survivors is due to
-a redundancy of the final harness, which checks sortedness and the
-permutation property for both a forward {\tt next} traversal of the
-list and a {\tt prev} traversal.  Omitting any \emph{one} of these
-(e.g. {\tt prev} sortedness or {\tt next} permutation) the harness can
-still detect all mutants.  Removing two, however, fails to kill
-mutants.  The two harness mutants with worse kill rates have extremely poor
-kill rates ($<50$\% and $<25$\%).
-%\subsubsection{AVL Tree}
-
-
-%\subsubsection{Merge With Duplicate Removal}
+but passing trace of this run using the CBMC extension lets us see the problem.
 
 \subsection{SpiderMonkey Boyer-Moore-Horspool Implementation}
 
