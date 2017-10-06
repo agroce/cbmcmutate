@@ -203,47 +203,70 @@ harness reject the SUT itself.
 
 \subsection{Contributions}
 
-This paper is an extension of a paper presented at ASE in 2015
+This paper is an extension of a paper presented at the 30th IEEE/ACM
+International Conference on Automated Software Engineering in 2015
 \cite{ase15}.  
-The contribution of that paper was a \emph{falsification-driven}
-verification methodology that uses mutants to aid developers 
+The core contribution of that earlier paper was a \emph{falsification-driven}
+verification methodology using mutants to aid developers 
  in understanding ``successful'' verification
 results, determining when a harness is flawed, and correcting the harness.
-We showed how to use mutation testing to
+It showed how to use mutation testing to
 choose a problem size in bounded model checking, how to mutate a
 harness to determine if any similar harnesses have an equal (or
 better) mutation kill rate, and most importantly, how to modify CBMC,
 a harness, and mutants to automatically produce successful
-  high-coverage executions covering mutated code in order to
+ high-coverage executions covering mutated code in order to
 understand mutant (and thus harness) behavior.  This
 approach, unlike a simpler method of searching for cases where the
 mutated and original code behave differently for identical inputs,
-applies to verification of reactive and concurrent systems, where
+in principle applied to verification of reactive and concurrent systems, where
 there is no simple notion of identical inputs.  
-%We also propose the use of mutation analysis to gain limited confidence
-%in program correctness even past model checker scalability limits. 
-At a more general level, we discussed the fundamental nature of
+It also proposed the use of mutation analysis to gain limited confidence
+in program correctness even past model checker scalability limits. 
+At a more general level, the original paper discussed the fundamental nature of
 ``verification'' in a real-world context where specifications are
-never known to be complete. We proposed that falsification, as in
-Popper's philosophy of science \cite{Popper}, is a useful conceptual
+never known to be complete.  The central concept of that paper, and
+this extension, is that falsification, as in Karl
+Popper's famous philosophy of scientific discovery \cite{Popper}, is
+the critical element of efforts to understand systems, efforts that are always
+provisional by nature:  e.g., most program verification (and even more
+so, testing) efforts.  Popper's approach therefore forms a 
+useful conceptual
 framework for verification efforts: rather than focusing on what can
-be proven about a program, we focus on how a
+be proven about a program, we propose that correctness-determination efforts focus on how a
 verification distinguishes the ``real'' program from similar
 alternative programs that do \emph{not} match the theory of program
-behavior.  Our approach still aims at verification, but continually
-evaluates and refines a verification effort by its ability to
+behavior.  Such an approach still aims at verification as a final outcome, but continually
+evaluates and refines that verification effort by its ability to
 \emph{falsify} rather than to verify.
 
 In this paper, we extend the contributions of the previous work by
 further elaborating the approach to bounded model checking presented
-there, but, most significantly, by extending the ideas to automated
+there, but, most significantly, we extend the same ideas to automated
 software testing, where there are new challenges and it is less clear
 that the underlying concepts are sound.  In our previous work, we
 dismissed the possibility of using our approach for testing, because
 when a typical test generation approach fails to find a failing test
 (that is, testing's version of a counterexample), it does not mean the
 property is insufficient, or even that the generation is weak.
-Testing is usually essentially probabilistic.  
+Testing is usually essentially probabilistic.  Here we show that this
+limitation is not fundamental, and the same principles can apply to
+serious automated test generation efforts as well.  The general ideas
+are analogous, including the modification of a test generation tool to
+generate high-coverage tests that 1) fail to kill a mutant but 2)
+cover the mutated code, in order to facilitate understanding of the
+limits of a harness, but the details require considerable modification
+in order to adapt to the probabilistic context of test generation.
+For example, the equivalent of a problem size for bounded model
+checking is a test budget for automated test generation; however,
+rather than a fixed outcome, the problem in this case is to present a
+likelyhood curve to users, and allow them to make tradeoffs based on
+that curve.
+
+We still initially present our approach in the context of formal
+verification, where it is most obviously useful, and where there is a
+higher chance of killing enough mutants to make manual analysis of
+un-killed mutants feasible.
 
 \section{A Simple Example Verification}
 
@@ -882,6 +905,7 @@ report {\underline{check-harness}} ($SUT$, $M$, $H$, $M(H)$, $S$, $O$, $U$)
 
 \subsection{Adapting Falsification-Based Approaches to Automated Test
   Generation}
+
 
 A key insight is that when estimating how hard a mutant is, a single
 run that either takes a long time to kill the mutant or a run that
@@ -1522,6 +1546,7 @@ verification success time is only 1.5 seconds.
 
 \subsection{Automated Test Generation and Falsification:  {\tt
     pyfakefs} Case Study}
+
 
 
 \section{Discussion}
