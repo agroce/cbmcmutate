@@ -1,0 +1,82 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.63829.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.AssertionError'>, AssertionError(), <traceback object at 0x104eff0e0>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 14455, in act338
+    assert (type(raised) == type(refRaised))
+Original test has 9 steps
+
+SAVING TEST AS failure.63829.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+path2 = "/Volumes/ramdisk/test"                                          # STEP 0
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = None : <type 'NoneType'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                        # STEP 1
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+=> os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x105003e50> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+REFERENCE ACTION: os_REF0 = os 
+=> os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+==================================================
+component3 = "b"                                                         # STEP 2
+ACTION: component3 = "b" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'b' : <type 'str'>
+==================================================
+component0 = "alpha"                                                     # STEP 3
+ACTION: component0 = "alpha" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'alpha' : <type 'str'>
+==================================================
+component2 = "b"                                                         # STEP 4
+ACTION: component2 = "b" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'b' : <type 'str'>
+==================================================
+component1 = "gamma"                                                     # STEP 5
+ACTION: component1 = "gamma" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'gamma' : <type 'str'>
+==================================================
+component4 = "omega"                                                     # STEP 6
+ACTION: component4 = "omega" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'omega' : <type 'str'>
+==================================================
+path2 += "/" + component3                                                # STEP 7
+ACTION: path2 += "/" + component3 
+component3 = 'b' : <type 'str'>
+path2 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/b' : <type 'str'>
+==================================================
+fd1 = os0.open(path2, os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL)  # STEP 8
+ACTION: fd1 = os0.open(path2, os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x105003e50> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/b' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.IOError'> [Errno 20] Not a directory in fake filesystem: '/Volumes/ramdisk/test'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path2, os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL) 
+=> fd_REF1 = 4 : <type 'int'>
+ERROR: (<type 'exceptions.AssertionError'>, AssertionError(), <traceback object at 0x104f1cbd8>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 14455, in act338
+    assert (type(raised) == type(refRaised))
+STOPPING TESTING DUE TO FAILED TEST
+0.0219919681549 TOTAL RUNTIME
+1 EXECUTED
+9 TOTAL TEST OPERATIONS
+0.00142407417297 TIME SPENT EXECUTING TEST OPERATIONS
+0.00068187713623 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+5.24520874023e-06 TIME SPENT CHECKING PROPERTIES
+0.00142931938171 TOTAL TIME SPENT RUNNING SUT
+0.00305986404419 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

@@ -1,0 +1,777 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.62575.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.TypeError'>, TypeError("unsupported operand type(s) for //: 'str' and 'str'",), <traceback object at 0x1020c3200>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 21, in newFakeOS
+    fs.CreateDirectory('/Volumes')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2055, in CreateDirectory
+    if self.Exists(directory_path):
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1624, in Exists
+    file_path = self.ResolvePath(file_path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1718, in ResolvePath
+    file_path = self.NormalizePath(self.NormalizeCase(file_path))
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1329, in NormalizeCase
+    return components_to_path()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1305, in components_to_path
+    normalized_path = (sep // normalized_path)
+Original test has 145 steps
+
+SAVING TEST AS failure.62575.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component2 = "alpha"                                                     # STEP 0
+ACTION: component2 = "alpha" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'alpha' : <type 'str'>
+==================================================
+component4 = "a"                                                         # STEP 1
+ACTION: component4 = "a" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'a' : <type 'str'>
+==================================================
+component0 = "e"                                                         # STEP 2
+ACTION: component0 = "e" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'e' : <type 'str'>
+==================================================
+component3 = "omega"                                                     # STEP 3
+ACTION: component3 = "omega" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'omega' : <type 'str'>
+==================================================
+str4 = ""                                                                # STEP 4
+ACTION: str4 = "" 
+str4 = None : <type 'NoneType'>
+=> str4 = '' : <type 'str'>
+==================================================
+str0 = ""                                                                # STEP 5
+ACTION: str0 = "" 
+str0 = None : <type 'NoneType'>
+=> str0 = '' : <type 'str'>
+==================================================
+str4 += 'v'                                                              # STEP 6
+ACTION: str4 += 'v' 
+str4 = '' : <type 'str'>
+=> str4 = 'v' : <type 'str'>
+==================================================
+str2 = ""                                                                # STEP 7
+ACTION: str2 = "" 
+str2 = None : <type 'NoneType'>
+=> str2 = '' : <type 'str'>
+==================================================
+str0 += 'k'                                                              # STEP 8
+ACTION: str0 += 'k' 
+str0 = '' : <type 'str'>
+=> str0 = 'k' : <type 'str'>
+==================================================
+str2 += 'n'                                                              # STEP 9
+ACTION: str2 += 'n' 
+str2 = '' : <type 'str'>
+=> str2 = 'n' : <type 'str'>
+==================================================
+str2 += 'c'                                                             # STEP 10
+ACTION: str2 += 'c' 
+str2 = 'n' : <type 'str'>
+=> str2 = 'nc' : <type 'str'>
+==================================================
+str2 += 'a'                                                             # STEP 11
+ACTION: str2 += 'a' 
+str2 = 'nc' : <type 'str'>
+=> str2 = 'nca' : <type 'str'>
+==================================================
+str2 += 't'                                                             # STEP 12
+ACTION: str2 += 't' 
+str2 = 'nca' : <type 'str'>
+=> str2 = 'ncat' : <type 'str'>
+==================================================
+str2 += 'c'                                                             # STEP 13
+ACTION: str2 += 'c' 
+str2 = 'ncat' : <type 'str'>
+=> str2 = 'ncatc' : <type 'str'>
+==================================================
+component1 = "omega"                                                    # STEP 14
+ACTION: component1 = "omega" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'omega' : <type 'str'>
+==================================================
+str3 = ""                                                               # STEP 15
+ACTION: str3 = "" 
+str3 = None : <type 'NoneType'>
+=> str3 = '' : <type 'str'>
+==================================================
+str0 += 'w'                                                             # STEP 16
+ACTION: str0 += 'w' 
+str0 = 'k' : <type 'str'>
+=> str0 = 'kw' : <type 'str'>
+==================================================
+str0 += 'p'                                                             # STEP 17
+ACTION: str0 += 'p' 
+str0 = 'kw' : <type 'str'>
+=> str0 = 'kwp' : <type 'str'>
+==================================================
+str4 += 'e'                                                             # STEP 18
+ACTION: str4 += 'e' 
+str4 = 'v' : <type 'str'>
+=> str4 = 've' : <type 'str'>
+==================================================
+bytes4 = 0                                                              # STEP 19
+ACTION: bytes4 = 0 
+bytes4 = None : <type 'NoneType'>
+=> bytes4 = 0 : <type 'int'>
+==================================================
+str3 += 'p'                                                             # STEP 20
+ACTION: str3 += 'p' 
+str3 = '' : <type 'str'>
+=> str3 = 'p' : <type 'str'>
+==================================================
+str2 += 'o'                                                             # STEP 21
+ACTION: str2 += 'o' 
+str2 = 'ncatc' : <type 'str'>
+=> str2 = 'ncatco' : <type 'str'>
+==================================================
+str4 = ""                                                               # STEP 22
+ACTION: str4 = "" 
+str4 = 've' : <type 'str'>
+=> str4 = '' : <type 'str'>
+==================================================
+str1 = ""                                                               # STEP 23
+ACTION: str1 = "" 
+str1 = None : <type 'NoneType'>
+=> str1 = '' : <type 'str'>
+==================================================
+str1 += 'a'                                                             # STEP 24
+ACTION: str1 += 'a' 
+str1 = '' : <type 'str'>
+=> str1 = 'a' : <type 'str'>
+==================================================
+str0 += 'm'                                                             # STEP 25
+ACTION: str0 += 'm' 
+str0 = 'kwp' : <type 'str'>
+=> str0 = 'kwpm' : <type 'str'>
+==================================================
+str3 += 'u'                                                             # STEP 26
+ACTION: str3 += 'u' 
+str3 = 'p' : <type 'str'>
+=> str3 = 'pu' : <type 'str'>
+==================================================
+str4 += 'w'                                                             # STEP 27
+ACTION: str4 += 'w' 
+str4 = '' : <type 'str'>
+=> str4 = 'w' : <type 'str'>
+==================================================
+str0 += 'd'                                                             # STEP 28
+ACTION: str0 += 'd' 
+str0 = 'kwpm' : <type 'str'>
+=> str0 = 'kwpmd' : <type 'str'>
+==================================================
+str1 += 'h'                                                             # STEP 29
+ACTION: str1 += 'h' 
+str1 = 'a' : <type 'str'>
+=> str1 = 'ah' : <type 'str'>
+==================================================
+str0 += 'z'                                                             # STEP 30
+ACTION: str0 += 'z' 
+str0 = 'kwpmd' : <type 'str'>
+=> str0 = 'kwpmdz' : <type 'str'>
+==================================================
+str2 += 'l'                                                             # STEP 31
+ACTION: str2 += 'l' 
+str2 = 'ncatco' : <type 'str'>
+=> str2 = 'ncatcol' : <type 'str'>
+==================================================
+str3 += 'b'                                                             # STEP 32
+ACTION: str3 += 'b' 
+str3 = 'pu' : <type 'str'>
+=> str3 = 'pub' : <type 'str'>
+==================================================
+str0 += 'z'                                                             # STEP 33
+ACTION: str0 += 'z' 
+str0 = 'kwpmdz' : <type 'str'>
+=> str0 = 'kwpmdzz' : <type 'str'>
+==================================================
+str2 += 'l'                                                             # STEP 34
+ACTION: str2 += 'l' 
+str2 = 'ncatcol' : <type 'str'>
+=> str2 = 'ncatcoll' : <type 'str'>
+==================================================
+str1 += 'b'                                                             # STEP 35
+ACTION: str1 += 'b' 
+str1 = 'ah' : <type 'str'>
+=> str1 = 'ahb' : <type 'str'>
+==================================================
+str2 += 'e'                                                             # STEP 36
+ACTION: str2 += 'e' 
+str2 = 'ncatcoll' : <type 'str'>
+=> str2 = 'ncatcolle' : <type 'str'>
+==================================================
+str2 += 'i'                                                             # STEP 37
+ACTION: str2 += 'i' 
+str2 = 'ncatcolle' : <type 'str'>
+=> str2 = 'ncatcollei' : <type 'str'>
+==================================================
+str4 += 'e'                                                             # STEP 38
+ACTION: str4 += 'e' 
+str4 = 'w' : <type 'str'>
+=> str4 = 'we' : <type 'str'>
+==================================================
+str2 += 'v'                                                             # STEP 39
+ACTION: str2 += 'v' 
+str2 = 'ncatcollei' : <type 'str'>
+=> str2 = 'ncatcolleiv' : <type 'str'>
+==================================================
+str0 += 'c'                                                             # STEP 40
+ACTION: str0 += 'c' 
+str0 = 'kwpmdzz' : <type 'str'>
+=> str0 = 'kwpmdzzc' : <type 'str'>
+==================================================
+str4 += 'e'                                                             # STEP 41
+ACTION: str4 += 'e' 
+str4 = 'we' : <type 'str'>
+=> str4 = 'wee' : <type 'str'>
+==================================================
+str3 += 'h'                                                             # STEP 42
+ACTION: str3 += 'h' 
+str3 = 'pub' : <type 'str'>
+=> str3 = 'pubh' : <type 'str'>
+==================================================
+str4 += 'n'                                                             # STEP 43
+ACTION: str4 += 'n' 
+str4 = 'wee' : <type 'str'>
+=> str4 = 'ween' : <type 'str'>
+==================================================
+str3 += 'r'                                                             # STEP 44
+ACTION: str3 += 'r' 
+str3 = 'pubh' : <type 'str'>
+=> str3 = 'pubhr' : <type 'str'>
+==================================================
+str2 += 'x'                                                             # STEP 45
+ACTION: str2 += 'x' 
+str2 = 'ncatcolleiv' : <type 'str'>
+=> str2 = 'ncatcolleivx' : <type 'str'>
+==================================================
+str4 += 'y'                                                             # STEP 46
+ACTION: str4 += 'y' 
+str4 = 'ween' : <type 'str'>
+=> str4 = 'weeny' : <type 'str'>
+==================================================
+str1 += 'k'                                                             # STEP 47
+ACTION: str1 += 'k' 
+str1 = 'ahb' : <type 'str'>
+=> str1 = 'ahbk' : <type 'str'>
+==================================================
+str4 += 'a'                                                             # STEP 48
+ACTION: str4 += 'a' 
+str4 = 'weeny' : <type 'str'>
+=> str4 = 'weenya' : <type 'str'>
+==================================================
+str2 += 'n'                                                             # STEP 49
+ACTION: str2 += 'n' 
+str2 = 'ncatcolleivx' : <type 'str'>
+=> str2 = 'ncatcolleivxn' : <type 'str'>
+==================================================
+str0 = ""                                                               # STEP 50
+ACTION: str0 = "" 
+str0 = 'kwpmdzzc' : <type 'str'>
+=> str0 = '' : <type 'str'>
+==================================================
+str2 += 'p'                                                             # STEP 51
+ACTION: str2 += 'p' 
+str2 = 'ncatcolleivxn' : <type 'str'>
+=> str2 = 'ncatcolleivxnp' : <type 'str'>
+==================================================
+str0 += 'i'                                                             # STEP 52
+ACTION: str0 += 'i' 
+str0 = '' : <type 'str'>
+=> str0 = 'i' : <type 'str'>
+==================================================
+str3 += 'o'                                                             # STEP 53
+ACTION: str3 += 'o' 
+str3 = 'pubhr' : <type 'str'>
+=> str3 = 'pubhro' : <type 'str'>
+==================================================
+str2 += 'j'                                                             # STEP 54
+ACTION: str2 += 'j' 
+str2 = 'ncatcolleivxnp' : <type 'str'>
+=> str2 = 'ncatcolleivxnpj' : <type 'str'>
+==================================================
+str3 += 'd'                                                             # STEP 55
+ACTION: str3 += 'd' 
+str3 = 'pubhro' : <type 'str'>
+=> str3 = 'pubhrod' : <type 'str'>
+==================================================
+str3 += 'i'                                                             # STEP 56
+ACTION: str3 += 'i' 
+str3 = 'pubhrod' : <type 'str'>
+=> str3 = 'pubhrodi' : <type 'str'>
+==================================================
+str0 += 'd'                                                             # STEP 57
+ACTION: str0 += 'd' 
+str0 = 'i' : <type 'str'>
+=> str0 = 'id' : <type 'str'>
+==================================================
+str3 += 'k'                                                             # STEP 58
+ACTION: str3 += 'k' 
+str3 = 'pubhrodi' : <type 'str'>
+=> str3 = 'pubhrodik' : <type 'str'>
+==================================================
+str1 += 'f'                                                             # STEP 59
+ACTION: str1 += 'f' 
+str1 = 'ahbk' : <type 'str'>
+=> str1 = 'ahbkf' : <type 'str'>
+==================================================
+str4 += 'g'                                                             # STEP 60
+ACTION: str4 += 'g' 
+str4 = 'weenya' : <type 'str'>
+=> str4 = 'weenyag' : <type 'str'>
+==================================================
+str0 += 'x'                                                             # STEP 61
+ACTION: str0 += 'x' 
+str0 = 'id' : <type 'str'>
+=> str0 = 'idx' : <type 'str'>
+==================================================
+bytes1 = 0                                                              # STEP 62
+ACTION: bytes1 = 0 
+bytes1 = None : <type 'NoneType'>
+=> bytes1 = 0 : <type 'int'>
+==================================================
+str2 += 'd'                                                             # STEP 63
+ACTION: str2 += 'd' 
+str2 = 'ncatcolleivxnpj' : <type 'str'>
+=> str2 = 'ncatcolleivxnpjd' : <type 'str'>
+==================================================
+str0 += 'j'                                                             # STEP 64
+ACTION: str0 += 'j' 
+str0 = 'idx' : <type 'str'>
+=> str0 = 'idxj' : <type 'str'>
+==================================================
+str1 += 'r'                                                             # STEP 65
+ACTION: str1 += 'r' 
+str1 = 'ahbkf' : <type 'str'>
+=> str1 = 'ahbkfr' : <type 'str'>
+==================================================
+str2 += 'y'                                                             # STEP 66
+ACTION: str2 += 'y' 
+str2 = 'ncatcolleivxnpjd' : <type 'str'>
+=> str2 = 'ncatcolleivxnpjdy' : <type 'str'>
+==================================================
+str2 = ""                                                               # STEP 67
+ACTION: str2 = "" 
+str2 = 'ncatcolleivxnpjdy' : <type 'str'>
+=> str2 = '' : <type 'str'>
+==================================================
+str0 += 'w'                                                             # STEP 68
+ACTION: str0 += 'w' 
+str0 = 'idxj' : <type 'str'>
+=> str0 = 'idxjw' : <type 'str'>
+==================================================
+str2 += 'r'                                                             # STEP 69
+ACTION: str2 += 'r' 
+str2 = '' : <type 'str'>
+=> str2 = 'r' : <type 'str'>
+==================================================
+str0 += 's'                                                             # STEP 70
+ACTION: str0 += 's' 
+str0 = 'idxjw' : <type 'str'>
+=> str0 = 'idxjws' : <type 'str'>
+==================================================
+str0 += 'q'                                                             # STEP 71
+ACTION: str0 += 'q' 
+str0 = 'idxjws' : <type 'str'>
+=> str0 = 'idxjwsq' : <type 'str'>
+==================================================
+str2 += 'd'                                                             # STEP 72
+ACTION: str2 += 'd' 
+str2 = 'r' : <type 'str'>
+=> str2 = 'rd' : <type 'str'>
+==================================================
+str4 += 'n'                                                             # STEP 73
+ACTION: str4 += 'n' 
+str4 = 'weenyag' : <type 'str'>
+=> str4 = 'weenyagn' : <type 'str'>
+==================================================
+str3 += 'c'                                                             # STEP 74
+ACTION: str3 += 'c' 
+str3 = 'pubhrodik' : <type 'str'>
+=> str3 = 'pubhrodikc' : <type 'str'>
+==================================================
+str1 += 's'                                                             # STEP 75
+ACTION: str1 += 's' 
+str1 = 'ahbkfr' : <type 'str'>
+=> str1 = 'ahbkfrs' : <type 'str'>
+==================================================
+str2 += 'o'                                                             # STEP 76
+ACTION: str2 += 'o' 
+str2 = 'rd' : <type 'str'>
+=> str2 = 'rdo' : <type 'str'>
+==================================================
+str1 += 'y'                                                             # STEP 77
+ACTION: str1 += 'y' 
+str1 = 'ahbkfrs' : <type 'str'>
+=> str1 = 'ahbkfrsy' : <type 'str'>
+==================================================
+str2 += 'm'                                                             # STEP 78
+ACTION: str2 += 'm' 
+str2 = 'rdo' : <type 'str'>
+=> str2 = 'rdom' : <type 'str'>
+==================================================
+str1 += 'c'                                                             # STEP 79
+ACTION: str1 += 'c' 
+str1 = 'ahbkfrsy' : <type 'str'>
+=> str1 = 'ahbkfrsyc' : <type 'str'>
+==================================================
+str1 += 'x'                                                             # STEP 80
+ACTION: str1 += 'x' 
+str1 = 'ahbkfrsyc' : <type 'str'>
+=> str1 = 'ahbkfrsycx' : <type 'str'>
+==================================================
+str2 += 'y'                                                             # STEP 81
+ACTION: str2 += 'y' 
+str2 = 'rdom' : <type 'str'>
+=> str2 = 'rdomy' : <type 'str'>
+==================================================
+str3 += 'x'                                                             # STEP 82
+ACTION: str3 += 'x' 
+str3 = 'pubhrodikc' : <type 'str'>
+=> str3 = 'pubhrodikcx' : <type 'str'>
+==================================================
+str0 += 'i'                                                             # STEP 83
+ACTION: str0 += 'i' 
+str0 = 'idxjwsq' : <type 'str'>
+=> str0 = 'idxjwsqi' : <type 'str'>
+==================================================
+str1 += 'd'                                                             # STEP 84
+ACTION: str1 += 'd' 
+str1 = 'ahbkfrsycx' : <type 'str'>
+=> str1 = 'ahbkfrsycxd' : <type 'str'>
+==================================================
+str3 += 'r'                                                             # STEP 85
+ACTION: str3 += 'r' 
+str3 = 'pubhrodikcx' : <type 'str'>
+=> str3 = 'pubhrodikcxr' : <type 'str'>
+==================================================
+str3 += 'w'                                                             # STEP 86
+ACTION: str3 += 'w' 
+str3 = 'pubhrodikcxr' : <type 'str'>
+=> str3 = 'pubhrodikcxrw' : <type 'str'>
+==================================================
+str0 = ""                                                               # STEP 87
+ACTION: str0 = "" 
+str0 = 'idxjwsqi' : <type 'str'>
+=> str0 = '' : <type 'str'>
+==================================================
+str1 += " "                                                             # STEP 88
+ACTION: str1 += " " 
+str1 = 'ahbkfrsycxd' : <type 'str'>
+=> str1 = 'ahbkfrsycxd ' : <type 'str'>
+==================================================
+str3 += 'b'                                                             # STEP 89
+ACTION: str3 += 'b' 
+str3 = 'pubhrodikcxrw' : <type 'str'>
+=> str3 = 'pubhrodikcxrwb' : <type 'str'>
+==================================================
+str2 += 't'                                                             # STEP 90
+ACTION: str2 += 't' 
+str2 = 'rdomy' : <type 'str'>
+=> str2 = 'rdomyt' : <type 'str'>
+==================================================
+str3 += 'h'                                                             # STEP 91
+ACTION: str3 += 'h' 
+str3 = 'pubhrodikcxrwb' : <type 'str'>
+=> str3 = 'pubhrodikcxrwbh' : <type 'str'>
+==================================================
+str2 += " "                                                             # STEP 92
+ACTION: str2 += " " 
+str2 = 'rdomyt' : <type 'str'>
+=> str2 = 'rdomyt ' : <type 'str'>
+==================================================
+str3 += 'j'                                                             # STEP 93
+ACTION: str3 += 'j' 
+str3 = 'pubhrodikcxrwbh' : <type 'str'>
+=> str3 = 'pubhrodikcxrwbhj' : <type 'str'>
+==================================================
+str4 += 'h'                                                             # STEP 94
+ACTION: str4 += 'h' 
+str4 = 'weenyagn' : <type 'str'>
+=> str4 = 'weenyagnh' : <type 'str'>
+==================================================
+str2 += 'e'                                                             # STEP 95
+ACTION: str2 += 'e' 
+str2 = 'rdomyt ' : <type 'str'>
+=> str2 = 'rdomyt e' : <type 'str'>
+==================================================
+str0 += 'j'                                                             # STEP 96
+ACTION: str0 += 'j' 
+str0 = '' : <type 'str'>
+=> str0 = 'j' : <type 'str'>
+==================================================
+str4 += 'a'                                                             # STEP 97
+ACTION: str4 += 'a' 
+str4 = 'weenyagnh' : <type 'str'>
+=> str4 = 'weenyagnha' : <type 'str'>
+==================================================
+str4 += 'o'                                                             # STEP 98
+ACTION: str4 += 'o' 
+str4 = 'weenyagnha' : <type 'str'>
+=> str4 = 'weenyagnhao' : <type 'str'>
+==================================================
+str2 += 'w'                                                             # STEP 99
+ACTION: str2 += 'w' 
+str2 = 'rdomyt e' : <type 'str'>
+=> str2 = 'rdomyt ew' : <type 'str'>
+==================================================
+str1 += 'z'                                                            # STEP 100
+ACTION: str1 += 'z' 
+str1 = 'ahbkfrsycxd ' : <type 'str'>
+=> str1 = 'ahbkfrsycxd z' : <type 'str'>
+==================================================
+str1 += 'z'                                                            # STEP 101
+ACTION: str1 += 'z' 
+str1 = 'ahbkfrsycxd z' : <type 'str'>
+=> str1 = 'ahbkfrsycxd zz' : <type 'str'>
+==================================================
+str1 += 'f'                                                            # STEP 102
+ACTION: str1 += 'f' 
+str1 = 'ahbkfrsycxd zz' : <type 'str'>
+=> str1 = 'ahbkfrsycxd zzf' : <type 'str'>
+==================================================
+str0 += 'x'                                                            # STEP 103
+ACTION: str0 += 'x' 
+str0 = 'j' : <type 'str'>
+=> str0 = 'jx' : <type 'str'>
+==================================================
+str3 += 'c'                                                            # STEP 104
+ACTION: str3 += 'c' 
+str3 = 'pubhrodikcxrwbhj' : <type 'str'>
+=> str3 = 'pubhrodikcxrwbhjc' : <type 'str'>
+==================================================
+str1 += 'b'                                                            # STEP 105
+ACTION: str1 += 'b' 
+str1 = 'ahbkfrsycxd zzf' : <type 'str'>
+=> str1 = 'ahbkfrsycxd zzfb' : <type 'str'>
+==================================================
+str0 += 'i'                                                            # STEP 106
+ACTION: str0 += 'i' 
+str0 = 'jx' : <type 'str'>
+=> str0 = 'jxi' : <type 'str'>
+==================================================
+str2 += 'q'                                                            # STEP 107
+ACTION: str2 += 'q' 
+str2 = 'rdomyt ew' : <type 'str'>
+=> str2 = 'rdomyt ewq' : <type 'str'>
+==================================================
+str3 += 'n'                                                            # STEP 108
+ACTION: str3 += 'n' 
+str3 = 'pubhrodikcxrwbhjc' : <type 'str'>
+=> str3 = 'pubhrodikcxrwbhjcn' : <type 'str'>
+==================================================
+str4 += 'b'                                                            # STEP 109
+ACTION: str4 += 'b' 
+str4 = 'weenyagnhao' : <type 'str'>
+=> str4 = 'weenyagnhaob' : <type 'str'>
+==================================================
+str4 += 'v'                                                            # STEP 110
+ACTION: str4 += 'v' 
+str4 = 'weenyagnhaob' : <type 'str'>
+=> str4 = 'weenyagnhaobv' : <type 'str'>
+==================================================
+str0 += 'a'                                                            # STEP 111
+ACTION: str0 += 'a' 
+str0 = 'jxi' : <type 'str'>
+=> str0 = 'jxia' : <type 'str'>
+==================================================
+str4 += 'z'                                                            # STEP 112
+ACTION: str4 += 'z' 
+str4 = 'weenyagnhaobv' : <type 'str'>
+=> str4 = 'weenyagnhaobvz' : <type 'str'>
+==================================================
+str1 += 'n'                                                            # STEP 113
+ACTION: str1 += 'n' 
+str1 = 'ahbkfrsycxd zzfb' : <type 'str'>
+=> str1 = 'ahbkfrsycxd zzfbn' : <type 'str'>
+==================================================
+str3 += 'v'                                                            # STEP 114
+ACTION: str3 += 'v' 
+str3 = 'pubhrodikcxrwbhjcn' : <type 'str'>
+=> str3 = 'pubhrodikcxrwbhjcnv' : <type 'str'>
+==================================================
+str3 += 'm'                                                            # STEP 115
+ACTION: str3 += 'm' 
+str3 = 'pubhrodikcxrwbhjcnv' : <type 'str'>
+=> str3 = 'pubhrodikcxrwbhjcnvm' : <type 'str'>
+==================================================
+str2 += " "                                                            # STEP 116
+ACTION: str2 += " " 
+str2 = 'rdomyt ewq' : <type 'str'>
+=> str2 = 'rdomyt ewq ' : <type 'str'>
+==================================================
+str2 += 'f'                                                            # STEP 117
+ACTION: str2 += 'f' 
+str2 = 'rdomyt ewq ' : <type 'str'>
+=> str2 = 'rdomyt ewq f' : <type 'str'>
+==================================================
+str3 += 'd'                                                            # STEP 118
+ACTION: str3 += 'd' 
+str3 = 'pubhrodikcxrwbhjcnvm' : <type 'str'>
+=> str3 = 'pubhrodikcxrwbhjcnvmd' : <type 'str'>
+==================================================
+str0 = ""                                                              # STEP 119
+ACTION: str0 = "" 
+str0 = 'jxia' : <type 'str'>
+=> str0 = '' : <type 'str'>
+==================================================
+str0 += 'j'                                                            # STEP 120
+ACTION: str0 += 'j' 
+str0 = '' : <type 'str'>
+=> str0 = 'j' : <type 'str'>
+==================================================
+str0 += 'y'                                                            # STEP 121
+ACTION: str0 += 'y' 
+str0 = 'j' : <type 'str'>
+=> str0 = 'jy' : <type 'str'>
+==================================================
+str1 += 'm'                                                            # STEP 122
+ACTION: str1 += 'm' 
+str1 = 'ahbkfrsycxd zzfbn' : <type 'str'>
+=> str1 = 'ahbkfrsycxd zzfbnm' : <type 'str'>
+==================================================
+str2 += 's'                                                            # STEP 123
+ACTION: str2 += 's' 
+str2 = 'rdomyt ewq f' : <type 'str'>
+=> str2 = 'rdomyt ewq fs' : <type 'str'>
+==================================================
+str3 += 'g'                                                            # STEP 124
+ACTION: str3 += 'g' 
+str3 = 'pubhrodikcxrwbhjcnvmd' : <type 'str'>
+=> str3 = 'pubhrodikcxrwbhjcnvmdg' : <type 'str'>
+==================================================
+str1 += 'z'                                                            # STEP 125
+ACTION: str1 += 'z' 
+str1 = 'ahbkfrsycxd zzfbnm' : <type 'str'>
+=> str1 = 'ahbkfrsycxd zzfbnmz' : <type 'str'>
+==================================================
+str0 += 'n'                                                            # STEP 126
+ACTION: str0 += 'n' 
+str0 = 'jy' : <type 'str'>
+=> str0 = 'jyn' : <type 'str'>
+==================================================
+str0 += 'p'                                                            # STEP 127
+ACTION: str0 += 'p' 
+str0 = 'jyn' : <type 'str'>
+=> str0 = 'jynp' : <type 'str'>
+==================================================
+str4 += 'p'                                                            # STEP 128
+ACTION: str4 += 'p' 
+str4 = 'weenyagnhaobvz' : <type 'str'>
+=> str4 = 'weenyagnhaobvzp' : <type 'str'>
+==================================================
+str0 += 'm'                                                            # STEP 129
+ACTION: str0 += 'm' 
+str0 = 'jynp' : <type 'str'>
+=> str0 = 'jynpm' : <type 'str'>
+==================================================
+str2 += 'e'                                                            # STEP 130
+ACTION: str2 += 'e' 
+str2 = 'rdomyt ewq fs' : <type 'str'>
+=> str2 = 'rdomyt ewq fse' : <type 'str'>
+==================================================
+str1 += 'b'                                                            # STEP 131
+ACTION: str1 += 'b' 
+str1 = 'ahbkfrsycxd zzfbnmz' : <type 'str'>
+=> str1 = 'ahbkfrsycxd zzfbnmzb' : <type 'str'>
+==================================================
+str4 += 'o'                                                            # STEP 132
+ACTION: str4 += 'o' 
+str4 = 'weenyagnhaobvzp' : <type 'str'>
+=> str4 = 'weenyagnhaobvzpo' : <type 'str'>
+==================================================
+str0 += 'l'                                                            # STEP 133
+ACTION: str0 += 'l' 
+str0 = 'jynpm' : <type 'str'>
+=> str0 = 'jynpml' : <type 'str'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                        # STEP 134
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = None : <type 'NoneType'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str1 += 'e'                                                            # STEP 135
+ACTION: str1 += 'e' 
+str1 = 'ahbkfrsycxd zzfbnmzb' : <type 'str'>
+=> str1 = 'ahbkfrsycxd zzfbnmzbe' : <type 'str'>
+==================================================
+str3 += 'j'                                                            # STEP 136
+ACTION: str3 += 'j' 
+str3 = 'pubhrodikcxrwbhjcnvmdg' : <type 'str'>
+=> str3 = 'pubhrodikcxrwbhjcnvmdgj' : <type 'str'>
+==================================================
+str3 += 't'                                                            # STEP 137
+ACTION: str3 += 't' 
+str3 = 'pubhrodikcxrwbhjcnvmdgj' : <type 'str'>
+=> str3 = 'pubhrodikcxrwbhjcnvmdgjt' : <type 'str'>
+==================================================
+str2 += 'w'                                                            # STEP 138
+ACTION: str2 += 'w' 
+str2 = 'rdomyt ewq fse' : <type 'str'>
+=> str2 = 'rdomyt ewq fsew' : <type 'str'>
+==================================================
+str3 += 'i'                                                            # STEP 139
+ACTION: str3 += 'i' 
+str3 = 'pubhrodikcxrwbhjcnvmdgjt' : <type 'str'>
+=> str3 = 'pubhrodikcxrwbhjcnvmdgjti' : <type 'str'>
+==================================================
+str2 += 'r'                                                            # STEP 140
+ACTION: str2 += 'r' 
+str2 = 'rdomyt ewq fsew' : <type 'str'>
+=> str2 = 'rdomyt ewq fsewr' : <type 'str'>
+==================================================
+str0 += 'o'                                                            # STEP 141
+ACTION: str0 += 'o' 
+str0 = 'jynpml' : <type 'str'>
+=> str0 = 'jynpmlo' : <type 'str'>
+==================================================
+str4 += 'o'                                                            # STEP 142
+ACTION: str4 += 'o' 
+str4 = 'weenyagnhaobvzpo' : <type 'str'>
+=> str4 = 'weenyagnhaobvzpoo' : <type 'str'>
+==================================================
+str0 += 'a'                                                            # STEP 143
+ACTION: str0 += 'a' 
+str0 = 'jynpmlo' : <type 'str'>
+=> str0 = 'jynpmloa' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                      # STEP 144
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.TypeError'> unsupported operand type(s) for //: 'str' and 'str'
+ERROR: (<type 'exceptions.TypeError'>, TypeError("unsupported operand type(s) for //: 'str' and 'str'",), <traceback object at 0x105246cb0>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 21, in newFakeOS
+    fs.CreateDirectory('/Volumes')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2055, in CreateDirectory
+    if self.Exists(directory_path):
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1624, in Exists
+    file_path = self.ResolvePath(file_path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1718, in ResolvePath
+    file_path = self.NormalizePath(self.NormalizeCase(file_path))
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1329, in NormalizeCase
+    return components_to_path()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1305, in components_to_path
+    normalized_path = (sep // normalized_path)
+STOPPING TESTING DUE TO FAILED TEST
+0.0573379993439 TOTAL RUNTIME
+2 EXECUTED
+345 TOTAL TEST OPERATIONS
+0.00725483894348 TIME SPENT EXECUTING TEST OPERATIONS
+0.0174434185028 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+0.00017261505127 TIME SPENT CHECKING PROPERTIES
+0.00742745399475 TOTAL TIME SPENT RUNNING SUT
+0.00734186172485 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

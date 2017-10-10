@@ -1,0 +1,182 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.64633.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.AssertionError'>, AssertionError(), <traceback object at 0x103c03f38>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 19043, in act400
+    assert (type(raised) == type(refRaised))
+Original test has 27 steps
+
+SAVING TEST AS failure.64633.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component4 = "phi"                                                       # STEP 0
+ACTION: component4 = "phi" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'phi' : <type 'str'>
+==================================================
+component3 = "d"                                                         # STEP 1
+ACTION: component3 = "d" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'd' : <type 'str'>
+==================================================
+component1 = "h"                                                         # STEP 2
+ACTION: component1 = "h" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'h' : <type 'str'>
+==================================================
+component2 = "phi"                                                       # STEP 3
+ACTION: component2 = "phi" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'phi' : <type 'str'>
+==================================================
+component0 = "f"                                                         # STEP 4
+ACTION: component0 = "f" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'f' : <type 'str'>
+==================================================
+bytes0 = 0                                                               # STEP 5
+ACTION: bytes0 = 0 
+bytes0 = None : <type 'NoneType'>
+=> bytes0 = 0 : <type 'int'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                          # STEP 6
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = None : <type 'NoneType'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+bytes2 = 0                                                               # STEP 7
+ACTION: bytes2 = 0 
+bytes2 = None : <type 'NoneType'>
+=> bytes2 = 0 : <type 'int'>
+==================================================
+bytes0 += 1                                                              # STEP 8
+ACTION: bytes0 += 1 
+bytes0 = 0 : <type 'int'>
+=> bytes0 = 1 : <type 'int'>
+==================================================
+os0 = newFakeOS()                                                        # STEP 9
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+=> os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x1036e9250> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+REFERENCE ACTION: os_REF0 = os 
+=> os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+==================================================
+path4 += "/" + component0                                               # STEP 10
+ACTION: path4 += "/" + component0 
+component0 = 'f' : <type 'str'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/f' : <type 'str'>
+==================================================
+str0 = ""                                                               # STEP 11
+ACTION: str0 = "" 
+str0 = None : <type 'NoneType'>
+=> str0 = '' : <type 'str'>
+==================================================
+str0 += 'k'                                                             # STEP 12
+ACTION: str0 += 'k' 
+str0 = '' : <type 'str'>
+=> str0 = 'k' : <type 'str'>
+==================================================
+str1 = ""                                                               # STEP 13
+ACTION: str1 = "" 
+str1 = None : <type 'NoneType'>
+=> str1 = '' : <type 'str'>
+==================================================
+result = os0.path.isabs(path4)                                          # STEP 14
+ACTION: result = os0.path.isabs(path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x1036e9250> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/f' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.isabs(path4) 
+==================================================
+str1 += 'c'                                                             # STEP 15
+ACTION: str1 += 'c' 
+str1 = '' : <type 'str'>
+=> str1 = 'c' : <type 'str'>
+==================================================
+result = os0.path.dirname(path4)                                        # STEP 16
+ACTION: result = os0.path.dirname(path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x1036e9250> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/f' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.dirname(path4) 
+==================================================
+str1 += 'i'                                                             # STEP 17
+ACTION: str1 += 'i' 
+str1 = 'c' : <type 'str'>
+=> str1 = 'ci' : <type 'str'>
+==================================================
+component0 = "delta"                                                    # STEP 18
+ACTION: component0 = "delta" 
+component0 = 'f' : <type 'str'>
+=> component0 = 'delta' : <type 'str'>
+==================================================
+str0 += 'v'                                                             # STEP 19
+ACTION: str0 += 'v' 
+str0 = 'k' : <type 'str'>
+=> str0 = 'kv' : <type 'str'>
+==================================================
+str0 += 'n'                                                             # STEP 20
+ACTION: str0 += 'n' 
+str0 = 'kv' : <type 'str'>
+=> str0 = 'kvn' : <type 'str'>
+==================================================
+fd0 = os0.open(path4, os.O_CREAT | os.O_WRONLY | os.O_EXCL)             # STEP 21
+ACTION: fd0 = os0.open(path4, os.O_CREAT | os.O_WRONLY | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x1036e9250> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/f' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+=> fd0 = 0 : <type 'int'>
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path4, os.O_CREAT | os.O_WRONLY | os.O_EXCL) 
+=> fd_REF0 = 4 : <type 'int'>
+==================================================
+str0 += 'p'                                                             # STEP 22
+ACTION: str0 += 'p' 
+str0 = 'kvn' : <type 'str'>
+=> str0 = 'kvnp' : <type 'str'>
+==================================================
+str1 += 'y'                                                             # STEP 23
+ACTION: str1 += 'y' 
+str1 = 'ci' : <type 'str'>
+=> str1 = 'ciy' : <type 'str'>
+==================================================
+str1 += 'g'                                                             # STEP 24
+ACTION: str1 += 'g' 
+str1 = 'ciy' : <type 'str'>
+=> str1 = 'ciyg' : <type 'str'>
+==================================================
+str1 += 's'                                                             # STEP 25
+ACTION: str1 += 's' 
+str1 = 'ciyg' : <type 'str'>
+=> str1 = 'ciygs' : <type 'str'>
+==================================================
+fd1 = os0.open(path4, os.O_RDONLY)                                      # STEP 26
+ACTION: fd1 = os0.open(path4, os.O_RDONLY) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x1036e9250> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/f' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 13] Permission denied: '/Volumes/ramdisk/test/f'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path4, os.O_RDONLY) 
+=> fd_REF1 = 5 : <type 'int'>
+ERROR: (<type 'exceptions.AssertionError'>, AssertionError(), <traceback object at 0x10360fc20>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 19043, in act400
+    assert (type(raised) == type(refRaised))
+STOPPING TESTING DUE TO FAILED TEST
+0.0252068042755 TOTAL RUNTIME
+1 EXECUTED
+27 TOTAL TEST OPERATIONS
+0.00265336036682 TIME SPENT EXECUTING TEST OPERATIONS
+0.00316023826599 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+1.26361846924e-05 TIME SPENT CHECKING PROPERTIES
+0.00266599655151 TOTAL TIME SPENT RUNNING SUT
+0.00306797027588 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

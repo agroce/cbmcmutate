@@ -1,0 +1,83 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.48394.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.TypeError'>, TypeError('str() takes at most 1 argument (3 given)',), <traceback object at 0x102bc7050>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 17, in newFakeOS
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 863, in __init__
+    self.root = FakeDirectory(self.path_separator, filesystem=self)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 649, in __init__
+    FakeFile.__init__(self, name, (stat.S_IFDIR | perm_bits), {}, filesystem=filesystem)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 368, in __init__
+    self._byte_contents = self._encode_contents(contents)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 440, in _encode_contents
+    contents = bytes(contents, (self.encoding or locale.getpreferredencoding(False)), self.errors)
+Original test has 7 steps
+
+SAVING TEST AS failure.48394.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component1 = "delta"                                                     # STEP 0
+ACTION: component1 = "delta" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'delta' : <type 'str'>
+==================================================
+component2 = "alpha"                                                     # STEP 1
+ACTION: component2 = "alpha" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'alpha' : <type 'str'>
+==================================================
+bytes3 = 0                                                               # STEP 2
+ACTION: bytes3 = 0 
+bytes3 = None : <type 'NoneType'>
+=> bytes3 = 0 : <type 'int'>
+==================================================
+bytes2 = 0                                                               # STEP 3
+ACTION: bytes2 = 0 
+bytes2 = None : <type 'NoneType'>
+=> bytes2 = 0 : <type 'int'>
+==================================================
+str2 = ""                                                                # STEP 4
+ACTION: str2 = "" 
+str2 = None : <type 'NoneType'>
+=> str2 = '' : <type 'str'>
+==================================================
+component3 = "d"                                                         # STEP 5
+ACTION: component3 = "d" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'd' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                        # STEP 6
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.TypeError'> str() takes at most 1 argument (3 given)
+ERROR: (<type 'exceptions.TypeError'>, TypeError('str() takes at most 1 argument (3 given)',), <traceback object at 0x102bf5b90>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 17, in newFakeOS
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 863, in __init__
+    self.root = FakeDirectory(self.path_separator, filesystem=self)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 649, in __init__
+    FakeFile.__init__(self, name, (stat.S_IFDIR | perm_bits), {}, filesystem=filesystem)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 368, in __init__
+    self._byte_contents = self._encode_contents(contents)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 440, in _encode_contents
+    contents = bytes(contents, (self.encoding or locale.getpreferredencoding(False)), self.errors)
+STOPPING TESTING DUE TO FAILED TEST
+0.0190999507904 TOTAL RUNTIME
+1 EXECUTED
+7 TOTAL TEST OPERATIONS
+0.000214099884033 TIME SPENT EXECUTING TEST OPERATIONS
+0.000685691833496 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+1.90734863281e-06 TIME SPENT CHECKING PROPERTIES
+0.000216007232666 TOTAL TIME SPENT RUNNING SUT
+0.0035388469696 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

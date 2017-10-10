@@ -1,0 +1,232 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.66147.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.OSError'>, OSError(17, 'Directory exists in fake filesystem'), <traceback object at 0x102b14098>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 21, in newFakeOS
+    fs.CreateDirectory('/Volumes')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2057, in CreateDirectory
+    raise OSError(errno.EEXIST, 'Directory exists in fake filesystem', directory_path)
+Original test has 38 steps
+
+SAVING TEST AS failure.66147.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component1 = "beta"                                                      # STEP 0
+ACTION: component1 = "beta" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'beta' : <type 'str'>
+==================================================
+component3 = "a"                                                         # STEP 1
+ACTION: component3 = "a" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'a' : <type 'str'>
+==================================================
+component0 = "delta"                                                     # STEP 2
+ACTION: component0 = "delta" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'delta' : <type 'str'>
+==================================================
+component4 = "c"                                                         # STEP 3
+ACTION: component4 = "c" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'c' : <type 'str'>
+==================================================
+bytes0 = 0                                                               # STEP 4
+ACTION: bytes0 = 0 
+bytes0 = None : <type 'NoneType'>
+=> bytes0 = 0 : <type 'int'>
+==================================================
+component2 = "c"                                                         # STEP 5
+ACTION: component2 = "c" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'c' : <type 'str'>
+==================================================
+bytes2 = 0                                                               # STEP 6
+ACTION: bytes2 = 0 
+bytes2 = None : <type 'NoneType'>
+=> bytes2 = 0 : <type 'int'>
+==================================================
+bytes1 = 0                                                               # STEP 7
+ACTION: bytes1 = 0 
+bytes1 = None : <type 'NoneType'>
+=> bytes1 = 0 : <type 'int'>
+==================================================
+bytes1 += 1                                                              # STEP 8
+ACTION: bytes1 += 1 
+bytes1 = 0 : <type 'int'>
+=> bytes1 = 1 : <type 'int'>
+==================================================
+str1 = ""                                                                # STEP 9
+ACTION: str1 = "" 
+str1 = None : <type 'NoneType'>
+=> str1 = '' : <type 'str'>
+==================================================
+bytes1 += 1                                                             # STEP 10
+ACTION: bytes1 += 1 
+bytes1 = 1 : <type 'int'>
+=> bytes1 = 2 : <type 'int'>
+==================================================
+path2 = "/Volumes/ramdisk/test"                                         # STEP 11
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = None : <type 'NoneType'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+path2 += "/" + component1                                               # STEP 12
+ACTION: path2 += "/" + component1 
+component1 = 'beta' : <type 'str'>
+path2 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/beta' : <type 'str'>
+==================================================
+str1 += " "                                                             # STEP 13
+ACTION: str1 += " " 
+str1 = '' : <type 'str'>
+=> str1 = ' ' : <type 'str'>
+==================================================
+str1 += 'q'                                                             # STEP 14
+ACTION: str1 += 'q' 
+str1 = ' ' : <type 'str'>
+=> str1 = ' q' : <type 'str'>
+==================================================
+path2 = "/Volumes/ramdisk/test"                                         # STEP 15
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = '/Volumes/ramdisk/test/beta' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+component1 = "b"                                                        # STEP 16
+ACTION: component1 = "b" 
+component1 = 'beta' : <type 'str'>
+=> component1 = 'b' : <type 'str'>
+==================================================
+str1 += 'h'                                                             # STEP 17
+ACTION: str1 += 'h' 
+str1 = ' q' : <type 'str'>
+=> str1 = ' qh' : <type 'str'>
+==================================================
+str1 += 'q'                                                             # STEP 18
+ACTION: str1 += 'q' 
+str1 = ' qh' : <type 'str'>
+=> str1 = ' qhq' : <type 'str'>
+==================================================
+bytes0 += 1                                                             # STEP 19
+ACTION: bytes0 += 1 
+bytes0 = 0 : <type 'int'>
+=> bytes0 = 1 : <type 'int'>
+==================================================
+str1 += 'd'                                                             # STEP 20
+ACTION: str1 += 'd' 
+str1 = ' qhq' : <type 'str'>
+=> str1 = ' qhqd' : <type 'str'>
+==================================================
+path2 += "/" + component3                                               # STEP 21
+ACTION: path2 += "/" + component3 
+component3 = 'a' : <type 'str'>
+path2 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/a' : <type 'str'>
+==================================================
+str1 += 'a'                                                             # STEP 22
+ACTION: str1 += 'a' 
+str1 = ' qhqd' : <type 'str'>
+=> str1 = ' qhqda' : <type 'str'>
+==================================================
+path2 += "/" + component4                                               # STEP 23
+ACTION: path2 += "/" + component4 
+component4 = 'c' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/a' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/a/c' : <type 'str'>
+==================================================
+component4 = "omega"                                                    # STEP 24
+ACTION: component4 = "omega" 
+component4 = 'c' : <type 'str'>
+=> component4 = 'omega' : <type 'str'>
+==================================================
+component3 = "phi"                                                      # STEP 25
+ACTION: component3 = "phi" 
+component3 = 'a' : <type 'str'>
+=> component3 = 'phi' : <type 'str'>
+==================================================
+str1 += 's'                                                             # STEP 26
+ACTION: str1 += 's' 
+str1 = ' qhqda' : <type 'str'>
+=> str1 = ' qhqdas' : <type 'str'>
+==================================================
+path3 = "/Volumes/ramdisk/test"                                         # STEP 27
+ACTION: path3 = "/Volumes/ramdisk/test" 
+path3 = None : <type 'NoneType'>
+=> path3 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str1 += " "                                                             # STEP 28
+ACTION: str1 += " " 
+str1 = ' qhqdas' : <type 'str'>
+=> str1 = ' qhqdas ' : <type 'str'>
+==================================================
+str1 += 'p'                                                             # STEP 29
+ACTION: str1 += 'p' 
+str1 = ' qhqdas ' : <type 'str'>
+=> str1 = ' qhqdas p' : <type 'str'>
+==================================================
+path3 += "/" + component1                                               # STEP 30
+ACTION: path3 += "/" + component1 
+component1 = 'b' : <type 'str'>
+path3 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/b' : <type 'str'>
+==================================================
+path3 += "/" + component4                                               # STEP 31
+ACTION: path3 += "/" + component4 
+component4 = 'omega' : <type 'str'>
+path3 = '/Volumes/ramdisk/test/b' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/b/omega' : <type 'str'>
+==================================================
+bytes1 += 1                                                             # STEP 32
+ACTION: bytes1 += 1 
+bytes1 = 2 : <type 'int'>
+=> bytes1 = 3 : <type 'int'>
+==================================================
+str1 += 'a'                                                             # STEP 33
+ACTION: str1 += 'a' 
+str1 = ' qhqdas p' : <type 'str'>
+=> str1 = ' qhqdas pa' : <type 'str'>
+==================================================
+component4 = "d"                                                        # STEP 34
+ACTION: component4 = "d" 
+component4 = 'omega' : <type 'str'>
+=> component4 = 'd' : <type 'str'>
+==================================================
+path2 += "/" + component3                                               # STEP 35
+ACTION: path2 += "/" + component3 
+component3 = 'phi' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/a/c' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/a/c/phi' : <type 'str'>
+==================================================
+component3 = "beta"                                                     # STEP 36
+ACTION: component3 = "beta" 
+component3 = 'phi' : <type 'str'>
+=> component3 = 'beta' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                       # STEP 37
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] Directory exists in fake filesystem: '/'
+ERROR: (<type 'exceptions.OSError'>, OSError(17, 'Directory exists in fake filesystem'), <traceback object at 0x1005aa368>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 21, in newFakeOS
+    fs.CreateDirectory('/Volumes')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2057, in CreateDirectory
+    raise OSError(errno.EEXIST, 'Directory exists in fake filesystem', directory_path)
+STOPPING TESTING DUE TO FAILED TEST
+0.0344498157501 TOTAL RUNTIME
+1 EXECUTED
+38 TOTAL TEST OPERATIONS
+0.000953197479248 TIME SPENT EXECUTING TEST OPERATIONS
+0.00494241714478 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+1.52587890625e-05 TIME SPENT CHECKING PROPERTIES
+0.000968456268311 TOTAL TIME SPENT RUNNING SUT
+0.00426006317139 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

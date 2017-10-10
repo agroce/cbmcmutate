@@ -1,0 +1,160 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.36384.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.TypeError'>, TypeError("'FakeOsModule' object is not iterable",), <traceback object at 0x10354ef80>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 24, in newFakeOS
+    fakeOS = pyfakefs.fake_filesystem.FakeOsModule(fs)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1717, in __init__
+    self.path = FakePathModule(self.filesystem, self)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1464, in __init__
+    self._os_path.os, self.os = os_module
+Original test has 23 steps
+
+SAVING TEST AS failure.36384.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component1 = "delta"                                                     # STEP 0
+ACTION: component1 = "delta" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'delta' : <type 'str'>
+==================================================
+component2 = "alpha"                                                     # STEP 1
+ACTION: component2 = "alpha" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'alpha' : <type 'str'>
+==================================================
+bytes2 = 0                                                               # STEP 2
+ACTION: bytes2 = 0 
+bytes2 = None : <type 'NoneType'>
+=> bytes2 = 0 : <type 'int'>
+==================================================
+component4 = "phi"                                                       # STEP 3
+ACTION: component4 = "phi" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'phi' : <type 'str'>
+==================================================
+component0 = "omega"                                                     # STEP 4
+ACTION: component0 = "omega" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'omega' : <type 'str'>
+==================================================
+component3 = "c"                                                         # STEP 5
+ACTION: component3 = "c" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'c' : <type 'str'>
+==================================================
+path3 = "/Volumes/ramdisk/test"                                          # STEP 6
+ACTION: path3 = "/Volumes/ramdisk/test" 
+path3 = None : <type 'NoneType'>
+=> path3 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                          # STEP 7
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = None : <type 'NoneType'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+path2 = "/Volumes/ramdisk/test"                                          # STEP 8
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = None : <type 'NoneType'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+path4 += "/" + component3                                                # STEP 9
+ACTION: path4 += "/" + component3 
+component3 = 'c' : <type 'str'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/c' : <type 'str'>
+==================================================
+bytes1 = 0                                                              # STEP 10
+ACTION: bytes1 = 0 
+bytes1 = None : <type 'NoneType'>
+=> bytes1 = 0 : <type 'int'>
+==================================================
+path4 += "/" + component2                                               # STEP 11
+ACTION: path4 += "/" + component2 
+component2 = 'alpha' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/c' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/c/alpha' : <type 'str'>
+==================================================
+bytes1 += 1                                                             # STEP 12
+ACTION: bytes1 += 1 
+bytes1 = 0 : <type 'int'>
+=> bytes1 = 1 : <type 'int'>
+==================================================
+component3 = "b"                                                        # STEP 13
+ACTION: component3 = "b" 
+component3 = 'c' : <type 'str'>
+=> component3 = 'b' : <type 'str'>
+==================================================
+bytes2 += 1                                                             # STEP 14
+ACTION: bytes2 += 1 
+bytes2 = 0 : <type 'int'>
+=> bytes2 = 1 : <type 'int'>
+==================================================
+component2 = "h"                                                        # STEP 15
+ACTION: component2 = "h" 
+component2 = 'alpha' : <type 'str'>
+=> component2 = 'h' : <type 'str'>
+==================================================
+path2 += "/" + component4                                               # STEP 16
+ACTION: path2 += "/" + component4 
+component4 = 'phi' : <type 'str'>
+path2 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/phi' : <type 'str'>
+==================================================
+path2 += "/" + component2                                               # STEP 17
+ACTION: path2 += "/" + component2 
+component2 = 'h' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/phi' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/phi/h' : <type 'str'>
+==================================================
+bytes2 = 0                                                              # STEP 18
+ACTION: bytes2 = 0 
+bytes2 = 1 : <type 'int'>
+=> bytes2 = 0 : <type 'int'>
+==================================================
+path2 += "/" + component1                                               # STEP 19
+ACTION: path2 += "/" + component1 
+component1 = 'delta' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/phi/h' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/phi/h/delta' : <type 'str'>
+==================================================
+component4 = "lambda"                                                   # STEP 20
+ACTION: component4 = "lambda" 
+component4 = 'phi' : <type 'str'>
+=> component4 = 'lambda' : <type 'str'>
+==================================================
+component1 = "gamma"                                                    # STEP 21
+ACTION: component1 = "gamma" 
+component1 = 'delta' : <type 'str'>
+=> component1 = 'gamma' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                       # STEP 22
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.TypeError'> 'FakeOsModule' object is not iterable
+ERROR: (<type 'exceptions.TypeError'>, TypeError("'FakeOsModule' object is not iterable",), <traceback object at 0x1006aa3b0>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 24, in newFakeOS
+    fakeOS = pyfakefs.fake_filesystem.FakeOsModule(fs)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1717, in __init__
+    self.path = FakePathModule(self.filesystem, self)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1464, in __init__
+    self._os_path.os, self.os = os_module
+STOPPING TESTING DUE TO FAILED TEST
+0.0227060317993 TOTAL RUNTIME
+1 EXECUTED
+23 TOTAL TEST OPERATIONS
+0.00103998184204 TIME SPENT EXECUTING TEST OPERATIONS
+0.00248980522156 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+8.10623168945e-06 TIME SPENT CHECKING PROPERTIES
+0.00104808807373 TOTAL TIME SPENT RUNNING SUT
+0.00342893600464 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

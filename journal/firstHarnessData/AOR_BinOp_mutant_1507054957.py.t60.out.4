@@ -1,0 +1,254 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.53608.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.TypeError'>, TypeError("unsupported operand type(s) for -: 'str' and 'str'",), <traceback object at 0x1021b3248>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 17, in newFakeOS
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 881, in __init__
+    self.AddMountPoint(self.root.name, total_size)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 933, in AddMountPoint
+    path = self.NormalizePath(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1357, in NormalizePath
+    return self.CollapsePath(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1283, in CollapsePath
+    collapsed_path = (sep - collapsed_path)
+Original test has 41 steps
+
+SAVING TEST AS failure.53608.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component1 = "alpha"                                                     # STEP 0
+ACTION: component1 = "alpha" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'alpha' : <type 'str'>
+==================================================
+str3 = ""                                                                # STEP 1
+ACTION: str3 = "" 
+str3 = None : <type 'NoneType'>
+=> str3 = '' : <type 'str'>
+==================================================
+component4 = "d"                                                         # STEP 2
+ACTION: component4 = "d" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'd' : <type 'str'>
+==================================================
+str3 += 'e'                                                              # STEP 3
+ACTION: str3 += 'e' 
+str3 = '' : <type 'str'>
+=> str3 = 'e' : <type 'str'>
+==================================================
+component2 = "g"                                                         # STEP 4
+ACTION: component2 = "g" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'g' : <type 'str'>
+==================================================
+str3 += 'd'                                                              # STEP 5
+ACTION: str3 += 'd' 
+str3 = 'e' : <type 'str'>
+=> str3 = 'ed' : <type 'str'>
+==================================================
+component0 = "lambda"                                                    # STEP 6
+ACTION: component0 = "lambda" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'lambda' : <type 'str'>
+==================================================
+str3 += 'f'                                                              # STEP 7
+ACTION: str3 += 'f' 
+str3 = 'ed' : <type 'str'>
+=> str3 = 'edf' : <type 'str'>
+==================================================
+str3 += 't'                                                              # STEP 8
+ACTION: str3 += 't' 
+str3 = 'edf' : <type 'str'>
+=> str3 = 'edft' : <type 'str'>
+==================================================
+component3 = "alpha"                                                     # STEP 9
+ACTION: component3 = "alpha" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'alpha' : <type 'str'>
+==================================================
+str2 = ""                                                               # STEP 10
+ACTION: str2 = "" 
+str2 = None : <type 'NoneType'>
+=> str2 = '' : <type 'str'>
+==================================================
+str2 += 'r'                                                             # STEP 11
+ACTION: str2 += 'r' 
+str2 = '' : <type 'str'>
+=> str2 = 'r' : <type 'str'>
+==================================================
+str2 += 'p'                                                             # STEP 12
+ACTION: str2 += 'p' 
+str2 = 'r' : <type 'str'>
+=> str2 = 'rp' : <type 'str'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                         # STEP 13
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = None : <type 'NoneType'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str3 += 'p'                                                             # STEP 14
+ACTION: str3 += 'p' 
+str3 = 'edft' : <type 'str'>
+=> str3 = 'edftp' : <type 'str'>
+==================================================
+str3 += 'l'                                                             # STEP 15
+ACTION: str3 += 'l' 
+str3 = 'edftp' : <type 'str'>
+=> str3 = 'edftpl' : <type 'str'>
+==================================================
+str2 = ""                                                               # STEP 16
+ACTION: str2 = "" 
+str2 = 'rp' : <type 'str'>
+=> str2 = '' : <type 'str'>
+==================================================
+str2 += 'x'                                                             # STEP 17
+ACTION: str2 += 'x' 
+str2 = '' : <type 'str'>
+=> str2 = 'x' : <type 'str'>
+==================================================
+path2 = "/Volumes/ramdisk/test"                                         # STEP 18
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = None : <type 'NoneType'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str2 += 'y'                                                             # STEP 19
+ACTION: str2 += 'y' 
+str2 = 'x' : <type 'str'>
+=> str2 = 'xy' : <type 'str'>
+==================================================
+path4 += "/" + component1                                               # STEP 20
+ACTION: path4 += "/" + component1 
+component1 = 'alpha' : <type 'str'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/alpha' : <type 'str'>
+==================================================
+str2 += " "                                                             # STEP 21
+ACTION: str2 += " " 
+str2 = 'xy' : <type 'str'>
+=> str2 = 'xy ' : <type 'str'>
+==================================================
+component1 = "c"                                                        # STEP 22
+ACTION: component1 = "c" 
+component1 = 'alpha' : <type 'str'>
+=> component1 = 'c' : <type 'str'>
+==================================================
+str2 += 'y'                                                             # STEP 23
+ACTION: str2 += 'y' 
+str2 = 'xy ' : <type 'str'>
+=> str2 = 'xy y' : <type 'str'>
+==================================================
+str3 += 'x'                                                             # STEP 24
+ACTION: str3 += 'x' 
+str3 = 'edftpl' : <type 'str'>
+=> str3 = 'edftplx' : <type 'str'>
+==================================================
+str3 += 'n'                                                             # STEP 25
+ACTION: str3 += 'n' 
+str3 = 'edftplx' : <type 'str'>
+=> str3 = 'edftplxn' : <type 'str'>
+==================================================
+str2 += 'x'                                                             # STEP 26
+ACTION: str2 += 'x' 
+str2 = 'xy y' : <type 'str'>
+=> str2 = 'xy yx' : <type 'str'>
+==================================================
+str2 += 't'                                                             # STEP 27
+ACTION: str2 += 't' 
+str2 = 'xy yx' : <type 'str'>
+=> str2 = 'xy yxt' : <type 'str'>
+==================================================
+str3 += 'j'                                                             # STEP 28
+ACTION: str3 += 'j' 
+str3 = 'edftplxn' : <type 'str'>
+=> str3 = 'edftplxnj' : <type 'str'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                         # STEP 29
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = '/Volumes/ramdisk/test/alpha' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str3 += 'd'                                                             # STEP 30
+ACTION: str3 += 'd' 
+str3 = 'edftplxnj' : <type 'str'>
+=> str3 = 'edftplxnjd' : <type 'str'>
+==================================================
+str3 += 'y'                                                             # STEP 31
+ACTION: str3 += 'y' 
+str3 = 'edftplxnjd' : <type 'str'>
+=> str3 = 'edftplxnjdy' : <type 'str'>
+==================================================
+str3 += 'z'                                                             # STEP 32
+ACTION: str3 += 'z' 
+str3 = 'edftplxnjdy' : <type 'str'>
+=> str3 = 'edftplxnjdyz' : <type 'str'>
+==================================================
+str3 += 'r'                                                             # STEP 33
+ACTION: str3 += 'r' 
+str3 = 'edftplxnjdyz' : <type 'str'>
+=> str3 = 'edftplxnjdyzr' : <type 'str'>
+==================================================
+str3 += 'i'                                                             # STEP 34
+ACTION: str3 += 'i' 
+str3 = 'edftplxnjdyzr' : <type 'str'>
+=> str3 = 'edftplxnjdyzri' : <type 'str'>
+==================================================
+str3 += 'a'                                                             # STEP 35
+ACTION: str3 += 'a' 
+str3 = 'edftplxnjdyzri' : <type 'str'>
+=> str3 = 'edftplxnjdyzria' : <type 'str'>
+==================================================
+str3 += 'o'                                                             # STEP 36
+ACTION: str3 += 'o' 
+str3 = 'edftplxnjdyzria' : <type 'str'>
+=> str3 = 'edftplxnjdyzriao' : <type 'str'>
+==================================================
+str3 += 's'                                                             # STEP 37
+ACTION: str3 += 's' 
+str3 = 'edftplxnjdyzriao' : <type 'str'>
+=> str3 = 'edftplxnjdyzriaos' : <type 'str'>
+==================================================
+str2 += 'd'                                                             # STEP 38
+ACTION: str2 += 'd' 
+str2 = 'xy yxt' : <type 'str'>
+=> str2 = 'xy yxtd' : <type 'str'>
+==================================================
+str3 += 'k'                                                             # STEP 39
+ACTION: str3 += 'k' 
+str3 = 'edftplxnjdyzriaos' : <type 'str'>
+=> str3 = 'edftplxnjdyzriaosk' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                       # STEP 40
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.TypeError'> unsupported operand type(s) for -: 'str' and 'str'
+ERROR: (<type 'exceptions.TypeError'>, TypeError("unsupported operand type(s) for -: 'str' and 'str'",), <traceback object at 0x1023846c8>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 17, in newFakeOS
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 881, in __init__
+    self.AddMountPoint(self.root.name, total_size)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 933, in AddMountPoint
+    path = self.NormalizePath(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1357, in NormalizePath
+    return self.CollapsePath(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1283, in CollapsePath
+    collapsed_path = (sep - collapsed_path)
+STOPPING TESTING DUE TO FAILED TEST
+0.0267291069031 TOTAL RUNTIME
+1 EXECUTED
+41 TOTAL TEST OPERATIONS
+0.000608682632446 TIME SPENT EXECUTING TEST OPERATIONS
+0.00267267227173 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+1.57356262207e-05 TIME SPENT CHECKING PROPERTIES
+0.000624418258667 TOTAL TIME SPENT RUNNING SUT
+0.00321793556213 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

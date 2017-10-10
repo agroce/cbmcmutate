@@ -1,0 +1,73 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.63900.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.TypeError'>, TypeError("can't multiply sequence by non-int of type 'str'",), <traceback object at 0x103788098>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 21, in newFakeOS
+    fs.CreateDirectory('/Volumes')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2055, in CreateDirectory
+    if self.Exists(directory_path):
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1624, in Exists
+    file_path = self.ResolvePath(file_path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1766, in ResolvePath
+    return _ComponentsToPath(resolved_components)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1662, in _ComponentsToPath
+    path = (sep * path)
+Original test has 5 steps
+
+SAVING TEST AS failure.63900.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+path0 = "/Volumes/ramdisk/test"                                          # STEP 0
+ACTION: path0 = "/Volumes/ramdisk/test" 
+path0 = None : <type 'NoneType'>
+=> path0 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str0 = ""                                                                # STEP 1
+ACTION: str0 = "" 
+str0 = None : <type 'NoneType'>
+=> str0 = '' : <type 'str'>
+==================================================
+component3 = "d"                                                         # STEP 2
+ACTION: component3 = "d" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'd' : <type 'str'>
+==================================================
+str1 = ""                                                                # STEP 3
+ACTION: str1 = "" 
+str1 = None : <type 'NoneType'>
+=> str1 = '' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                        # STEP 4
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.TypeError'> can't multiply sequence by non-int of type 'str'
+ERROR: (<type 'exceptions.TypeError'>, TypeError("can't multiply sequence by non-int of type 'str'",), <traceback object at 0x103c1ebd8>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 21, in newFakeOS
+    fs.CreateDirectory('/Volumes')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2055, in CreateDirectory
+    if self.Exists(directory_path):
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1624, in Exists
+    file_path = self.ResolvePath(file_path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1766, in ResolvePath
+    return _ComponentsToPath(resolved_components)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1662, in _ComponentsToPath
+    path = (sep * path)
+STOPPING TESTING DUE TO FAILED TEST
+0.0164799690247 TOTAL RUNTIME
+1 EXECUTED
+5 TOTAL TEST OPERATIONS
+0.000381946563721 TIME SPENT EXECUTING TEST OPERATIONS
+0.000302314758301 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+9.53674316406e-07 TIME SPENT CHECKING PROPERTIES
+0.000382900238037 TOTAL TIME SPENT RUNNING SUT
+0.00312399864197 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

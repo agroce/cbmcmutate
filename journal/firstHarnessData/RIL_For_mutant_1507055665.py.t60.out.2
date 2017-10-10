@@ -1,0 +1,108 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.65758.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.IOError'>, IOError(2, 'No such file or directory in fake filesystem'), <traceback object at 0x104047cb0>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 22353, in act447
+    self.p_os[0].remove(self.p_path[4])
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 3569, in remove
+    self.filesystem.RemoveFile(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2473, in RemoveFile
+    obj = self.ResolveObject(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1837, in ResolveObject
+    return self.GetObjectFromNormalizedPath(self.ResolvePath(file_path))
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1805, in GetObjectFromNormalizedPath
+    raise IOError(errno.ENOENT, 'No such file or directory in fake filesystem', file_path)
+Original test has 11 steps
+
+SAVING TEST AS failure.65758.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component0 = "phi"                                                       # STEP 0
+ACTION: component0 = "phi" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'phi' : <type 'str'>
+==================================================
+component1 = "d"                                                         # STEP 1
+ACTION: component1 = "d" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'd' : <type 'str'>
+==================================================
+component3 = "g"                                                         # STEP 2
+ACTION: component3 = "g" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'g' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                        # STEP 3
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+=> os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103b8bb50> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+REFERENCE ACTION: os_REF0 = os 
+=> os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+==================================================
+component4 = "g"                                                         # STEP 4
+ACTION: component4 = "g" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'g' : <type 'str'>
+==================================================
+path2 = "/Volumes/ramdisk/test"                                          # STEP 5
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = None : <type 'NoneType'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+bytes0 = 0                                                               # STEP 6
+ACTION: bytes0 = 0 
+bytes0 = None : <type 'NoneType'>
+=> bytes0 = 0 : <type 'int'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                          # STEP 7
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = None : <type 'NoneType'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+os0.symlink(path2,path4)                                                 # STEP 8
+ACTION: os0.symlink(path2,path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103b8bb50> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test' : <type 'str'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File already exists in fake filesystem: '/Volumes/ramdisk/test'
+REFERENCE ACTION: os_REF0.symlink(path2,path4) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File exists
+==================================================
+component2 = "d"                                                         # STEP 9
+ACTION: component2 = "d" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'd' : <type 'str'>
+==================================================
+os0.remove(path4)                                                       # STEP 10
+ACTION: os0.remove(path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103b8bb50> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXCEPTION: <type 'exceptions.IOError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test'
+ERROR: (<type 'exceptions.IOError'>, IOError(2, 'No such file or directory in fake filesystem'), <traceback object at 0x103c6f128>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 22353, in act447
+    self.p_os[0].remove(self.p_path[4])
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 3569, in remove
+    self.filesystem.RemoveFile(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2473, in RemoveFile
+    obj = self.ResolveObject(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1837, in ResolveObject
+    return self.GetObjectFromNormalizedPath(self.ResolvePath(file_path))
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1805, in GetObjectFromNormalizedPath
+    raise IOError(errno.ENOENT, 'No such file or directory in fake filesystem', file_path)
+STOPPING TESTING DUE TO FAILED TEST
+0.0285308361053 TOTAL RUNTIME
+1 EXECUTED
+11 TOTAL TEST OPERATIONS
+0.00137495994568 TIME SPENT EXECUTING TEST OPERATIONS
+0.00093150138855 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+3.09944152832e-06 TIME SPENT CHECKING PROPERTIES
+0.00137805938721 TOTAL TIME SPENT RUNNING SUT
+0.00717711448669 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

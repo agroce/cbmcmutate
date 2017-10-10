@@ -1,0 +1,56 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.59575.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.OSError'>, OSError(20, 'Not a directory'), <traceback object at 0x101d3d098>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 22, in newFakeOS
+    fs.CreateDirectory('/Volumes/ramdisk')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2088, in CreateDirectory
+    raise OSError(errno.ENOTDIR, 'Not a directory', current_dir.GetPath())
+Original test has 4 steps
+
+SAVING TEST AS failure.59575.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+str2 = ""                                                                # STEP 0
+ACTION: str2 = "" 
+str2 = None : <type 'NoneType'>
+=> str2 = '' : <type 'str'>
+==================================================
+str2 += 'b'                                                              # STEP 1
+ACTION: str2 += 'b' 
+str2 = '' : <type 'str'>
+=> str2 = 'b' : <type 'str'>
+==================================================
+str2 += 't'                                                              # STEP 2
+ACTION: str2 += 't' 
+str2 = 'b' : <type 'str'>
+=> str2 = 'bt' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                        # STEP 3
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 20] Not a directory: '/Volumes'
+ERROR: (<type 'exceptions.OSError'>, OSError(20, 'Not a directory'), <traceback object at 0x10194dc20>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 22, in newFakeOS
+    fs.CreateDirectory('/Volumes/ramdisk')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2088, in CreateDirectory
+    raise OSError(errno.ENOTDIR, 'Not a directory', current_dir.GetPath())
+STOPPING TESTING DUE TO FAILED TEST
+0.018128156662 TOTAL RUNTIME
+1 EXECUTED
+4 TOTAL TEST OPERATIONS
+0.000414848327637 TIME SPENT EXECUTING TEST OPERATIONS
+0.000258207321167 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+9.53674316406e-07 TIME SPENT CHECKING PROPERTIES
+0.000415802001953 TOTAL TIME SPENT RUNNING SUT
+0.00310301780701 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

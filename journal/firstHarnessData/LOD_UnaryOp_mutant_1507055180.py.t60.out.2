@@ -1,0 +1,229 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.61020.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.OSError'>, OSError(17, 'Object already exists in fake filesystem'), <traceback object at 0x1006c32d8>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 22, in newFakeOS
+    fs.CreateDirectory('/Volumes/ramdisk')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2075, in CreateDirectory
+    current_dir.AddEntry(new_dir)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 689, in AddEntry
+    raise OSError(errno.EEXIST, 'Object already exists in fake filesystem', self.GetPath())
+Original test has 37 steps
+
+SAVING TEST AS failure.61020.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component2 = "h"                                                         # STEP 0
+ACTION: component2 = "h" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'h' : <type 'str'>
+==================================================
+bytes0 = 0                                                               # STEP 1
+ACTION: bytes0 = 0 
+bytes0 = None : <type 'NoneType'>
+=> bytes0 = 0 : <type 'int'>
+==================================================
+component3 = "d"                                                         # STEP 2
+ACTION: component3 = "d" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'd' : <type 'str'>
+==================================================
+component0 = "epsilon"                                                   # STEP 3
+ACTION: component0 = "epsilon" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'epsilon' : <type 'str'>
+==================================================
+component4 = "h"                                                         # STEP 4
+ACTION: component4 = "h" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'h' : <type 'str'>
+==================================================
+component1 = "f"                                                         # STEP 5
+ACTION: component1 = "f" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'f' : <type 'str'>
+==================================================
+str1 = ""                                                                # STEP 6
+ACTION: str1 = "" 
+str1 = None : <type 'NoneType'>
+=> str1 = '' : <type 'str'>
+==================================================
+path3 = "/Volumes/ramdisk/test"                                          # STEP 7
+ACTION: path3 = "/Volumes/ramdisk/test" 
+path3 = None : <type 'NoneType'>
+=> path3 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+bytes3 = 0                                                               # STEP 8
+ACTION: bytes3 = 0 
+bytes3 = None : <type 'NoneType'>
+=> bytes3 = 0 : <type 'int'>
+==================================================
+str1 += 'q'                                                              # STEP 9
+ACTION: str1 += 'q' 
+str1 = '' : <type 'str'>
+=> str1 = 'q' : <type 'str'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                         # STEP 10
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = None : <type 'NoneType'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str1 += 'a'                                                             # STEP 11
+ACTION: str1 += 'a' 
+str1 = 'q' : <type 'str'>
+=> str1 = 'qa' : <type 'str'>
+==================================================
+str1 += 'w'                                                             # STEP 12
+ACTION: str1 += 'w' 
+str1 = 'qa' : <type 'str'>
+=> str1 = 'qaw' : <type 'str'>
+==================================================
+path3 += "/" + component3                                               # STEP 13
+ACTION: path3 += "/" + component3 
+component3 = 'd' : <type 'str'>
+path3 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/d' : <type 'str'>
+==================================================
+str1 += 'o'                                                             # STEP 14
+ACTION: str1 += 'o' 
+str1 = 'qaw' : <type 'str'>
+=> str1 = 'qawo' : <type 'str'>
+==================================================
+path4 += "/" + component2                                               # STEP 15
+ACTION: path4 += "/" + component2 
+component2 = 'h' : <type 'str'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/h' : <type 'str'>
+==================================================
+component3 = "epsilon"                                                  # STEP 16
+ACTION: component3 = "epsilon" 
+component3 = 'd' : <type 'str'>
+=> component3 = 'epsilon' : <type 'str'>
+==================================================
+path0 = "/Volumes/ramdisk/test"                                         # STEP 17
+ACTION: path0 = "/Volumes/ramdisk/test" 
+path0 = None : <type 'NoneType'>
+=> path0 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+component2 = "c"                                                        # STEP 18
+ACTION: component2 = "c" 
+component2 = 'h' : <type 'str'>
+=> component2 = 'c' : <type 'str'>
+==================================================
+path4 += "/" + component3                                               # STEP 19
+ACTION: path4 += "/" + component3 
+component3 = 'epsilon' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/h' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/h/epsilon' : <type 'str'>
+==================================================
+path1 = "/Volumes/ramdisk/test"                                         # STEP 20
+ACTION: path1 = "/Volumes/ramdisk/test" 
+path1 = None : <type 'NoneType'>
+=> path1 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+path2 = "/Volumes/ramdisk/test"                                         # STEP 21
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = None : <type 'NoneType'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+path4 += "/" + component1                                               # STEP 22
+ACTION: path4 += "/" + component1 
+component1 = 'f' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/h/epsilon' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/h/epsilon/f' : <type 'str'>
+==================================================
+bytes1 = 0                                                              # STEP 23
+ACTION: bytes1 = 0 
+bytes1 = None : <type 'NoneType'>
+=> bytes1 = 0 : <type 'int'>
+==================================================
+str3 = ""                                                               # STEP 24
+ACTION: str3 = "" 
+str3 = None : <type 'NoneType'>
+=> str3 = '' : <type 'str'>
+==================================================
+component3 = "phi"                                                      # STEP 25
+ACTION: component3 = "phi" 
+component3 = 'epsilon' : <type 'str'>
+=> component3 = 'phi' : <type 'str'>
+==================================================
+str3 += 'l'                                                             # STEP 26
+ACTION: str3 += 'l' 
+str3 = '' : <type 'str'>
+=> str3 = 'l' : <type 'str'>
+==================================================
+str1 += 'j'                                                             # STEP 27
+ACTION: str1 += 'j' 
+str1 = 'qawo' : <type 'str'>
+=> str1 = 'qawoj' : <type 'str'>
+==================================================
+component1 = "alpha"                                                    # STEP 28
+ACTION: component1 = "alpha" 
+component1 = 'f' : <type 'str'>
+=> component1 = 'alpha' : <type 'str'>
+==================================================
+str3 += 'z'                                                             # STEP 29
+ACTION: str3 += 'z' 
+str3 = 'l' : <type 'str'>
+=> str3 = 'lz' : <type 'str'>
+==================================================
+str1 += 'g'                                                             # STEP 30
+ACTION: str1 += 'g' 
+str1 = 'qawoj' : <type 'str'>
+=> str1 = 'qawojg' : <type 'str'>
+==================================================
+str1 += 'm'                                                             # STEP 31
+ACTION: str1 += 'm' 
+str1 = 'qawojg' : <type 'str'>
+=> str1 = 'qawojgm' : <type 'str'>
+==================================================
+str1 += 'a'                                                             # STEP 32
+ACTION: str1 += 'a' 
+str1 = 'qawojgm' : <type 'str'>
+=> str1 = 'qawojgma' : <type 'str'>
+==================================================
+str1 += 'm'                                                             # STEP 33
+ACTION: str1 += 'm' 
+str1 = 'qawojgma' : <type 'str'>
+=> str1 = 'qawojgmam' : <type 'str'>
+==================================================
+str1 += 'u'                                                             # STEP 34
+ACTION: str1 += 'u' 
+str1 = 'qawojgmam' : <type 'str'>
+=> str1 = 'qawojgmamu' : <type 'str'>
+==================================================
+str1 += 'o'                                                             # STEP 35
+ACTION: str1 += 'o' 
+str1 = 'qawojgmamu' : <type 'str'>
+=> str1 = 'qawojgmamuo' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                       # STEP 36
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] Object already exists in fake filesystem: '/'
+ERROR: (<type 'exceptions.OSError'>, OSError(17, 'Object already exists in fake filesystem'), <traceback object at 0x1046c3f80>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 22, in newFakeOS
+    fs.CreateDirectory('/Volumes/ramdisk')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2075, in CreateDirectory
+    current_dir.AddEntry(new_dir)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 689, in AddEntry
+    raise OSError(errno.EEXIST, 'Object already exists in fake filesystem', self.GetPath())
+STOPPING TESTING DUE TO FAILED TEST
+0.0591599941254 TOTAL RUNTIME
+3 EXECUTED
+437 TOTAL TEST OPERATIONS
+0.00781774520874 TIME SPENT EXECUTING TEST OPERATIONS
+0.0228860378265 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+0.000209808349609 TIME SPENT CHECKING PROPERTIES
+0.00802755355835 TOTAL TIME SPENT RUNNING SUT
+0.0087571144104 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

@@ -1,0 +1,51 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.48774.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.OSError'>, OSError(17, 'Directory exists in fake filesystem'), <traceback object at 0x103cc55a8>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 21, in newFakeOS
+    fs.CreateDirectory('/Volumes')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2057, in CreateDirectory
+    raise OSError(errno.EEXIST, 'Directory exists in fake filesystem', directory_path)
+Original test has 3 steps
+
+SAVING TEST AS failure.48774.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component3 = "b"                                                         # STEP 0
+ACTION: component3 = "b" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'b' : <type 'str'>
+==================================================
+component0 = "epsilon"                                                   # STEP 1
+ACTION: component0 = "epsilon" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'epsilon' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                        # STEP 2
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] Directory exists in fake filesystem: '/'
+ERROR: (<type 'exceptions.OSError'>, OSError(17, 'Directory exists in fake filesystem'), <traceback object at 0x103cf8b48>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 21, in newFakeOS
+    fs.CreateDirectory('/Volumes')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2057, in CreateDirectory
+    raise OSError(errno.EEXIST, 'Directory exists in fake filesystem', directory_path)
+STOPPING TESTING DUE TO FAILED TEST
+0.0193967819214 TOTAL RUNTIME
+1 EXECUTED
+3 TOTAL TEST OPERATIONS
+0.000361919403076 TIME SPENT EXECUTING TEST OPERATIONS
+0.000243902206421 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+2.14576721191e-06 TIME SPENT CHECKING PROPERTIES
+0.000364065170288 TOTAL TIME SPENT RUNNING SUT
+0.00320506095886 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

@@ -1,0 +1,58 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.61088.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.AttributeError'>, AttributeError("'dict' object has no attribute 'encode'",), <traceback object at 0x102de0710>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 17, in newFakeOS
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 863, in __init__
+    self.root = FakeDirectory(self.path_separator, filesystem=self)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 649, in __init__
+    FakeFile.__init__(self, name, (stat.S_IFDIR | perm_bits), {}, filesystem=filesystem)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 368, in __init__
+    self._byte_contents = self._encode_contents(contents)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 443, in _encode_contents
+    contents = contents.encode((self.encoding or locale.getpreferredencoding(False)), self.errors)
+Original test has 2 steps
+
+SAVING TEST AS failure.61088.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component3 = "gamma"                                                     # STEP 0
+ACTION: component3 = "gamma" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'gamma' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                        # STEP 1
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.AttributeError'> 'dict' object has no attribute 'encode'
+ERROR: (<type 'exceptions.AttributeError'>, AttributeError("'dict' object has no attribute 'encode'",), <traceback object at 0x103443f80>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 17, in newFakeOS
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 863, in __init__
+    self.root = FakeDirectory(self.path_separator, filesystem=self)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 649, in __init__
+    FakeFile.__init__(self, name, (stat.S_IFDIR | perm_bits), {}, filesystem=filesystem)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 368, in __init__
+    self._byte_contents = self._encode_contents(contents)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 443, in _encode_contents
+    contents = contents.encode((self.encoding or locale.getpreferredencoding(False)), self.errors)
+STOPPING TESTING DUE TO FAILED TEST
+0.0321140289307 TOTAL RUNTIME
+2 EXECUTED
+202 TOTAL TEST OPERATIONS
+0.00287818908691 TIME SPENT EXECUTING TEST OPERATIONS
+0.00937056541443 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+8.84532928467e-05 TIME SPENT CHECKING PROPERTIES
+0.00296664237976 TOTAL TIME SPENT RUNNING SUT
+0.00531911849976 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

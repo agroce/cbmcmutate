@@ -1,0 +1,332 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.60942.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.TypeError'>, TypeError("unsupported operand type(s) for /: 'str' and 'str'",), <traceback object at 0x1024a7758>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 17, in newFakeOS
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 881, in __init__
+    self.AddMountPoint(self.root.name, total_size)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 933, in AddMountPoint
+    path = self.NormalizePath(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1357, in NormalizePath
+    return self.CollapsePath(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1285, in CollapsePath
+    return ((drive / collapsed_path) or dot)
+Original test has 56 steps
+
+SAVING TEST AS failure.60942.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component4 = "c"                                                         # STEP 0
+ACTION: component4 = "c" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'c' : <type 'str'>
+==================================================
+component3 = "alpha"                                                     # STEP 1
+ACTION: component3 = "alpha" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'alpha' : <type 'str'>
+==================================================
+component2 = "phi"                                                       # STEP 2
+ACTION: component2 = "phi" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'phi' : <type 'str'>
+==================================================
+str3 = ""                                                                # STEP 3
+ACTION: str3 = "" 
+str3 = None : <type 'NoneType'>
+=> str3 = '' : <type 'str'>
+==================================================
+str3 += 'l'                                                              # STEP 4
+ACTION: str3 += 'l' 
+str3 = '' : <type 'str'>
+=> str3 = 'l' : <type 'str'>
+==================================================
+str3 += 'u'                                                              # STEP 5
+ACTION: str3 += 'u' 
+str3 = 'l' : <type 'str'>
+=> str3 = 'lu' : <type 'str'>
+==================================================
+path1 = "/Volumes/ramdisk/test"                                          # STEP 6
+ACTION: path1 = "/Volumes/ramdisk/test" 
+path1 = None : <type 'NoneType'>
+=> path1 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str3 += 'a'                                                              # STEP 7
+ACTION: str3 += 'a' 
+str3 = 'lu' : <type 'str'>
+=> str3 = 'lua' : <type 'str'>
+==================================================
+path3 = "/Volumes/ramdisk/test"                                          # STEP 8
+ACTION: path3 = "/Volumes/ramdisk/test" 
+path3 = None : <type 'NoneType'>
+=> path3 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+component0 = "epsilon"                                                   # STEP 9
+ACTION: component0 = "epsilon" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'epsilon' : <type 'str'>
+==================================================
+str2 = ""                                                               # STEP 10
+ACTION: str2 = "" 
+str2 = None : <type 'NoneType'>
+=> str2 = '' : <type 'str'>
+==================================================
+str3 += " "                                                             # STEP 11
+ACTION: str3 += " " 
+str3 = 'lua' : <type 'str'>
+=> str3 = 'lua ' : <type 'str'>
+==================================================
+bytes1 = 0                                                              # STEP 12
+ACTION: bytes1 = 0 
+bytes1 = None : <type 'NoneType'>
+=> bytes1 = 0 : <type 'int'>
+==================================================
+str2 += 'j'                                                             # STEP 13
+ACTION: str2 += 'j' 
+str2 = '' : <type 'str'>
+=> str2 = 'j' : <type 'str'>
+==================================================
+str3 += 'd'                                                             # STEP 14
+ACTION: str3 += 'd' 
+str3 = 'lua ' : <type 'str'>
+=> str3 = 'lua d' : <type 'str'>
+==================================================
+str2 += 'm'                                                             # STEP 15
+ACTION: str2 += 'm' 
+str2 = 'j' : <type 'str'>
+=> str2 = 'jm' : <type 'str'>
+==================================================
+component1 = "lambda"                                                   # STEP 16
+ACTION: component1 = "lambda" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'lambda' : <type 'str'>
+==================================================
+str3 += 'o'                                                             # STEP 17
+ACTION: str3 += 'o' 
+str3 = 'lua d' : <type 'str'>
+=> str3 = 'lua do' : <type 'str'>
+==================================================
+str3 += 'n'                                                             # STEP 18
+ACTION: str3 += 'n' 
+str3 = 'lua do' : <type 'str'>
+=> str3 = 'lua don' : <type 'str'>
+==================================================
+str3 += 'p'                                                             # STEP 19
+ACTION: str3 += 'p' 
+str3 = 'lua don' : <type 'str'>
+=> str3 = 'lua donp' : <type 'str'>
+==================================================
+str3 += 'i'                                                             # STEP 20
+ACTION: str3 += 'i' 
+str3 = 'lua donp' : <type 'str'>
+=> str3 = 'lua donpi' : <type 'str'>
+==================================================
+str3 += 'p'                                                             # STEP 21
+ACTION: str3 += 'p' 
+str3 = 'lua donpi' : <type 'str'>
+=> str3 = 'lua donpip' : <type 'str'>
+==================================================
+str2 += 'y'                                                             # STEP 22
+ACTION: str2 += 'y' 
+str2 = 'jm' : <type 'str'>
+=> str2 = 'jmy' : <type 'str'>
+==================================================
+str2 += 'f'                                                             # STEP 23
+ACTION: str2 += 'f' 
+str2 = 'jmy' : <type 'str'>
+=> str2 = 'jmyf' : <type 'str'>
+==================================================
+str2 += 'k'                                                             # STEP 24
+ACTION: str2 += 'k' 
+str2 = 'jmyf' : <type 'str'>
+=> str2 = 'jmyfk' : <type 'str'>
+==================================================
+str3 += 'l'                                                             # STEP 25
+ACTION: str3 += 'l' 
+str3 = 'lua donpip' : <type 'str'>
+=> str3 = 'lua donpipl' : <type 'str'>
+==================================================
+path1 += "/" + component4                                               # STEP 26
+ACTION: path1 += "/" + component4 
+component4 = 'c' : <type 'str'>
+path1 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/c' : <type 'str'>
+==================================================
+str2 += 'g'                                                             # STEP 27
+ACTION: str2 += 'g' 
+str2 = 'jmyfk' : <type 'str'>
+=> str2 = 'jmyfkg' : <type 'str'>
+==================================================
+path0 = "/Volumes/ramdisk/test"                                         # STEP 28
+ACTION: path0 = "/Volumes/ramdisk/test" 
+path0 = None : <type 'NoneType'>
+=> path0 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str3 += 'x'                                                             # STEP 29
+ACTION: str3 += 'x' 
+str3 = 'lua donpipl' : <type 'str'>
+=> str3 = 'lua donpiplx' : <type 'str'>
+==================================================
+str4 = ""                                                               # STEP 30
+ACTION: str4 = "" 
+str4 = None : <type 'NoneType'>
+=> str4 = '' : <type 'str'>
+==================================================
+str2 += 'n'                                                             # STEP 31
+ACTION: str2 += 'n' 
+str2 = 'jmyfkg' : <type 'str'>
+=> str2 = 'jmyfkgn' : <type 'str'>
+==================================================
+str2 += 'a'                                                             # STEP 32
+ACTION: str2 += 'a' 
+str2 = 'jmyfkgn' : <type 'str'>
+=> str2 = 'jmyfkgna' : <type 'str'>
+==================================================
+str4 += 'i'                                                             # STEP 33
+ACTION: str4 += 'i' 
+str4 = '' : <type 'str'>
+=> str4 = 'i' : <type 'str'>
+==================================================
+str3 += 'j'                                                             # STEP 34
+ACTION: str3 += 'j' 
+str3 = 'lua donpiplx' : <type 'str'>
+=> str3 = 'lua donpiplxj' : <type 'str'>
+==================================================
+str2 += 'g'                                                             # STEP 35
+ACTION: str2 += 'g' 
+str2 = 'jmyfkgna' : <type 'str'>
+=> str2 = 'jmyfkgnag' : <type 'str'>
+==================================================
+path1 += "/" + component4                                               # STEP 36
+ACTION: path1 += "/" + component4 
+component4 = 'c' : <type 'str'>
+path1 = '/Volumes/ramdisk/test/c' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/c/c' : <type 'str'>
+==================================================
+str2 += 'y'                                                             # STEP 37
+ACTION: str2 += 'y' 
+str2 = 'jmyfkgnag' : <type 'str'>
+=> str2 = 'jmyfkgnagy' : <type 'str'>
+==================================================
+path0 += "/" + component4                                               # STEP 38
+ACTION: path0 += "/" + component4 
+component4 = 'c' : <type 'str'>
+path0 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path0 = '/Volumes/ramdisk/test/c' : <type 'str'>
+==================================================
+str4 += 'm'                                                             # STEP 39
+ACTION: str4 += 'm' 
+str4 = 'i' : <type 'str'>
+=> str4 = 'im' : <type 'str'>
+==================================================
+path1 += "/" + component4                                               # STEP 40
+ACTION: path1 += "/" + component4 
+component4 = 'c' : <type 'str'>
+path1 = '/Volumes/ramdisk/test/c/c' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/c/c/c' : <type 'str'>
+==================================================
+component4 = "a"                                                        # STEP 41
+ACTION: component4 = "a" 
+component4 = 'c' : <type 'str'>
+=> component4 = 'a' : <type 'str'>
+==================================================
+str3 += 'f'                                                             # STEP 42
+ACTION: str3 += 'f' 
+str3 = 'lua donpiplxj' : <type 'str'>
+=> str3 = 'lua donpiplxjf' : <type 'str'>
+==================================================
+str2 += 'c'                                                             # STEP 43
+ACTION: str2 += 'c' 
+str2 = 'jmyfkgnagy' : <type 'str'>
+=> str2 = 'jmyfkgnagyc' : <type 'str'>
+==================================================
+str3 = ""                                                               # STEP 44
+ACTION: str3 = "" 
+str3 = 'lua donpiplxjf' : <type 'str'>
+=> str3 = '' : <type 'str'>
+==================================================
+str4 += 'e'                                                             # STEP 45
+ACTION: str4 += 'e' 
+str4 = 'im' : <type 'str'>
+=> str4 = 'ime' : <type 'str'>
+==================================================
+str4 += 'i'                                                             # STEP 46
+ACTION: str4 += 'i' 
+str4 = 'ime' : <type 'str'>
+=> str4 = 'imei' : <type 'str'>
+==================================================
+str2 += 'n'                                                             # STEP 47
+ACTION: str2 += 'n' 
+str2 = 'jmyfkgnagyc' : <type 'str'>
+=> str2 = 'jmyfkgnagycn' : <type 'str'>
+==================================================
+str4 += 'k'                                                             # STEP 48
+ACTION: str4 += 'k' 
+str4 = 'imei' : <type 'str'>
+=> str4 = 'imeik' : <type 'str'>
+==================================================
+str3 += 'd'                                                             # STEP 49
+ACTION: str3 += 'd' 
+str3 = '' : <type 'str'>
+=> str3 = 'd' : <type 'str'>
+==================================================
+str2 += 'm'                                                             # STEP 50
+ACTION: str2 += 'm' 
+str2 = 'jmyfkgnagycn' : <type 'str'>
+=> str2 = 'jmyfkgnagycnm' : <type 'str'>
+==================================================
+str4 += 'm'                                                             # STEP 51
+ACTION: str4 += 'm' 
+str4 = 'imeik' : <type 'str'>
+=> str4 = 'imeikm' : <type 'str'>
+==================================================
+str4 += 'g'                                                             # STEP 52
+ACTION: str4 += 'g' 
+str4 = 'imeikm' : <type 'str'>
+=> str4 = 'imeikmg' : <type 'str'>
+==================================================
+str2 += 'c'                                                             # STEP 53
+ACTION: str2 += 'c' 
+str2 = 'jmyfkgnagycnm' : <type 'str'>
+=> str2 = 'jmyfkgnagycnmc' : <type 'str'>
+==================================================
+str2 += 'o'                                                             # STEP 54
+ACTION: str2 += 'o' 
+str2 = 'jmyfkgnagycnmc' : <type 'str'>
+=> str2 = 'jmyfkgnagycnmco' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                       # STEP 55
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.TypeError'> unsupported operand type(s) for /: 'str' and 'str'
+ERROR: (<type 'exceptions.TypeError'>, TypeError("unsupported operand type(s) for /: 'str' and 'str'",), <traceback object at 0x103408320>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 17, in newFakeOS
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 881, in __init__
+    self.AddMountPoint(self.root.name, total_size)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 933, in AddMountPoint
+    path = self.NormalizePath(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1357, in NormalizePath
+    return self.CollapsePath(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1285, in CollapsePath
+    return ((drive / collapsed_path) or dot)
+STOPPING TESTING DUE TO FAILED TEST
+0.0229921340942 TOTAL RUNTIME
+1 EXECUTED
+56 TOTAL TEST OPERATIONS
+0.000893354415894 TIME SPENT EXECUTING TEST OPERATIONS
+0.00263476371765 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+3.21865081787e-05 TIME SPENT CHECKING PROPERTIES
+0.000925540924072 TOTAL TIME SPENT RUNNING SUT
+0.0039119720459 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

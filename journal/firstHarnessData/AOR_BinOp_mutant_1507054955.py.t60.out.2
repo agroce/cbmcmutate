@@ -1,0 +1,965 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.66625.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.TypeError'>, TypeError("unsupported operand type(s) for /: 'str' and 'str'",), <traceback object at 0x1027d5dd0>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 17, in newFakeOS
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 881, in __init__
+    self.AddMountPoint(self.root.name, total_size)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 933, in AddMountPoint
+    path = self.NormalizePath(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1357, in NormalizePath
+    return self.CollapsePath(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1283, in CollapsePath
+    collapsed_path = (sep / collapsed_path)
+Original test has 178 steps
+
+SAVING TEST AS failure.66625.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component2 = "e"                                                         # STEP 0
+ACTION: component2 = "e" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'e' : <type 'str'>
+==================================================
+component0 = "d"                                                         # STEP 1
+ACTION: component0 = "d" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'd' : <type 'str'>
+==================================================
+str1 = ""                                                                # STEP 2
+ACTION: str1 = "" 
+str1 = None : <type 'NoneType'>
+=> str1 = '' : <type 'str'>
+==================================================
+component1 = "a"                                                         # STEP 3
+ACTION: component1 = "a" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'a' : <type 'str'>
+==================================================
+str1 += 'b'                                                              # STEP 4
+ACTION: str1 += 'b' 
+str1 = '' : <type 'str'>
+=> str1 = 'b' : <type 'str'>
+==================================================
+str1 += 's'                                                              # STEP 5
+ACTION: str1 += 's' 
+str1 = 'b' : <type 'str'>
+=> str1 = 'bs' : <type 'str'>
+==================================================
+component3 = "alpha"                                                     # STEP 6
+ACTION: component3 = "alpha" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'alpha' : <type 'str'>
+==================================================
+str1 += 't'                                                              # STEP 7
+ACTION: str1 += 't' 
+str1 = 'bs' : <type 'str'>
+=> str1 = 'bst' : <type 'str'>
+==================================================
+str1 += " "                                                              # STEP 8
+ACTION: str1 += " " 
+str1 = 'bst' : <type 'str'>
+=> str1 = 'bst ' : <type 'str'>
+==================================================
+str1 += 'h'                                                              # STEP 9
+ACTION: str1 += 'h' 
+str1 = 'bst ' : <type 'str'>
+=> str1 = 'bst h' : <type 'str'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                         # STEP 10
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = None : <type 'NoneType'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str1 += 'a'                                                             # STEP 11
+ACTION: str1 += 'a' 
+str1 = 'bst h' : <type 'str'>
+=> str1 = 'bst ha' : <type 'str'>
+==================================================
+component4 = "e"                                                        # STEP 12
+ACTION: component4 = "e" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'e' : <type 'str'>
+==================================================
+str1 += 'h'                                                             # STEP 13
+ACTION: str1 += 'h' 
+str1 = 'bst ha' : <type 'str'>
+=> str1 = 'bst hah' : <type 'str'>
+==================================================
+str2 = ""                                                               # STEP 14
+ACTION: str2 = "" 
+str2 = None : <type 'NoneType'>
+=> str2 = '' : <type 'str'>
+==================================================
+str1 += 'z'                                                             # STEP 15
+ACTION: str1 += 'z' 
+str1 = 'bst hah' : <type 'str'>
+=> str1 = 'bst hahz' : <type 'str'>
+==================================================
+str1 += 'h'                                                             # STEP 16
+ACTION: str1 += 'h' 
+str1 = 'bst hahz' : <type 'str'>
+=> str1 = 'bst hahzh' : <type 'str'>
+==================================================
+str1 += 'm'                                                             # STEP 17
+ACTION: str1 += 'm' 
+str1 = 'bst hahzh' : <type 'str'>
+=> str1 = 'bst hahzhm' : <type 'str'>
+==================================================
+str2 += 'c'                                                             # STEP 18
+ACTION: str2 += 'c' 
+str2 = '' : <type 'str'>
+=> str2 = 'c' : <type 'str'>
+==================================================
+str1 += 'h'                                                             # STEP 19
+ACTION: str1 += 'h' 
+str1 = 'bst hahzhm' : <type 'str'>
+=> str1 = 'bst hahzhmh' : <type 'str'>
+==================================================
+str2 += 'k'                                                             # STEP 20
+ACTION: str2 += 'k' 
+str2 = 'c' : <type 'str'>
+=> str2 = 'ck' : <type 'str'>
+==================================================
+str1 += 'u'                                                             # STEP 21
+ACTION: str1 += 'u' 
+str1 = 'bst hahzhmh' : <type 'str'>
+=> str1 = 'bst hahzhmhu' : <type 'str'>
+==================================================
+str2 += 'q'                                                             # STEP 22
+ACTION: str2 += 'q' 
+str2 = 'ck' : <type 'str'>
+=> str2 = 'ckq' : <type 'str'>
+==================================================
+str1 += 'd'                                                             # STEP 23
+ACTION: str1 += 'd' 
+str1 = 'bst hahzhmhu' : <type 'str'>
+=> str1 = 'bst hahzhmhud' : <type 'str'>
+==================================================
+path1 = "/Volumes/ramdisk/test"                                         # STEP 24
+ACTION: path1 = "/Volumes/ramdisk/test" 
+path1 = None : <type 'NoneType'>
+=> path1 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str1 += 'n'                                                             # STEP 25
+ACTION: str1 += 'n' 
+str1 = 'bst hahzhmhud' : <type 'str'>
+=> str1 = 'bst hahzhmhudn' : <type 'str'>
+==================================================
+str2 += 'l'                                                             # STEP 26
+ACTION: str2 += 'l' 
+str2 = 'ckq' : <type 'str'>
+=> str2 = 'ckql' : <type 'str'>
+==================================================
+path4 += "/" + component4                                               # STEP 27
+ACTION: path4 += "/" + component4 
+component4 = 'e' : <type 'str'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/e' : <type 'str'>
+==================================================
+str1 += 'q'                                                             # STEP 28
+ACTION: str1 += 'q' 
+str1 = 'bst hahzhmhudn' : <type 'str'>
+=> str1 = 'bst hahzhmhudnq' : <type 'str'>
+==================================================
+str1 += 'n'                                                             # STEP 29
+ACTION: str1 += 'n' 
+str1 = 'bst hahzhmhudnq' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqn' : <type 'str'>
+==================================================
+path1 += "/" + component3                                               # STEP 30
+ACTION: path1 += "/" + component3 
+component3 = 'alpha' : <type 'str'>
+path1 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/alpha' : <type 'str'>
+==================================================
+str2 += 'y'                                                             # STEP 31
+ACTION: str2 += 'y' 
+str2 = 'ckql' : <type 'str'>
+=> str2 = 'ckqly' : <type 'str'>
+==================================================
+str1 += 'u'                                                             # STEP 32
+ACTION: str1 += 'u' 
+str1 = 'bst hahzhmhudnqn' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnu' : <type 'str'>
+==================================================
+path1 += "/" + component2                                               # STEP 33
+ACTION: path1 += "/" + component2 
+component2 = 'e' : <type 'str'>
+path1 = '/Volumes/ramdisk/test/alpha' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/alpha/e' : <type 'str'>
+==================================================
+component4 = "f"                                                        # STEP 34
+ACTION: component4 = "f" 
+component4 = 'e' : <type 'str'>
+=> component4 = 'f' : <type 'str'>
+==================================================
+component2 = "h"                                                        # STEP 35
+ACTION: component2 = "h" 
+component2 = 'e' : <type 'str'>
+=> component2 = 'h' : <type 'str'>
+==================================================
+str1 += 's'                                                             # STEP 36
+ACTION: str1 += 's' 
+str1 = 'bst hahzhmhudnqnu' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnus' : <type 'str'>
+==================================================
+str1 += 't'                                                             # STEP 37
+ACTION: str1 += 't' 
+str1 = 'bst hahzhmhudnqnus' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust' : <type 'str'>
+==================================================
+str2 += 'j'                                                             # STEP 38
+ACTION: str2 += 'j' 
+str2 = 'ckqly' : <type 'str'>
+=> str2 = 'ckqlyj' : <type 'str'>
+==================================================
+str1 += " "                                                             # STEP 39
+ACTION: str1 += " " 
+str1 = 'bst hahzhmhudnqnust' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust ' : <type 'str'>
+==================================================
+str2 += 'i'                                                             # STEP 40
+ACTION: str2 += 'i' 
+str2 = 'ckqlyj' : <type 'str'>
+=> str2 = 'ckqlyji' : <type 'str'>
+==================================================
+component3 = "f"                                                        # STEP 41
+ACTION: component3 = "f" 
+component3 = 'alpha' : <type 'str'>
+=> component3 = 'f' : <type 'str'>
+==================================================
+str2 += 'i'                                                             # STEP 42
+ACTION: str2 += 'i' 
+str2 = 'ckqlyji' : <type 'str'>
+=> str2 = 'ckqlyjii' : <type 'str'>
+==================================================
+bytes0 = 0                                                              # STEP 43
+ACTION: bytes0 = 0 
+bytes0 = None : <type 'NoneType'>
+=> bytes0 = 0 : <type 'int'>
+==================================================
+str1 += 'z'                                                             # STEP 44
+ACTION: str1 += 'z' 
+str1 = 'bst hahzhmhudnqnust ' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust z' : <type 'str'>
+==================================================
+str2 += 'h'                                                             # STEP 45
+ACTION: str2 += 'h' 
+str2 = 'ckqlyjii' : <type 'str'>
+=> str2 = 'ckqlyjiih' : <type 'str'>
+==================================================
+bytes1 = 0                                                              # STEP 46
+ACTION: bytes1 = 0 
+bytes1 = None : <type 'NoneType'>
+=> bytes1 = 0 : <type 'int'>
+==================================================
+str2 += 'l'                                                             # STEP 47
+ACTION: str2 += 'l' 
+str2 = 'ckqlyjiih' : <type 'str'>
+=> str2 = 'ckqlyjiihl' : <type 'str'>
+==================================================
+str1 += 'o'                                                             # STEP 48
+ACTION: str1 += 'o' 
+str1 = 'bst hahzhmhudnqnust z' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zo' : <type 'str'>
+==================================================
+path4 += "/" + component0                                               # STEP 49
+ACTION: path4 += "/" + component0 
+component0 = 'd' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/e' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/e/d' : <type 'str'>
+==================================================
+path1 += "/" + component2                                               # STEP 50
+ACTION: path1 += "/" + component2 
+component2 = 'h' : <type 'str'>
+path1 = '/Volumes/ramdisk/test/alpha/e' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/alpha/e/h' : <type 'str'>
+==================================================
+path2 = "/Volumes/ramdisk/test"                                         # STEP 51
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = None : <type 'NoneType'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+path1 += "/" + component2                                               # STEP 52
+ACTION: path1 += "/" + component2 
+component2 = 'h' : <type 'str'>
+path1 = '/Volumes/ramdisk/test/alpha/e/h' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/alpha/e/h/h' : <type 'str'>
+==================================================
+str2 += 'w'                                                             # STEP 53
+ACTION: str2 += 'w' 
+str2 = 'ckqlyjiihl' : <type 'str'>
+=> str2 = 'ckqlyjiihlw' : <type 'str'>
+==================================================
+path4 += "/" + component1                                               # STEP 54
+ACTION: path4 += "/" + component1 
+component1 = 'a' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/e/d' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/e/d/a' : <type 'str'>
+==================================================
+component0 = "d"                                                        # STEP 55
+ACTION: component0 = "d" 
+component0 = 'd' : <type 'str'>
+==================================================
+str0 = ""                                                               # STEP 56
+ACTION: str0 = "" 
+str0 = None : <type 'NoneType'>
+=> str0 = '' : <type 'str'>
+==================================================
+str1 += 'd'                                                             # STEP 57
+ACTION: str1 += 'd' 
+str1 = 'bst hahzhmhudnqnust zo' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zod' : <type 'str'>
+==================================================
+str2 += 'z'                                                             # STEP 58
+ACTION: str2 += 'z' 
+str2 = 'ckqlyjiihlw' : <type 'str'>
+=> str2 = 'ckqlyjiihlwz' : <type 'str'>
+==================================================
+path1 += "/" + component4                                               # STEP 59
+ACTION: path1 += "/" + component4 
+component4 = 'f' : <type 'str'>
+path1 = '/Volumes/ramdisk/test/alpha/e/h/h' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/alpha/e/h/h/f' : <type 'str'>
+==================================================
+bytes4 = 0                                                              # STEP 60
+ACTION: bytes4 = 0 
+bytes4 = None : <type 'NoneType'>
+=> bytes4 = 0 : <type 'int'>
+==================================================
+path4 += "/" + component1                                               # STEP 61
+ACTION: path4 += "/" + component1 
+component1 = 'a' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/e/d/a' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/e/d/a/a' : <type 'str'>
+==================================================
+path1 += "/" + component1                                               # STEP 62
+ACTION: path1 += "/" + component1 
+component1 = 'a' : <type 'str'>
+path1 = '/Volumes/ramdisk/test/alpha/e/h/h/f' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/alpha/e/h/h/f/a' : <type 'str'>
+==================================================
+component1 = "d"                                                        # STEP 63
+ACTION: component1 = "d" 
+component1 = 'a' : <type 'str'>
+=> component1 = 'd' : <type 'str'>
+==================================================
+str2 += 'l'                                                             # STEP 64
+ACTION: str2 += 'l' 
+str2 = 'ckqlyjiihlwz' : <type 'str'>
+=> str2 = 'ckqlyjiihlwzl' : <type 'str'>
+==================================================
+str0 += 'c'                                                             # STEP 65
+ACTION: str0 += 'c' 
+str0 = '' : <type 'str'>
+=> str0 = 'c' : <type 'str'>
+==================================================
+component2 = "alpha"                                                    # STEP 66
+ACTION: component2 = "alpha" 
+component2 = 'h' : <type 'str'>
+=> component2 = 'alpha' : <type 'str'>
+==================================================
+str0 += 'j'                                                             # STEP 67
+ACTION: str0 += 'j' 
+str0 = 'c' : <type 'str'>
+=> str0 = 'cj' : <type 'str'>
+==================================================
+str1 += 'i'                                                             # STEP 68
+ACTION: str1 += 'i' 
+str1 = 'bst hahzhmhudnqnust zod' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodi' : <type 'str'>
+==================================================
+bytes1 += 1                                                             # STEP 69
+ACTION: bytes1 += 1 
+bytes1 = 0 : <type 'int'>
+=> bytes1 = 1 : <type 'int'>
+==================================================
+str0 += 't'                                                             # STEP 70
+ACTION: str0 += 't' 
+str0 = 'cj' : <type 'str'>
+=> str0 = 'cjt' : <type 'str'>
+==================================================
+str2 += 'e'                                                             # STEP 71
+ACTION: str2 += 'e' 
+str2 = 'ckqlyjiihlwzl' : <type 'str'>
+=> str2 = 'ckqlyjiihlwzle' : <type 'str'>
+==================================================
+bytes1 += 1                                                             # STEP 72
+ACTION: bytes1 += 1 
+bytes1 = 1 : <type 'int'>
+=> bytes1 = 2 : <type 'int'>
+==================================================
+path4 += "/" + component2                                               # STEP 73
+ACTION: path4 += "/" + component2 
+component2 = 'alpha' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/e/d/a/a' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/e/d/a/a/alpha' : <type 'str'>
+==================================================
+str1 += 'p'                                                             # STEP 74
+ACTION: str1 += 'p' 
+str1 = 'bst hahzhmhudnqnust zodi' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodip' : <type 'str'>
+==================================================
+str1 += 'e'                                                             # STEP 75
+ACTION: str1 += 'e' 
+str1 = 'bst hahzhmhudnqnust zodip' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipe' : <type 'str'>
+==================================================
+str0 += 'l'                                                             # STEP 76
+ACTION: str0 += 'l' 
+str0 = 'cjt' : <type 'str'>
+=> str0 = 'cjtl' : <type 'str'>
+==================================================
+bytes2 = 0                                                              # STEP 77
+ACTION: bytes2 = 0 
+bytes2 = None : <type 'NoneType'>
+=> bytes2 = 0 : <type 'int'>
+==================================================
+str2 += 'u'                                                             # STEP 78
+ACTION: str2 += 'u' 
+str2 = 'ckqlyjiihlwzle' : <type 'str'>
+=> str2 = 'ckqlyjiihlwzleu' : <type 'str'>
+==================================================
+str0 += 'x'                                                             # STEP 79
+ACTION: str0 += 'x' 
+str0 = 'cjtl' : <type 'str'>
+=> str0 = 'cjtlx' : <type 'str'>
+==================================================
+str1 += 'x'                                                             # STEP 80
+ACTION: str1 += 'x' 
+str1 = 'bst hahzhmhudnqnust zodipe' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipex' : <type 'str'>
+==================================================
+path4 += "/" + component2                                               # STEP 81
+ACTION: path4 += "/" + component2 
+component2 = 'alpha' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/e/d/a/a/alpha' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/e/d/a/a/alpha/alpha' : <type 'str'>
+==================================================
+component4 = "g"                                                        # STEP 82
+ACTION: component4 = "g" 
+component4 = 'f' : <type 'str'>
+=> component4 = 'g' : <type 'str'>
+==================================================
+str2 += 'c'                                                             # STEP 83
+ACTION: str2 += 'c' 
+str2 = 'ckqlyjiihlwzleu' : <type 'str'>
+=> str2 = 'ckqlyjiihlwzleuc' : <type 'str'>
+==================================================
+str1 += " "                                                             # STEP 84
+ACTION: str1 += " " 
+str1 = 'bst hahzhmhudnqnust zodipex' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipex ' : <type 'str'>
+==================================================
+path2 += "/" + component4                                               # STEP 85
+ACTION: path2 += "/" + component4 
+component4 = 'g' : <type 'str'>
+path2 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/g' : <type 'str'>
+==================================================
+str2 += 'f'                                                             # STEP 86
+ACTION: str2 += 'f' 
+str2 = 'ckqlyjiihlwzleuc' : <type 'str'>
+=> str2 = 'ckqlyjiihlwzleucf' : <type 'str'>
+==================================================
+path2 += "/" + component0                                               # STEP 87
+ACTION: path2 += "/" + component0 
+component0 = 'd' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/g' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/g/d' : <type 'str'>
+==================================================
+str1 += 'd'                                                             # STEP 88
+ACTION: str1 += 'd' 
+str1 = 'bst hahzhmhudnqnust zodipex ' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipex d' : <type 'str'>
+==================================================
+str2 += 'f'                                                             # STEP 89
+ACTION: str2 += 'f' 
+str2 = 'ckqlyjiihlwzleucf' : <type 'str'>
+=> str2 = 'ckqlyjiihlwzleucff' : <type 'str'>
+==================================================
+str2 += 'f'                                                             # STEP 90
+ACTION: str2 += 'f' 
+str2 = 'ckqlyjiihlwzleucff' : <type 'str'>
+=> str2 = 'ckqlyjiihlwzleucfff' : <type 'str'>
+==================================================
+str2 += 'd'                                                             # STEP 91
+ACTION: str2 += 'd' 
+str2 = 'ckqlyjiihlwzleucfff' : <type 'str'>
+=> str2 = 'ckqlyjiihlwzleucfffd' : <type 'str'>
+==================================================
+path4 += "/" + component4                                               # STEP 92
+ACTION: path4 += "/" + component4 
+component4 = 'g' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/e/d/a/a/alpha/alpha' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/e/d/a/a/alpha/alpha/g' : <type 'str'>
+==================================================
+str0 += 'k'                                                             # STEP 93
+ACTION: str0 += 'k' 
+str0 = 'cjtlx' : <type 'str'>
+=> str0 = 'cjtlxk' : <type 'str'>
+==================================================
+component4 = "beta"                                                     # STEP 94
+ACTION: component4 = "beta" 
+component4 = 'g' : <type 'str'>
+=> component4 = 'beta' : <type 'str'>
+==================================================
+component0 = "a"                                                        # STEP 95
+ACTION: component0 = "a" 
+component0 = 'd' : <type 'str'>
+=> component0 = 'a' : <type 'str'>
+==================================================
+str1 += 's'                                                             # STEP 96
+ACTION: str1 += 's' 
+str1 = 'bst hahzhmhudnqnust zodipex d' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipex ds' : <type 'str'>
+==================================================
+component2 = "f"                                                        # STEP 97
+ACTION: component2 = "f" 
+component2 = 'alpha' : <type 'str'>
+=> component2 = 'f' : <type 'str'>
+==================================================
+path2 += "/" + component0                                               # STEP 98
+ACTION: path2 += "/" + component0 
+component0 = 'a' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/g/d' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/g/d/a' : <type 'str'>
+==================================================
+component0 = "c"                                                        # STEP 99
+ACTION: component0 = "c" 
+component0 = 'a' : <type 'str'>
+=> component0 = 'c' : <type 'str'>
+==================================================
+str0 += 'm'                                                            # STEP 100
+ACTION: str0 += 'm' 
+str0 = 'cjtlxk' : <type 'str'>
+=> str0 = 'cjtlxkm' : <type 'str'>
+==================================================
+str0 += 'o'                                                            # STEP 101
+ACTION: str0 += 'o' 
+str0 = 'cjtlxkm' : <type 'str'>
+=> str0 = 'cjtlxkmo' : <type 'str'>
+==================================================
+str0 += 'd'                                                            # STEP 102
+ACTION: str0 += 'd' 
+str0 = 'cjtlxkmo' : <type 'str'>
+=> str0 = 'cjtlxkmod' : <type 'str'>
+==================================================
+str1 += 'v'                                                            # STEP 103
+ACTION: str1 += 'v' 
+str1 = 'bst hahzhmhudnqnust zodipex ds' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipex dsv' : <type 'str'>
+==================================================
+str2 += 'q'                                                            # STEP 104
+ACTION: str2 += 'q' 
+str2 = 'ckqlyjiihlwzleucfffd' : <type 'str'>
+=> str2 = 'ckqlyjiihlwzleucfffdq' : <type 'str'>
+==================================================
+path1 += "/" + component4                                              # STEP 105
+ACTION: path1 += "/" + component4 
+component4 = 'beta' : <type 'str'>
+path1 = '/Volumes/ramdisk/test/alpha/e/h/h/f/a' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/alpha/e/h/h/f/a/beta' : <type 'str'>
+==================================================
+component4 = "epsilon"                                                 # STEP 106
+ACTION: component4 = "epsilon" 
+component4 = 'beta' : <type 'str'>
+=> component4 = 'epsilon' : <type 'str'>
+==================================================
+str2 += 't'                                                            # STEP 107
+ACTION: str2 += 't' 
+str2 = 'ckqlyjiihlwzleucfffdq' : <type 'str'>
+=> str2 = 'ckqlyjiihlwzleucfffdqt' : <type 'str'>
+==================================================
+str0 += 't'                                                            # STEP 108
+ACTION: str0 += 't' 
+str0 = 'cjtlxkmod' : <type 'str'>
+=> str0 = 'cjtlxkmodt' : <type 'str'>
+==================================================
+str1 += 'e'                                                            # STEP 109
+ACTION: str1 += 'e' 
+str1 = 'bst hahzhmhudnqnust zodipex dsv' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipex dsve' : <type 'str'>
+==================================================
+bytes1 = 0                                                             # STEP 110
+ACTION: bytes1 = 0 
+bytes1 = 2 : <type 'int'>
+=> bytes1 = 0 : <type 'int'>
+==================================================
+str2 += 'k'                                                            # STEP 111
+ACTION: str2 += 'k' 
+str2 = 'ckqlyjiihlwzleucfffdqt' : <type 'str'>
+=> str2 = 'ckqlyjiihlwzleucfffdqtk' : <type 'str'>
+==================================================
+path1 = "/Volumes/ramdisk/test"                                        # STEP 112
+ACTION: path1 = "/Volumes/ramdisk/test" 
+path1 = '/Volumes/ramdisk/test/alpha/e/h/h/f/a/beta' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str2 = ""                                                              # STEP 113
+ACTION: str2 = "" 
+str2 = 'ckqlyjiihlwzleucfffdqtk' : <type 'str'>
+=> str2 = '' : <type 'str'>
+==================================================
+str1 += 'i'                                                            # STEP 114
+ACTION: str1 += 'i' 
+str1 = 'bst hahzhmhudnqnust zodipex dsve' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipex dsvei' : <type 'str'>
+==================================================
+path1 += "/" + component1                                              # STEP 115
+ACTION: path1 += "/" + component1 
+component1 = 'd' : <type 'str'>
+path1 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/d' : <type 'str'>
+==================================================
+path1 += "/" + component2                                              # STEP 116
+ACTION: path1 += "/" + component2 
+component2 = 'f' : <type 'str'>
+path1 = '/Volumes/ramdisk/test/d' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/d/f' : <type 'str'>
+==================================================
+str1 += 'y'                                                            # STEP 117
+ACTION: str1 += 'y' 
+str1 = 'bst hahzhmhudnqnust zodipex dsvei' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipex dsveiy' : <type 'str'>
+==================================================
+str1 += 'z'                                                            # STEP 118
+ACTION: str1 += 'z' 
+str1 = 'bst hahzhmhudnqnust zodipex dsveiy' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipex dsveiyz' : <type 'str'>
+==================================================
+component2 = "epsilon"                                                 # STEP 119
+ACTION: component2 = "epsilon" 
+component2 = 'f' : <type 'str'>
+=> component2 = 'epsilon' : <type 'str'>
+==================================================
+component1 = "c"                                                       # STEP 120
+ACTION: component1 = "c" 
+component1 = 'd' : <type 'str'>
+=> component1 = 'c' : <type 'str'>
+==================================================
+bytes3 = 0                                                             # STEP 121
+ACTION: bytes3 = 0 
+bytes3 = None : <type 'NoneType'>
+=> bytes3 = 0 : <type 'int'>
+==================================================
+str1 += 'o'                                                            # STEP 122
+ACTION: str1 += 'o' 
+str1 = 'bst hahzhmhudnqnust zodipex dsveiyz' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipex dsveiyzo' : <type 'str'>
+==================================================
+str0 += 'i'                                                            # STEP 123
+ACTION: str0 += 'i' 
+str0 = 'cjtlxkmodt' : <type 'str'>
+=> str0 = 'cjtlxkmodti' : <type 'str'>
+==================================================
+path4 += "/" + component1                                              # STEP 124
+ACTION: path4 += "/" + component1 
+component1 = 'c' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/e/d/a/a/alpha/alpha/g' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/e/d/a/a/alpha/alpha/g/c' : <type 'str'>
+==================================================
+path2 += "/" + component1                                              # STEP 125
+ACTION: path2 += "/" + component1 
+component1 = 'c' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/g/d/a' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/g/d/a/c' : <type 'str'>
+==================================================
+str1 += 'n'                                                            # STEP 126
+ACTION: str1 += 'n' 
+str1 = 'bst hahzhmhudnqnust zodipex dsveiyzo' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipex dsveiyzon' : <type 'str'>
+==================================================
+str1 += 'x'                                                            # STEP 127
+ACTION: str1 += 'x' 
+str1 = 'bst hahzhmhudnqnust zodipex dsveiyzon' : <type 'str'>
+=> str1 = 'bst hahzhmhudnqnust zodipex dsveiyzonx' : <type 'str'>
+==================================================
+path1 = "/Volumes/ramdisk/test"                                        # STEP 128
+ACTION: path1 = "/Volumes/ramdisk/test" 
+path1 = '/Volumes/ramdisk/test/d/f' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str1 = ""                                                              # STEP 129
+ACTION: str1 = "" 
+str1 = 'bst hahzhmhudnqnust zodipex dsveiyzonx' : <type 'str'>
+=> str1 = '' : <type 'str'>
+==================================================
+str1 += " "                                                            # STEP 130
+ACTION: str1 += " " 
+str1 = '' : <type 'str'>
+=> str1 = ' ' : <type 'str'>
+==================================================
+str2 += 'r'                                                            # STEP 131
+ACTION: str2 += 'r' 
+str2 = '' : <type 'str'>
+=> str2 = 'r' : <type 'str'>
+==================================================
+str1 += 'w'                                                            # STEP 132
+ACTION: str1 += 'w' 
+str1 = ' ' : <type 'str'>
+=> str1 = ' w' : <type 'str'>
+==================================================
+path3 = "/Volumes/ramdisk/test"                                        # STEP 133
+ACTION: path3 = "/Volumes/ramdisk/test" 
+path3 = None : <type 'NoneType'>
+=> path3 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str2 += 'i'                                                            # STEP 134
+ACTION: str2 += 'i' 
+str2 = 'r' : <type 'str'>
+=> str2 = 'ri' : <type 'str'>
+==================================================
+str2 += 'a'                                                            # STEP 135
+ACTION: str2 += 'a' 
+str2 = 'ri' : <type 'str'>
+=> str2 = 'ria' : <type 'str'>
+==================================================
+str1 += 's'                                                            # STEP 136
+ACTION: str1 += 's' 
+str1 = ' w' : <type 'str'>
+=> str1 = ' ws' : <type 'str'>
+==================================================
+path3 += "/" + component1                                              # STEP 137
+ACTION: path3 += "/" + component1 
+component1 = 'c' : <type 'str'>
+path3 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/c' : <type 'str'>
+==================================================
+str2 += 'f'                                                            # STEP 138
+ACTION: str2 += 'f' 
+str2 = 'ria' : <type 'str'>
+=> str2 = 'riaf' : <type 'str'>
+==================================================
+str0 += 'e'                                                            # STEP 139
+ACTION: str0 += 'e' 
+str0 = 'cjtlxkmodti' : <type 'str'>
+=> str0 = 'cjtlxkmodtie' : <type 'str'>
+==================================================
+str0 += 'w'                                                            # STEP 140
+ACTION: str0 += 'w' 
+str0 = 'cjtlxkmodtie' : <type 'str'>
+=> str0 = 'cjtlxkmodtiew' : <type 'str'>
+==================================================
+str2 += 'p'                                                            # STEP 141
+ACTION: str2 += 'p' 
+str2 = 'riaf' : <type 'str'>
+=> str2 = 'riafp' : <type 'str'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                        # STEP 142
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = '/Volumes/ramdisk/test/e/d/a/a/alpha/alpha/g/c' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str2 += 'h'                                                            # STEP 143
+ACTION: str2 += 'h' 
+str2 = 'riafp' : <type 'str'>
+=> str2 = 'riafph' : <type 'str'>
+==================================================
+path4 += "/" + component0                                              # STEP 144
+ACTION: path4 += "/" + component0 
+component0 = 'c' : <type 'str'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/c' : <type 'str'>
+==================================================
+str2 += 's'                                                            # STEP 145
+ACTION: str2 += 's' 
+str2 = 'riafph' : <type 'str'>
+=> str2 = 'riafphs' : <type 'str'>
+==================================================
+str0 += " "                                                            # STEP 146
+ACTION: str0 += " " 
+str0 = 'cjtlxkmodtiew' : <type 'str'>
+=> str0 = 'cjtlxkmodtiew ' : <type 'str'>
+==================================================
+str2 += 'y'                                                            # STEP 147
+ACTION: str2 += 'y' 
+str2 = 'riafphs' : <type 'str'>
+=> str2 = 'riafphsy' : <type 'str'>
+==================================================
+str2 += 'x'                                                            # STEP 148
+ACTION: str2 += 'x' 
+str2 = 'riafphsy' : <type 'str'>
+=> str2 = 'riafphsyx' : <type 'str'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                        # STEP 149
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = '/Volumes/ramdisk/test/c' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str1 += 'a'                                                            # STEP 150
+ACTION: str1 += 'a' 
+str1 = ' ws' : <type 'str'>
+=> str1 = ' wsa' : <type 'str'>
+==================================================
+path4 += "/" + component0                                              # STEP 151
+ACTION: path4 += "/" + component0 
+component0 = 'c' : <type 'str'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/c' : <type 'str'>
+==================================================
+path4 += "/" + component3                                              # STEP 152
+ACTION: path4 += "/" + component3 
+component3 = 'f' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/c' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/c/f' : <type 'str'>
+==================================================
+str0 += 'y'                                                            # STEP 153
+ACTION: str0 += 'y' 
+str0 = 'cjtlxkmodtiew ' : <type 'str'>
+=> str0 = 'cjtlxkmodtiew y' : <type 'str'>
+==================================================
+str0 += 'f'                                                            # STEP 154
+ACTION: str0 += 'f' 
+str0 = 'cjtlxkmodtiew y' : <type 'str'>
+=> str0 = 'cjtlxkmodtiew yf' : <type 'str'>
+==================================================
+path4 += "/" + component3                                              # STEP 155
+ACTION: path4 += "/" + component3 
+component3 = 'f' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/c/f' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/c/f/f' : <type 'str'>
+==================================================
+str2 += " "                                                            # STEP 156
+ACTION: str2 += " " 
+str2 = 'riafphsyx' : <type 'str'>
+=> str2 = 'riafphsyx ' : <type 'str'>
+==================================================
+path4 += "/" + component2                                              # STEP 157
+ACTION: path4 += "/" + component2 
+component2 = 'epsilon' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/c/f/f' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/c/f/f/epsilon' : <type 'str'>
+==================================================
+component0 = "lambda"                                                  # STEP 158
+ACTION: component0 = "lambda" 
+component0 = 'c' : <type 'str'>
+=> component0 = 'lambda' : <type 'str'>
+==================================================
+str0 += 'x'                                                            # STEP 159
+ACTION: str0 += 'x' 
+str0 = 'cjtlxkmodtiew yf' : <type 'str'>
+=> str0 = 'cjtlxkmodtiew yfx' : <type 'str'>
+==================================================
+str0 += 'd'                                                            # STEP 160
+ACTION: str0 += 'd' 
+str0 = 'cjtlxkmodtiew yfx' : <type 'str'>
+=> str0 = 'cjtlxkmodtiew yfxd' : <type 'str'>
+==================================================
+component3 = "omega"                                                   # STEP 161
+ACTION: component3 = "omega" 
+component3 = 'f' : <type 'str'>
+=> component3 = 'omega' : <type 'str'>
+==================================================
+path2 += "/" + component1                                              # STEP 162
+ACTION: path2 += "/" + component1 
+component1 = 'c' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/g/d/a/c' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/g/d/a/c/c' : <type 'str'>
+==================================================
+str4 = ""                                                              # STEP 163
+ACTION: str4 = "" 
+str4 = None : <type 'NoneType'>
+=> str4 = '' : <type 'str'>
+==================================================
+component2 = "gamma"                                                   # STEP 164
+ACTION: component2 = "gamma" 
+component2 = 'epsilon' : <type 'str'>
+=> component2 = 'gamma' : <type 'str'>
+==================================================
+str4 += 'w'                                                            # STEP 165
+ACTION: str4 += 'w' 
+str4 = '' : <type 'str'>
+=> str4 = 'w' : <type 'str'>
+==================================================
+str2 += 't'                                                            # STEP 166
+ACTION: str2 += 't' 
+str2 = 'riafphsyx ' : <type 'str'>
+=> str2 = 'riafphsyx t' : <type 'str'>
+==================================================
+str2 += 'd'                                                            # STEP 167
+ACTION: str2 += 'd' 
+str2 = 'riafphsyx t' : <type 'str'>
+=> str2 = 'riafphsyx td' : <type 'str'>
+==================================================
+str2 += 's'                                                            # STEP 168
+ACTION: str2 += 's' 
+str2 = 'riafphsyx td' : <type 'str'>
+=> str2 = 'riafphsyx tds' : <type 'str'>
+==================================================
+str0 += 'd'                                                            # STEP 169
+ACTION: str0 += 'd' 
+str0 = 'cjtlxkmodtiew yfxd' : <type 'str'>
+=> str0 = 'cjtlxkmodtiew yfxdd' : <type 'str'>
+==================================================
+str0 += 't'                                                            # STEP 170
+ACTION: str0 += 't' 
+str0 = 'cjtlxkmodtiew yfxdd' : <type 'str'>
+=> str0 = 'cjtlxkmodtiew yfxddt' : <type 'str'>
+==================================================
+component1 = "epsilon"                                                 # STEP 171
+ACTION: component1 = "epsilon" 
+component1 = 'c' : <type 'str'>
+=> component1 = 'epsilon' : <type 'str'>
+==================================================
+str4 += 'e'                                                            # STEP 172
+ACTION: str4 += 'e' 
+str4 = 'w' : <type 'str'>
+=> str4 = 'we' : <type 'str'>
+==================================================
+str2 += 'a'                                                            # STEP 173
+ACTION: str2 += 'a' 
+str2 = 'riafphsyx tds' : <type 'str'>
+=> str2 = 'riafphsyx tdsa' : <type 'str'>
+==================================================
+str2 += 'v'                                                            # STEP 174
+ACTION: str2 += 'v' 
+str2 = 'riafphsyx tdsa' : <type 'str'>
+=> str2 = 'riafphsyx tdsav' : <type 'str'>
+==================================================
+str1 += 'z'                                                            # STEP 175
+ACTION: str1 += 'z' 
+str1 = ' wsa' : <type 'str'>
+=> str1 = ' wsaz' : <type 'str'>
+==================================================
+str0 += 'w'                                                            # STEP 176
+ACTION: str0 += 'w' 
+str0 = 'cjtlxkmodtiew yfxddt' : <type 'str'>
+=> str0 = 'cjtlxkmodtiew yfxddtw' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                      # STEP 177
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.TypeError'> unsupported operand type(s) for /: 'str' and 'str'
+ERROR: (<type 'exceptions.TypeError'>, TypeError("unsupported operand type(s) for /: 'str' and 'str'",), <traceback object at 0x102b33830>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 17, in newFakeOS
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 881, in __init__
+    self.AddMountPoint(self.root.name, total_size)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 933, in AddMountPoint
+    path = self.NormalizePath(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1357, in NormalizePath
+    return self.CollapsePath(path)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1283, in CollapsePath
+    collapsed_path = (sep / collapsed_path)
+STOPPING TESTING DUE TO FAILED TEST
+0.0400049686432 TOTAL RUNTIME
+1 EXECUTED
+178 TOTAL TEST OPERATIONS
+0.00296258926392 TIME SPENT EXECUTING TEST OPERATIONS
+0.00944995880127 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+9.96589660645e-05 TIME SPENT CHECKING PROPERTIES
+0.00306224822998 TOTAL TIME SPENT RUNNING SUT
+0.00374579429626 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

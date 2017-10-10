@@ -1,0 +1,120 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.47998.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.OSError'>, OSError(13, 'Permission Denied'), <traceback object at 0x1035ea290>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 21, in newFakeOS
+    fs.CreateDirectory('/Volumes')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2075, in CreateDirectory
+    current_dir.AddEntry(new_dir)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 685, in AddEntry
+    raise OSError(errno.EACCES, 'Permission Denied', self.GetPath())
+Original test has 16 steps
+
+SAVING TEST AS failure.47998.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component3 = "f"                                                         # STEP 0
+ACTION: component3 = "f" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'f' : <type 'str'>
+==================================================
+component2 = "delta"                                                     # STEP 1
+ACTION: component2 = "delta" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'delta' : <type 'str'>
+==================================================
+str1 = ""                                                                # STEP 2
+ACTION: str1 = "" 
+str1 = None : <type 'NoneType'>
+=> str1 = '' : <type 'str'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                          # STEP 3
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = None : <type 'NoneType'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+component0 = "omega"                                                     # STEP 4
+ACTION: component0 = "omega" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'omega' : <type 'str'>
+==================================================
+str1 += 'a'                                                              # STEP 5
+ACTION: str1 += 'a' 
+str1 = '' : <type 'str'>
+=> str1 = 'a' : <type 'str'>
+==================================================
+component4 = "lambda"                                                    # STEP 6
+ACTION: component4 = "lambda" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'lambda' : <type 'str'>
+==================================================
+str1 += 't'                                                              # STEP 7
+ACTION: str1 += 't' 
+str1 = 'a' : <type 'str'>
+=> str1 = 'at' : <type 'str'>
+==================================================
+component1 = "omega"                                                     # STEP 8
+ACTION: component1 = "omega" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'omega' : <type 'str'>
+==================================================
+str1 += 't'                                                              # STEP 9
+ACTION: str1 += 't' 
+str1 = 'at' : <type 'str'>
+=> str1 = 'att' : <type 'str'>
+==================================================
+str1 += 'y'                                                             # STEP 10
+ACTION: str1 += 'y' 
+str1 = 'att' : <type 'str'>
+=> str1 = 'atty' : <type 'str'>
+==================================================
+str1 += 'd'                                                             # STEP 11
+ACTION: str1 += 'd' 
+str1 = 'atty' : <type 'str'>
+=> str1 = 'attyd' : <type 'str'>
+==================================================
+str0 = ""                                                               # STEP 12
+ACTION: str0 = "" 
+str0 = None : <type 'NoneType'>
+=> str0 = '' : <type 'str'>
+==================================================
+path2 = "/Volumes/ramdisk/test"                                         # STEP 13
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = None : <type 'NoneType'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str1 += 'a'                                                             # STEP 14
+ACTION: str1 += 'a' 
+str1 = 'attyd' : <type 'str'>
+=> str1 = 'attyda' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                       # STEP 15
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 13] Permission Denied: '/'
+ERROR: (<type 'exceptions.OSError'>, OSError(13, 'Permission Denied'), <traceback object at 0x103693b48>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 21, in newFakeOS
+    fs.CreateDirectory('/Volumes')
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 2075, in CreateDirectory
+    current_dir.AddEntry(new_dir)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 685, in AddEntry
+    raise OSError(errno.EACCES, 'Permission Denied', self.GetPath())
+STOPPING TESTING DUE TO FAILED TEST
+0.0205600261688 TOTAL RUNTIME
+1 EXECUTED
+16 TOTAL TEST OPERATIONS
+0.000465631484985 TIME SPENT EXECUTING TEST OPERATIONS
+0.00145077705383 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+9.05990600586e-06 TIME SPENT CHECKING PROPERTIES
+0.000474691390991 TOTAL TIME SPENT RUNNING SUT
+0.00322198867798 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

@@ -1,0 +1,150 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.55927.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.TypeError'>, TypeError('an integer is required',), <traceback object at 0x102bb7638>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 25249, in act489
+    self.p_stat[0] = self.p_os[0].lstat(self.p_path[1])
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 3560, in lstat
+    return self.filesystem.GetStat(entry_path, follow_symlinks=False)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1081, in GetStat
+    file_object = self.ResolveObject(entry_path, follow_symlinks, allow_fd=True)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1829, in ResolveObject
+    return self.GetOpenFile(file_path).GetObject()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1209, in GetOpenFile
+    raise TypeError('an integer is required')
+Original test has 19 steps
+
+SAVING TEST AS failure.55927.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component3 = "d"                                                         # STEP 0
+ACTION: component3 = "d" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'd' : <type 'str'>
+==================================================
+component4 = "gamma"                                                     # STEP 1
+ACTION: component4 = "gamma" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'gamma' : <type 'str'>
+==================================================
+component2 = "beta"                                                      # STEP 2
+ACTION: component2 = "beta" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'beta' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                        # STEP 3
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+=> os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x1026f0110> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+REFERENCE ACTION: os_REF0 = os 
+=> os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+==================================================
+str4 = ""                                                                # STEP 4
+ACTION: str4 = "" 
+str4 = None : <type 'NoneType'>
+=> str4 = '' : <type 'str'>
+==================================================
+component1 = "b"                                                         # STEP 5
+ACTION: component1 = "b" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'b' : <type 'str'>
+==================================================
+bytes0 = 0                                                               # STEP 6
+ACTION: bytes0 = 0 
+bytes0 = None : <type 'NoneType'>
+=> bytes0 = 0 : <type 'int'>
+==================================================
+str4 += 'a'                                                              # STEP 7
+ACTION: str4 += 'a' 
+str4 = '' : <type 'str'>
+=> str4 = 'a' : <type 'str'>
+==================================================
+component0 = "h"                                                         # STEP 8
+ACTION: component0 = "h" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'h' : <type 'str'>
+==================================================
+str4 += 'o'                                                              # STEP 9
+ACTION: str4 += 'o' 
+str4 = 'a' : <type 'str'>
+=> str4 = 'ao' : <type 'str'>
+==================================================
+str4 += 'j'                                                             # STEP 10
+ACTION: str4 += 'j' 
+str4 = 'ao' : <type 'str'>
+=> str4 = 'aoj' : <type 'str'>
+==================================================
+str4 += 'b'                                                             # STEP 11
+ACTION: str4 += 'b' 
+str4 = 'aoj' : <type 'str'>
+=> str4 = 'aojb' : <type 'str'>
+==================================================
+path1 = "/Volumes/ramdisk/test"                                         # STEP 12
+ACTION: path1 = "/Volumes/ramdisk/test" 
+path1 = None : <type 'NoneType'>
+=> path1 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+bytes1 = 0                                                              # STEP 13
+ACTION: bytes1 = 0 
+bytes1 = None : <type 'NoneType'>
+=> bytes1 = 0 : <type 'int'>
+==================================================
+str4 += 'p'                                                             # STEP 14
+ACTION: str4 += 'p' 
+str4 = 'aojb' : <type 'str'>
+=> str4 = 'aojbp' : <type 'str'>
+==================================================
+os0.symlink(path1,path1)                                                # STEP 15
+ACTION: os0.symlink(path1,path1) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x1026f0110> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path1 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File already exists in fake filesystem: '/Volumes/ramdisk/test'
+REFERENCE ACTION: os_REF0.symlink(path1,path1) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File exists
+==================================================
+str3 = ""                                                               # STEP 16
+ACTION: str3 = "" 
+str3 = None : <type 'NoneType'>
+=> str3 = '' : <type 'str'>
+==================================================
+path1 += "/" + component3                                               # STEP 17
+ACTION: path1 += "/" + component3 
+component3 = 'd' : <type 'str'>
+path1 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/d' : <type 'str'>
+==================================================
+stat0 = os0.lstat(path1)                                                # STEP 18
+ACTION: stat0 = os0.lstat(path1) 
+stat0 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x1026f0110> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path1 = '/Volumes/ramdisk/test/d' : <type 'str'>
+stat_REF0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXCEPTION: <type 'exceptions.TypeError'> an integer is required
+ERROR: (<type 'exceptions.TypeError'>, TypeError('an integer is required',), <traceback object at 0x1029e9b48>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 25249, in act489
+    self.p_stat[0] = self.p_os[0].lstat(self.p_path[1])
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 3560, in lstat
+    return self.filesystem.GetStat(entry_path, follow_symlinks=False)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1081, in GetStat
+    file_object = self.ResolveObject(entry_path, follow_symlinks, allow_fd=True)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1829, in ResolveObject
+    return self.GetOpenFile(file_path).GetObject()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1209, in GetOpenFile
+    raise TypeError('an integer is required')
+STOPPING TESTING DUE TO FAILED TEST
+0.0228359699249 TOTAL RUNTIME
+1 EXECUTED
+19 TOTAL TEST OPERATIONS
+0.00145602226257 TIME SPENT EXECUTING TEST OPERATIONS
+0.00233578681946 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+1.07288360596e-05 TIME SPENT CHECKING PROPERTIES
+0.00146675109863 TOTAL TIME SPENT RUNNING SUT
+0.00312519073486 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

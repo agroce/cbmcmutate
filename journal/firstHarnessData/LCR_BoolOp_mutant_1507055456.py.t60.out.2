@@ -1,0 +1,261 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.47968.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.AttributeError'>, AttributeError("'dict' object has no attribute 'encode'",), <traceback object at 0x1018c1290>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 17, in newFakeOS
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 863, in __init__
+    self.root = FakeDirectory(self.path_separator, filesystem=self)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 649, in __init__
+    FakeFile.__init__(self, name, (stat.S_IFDIR | perm_bits), {}, filesystem=filesystem)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 368, in __init__
+    self._byte_contents = self._encode_contents(contents)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 443, in _encode_contents
+    contents = contents.encode((self.encoding or locale.getpreferredencoding(False)), self.errors)
+Original test has 40 steps
+
+SAVING TEST AS failure.47968.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component0 = "c"                                                         # STEP 0
+ACTION: component0 = "c" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'c' : <type 'str'>
+==================================================
+component1 = "epsilon"                                                   # STEP 1
+ACTION: component1 = "epsilon" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'epsilon' : <type 'str'>
+==================================================
+component4 = "d"                                                         # STEP 2
+ACTION: component4 = "d" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'd' : <type 'str'>
+==================================================
+component2 = "beta"                                                      # STEP 3
+ACTION: component2 = "beta" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'beta' : <type 'str'>
+==================================================
+component3 = "gamma"                                                     # STEP 4
+ACTION: component3 = "gamma" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'gamma' : <type 'str'>
+==================================================
+path3 = "/Volumes/ramdisk/test"                                          # STEP 5
+ACTION: path3 = "/Volumes/ramdisk/test" 
+path3 = None : <type 'NoneType'>
+=> path3 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+path3 += "/" + component1                                                # STEP 6
+ACTION: path3 += "/" + component1 
+component1 = 'epsilon' : <type 'str'>
+path3 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/epsilon' : <type 'str'>
+==================================================
+path3 = "/Volumes/ramdisk/test"                                          # STEP 7
+ACTION: path3 = "/Volumes/ramdisk/test" 
+path3 = '/Volumes/ramdisk/test/epsilon' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+component1 = "c"                                                         # STEP 8
+ACTION: component1 = "c" 
+component1 = 'epsilon' : <type 'str'>
+=> component1 = 'c' : <type 'str'>
+==================================================
+path2 = "/Volumes/ramdisk/test"                                          # STEP 9
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = None : <type 'NoneType'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+path2 += "/" + component0                                               # STEP 10
+ACTION: path2 += "/" + component0 
+component0 = 'c' : <type 'str'>
+path2 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/c' : <type 'str'>
+==================================================
+component0 = "alpha"                                                    # STEP 11
+ACTION: component0 = "alpha" 
+component0 = 'c' : <type 'str'>
+=> component0 = 'alpha' : <type 'str'>
+==================================================
+path2 += "/" + component1                                               # STEP 12
+ACTION: path2 += "/" + component1 
+component1 = 'c' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/c' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/c/c' : <type 'str'>
+==================================================
+path2 += "/" + component1                                               # STEP 13
+ACTION: path2 += "/" + component1 
+component1 = 'c' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/c/c' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/c/c/c' : <type 'str'>
+==================================================
+path2 = "/Volumes/ramdisk/test"                                         # STEP 14
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = '/Volumes/ramdisk/test/c/c/c' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+path3 += "/" + component3                                               # STEP 15
+ACTION: path3 += "/" + component3 
+component3 = 'gamma' : <type 'str'>
+path3 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/gamma' : <type 'str'>
+==================================================
+component3 = "epsilon"                                                  # STEP 16
+ACTION: component3 = "epsilon" 
+component3 = 'gamma' : <type 'str'>
+=> component3 = 'epsilon' : <type 'str'>
+==================================================
+path2 += "/" + component1                                               # STEP 17
+ACTION: path2 += "/" + component1 
+component1 = 'c' : <type 'str'>
+path2 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/c' : <type 'str'>
+==================================================
+component1 = "delta"                                                    # STEP 18
+ACTION: component1 = "delta" 
+component1 = 'c' : <type 'str'>
+=> component1 = 'delta' : <type 'str'>
+==================================================
+bytes3 = 0                                                              # STEP 19
+ACTION: bytes3 = 0 
+bytes3 = None : <type 'NoneType'>
+=> bytes3 = 0 : <type 'int'>
+==================================================
+path3 += "/" + component0                                               # STEP 20
+ACTION: path3 += "/" + component0 
+component0 = 'alpha' : <type 'str'>
+path3 = '/Volumes/ramdisk/test/gamma' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/gamma/alpha' : <type 'str'>
+==================================================
+component0 = "phi"                                                      # STEP 21
+ACTION: component0 = "phi" 
+component0 = 'alpha' : <type 'str'>
+=> component0 = 'phi' : <type 'str'>
+==================================================
+path2 += "/" + component0                                               # STEP 22
+ACTION: path2 += "/" + component0 
+component0 = 'phi' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/c' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/c/phi' : <type 'str'>
+==================================================
+bytes2 = 0                                                              # STEP 23
+ACTION: bytes2 = 0 
+bytes2 = None : <type 'NoneType'>
+=> bytes2 = 0 : <type 'int'>
+==================================================
+path3 += "/" + component4                                               # STEP 24
+ACTION: path3 += "/" + component4 
+component4 = 'd' : <type 'str'>
+path3 = '/Volumes/ramdisk/test/gamma/alpha' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/gamma/alpha/d' : <type 'str'>
+==================================================
+component0 = "epsilon"                                                  # STEP 25
+ACTION: component0 = "epsilon" 
+component0 = 'phi' : <type 'str'>
+=> component0 = 'epsilon' : <type 'str'>
+==================================================
+component4 = "phi"                                                      # STEP 26
+ACTION: component4 = "phi" 
+component4 = 'd' : <type 'str'>
+=> component4 = 'phi' : <type 'str'>
+==================================================
+path2 = "/Volumes/ramdisk/test"                                         # STEP 27
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = '/Volumes/ramdisk/test/c/phi' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+bytes2 += 1                                                             # STEP 28
+ACTION: bytes2 += 1 
+bytes2 = 0 : <type 'int'>
+=> bytes2 = 1 : <type 'int'>
+==================================================
+bytes2 += 1                                                             # STEP 29
+ACTION: bytes2 += 1 
+bytes2 = 1 : <type 'int'>
+=> bytes2 = 2 : <type 'int'>
+==================================================
+path3 += "/" + component1                                               # STEP 30
+ACTION: path3 += "/" + component1 
+component1 = 'delta' : <type 'str'>
+path3 = '/Volumes/ramdisk/test/gamma/alpha/d' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/gamma/alpha/d/delta' : <type 'str'>
+==================================================
+component1 = "phi"                                                      # STEP 31
+ACTION: component1 = "phi" 
+component1 = 'delta' : <type 'str'>
+=> component1 = 'phi' : <type 'str'>
+==================================================
+path2 += "/" + component4                                               # STEP 32
+ACTION: path2 += "/" + component4 
+component4 = 'phi' : <type 'str'>
+path2 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/phi' : <type 'str'>
+==================================================
+path3 += "/" + component1                                               # STEP 33
+ACTION: path3 += "/" + component1 
+component1 = 'phi' : <type 'str'>
+path3 = '/Volumes/ramdisk/test/gamma/alpha/d/delta' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/gamma/alpha/d/delta/phi' : <type 'str'>
+==================================================
+component4 = "g"                                                        # STEP 34
+ACTION: component4 = "g" 
+component4 = 'phi' : <type 'str'>
+=> component4 = 'g' : <type 'str'>
+==================================================
+component1 = "delta"                                                    # STEP 35
+ACTION: component1 = "delta" 
+component1 = 'phi' : <type 'str'>
+=> component1 = 'delta' : <type 'str'>
+==================================================
+bytes4 = 0                                                              # STEP 36
+ACTION: bytes4 = 0 
+bytes4 = None : <type 'NoneType'>
+=> bytes4 = 0 : <type 'int'>
+==================================================
+path3 += "/" + component4                                               # STEP 37
+ACTION: path3 += "/" + component4 
+component4 = 'g' : <type 'str'>
+path3 = '/Volumes/ramdisk/test/gamma/alpha/d/delta/phi' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/gamma/alpha/d/delta/phi/g' : <type 'str'>
+==================================================
+bytes2 += 1                                                             # STEP 38
+ACTION: bytes2 += 1 
+bytes2 = 2 : <type 'int'>
+=> bytes2 = 3 : <type 'int'>
+==================================================
+os0 = newFakeOS()                                                       # STEP 39
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.AttributeError'> 'dict' object has no attribute 'encode'
+ERROR: (<type 'exceptions.AttributeError'>, AttributeError("'dict' object has no attribute 'encode'",), <traceback object at 0x101a92b48>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 17, in newFakeOS
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 863, in __init__
+    self.root = FakeDirectory(self.path_separator, filesystem=self)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 649, in __init__
+    FakeFile.__init__(self, name, (stat.S_IFDIR | perm_bits), {}, filesystem=filesystem)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 368, in __init__
+    self._byte_contents = self._encode_contents(contents)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 443, in _encode_contents
+    contents = contents.encode((self.encoding or locale.getpreferredencoding(False)), self.errors)
+STOPPING TESTING DUE TO FAILED TEST
+0.0274600982666 TOTAL RUNTIME
+1 EXECUTED
+40 TOTAL TEST OPERATIONS
+0.000658988952637 TIME SPENT EXECUTING TEST OPERATIONS
+0.00539541244507 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+1.95503234863e-05 TIME SPENT CHECKING PROPERTIES
+0.000678539276123 TOTAL TIME SPENT RUNNING SUT
+0.0038731098175 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

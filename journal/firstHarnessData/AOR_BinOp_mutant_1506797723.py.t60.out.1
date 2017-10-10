@@ -1,0 +1,328 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.36356.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.TypeError'>, TypeError("'FakeOsModule' object is not iterable",), <traceback object at 0x1035bbcf8>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 24, in newFakeOS
+    fakeOS = pyfakefs.fake_filesystem.FakeOsModule(fs)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1717, in __init__
+    self.path = FakePathModule(self.filesystem, self)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1464, in __init__
+    self._os_path.os, self.os = os_module
+Original test has 57 steps
+
+SAVING TEST AS failure.36356.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component4 = "delta"                                                     # STEP 0
+ACTION: component4 = "delta" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'delta' : <type 'str'>
+==================================================
+bytes1 = 0                                                               # STEP 1
+ACTION: bytes1 = 0 
+bytes1 = None : <type 'NoneType'>
+=> bytes1 = 0 : <type 'int'>
+==================================================
+component0 = "d"                                                         # STEP 2
+ACTION: component0 = "d" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'd' : <type 'str'>
+==================================================
+component3 = "f"                                                         # STEP 3
+ACTION: component3 = "f" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'f' : <type 'str'>
+==================================================
+component2 = "d"                                                         # STEP 4
+ACTION: component2 = "d" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'd' : <type 'str'>
+==================================================
+str2 = ""                                                                # STEP 5
+ACTION: str2 = "" 
+str2 = None : <type 'NoneType'>
+=> str2 = '' : <type 'str'>
+==================================================
+component1 = "beta"                                                      # STEP 6
+ACTION: component1 = "beta" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'beta' : <type 'str'>
+==================================================
+str2 += 'b'                                                              # STEP 7
+ACTION: str2 += 'b' 
+str2 = '' : <type 'str'>
+=> str2 = 'b' : <type 'str'>
+==================================================
+path1 = "/Volumes/ramdisk/test"                                          # STEP 8
+ACTION: path1 = "/Volumes/ramdisk/test" 
+path1 = None : <type 'NoneType'>
+=> path1 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+path1 += "/" + component0                                                # STEP 9
+ACTION: path1 += "/" + component0 
+component0 = 'd' : <type 'str'>
+path1 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/d' : <type 'str'>
+==================================================
+str2 += 't'                                                             # STEP 10
+ACTION: str2 += 't' 
+str2 = 'b' : <type 'str'>
+=> str2 = 'bt' : <type 'str'>
+==================================================
+str3 = ""                                                               # STEP 11
+ACTION: str3 = "" 
+str3 = None : <type 'NoneType'>
+=> str3 = '' : <type 'str'>
+==================================================
+component0 = "beta"                                                     # STEP 12
+ACTION: component0 = "beta" 
+component0 = 'd' : <type 'str'>
+=> component0 = 'beta' : <type 'str'>
+==================================================
+path1 += "/" + component2                                               # STEP 13
+ACTION: path1 += "/" + component2 
+component2 = 'd' : <type 'str'>
+path1 = '/Volumes/ramdisk/test/d' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/d/d' : <type 'str'>
+==================================================
+str3 += " "                                                             # STEP 14
+ACTION: str3 += " " 
+str3 = '' : <type 'str'>
+=> str3 = ' ' : <type 'str'>
+==================================================
+str3 += 'w'                                                             # STEP 15
+ACTION: str3 += 'w' 
+str3 = ' ' : <type 'str'>
+=> str3 = ' w' : <type 'str'>
+==================================================
+str2 += 'k'                                                             # STEP 16
+ACTION: str2 += 'k' 
+str2 = 'bt' : <type 'str'>
+=> str2 = 'btk' : <type 'str'>
+==================================================
+str2 += 't'                                                             # STEP 17
+ACTION: str2 += 't' 
+str2 = 'btk' : <type 'str'>
+=> str2 = 'btkt' : <type 'str'>
+==================================================
+str3 += 'g'                                                             # STEP 18
+ACTION: str3 += 'g' 
+str3 = ' w' : <type 'str'>
+=> str3 = ' wg' : <type 'str'>
+==================================================
+str2 = ""                                                               # STEP 19
+ACTION: str2 = "" 
+str2 = 'btkt' : <type 'str'>
+=> str2 = '' : <type 'str'>
+==================================================
+str2 += 'n'                                                             # STEP 20
+ACTION: str2 += 'n' 
+str2 = '' : <type 'str'>
+=> str2 = 'n' : <type 'str'>
+==================================================
+str3 += 'h'                                                             # STEP 21
+ACTION: str3 += 'h' 
+str3 = ' wg' : <type 'str'>
+=> str3 = ' wgh' : <type 'str'>
+==================================================
+component2 = "delta"                                                    # STEP 22
+ACTION: component2 = "delta" 
+component2 = 'd' : <type 'str'>
+=> component2 = 'delta' : <type 'str'>
+==================================================
+str2 += 't'                                                             # STEP 23
+ACTION: str2 += 't' 
+str2 = 'n' : <type 'str'>
+=> str2 = 'nt' : <type 'str'>
+==================================================
+path1 = "/Volumes/ramdisk/test"                                         # STEP 24
+ACTION: path1 = "/Volumes/ramdisk/test" 
+path1 = '/Volumes/ramdisk/test/d/d' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str3 += 'z'                                                             # STEP 25
+ACTION: str3 += 'z' 
+str3 = ' wgh' : <type 'str'>
+=> str3 = ' wghz' : <type 'str'>
+==================================================
+str1 = ""                                                               # STEP 26
+ACTION: str1 = "" 
+str1 = None : <type 'NoneType'>
+=> str1 = '' : <type 'str'>
+==================================================
+bytes4 = 0                                                              # STEP 27
+ACTION: bytes4 = 0 
+bytes4 = None : <type 'NoneType'>
+=> bytes4 = 0 : <type 'int'>
+==================================================
+str2 += 'r'                                                             # STEP 28
+ACTION: str2 += 'r' 
+str2 = 'nt' : <type 'str'>
+=> str2 = 'ntr' : <type 'str'>
+==================================================
+str3 += 'e'                                                             # STEP 29
+ACTION: str3 += 'e' 
+str3 = ' wghz' : <type 'str'>
+=> str3 = ' wghze' : <type 'str'>
+==================================================
+str3 += 'z'                                                             # STEP 30
+ACTION: str3 += 'z' 
+str3 = ' wghze' : <type 'str'>
+=> str3 = ' wghzez' : <type 'str'>
+==================================================
+str2 += 's'                                                             # STEP 31
+ACTION: str2 += 's' 
+str2 = 'ntr' : <type 'str'>
+=> str2 = 'ntrs' : <type 'str'>
+==================================================
+str2 += 'c'                                                             # STEP 32
+ACTION: str2 += 'c' 
+str2 = 'ntrs' : <type 'str'>
+=> str2 = 'ntrsc' : <type 'str'>
+==================================================
+str1 += 'z'                                                             # STEP 33
+ACTION: str1 += 'z' 
+str1 = '' : <type 'str'>
+=> str1 = 'z' : <type 'str'>
+==================================================
+str3 += 'o'                                                             # STEP 34
+ACTION: str3 += 'o' 
+str3 = ' wghzez' : <type 'str'>
+=> str3 = ' wghzezo' : <type 'str'>
+==================================================
+str1 += " "                                                             # STEP 35
+ACTION: str1 += " " 
+str1 = 'z' : <type 'str'>
+=> str1 = 'z ' : <type 'str'>
+==================================================
+str3 += 'k'                                                             # STEP 36
+ACTION: str3 += 'k' 
+str3 = ' wghzezo' : <type 'str'>
+=> str3 = ' wghzezok' : <type 'str'>
+==================================================
+path1 += "/" + component1                                               # STEP 37
+ACTION: path1 += "/" + component1 
+component1 = 'beta' : <type 'str'>
+path1 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/beta' : <type 'str'>
+==================================================
+str1 += 's'                                                             # STEP 38
+ACTION: str1 += 's' 
+str1 = 'z ' : <type 'str'>
+=> str1 = 'z s' : <type 'str'>
+==================================================
+component1 = "omega"                                                    # STEP 39
+ACTION: component1 = "omega" 
+component1 = 'beta' : <type 'str'>
+=> component1 = 'omega' : <type 'str'>
+==================================================
+str3 += 'm'                                                             # STEP 40
+ACTION: str3 += 'm' 
+str3 = ' wghzezok' : <type 'str'>
+=> str3 = ' wghzezokm' : <type 'str'>
+==================================================
+str3 += 'h'                                                             # STEP 41
+ACTION: str3 += 'h' 
+str3 = ' wghzezokm' : <type 'str'>
+=> str3 = ' wghzezokmh' : <type 'str'>
+==================================================
+str1 += 's'                                                             # STEP 42
+ACTION: str1 += 's' 
+str1 = 'z s' : <type 'str'>
+=> str1 = 'z ss' : <type 'str'>
+==================================================
+str2 += 'n'                                                             # STEP 43
+ACTION: str2 += 'n' 
+str2 = 'ntrsc' : <type 'str'>
+=> str2 = 'ntrscn' : <type 'str'>
+==================================================
+str3 += 'd'                                                             # STEP 44
+ACTION: str3 += 'd' 
+str3 = ' wghzezokmh' : <type 'str'>
+=> str3 = ' wghzezokmhd' : <type 'str'>
+==================================================
+str3 += 'u'                                                             # STEP 45
+ACTION: str3 += 'u' 
+str3 = ' wghzezokmhd' : <type 'str'>
+=> str3 = ' wghzezokmhdu' : <type 'str'>
+==================================================
+str2 += 'q'                                                             # STEP 46
+ACTION: str2 += 'q' 
+str2 = 'ntrscn' : <type 'str'>
+=> str2 = 'ntrscnq' : <type 'str'>
+==================================================
+str2 += 'd'                                                             # STEP 47
+ACTION: str2 += 'd' 
+str2 = 'ntrscnq' : <type 'str'>
+=> str2 = 'ntrscnqd' : <type 'str'>
+==================================================
+path1 = "/Volumes/ramdisk/test"                                         # STEP 48
+ACTION: path1 = "/Volumes/ramdisk/test" 
+path1 = '/Volumes/ramdisk/test/beta' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str3 += 'v'                                                             # STEP 49
+ACTION: str3 += 'v' 
+str3 = ' wghzezokmhdu' : <type 'str'>
+=> str3 = ' wghzezokmhduv' : <type 'str'>
+==================================================
+str1 += 'c'                                                             # STEP 50
+ACTION: str1 += 'c' 
+str1 = 'z ss' : <type 'str'>
+=> str1 = 'z ssc' : <type 'str'>
+==================================================
+str3 += 'f'                                                             # STEP 51
+ACTION: str3 += 'f' 
+str3 = ' wghzezokmhduv' : <type 'str'>
+=> str3 = ' wghzezokmhduvf' : <type 'str'>
+==================================================
+str1 += 'b'                                                             # STEP 52
+ACTION: str1 += 'b' 
+str1 = 'z ssc' : <type 'str'>
+=> str1 = 'z sscb' : <type 'str'>
+==================================================
+str3 += 'n'                                                             # STEP 53
+ACTION: str3 += 'n' 
+str3 = ' wghzezokmhduvf' : <type 'str'>
+=> str3 = ' wghzezokmhduvfn' : <type 'str'>
+==================================================
+str1 += 'p'                                                             # STEP 54
+ACTION: str1 += 'p' 
+str1 = 'z sscb' : <type 'str'>
+=> str1 = 'z sscbp' : <type 'str'>
+==================================================
+str1 += 'z'                                                             # STEP 55
+ACTION: str1 += 'z' 
+str1 = 'z sscbp' : <type 'str'>
+=> str1 = 'z sscbpz' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                       # STEP 56
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.TypeError'> 'FakeOsModule' object is not iterable
+ERROR: (<type 'exceptions.TypeError'>, TypeError("'FakeOsModule' object is not iterable",), <traceback object at 0x1043e7ea8>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 66, in act0
+    self.p_os[0] = newFakeOS()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 24, in newFakeOS
+    fakeOS = pyfakefs.fake_filesystem.FakeOsModule(fs)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1717, in __init__
+    self.path = FakePathModule(self.filesystem, self)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 1464, in __init__
+    self._os_path.os, self.os = os_module
+STOPPING TESTING DUE TO FAILED TEST
+0.0265998840332 TOTAL RUNTIME
+1 EXECUTED
+57 TOTAL TEST OPERATIONS
+0.00133156776428 TIME SPENT EXECUTING TEST OPERATIONS
+0.00334548950195 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+2.38418579102e-05 TIME SPENT CHECKING PROPERTIES
+0.00135540962219 TOTAL TIME SPENT RUNNING SUT
+0.00385618209839 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

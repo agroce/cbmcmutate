@@ -1,0 +1,1401 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.57827.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.AssertionError'>, AssertionError(), <traceback object at 0x103c861b8>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 21333, in act432
+    assert (type(raised) == type(refRaised))
+Original test has 189 steps
+
+SAVING TEST AS failure.57827.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+str4 = ""                                                                # STEP 0
+ACTION: str4 = "" 
+str4 = None : <type 'NoneType'>
+=> str4 = '' : <type 'str'>
+==================================================
+component4 = "e"                                                         # STEP 1
+ACTION: component4 = "e" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'e' : <type 'str'>
+==================================================
+path2 = "/Volumes/ramdisk/test"                                          # STEP 2
+ACTION: path2 = "/Volumes/ramdisk/test" 
+path2 = None : <type 'NoneType'>
+=> path2 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+component2 = "d"                                                         # STEP 3
+ACTION: component2 = "d" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'd' : <type 'str'>
+==================================================
+str4 += 'n'                                                              # STEP 4
+ACTION: str4 += 'n' 
+str4 = '' : <type 'str'>
+=> str4 = 'n' : <type 'str'>
+==================================================
+str3 = ""                                                                # STEP 5
+ACTION: str3 = "" 
+str3 = None : <type 'NoneType'>
+=> str3 = '' : <type 'str'>
+==================================================
+str3 += 'm'                                                              # STEP 6
+ACTION: str3 += 'm' 
+str3 = '' : <type 'str'>
+=> str3 = 'm' : <type 'str'>
+==================================================
+str3 += 'x'                                                              # STEP 7
+ACTION: str3 += 'x' 
+str3 = 'm' : <type 'str'>
+=> str3 = 'mx' : <type 'str'>
+==================================================
+path2 += "/" + component4                                                # STEP 8
+ACTION: path2 += "/" + component4 
+component4 = 'e' : <type 'str'>
+path2 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/e' : <type 'str'>
+==================================================
+component3 = "f"                                                         # STEP 9
+ACTION: component3 = "f" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'f' : <type 'str'>
+==================================================
+component1 = "g"                                                        # STEP 10
+ACTION: component1 = "g" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'g' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                       # STEP 11
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+=> os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+REFERENCE ACTION: os_REF0 = os 
+=> os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+==================================================
+str4 += 'x'                                                             # STEP 12
+ACTION: str4 += 'x' 
+str4 = 'n' : <type 'str'>
+=> str4 = 'nx' : <type 'str'>
+==================================================
+stat2 = os0.lstat(path2)                                                # STEP 13
+ACTION: stat2 = os0.lstat(path2) 
+stat2 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e' : <type 'str'>
+stat_REF2 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in the fake filesystem: '/Volumes/ramdisk/test/e'
+REFERENCE ACTION: stat_REF2 = os_REF0.lstat(path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e'
+==================================================
+str3 += 'y'                                                             # STEP 14
+ACTION: str3 += 'y' 
+str3 = 'mx' : <type 'str'>
+=> str3 = 'mxy' : <type 'str'>
+==================================================
+str3 += 'f'                                                             # STEP 15
+ACTION: str3 += 'f' 
+str3 = 'mxy' : <type 'str'>
+=> str3 = 'mxyf' : <type 'str'>
+==================================================
+str3 = ""                                                               # STEP 16
+ACTION: str3 = "" 
+str3 = 'mxyf' : <type 'str'>
+=> str3 = '' : <type 'str'>
+==================================================
+str3 += 's'                                                             # STEP 17
+ACTION: str3 += 's' 
+str3 = '' : <type 'str'>
+=> str3 = 's' : <type 'str'>
+==================================================
+result = os0.path.islink(path2)                                         # STEP 18
+ACTION: result = os0.path.islink(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.islink(path2) 
+==================================================
+path2 += "/" + component2                                               # STEP 19
+ACTION: path2 += "/" + component2 
+component2 = 'd' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/e' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/e/d' : <type 'str'>
+==================================================
+result = os0.path.lexists(path2)                                        # STEP 20
+ACTION: result = os0.path.lexists(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.lexists(path2) 
+==================================================
+fd1 = os0.open(path2, os.O_CREAT | os.O_WRONLY | os.O_EXCL)             # STEP 21
+ACTION: fd1 = os0.open(path2, os.O_CREAT | os.O_WRONLY | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path2, os.O_CREAT | os.O_WRONLY | os.O_EXCL) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d'
+==================================================
+result = sorted(os0.listdir(path2))                                     # STEP 22
+ACTION: result = sorted(os0.listdir(path2)) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/e/d'
+REFERENCE ACTION: result_REF = sorted(os_REF0.listdir(path2)) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d'
+==================================================
+str4 += 'l'                                                             # STEP 23
+ACTION: str4 += 'l' 
+str4 = 'nx' : <type 'str'>
+=> str4 = 'nxl' : <type 'str'>
+==================================================
+bytes3 = 0                                                              # STEP 24
+ACTION: bytes3 = 0 
+bytes3 = None : <type 'NoneType'>
+=> bytes3 = 0 : <type 'int'>
+==================================================
+component4 = "b"                                                        # STEP 25
+ACTION: component4 = "b" 
+component4 = 'e' : <type 'str'>
+=> component4 = 'b' : <type 'str'>
+==================================================
+str3 += 'v'                                                             # STEP 26
+ACTION: str3 += 'v' 
+str3 = 's' : <type 'str'>
+=> str3 = 'sv' : <type 'str'>
+==================================================
+stat4 = os0.stat(path2)                                                 # STEP 27
+ACTION: stat4 = os0.stat(path2) 
+stat4 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d' : <type 'str'>
+stat_REF4 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/e/d'
+REFERENCE ACTION: stat_REF4 = os_REF0.stat(path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d'
+==================================================
+str4 += 'j'                                                             # STEP 28
+ACTION: str4 += 'j' 
+str4 = 'nxl' : <type 'str'>
+=> str4 = 'nxlj' : <type 'str'>
+==================================================
+component0 = "gamma"                                                    # STEP 29
+ACTION: component0 = "gamma" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'gamma' : <type 'str'>
+==================================================
+fd1 = os0.open(path2, os.O_CREAT | os.O_EXCL)                           # STEP 30
+ACTION: fd1 = os0.open(path2, os.O_CREAT | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path2, os.O_CREAT | os.O_EXCL) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d'
+==================================================
+component2 = "lambda"                                                   # STEP 31
+ACTION: component2 = "lambda" 
+component2 = 'd' : <type 'str'>
+=> component2 = 'lambda' : <type 'str'>
+==================================================
+bytes3 += 1                                                             # STEP 32
+ACTION: bytes3 += 1 
+bytes3 = 0 : <type 'int'>
+=> bytes3 = 1 : <type 'int'>
+==================================================
+str4 += 'h'                                                             # STEP 33
+ACTION: str4 += 'h' 
+str4 = 'nxlj' : <type 'str'>
+=> str4 = 'nxljh' : <type 'str'>
+==================================================
+path2 += "/" + component4                                               # STEP 34
+ACTION: path2 += "/" + component4 
+component4 = 'b' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/e/d' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+==================================================
+component4 = "c"                                                        # STEP 35
+ACTION: component4 = "c" 
+component4 = 'b' : <type 'str'>
+=> component4 = 'c' : <type 'str'>
+==================================================
+str4 += 'l'                                                             # STEP 36
+ACTION: str4 += 'l' 
+str4 = 'nxljh' : <type 'str'>
+=> str4 = 'nxljhl' : <type 'str'>
+==================================================
+str1 = ""                                                               # STEP 37
+ACTION: str1 = "" 
+str1 = None : <type 'NoneType'>
+=> str1 = '' : <type 'str'>
+==================================================
+str3 += 'w'                                                             # STEP 38
+ACTION: str3 += 'w' 
+str3 = 'sv' : <type 'str'>
+=> str3 = 'svw' : <type 'str'>
+==================================================
+str1 += 'j'                                                             # STEP 39
+ACTION: str1 += 'j' 
+str1 = '' : <type 'str'>
+=> str1 = 'j' : <type 'str'>
+==================================================
+fd0 = os0.open(path2, os.O_RDONLY)                                      # STEP 40
+ACTION: fd0 = os0.open(path2, os.O_RDONLY) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path2, os.O_RDONLY) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+==================================================
+str3 += 'n'                                                             # STEP 41
+ACTION: str3 += 'n' 
+str3 = 'svw' : <type 'str'>
+=> str3 = 'svwn' : <type 'str'>
+==================================================
+stat2 = os0.stat(path2)                                                 # STEP 42
+ACTION: stat2 = os0.stat(path2) 
+stat2 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+stat_REF2 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: stat_REF2 = os_REF0.stat(path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+==================================================
+fd1 = os0.open(path2, os.O_RDONLY)                                      # STEP 43
+ACTION: fd1 = os0.open(path2, os.O_RDONLY) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path2, os.O_RDONLY) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+==================================================
+str4 += 'p'                                                             # STEP 44
+ACTION: str4 += 'p' 
+str4 = 'nxljhl' : <type 'str'>
+=> str4 = 'nxljhlp' : <type 'str'>
+==================================================
+str4 += 't'                                                             # STEP 45
+ACTION: str4 += 't' 
+str4 = 'nxljhlp' : <type 'str'>
+=> str4 = 'nxljhlpt' : <type 'str'>
+==================================================
+result = sorted(os0.listdir(path2))                                     # STEP 46
+ACTION: result = sorted(os0.listdir(path2)) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: result_REF = sorted(os_REF0.listdir(path2)) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+==================================================
+path3 = "/Volumes/ramdisk/test"                                         # STEP 47
+ACTION: path3 = "/Volumes/ramdisk/test" 
+path3 = None : <type 'NoneType'>
+=> path3 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+fd1 = os0.open(path2, os.O_RDWR)                                        # STEP 48
+ACTION: fd1 = os0.open(path2, os.O_RDWR) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path2, os.O_RDWR) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+==================================================
+str4 += 'p'                                                             # STEP 49
+ACTION: str4 += 'p' 
+str4 = 'nxljhlpt' : <type 'str'>
+=> str4 = 'nxljhlptp' : <type 'str'>
+==================================================
+result = os0.path.isdir(path3)                                          # STEP 50
+ACTION: result = os0.path.isdir(path3) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.isdir(path3) 
+==================================================
+str4 = ""                                                               # STEP 51
+ACTION: str4 = "" 
+str4 = 'nxljhlptp' : <type 'str'>
+=> str4 = '' : <type 'str'>
+==================================================
+os0.rename(path2,path3)                                                 # STEP 52
+ACTION: os0.rename(path2,path3) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+path3 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] Fake filesystem object: can not rename nonexistent file: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: os_REF0.rename(path2,path3) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory
+==================================================
+str1 += 'h'                                                             # STEP 53
+ACTION: str1 += 'h' 
+str1 = 'j' : <type 'str'>
+=> str1 = 'jh' : <type 'str'>
+==================================================
+result = os0.path.getsize(path2)                                        # STEP 54
+ACTION: result = os0.path.getsize(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem
+REFERENCE ACTION: result_REF = os_REF0.path.getsize(path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+==================================================
+os0.mkdir(path3)                                                        # STEP 55
+ACTION: os0.mkdir(path3) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] Fake object already exists: '/Volumes/ramdisk/test'
+REFERENCE ACTION: os_REF0.mkdir(path3) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File exists: '/Volumes/ramdisk/test'
+==================================================
+bytes4 = 0                                                              # STEP 56
+ACTION: bytes4 = 0 
+bytes4 = None : <type 'NoneType'>
+=> bytes4 = 0 : <type 'int'>
+==================================================
+stat2 = os0.lstat(path2)                                                # STEP 57
+ACTION: stat2 = os0.lstat(path2) 
+stat2 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+stat_REF2 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: stat_REF2 = os_REF0.lstat(path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+==================================================
+path3 += "/" + component0                                               # STEP 58
+ACTION: path3 += "/" + component0 
+component0 = 'gamma' : <type 'str'>
+path3 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/gamma' : <type 'str'>
+==================================================
+path3 += "/" + component3                                               # STEP 59
+ACTION: path3 += "/" + component3 
+component3 = 'f' : <type 'str'>
+path3 = '/Volumes/ramdisk/test/gamma' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/gamma/f' : <type 'str'>
+==================================================
+result = os0.path.islink(path2)                                         # STEP 60
+ACTION: result = os0.path.islink(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.islink(path2) 
+==================================================
+fd1 = os0.open(path3, os.O_RDONLY)                                      # STEP 61
+ACTION: fd1 = os0.open(path3, os.O_RDONLY) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path3, os.O_RDONLY) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f'
+==================================================
+str1 += 'n'                                                             # STEP 62
+ACTION: str1 += 'n' 
+str1 = 'jh' : <type 'str'>
+=> str1 = 'jhn' : <type 'str'>
+==================================================
+str4 += 'j'                                                             # STEP 63
+ACTION: str4 += 'j' 
+str4 = '' : <type 'str'>
+=> str4 = 'j' : <type 'str'>
+==================================================
+result = os0.path.islink(path2)                                         # STEP 64
+ACTION: result = os0.path.islink(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.islink(path2) 
+==================================================
+str4 += 'v'                                                             # STEP 65
+ACTION: str4 += 'v' 
+str4 = 'j' : <type 'str'>
+=> str4 = 'jv' : <type 'str'>
+==================================================
+fd1 = os0.open(path2, os.O_CREAT | os.O_WRONLY | os.O_EXCL)             # STEP 66
+ACTION: fd1 = os0.open(path2, os.O_CREAT | os.O_WRONLY | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path2, os.O_CREAT | os.O_WRONLY | os.O_EXCL) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+==================================================
+stat2 = os0.lstat(path2)                                                # STEP 67
+ACTION: stat2 = os0.lstat(path2) 
+stat2 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+stat_REF2 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: stat_REF2 = os_REF0.lstat(path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+==================================================
+path3 += "/" + component0                                               # STEP 68
+ACTION: path3 += "/" + component0 
+component0 = 'gamma' : <type 'str'>
+path3 = '/Volumes/ramdisk/test/gamma/f' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/gamma/f/gamma' : <type 'str'>
+==================================================
+bytes3 = 0                                                              # STEP 69
+ACTION: bytes3 = 0 
+bytes3 = 1 : <type 'int'>
+=> bytes3 = 0 : <type 'int'>
+==================================================
+result = os0.path.lexists(path3)                                        # STEP 70
+ACTION: result = os0.path.lexists(path3) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.lexists(path3) 
+==================================================
+fd1 = os0.open(path3, os.O_CREAT)                                       # STEP 71
+ACTION: fd1 = os0.open(path3, os.O_CREAT) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/gamma/f'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path3, os.O_CREAT) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma'
+==================================================
+stat1 = os0.stat(path2)                                                 # STEP 72
+ACTION: stat1 = os0.stat(path2) 
+stat1 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+stat_REF1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: stat_REF1 = os_REF0.stat(path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+==================================================
+result = os0.path.exists(path3)                                         # STEP 73
+ACTION: result = os0.path.exists(path3) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.exists(path3) 
+==================================================
+component3 = "a"                                                        # STEP 74
+ACTION: component3 = "a" 
+component3 = 'f' : <type 'str'>
+=> component3 = 'a' : <type 'str'>
+==================================================
+fd1 = os0.open(path2, os.O_RDWR)                                        # STEP 75
+ACTION: fd1 = os0.open(path2, os.O_RDWR) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path2, os.O_RDWR) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b'
+==================================================
+str3 += 'j'                                                             # STEP 76
+ACTION: str3 += 'j' 
+str3 = 'svwn' : <type 'str'>
+=> str3 = 'svwnj' : <type 'str'>
+==================================================
+result = os0.path.islink(path2)                                         # STEP 77
+ACTION: result = os0.path.islink(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.islink(path2) 
+==================================================
+os0.remove(path3)                                                       # STEP 78
+ACTION: os0.remove(path3) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/gamma/f'
+REFERENCE ACTION: os_REF0.remove(path3) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma'
+==================================================
+fd1 = os0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_TRUNC)            # STEP 79
+ACTION: fd1 = os0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_TRUNC) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/gamma/f'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_TRUNC) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma'
+==================================================
+os0.symlink(path3,path2)                                                # STEP 80
+ACTION: os0.symlink(path3,path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d'
+REFERENCE ACTION: os_REF0.symlink(path3,path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory
+==================================================
+str1 += 'a'                                                             # STEP 81
+ACTION: str1 += 'a' 
+str1 = 'jhn' : <type 'str'>
+=> str1 = 'jhna' : <type 'str'>
+==================================================
+component0 = "b"                                                        # STEP 82
+ACTION: component0 = "b" 
+component0 = 'gamma' : <type 'str'>
+=> component0 = 'b' : <type 'str'>
+==================================================
+str3 += 'w'                                                             # STEP 83
+ACTION: str3 += 'w' 
+str3 = 'svwnj' : <type 'str'>
+=> str3 = 'svwnjw' : <type 'str'>
+==================================================
+path2 += "/" + component1                                               # STEP 84
+ACTION: path2 += "/" + component1 
+component1 = 'g' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/e/d/b' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+==================================================
+os0.mkdir(path2)                                                        # STEP 85
+ACTION: os0.mkdir(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: os_REF0.mkdir(path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g'
+==================================================
+fd1 = os0.open(path2, os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL)  # STEP 86
+ACTION: fd1 = os0.open(path2, os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path2, os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g'
+==================================================
+result = os0.path.exists(path3)                                         # STEP 87
+ACTION: result = os0.path.exists(path3) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.exists(path3) 
+==================================================
+os0.link(path3,path2)                                                   # STEP 88
+ACTION: os0.link(path3,path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: os_REF0.link(path3,path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory
+==================================================
+component1 = "delta"                                                    # STEP 89
+ACTION: component1 = "delta" 
+component1 = 'g' : <type 'str'>
+=> component1 = 'delta' : <type 'str'>
+==================================================
+str3 += 'r'                                                             # STEP 90
+ACTION: str3 += 'r' 
+str3 = 'svwnjw' : <type 'str'>
+=> str3 = 'svwnjwr' : <type 'str'>
+==================================================
+fd1 = os0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_EXCL)             # STEP 91
+ACTION: fd1 = os0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/gamma/f'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_EXCL) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma'
+==================================================
+result = os0.path.isdir(path2)                                          # STEP 92
+ACTION: result = os0.path.isdir(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.isdir(path2) 
+==================================================
+result = os0.path.isabs(path2)                                          # STEP 93
+ACTION: result = os0.path.isabs(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.isabs(path2) 
+==================================================
+str3 += 'l'                                                             # STEP 94
+ACTION: str3 += 'l' 
+str3 = 'svwnjwr' : <type 'str'>
+=> str3 = 'svwnjwrl' : <type 'str'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                         # STEP 95
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = None : <type 'NoneType'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+fd0 = os0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_EXCL)             # STEP 96
+ACTION: fd0 = os0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/gamma/f'
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_EXCL) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma'
+==================================================
+str3 += 's'                                                             # STEP 97
+ACTION: str3 += 's' 
+str3 = 'svwnjwrl' : <type 'str'>
+=> str3 = 'svwnjwrls' : <type 'str'>
+==================================================
+str3 += 'u'                                                             # STEP 98
+ACTION: str3 += 'u' 
+str3 = 'svwnjwrls' : <type 'str'>
+=> str3 = 'svwnjwrlsu' : <type 'str'>
+==================================================
+str1 += 'z'                                                             # STEP 99
+ACTION: str1 += 'z' 
+str1 = 'jhna' : <type 'str'>
+=> str1 = 'jhnaz' : <type 'str'>
+==================================================
+path3 += "/" + component0                                              # STEP 100
+ACTION: path3 += "/" + component0 
+component0 = 'b' : <type 'str'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma' : <type 'str'>
+=> path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+==================================================
+result = sorted(os0.listdir(path2))                                    # STEP 101
+ACTION: result = sorted(os0.listdir(path2)) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/e/d/b/g'
+REFERENCE ACTION: result_REF = sorted(os_REF0.listdir(path2)) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g'
+==================================================
+os0.link(path3,path3)                                                  # STEP 102
+ACTION: os0.link(path3,path3) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/gamma/f/gamma'
+REFERENCE ACTION: os_REF0.link(path3,path3) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory
+==================================================
+os0.rename(path3,path2)                                                # STEP 103
+ACTION: os0.rename(path3,path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] Fake filesystem object: can not rename nonexistent file: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+REFERENCE ACTION: os_REF0.rename(path3,path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory
+==================================================
+str3 += 'p'                                                            # STEP 104
+ACTION: str3 += 'p' 
+str3 = 'svwnjwrlsu' : <type 'str'>
+=> str3 = 'svwnjwrlsup' : <type 'str'>
+==================================================
+result = os0.path.isdir(path2)                                         # STEP 105
+ACTION: result = os0.path.isdir(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.isdir(path2) 
+==================================================
+str4 += 'h'                                                            # STEP 106
+ACTION: str4 += 'h' 
+str4 = 'jv' : <type 'str'>
+=> str4 = 'jvh' : <type 'str'>
+==================================================
+os0.symlink(path4,path2)                                               # STEP 107
+ACTION: os0.symlink(path4,path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: os_REF0.symlink(path4,path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory
+==================================================
+str4 += 'y'                                                            # STEP 108
+ACTION: str4 += 'y' 
+str4 = 'jvh' : <type 'str'>
+=> str4 = 'jvhy' : <type 'str'>
+==================================================
+str4 += 's'                                                            # STEP 109
+ACTION: str4 += 's' 
+str4 = 'jvhy' : <type 'str'>
+=> str4 = 'jvhys' : <type 'str'>
+==================================================
+result = os0.path.isfile(path2)                                        # STEP 110
+ACTION: result = os0.path.isfile(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.isfile(path2) 
+==================================================
+str4 += 'j'                                                            # STEP 111
+ACTION: str4 += 'j' 
+str4 = 'jvhys' : <type 'str'>
+=> str4 = 'jvhysj' : <type 'str'>
+==================================================
+stat4 = os0.lstat(path2)                                               # STEP 112
+ACTION: stat4 = os0.lstat(path2) 
+stat4 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+stat_REF4 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/e/d/b/g'
+REFERENCE ACTION: stat_REF4 = os_REF0.lstat(path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g'
+==================================================
+fd1 = os0.open(path2, os.O_CREAT)                                      # STEP 113
+ACTION: fd1 = os0.open(path2, os.O_CREAT) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path2, os.O_CREAT) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g'
+==================================================
+os0.link(path4,path4)                                                  # STEP 114
+ACTION: os0.link(path4,path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File already exists in fake filesystem: '/Volumes/ramdisk/test'
+REFERENCE ACTION: os_REF0.link(path4,path4) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File exists
+==================================================
+fd1 = os0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL)  # STEP 115
+ACTION: fd1 = os0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/gamma/f/gamma'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+==================================================
+str4 += 'b'                                                            # STEP 116
+ACTION: str4 += 'b' 
+str4 = 'jvhysj' : <type 'str'>
+=> str4 = 'jvhysjb' : <type 'str'>
+==================================================
+str1 += 'c'                                                            # STEP 117
+ACTION: str1 += 'c' 
+str1 = 'jhnaz' : <type 'str'>
+=> str1 = 'jhnazc' : <type 'str'>
+==================================================
+str4 += 'v'                                                            # STEP 118
+ACTION: str4 += 'v' 
+str4 = 'jvhysjb' : <type 'str'>
+=> str4 = 'jvhysjbv' : <type 'str'>
+==================================================
+os0.symlink(path3,path4)                                               # STEP 119
+ACTION: os0.symlink(path3,path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File already exists in fake filesystem: '/Volumes/ramdisk/test'
+REFERENCE ACTION: os_REF0.symlink(path3,path4) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File exists
+==================================================
+str4 += 'o'                                                            # STEP 120
+ACTION: str4 += 'o' 
+str4 = 'jvhysjbv' : <type 'str'>
+=> str4 = 'jvhysjbvo' : <type 'str'>
+==================================================
+result = os0.path.isabs(path4)                                         # STEP 121
+ACTION: result = os0.path.isabs(path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.isabs(path4) 
+==================================================
+bytes2 = 0                                                             # STEP 122
+ACTION: bytes2 = 0 
+bytes2 = None : <type 'NoneType'>
+=> bytes2 = 0 : <type 'int'>
+==================================================
+fd1 = os0.open(path3, os.O_CREAT | os.O_EXCL)                          # STEP 123
+ACTION: fd1 = os0.open(path3, os.O_CREAT | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/gamma/f/gamma'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path3, os.O_CREAT | os.O_EXCL) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+==================================================
+result = os0.readlink(path4)                                           # STEP 124
+ACTION: result = os0.readlink(path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 22] Fake filesystem: not a symlink: '/Volumes/ramdisk/test'
+REFERENCE ACTION: result_REF = os_REF0.readlink(path4) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 22] Invalid argument: '/Volumes/ramdisk/test'
+==================================================
+fd1 = os0.open(path3, os.O_RDWR)                                       # STEP 125
+ACTION: fd1 = os0.open(path3, os.O_RDWR) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path3, os.O_RDWR) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+==================================================
+str1 += 'o'                                                            # STEP 126
+ACTION: str1 += 'o' 
+str1 = 'jhnazc' : <type 'str'>
+=> str1 = 'jhnazco' : <type 'str'>
+==================================================
+stat2 = os0.lstat(path3)                                               # STEP 127
+ACTION: stat2 = os0.lstat(path3) 
+stat2 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+stat_REF2 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+REFERENCE ACTION: stat_REF2 = os_REF0.lstat(path3) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+==================================================
+fd1 = os0.open(path2, os.O_CREAT)                                      # STEP 128
+ACTION: fd1 = os0.open(path2, os.O_CREAT) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path2, os.O_CREAT) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g'
+==================================================
+stat4 = os0.lstat(path2)                                               # STEP 129
+ACTION: stat4 = os0.lstat(path2) 
+stat4 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+stat_REF4 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/e/d/b/g'
+REFERENCE ACTION: stat_REF4 = os_REF0.lstat(path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g'
+==================================================
+result = os0.path.getsize(path2)                                       # STEP 130
+ACTION: result = os0.path.getsize(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem
+REFERENCE ACTION: result_REF = os_REF0.path.getsize(path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g'
+==================================================
+fd1 = os0.open(path3, os.O_CREAT | os.O_WRONLY)                        # STEP 131
+ACTION: fd1 = os0.open(path3, os.O_CREAT | os.O_WRONLY) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/gamma/f/gamma'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path3, os.O_CREAT | os.O_WRONLY) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+==================================================
+str3 += 'e'                                                            # STEP 132
+ACTION: str3 += 'e' 
+str3 = 'svwnjwrlsup' : <type 'str'>
+=> str3 = 'svwnjwrlsupe' : <type 'str'>
+==================================================
+fd1 = os0.open(path2, os.O_WRONLY | os.O_APPEND)                       # STEP 133
+ACTION: fd1 = os0.open(path2, os.O_WRONLY | os.O_APPEND) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path2, os.O_WRONLY | os.O_APPEND) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g'
+==================================================
+str1 += 'e'                                                            # STEP 134
+ACTION: str1 += 'e' 
+str1 = 'jhnazco' : <type 'str'>
+=> str1 = 'jhnazcoe' : <type 'str'>
+==================================================
+str4 += 'm'                                                            # STEP 135
+ACTION: str4 += 'm' 
+str4 = 'jvhysjbvo' : <type 'str'>
+=> str4 = 'jvhysjbvom' : <type 'str'>
+==================================================
+str1 += 'q'                                                            # STEP 136
+ACTION: str1 += 'q' 
+str1 = 'jhnazcoe' : <type 'str'>
+=> str1 = 'jhnazcoeq' : <type 'str'>
+==================================================
+str4 += 'r'                                                            # STEP 137
+ACTION: str4 += 'r' 
+str4 = 'jvhysjbvom' : <type 'str'>
+=> str4 = 'jvhysjbvomr' : <type 'str'>
+==================================================
+fd0 = os0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_TRUNC)           # STEP 138
+ACTION: fd0 = os0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_TRUNC) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/gamma/f/gamma'
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path3, os.O_CREAT | os.O_WRONLY | os.O_TRUNC) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+==================================================
+str1 += 'f'                                                            # STEP 139
+ACTION: str1 += 'f' 
+str1 = 'jhnazcoeq' : <type 'str'>
+=> str1 = 'jhnazcoeqf' : <type 'str'>
+==================================================
+result = os0.path.isdir(path3)                                         # STEP 140
+ACTION: result = os0.path.isdir(path3) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.isdir(path3) 
+==================================================
+fd1 = os0.open(path2, os.O_CREAT | os.O_EXCL)                          # STEP 141
+ACTION: fd1 = os0.open(path2, os.O_CREAT | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d/b'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path2, os.O_CREAT | os.O_EXCL) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g'
+==================================================
+stat1 = os0.stat(path2)                                                # STEP 142
+ACTION: stat1 = os0.stat(path2) 
+stat1 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+stat_REF1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/e/d/b/g'
+REFERENCE ACTION: stat_REF1 = os_REF0.stat(path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g'
+==================================================
+str4 += 'a'                                                            # STEP 143
+ACTION: str4 += 'a' 
+str4 = 'jvhysjbvomr' : <type 'str'>
+=> str4 = 'jvhysjbvomra' : <type 'str'>
+==================================================
+os0.link(path2,path4)                                                  # STEP 144
+ACTION: os0.link(path2,path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File already exists in fake filesystem: '/Volumes/ramdisk/test'
+REFERENCE ACTION: os_REF0.link(path2,path4) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory
+==================================================
+path2 += "/" + component1                                              # STEP 145
+ACTION: path2 += "/" + component1 
+component1 = 'delta' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/e/d/b/g/delta' : <type 'str'>
+==================================================
+os0.link(path2,path3)                                                  # STEP 146
+ACTION: os0.link(path2,path3) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g/delta' : <type 'str'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/gamma/f/gamma'
+REFERENCE ACTION: os_REF0.link(path2,path3) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory
+==================================================
+result = os0.path.isdir(path4)                                         # STEP 147
+ACTION: result = os0.path.isdir(path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.isdir(path4) 
+==================================================
+result = os0.path.dirname(path2)                                       # STEP 148
+ACTION: result = os0.path.dirname(path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g/delta' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.dirname(path2) 
+==================================================
+str4 += 'r'                                                            # STEP 149
+ACTION: str4 += 'r' 
+str4 = 'jvhysjbvomra' : <type 'str'>
+=> str4 = 'jvhysjbvomrar' : <type 'str'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                        # STEP 150
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+path4 += "/" + component0                                              # STEP 151
+ACTION: path4 += "/" + component0 
+component0 = 'b' : <type 'str'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/b' : <type 'str'>
+==================================================
+os0.symlink(path2,path2)                                               # STEP 152
+ACTION: os0.symlink(path2,path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g/delta' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d/b/g'
+REFERENCE ACTION: os_REF0.symlink(path2,path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory
+==================================================
+stat1 = os0.lstat(path3)                                               # STEP 153
+ACTION: stat1 = os0.lstat(path3) 
+stat1 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+stat_REF1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+REFERENCE ACTION: stat_REF1 = os_REF0.lstat(path3) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+==================================================
+fd0 = os0.open(path3, os.O_RDWR)                                       # STEP 154
+ACTION: fd0 = os0.open(path3, os.O_RDWR) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path3, os.O_RDWR) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+==================================================
+component0 = "delta"                                                   # STEP 155
+ACTION: component0 = "delta" 
+component0 = 'b' : <type 'str'>
+=> component0 = 'delta' : <type 'str'>
+==================================================
+str1 += 'e'                                                            # STEP 156
+ACTION: str1 += 'e' 
+str1 = 'jhnazcoeqf' : <type 'str'>
+=> str1 = 'jhnazcoeqfe' : <type 'str'>
+==================================================
+os0.link(path4,path2)                                                  # STEP 157
+ACTION: os0.link(path4,path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/b' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g/delta' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d/b/g'
+REFERENCE ACTION: os_REF0.link(path4,path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory
+==================================================
+fd0 = os0.open(path2, os.O_WRONLY | os.O_APPEND)                       # STEP 158
+ACTION: fd0 = os0.open(path2, os.O_WRONLY | os.O_APPEND) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g/delta' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g/delta'
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path2, os.O_WRONLY | os.O_APPEND) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g/delta'
+==================================================
+str4 += 'e'                                                            # STEP 159
+ACTION: str4 += 'e' 
+str4 = 'jvhysjbvomrar' : <type 'str'>
+=> str4 = 'jvhysjbvomrare' : <type 'str'>
+==================================================
+path2 += "/" + component0                                              # STEP 160
+ACTION: path2 += "/" + component0 
+component0 = 'delta' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g/delta' : <type 'str'>
+=> path2 = '/Volumes/ramdisk/test/e/d/b/g/delta/delta' : <type 'str'>
+==================================================
+fd0 = os0.open(path4, os.O_RDONLY)                                     # STEP 161
+ACTION: fd0 = os0.open(path4, os.O_RDONLY) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/b' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/b'
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path4, os.O_RDONLY) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/b'
+==================================================
+str4 += 'e'                                                            # STEP 162
+ACTION: str4 += 'e' 
+str4 = 'jvhysjbvomrare' : <type 'str'>
+=> str4 = 'jvhysjbvomraree' : <type 'str'>
+==================================================
+component1 = "h"                                                       # STEP 163
+ACTION: component1 = "h" 
+component1 = 'delta' : <type 'str'>
+=> component1 = 'h' : <type 'str'>
+==================================================
+str3 += 'o'                                                            # STEP 164
+ACTION: str3 += 'o' 
+str3 = 'svwnjwrlsupe' : <type 'str'>
+=> str3 = 'svwnjwrlsupeo' : <type 'str'>
+==================================================
+fd0 = os0.open(path3, os.O_RDONLY)                                     # STEP 165
+ACTION: fd0 = os0.open(path3, os.O_RDONLY) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path3, os.O_RDONLY) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+==================================================
+str4 += 'g'                                                            # STEP 166
+ACTION: str4 += 'g' 
+str4 = 'jvhysjbvomraree' : <type 'str'>
+=> str4 = 'jvhysjbvomrareeg' : <type 'str'>
+==================================================
+result = os0.path.lexists(path4)                                       # STEP 167
+ACTION: result = os0.path.lexists(path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.lexists(path4) 
+==================================================
+fd1 = os0.open(path3, os.O_RDWR)                                       # STEP 168
+ACTION: fd1 = os0.open(path3, os.O_RDWR) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path3, os.O_RDWR) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+==================================================
+str3 += 'l'                                                            # STEP 169
+ACTION: str3 += 'l' 
+str3 = 'svwnjwrlsupeo' : <type 'str'>
+=> str3 = 'svwnjwrlsupeol' : <type 'str'>
+==================================================
+result = os0.path.lexists(path4)                                       # STEP 170
+ACTION: result = os0.path.lexists(path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.lexists(path4) 
+==================================================
+result = os0.path.exists(path4)                                        # STEP 171
+ACTION: result = os0.path.exists(path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.exists(path4) 
+==================================================
+str3 += 'n'                                                            # STEP 172
+ACTION: str3 += 'n' 
+str3 = 'svwnjwrlsupeol' : <type 'str'>
+=> str3 = 'svwnjwrlsupeoln' : <type 'str'>
+==================================================
+os0.rmdir(path3)                                                       # STEP 173
+ACTION: os0.rmdir(path3) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+REFERENCE ACTION: os_REF0.rmdir(path3) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+==================================================
+str3 += 'h'                                                            # STEP 174
+ACTION: str3 += 'h' 
+str3 = 'svwnjwrlsupeoln' : <type 'str'>
+=> str3 = 'svwnjwrlsupeolnh' : <type 'str'>
+==================================================
+str3 += 'u'                                                            # STEP 175
+ACTION: str3 += 'u' 
+str3 = 'svwnjwrlsupeolnh' : <type 'str'>
+=> str3 = 'svwnjwrlsupeolnhu' : <type 'str'>
+==================================================
+fd1 = os0.open(path4, os.O_CREAT | os.O_EXCL)                          # STEP 176
+ACTION: fd1 = os0.open(path4, os.O_CREAT | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/b' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+=> fd1 = 0 : <type 'int'>
+REFERENCE ACTION: fd_REF1 = os_REF0.open(path4, os.O_CREAT | os.O_EXCL) 
+=> fd_REF1 = 4 : <type 'int'>
+==================================================
+fd0 = os0.open(path2, os.O_CREAT | os.O_WRONLY)                        # STEP 177
+ACTION: fd0 = os0.open(path2, os.O_CREAT | os.O_WRONLY) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g/delta/delta' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d/b/g/delta'
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path2, os.O_CREAT | os.O_WRONLY) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g/delta/delta'
+==================================================
+stat1 = os0.stat(path4)                                                # STEP 178
+ACTION: stat1 = os0.stat(path4) 
+stat1 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/b' : <type 'str'>
+stat_REF1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+=> stat1 = <pyfakefs.fake_filesystem._FakeStatResult object at 0x103f51310> : <class 'pyfakefs.fake_filesystem._FakeStatResult'>
+REFERENCE ACTION: stat_REF1 = os_REF0.stat(path4) 
+=> stat_REF1 = posix.stat_result(st_mode=33261, st_ino=12624263, st_dev=16777224, st_nlink=1, st_uid=501, st_gid=20, st_size=0, st_atime=1507323214, st_mtime=1507323214, st_ctime=1507323214) : <type 'posix.stat_result'>
+==================================================
+fd0 = os0.open(path2, os.O_CREAT | os.O_EXCL)                          # STEP 179
+ACTION: fd0 = os0.open(path2, os.O_CREAT | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g/delta/delta' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d/b/g/delta'
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path2, os.O_CREAT | os.O_EXCL) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/e/d/b/g/delta/delta'
+==================================================
+fd0 = os0.open(path4, os.O_RDWR)                                       # STEP 180
+ACTION: fd0 = os0.open(path4, os.O_RDWR) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/b' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+=> fd0 = 1 : <type 'int'>
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path4, os.O_RDWR) 
+=> fd_REF0 = 5 : <type 'int'>
+==================================================
+stat3 = os0.stat(path3)                                                # STEP 181
+ACTION: stat3 = os0.stat(path3) 
+stat3 = None : <type 'NoneType'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+stat_REF3 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+REFERENCE ACTION: stat_REF3 = os_REF0.stat(path3) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+==================================================
+str4 += 'o'                                                            # STEP 182
+ACTION: str4 += 'o' 
+str4 = 'jvhysjbvomrareeg' : <type 'str'>
+=> str4 = 'jvhysjbvomrareego' : <type 'str'>
+==================================================
+str1 += 'r'                                                            # STEP 183
+ACTION: str1 += 'r' 
+str1 = 'jhnazcoeqfe' : <type 'str'>
+=> str1 = 'jhnazcoeqfer' : <type 'str'>
+==================================================
+os0.symlink(path4,path2)                                               # STEP 184
+ACTION: os0.symlink(path4,path2) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/b' : <type 'str'>
+path2 = '/Volumes/ramdisk/test/e/d/b/g/delta/delta' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such fake directory: '/Volumes/ramdisk/test/e/d/b/g/delta'
+REFERENCE ACTION: os_REF0.symlink(path4,path2) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory
+==================================================
+str1 += 'k'                                                            # STEP 185
+ACTION: str1 += 'k' 
+str1 = 'jhnazcoeqfer' : <type 'str'>
+=> str1 = 'jhnazcoeqferk' : <type 'str'>
+==================================================
+os0.rename(path3,path4)                                                # STEP 186
+ACTION: os0.rename(path3,path4) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path3 = '/Volumes/ramdisk/test/gamma/f/gamma/b' : <type 'str'>
+path4 = '/Volumes/ramdisk/test/b' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] Fake filesystem object: can not rename nonexistent file: '/Volumes/ramdisk/test/gamma/f/gamma/b'
+REFERENCE ACTION: os_REF0.rename(path3,path4) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory
+==================================================
+str3 += 'w'                                                            # STEP 187
+ACTION: str3 += 'w' 
+str3 = 'svwnjwrlsupeolnhu' : <type 'str'>
+=> str3 = 'svwnjwrlsupeolnhuw' : <type 'str'>
+==================================================
+result = os0.read(fd1,bytes4)                                          # STEP 188
+ACTION: result = os0.read(fd1,bytes4) 
+bytes4 = 0 : <type 'int'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x103fd3d90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+fd1 = 0 : <type 'int'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = 4 : <type 'int'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 9] File is not open for reading.
+REFERENCE ACTION: result_REF = os_REF0.read(fd_REF1,bytes4) 
+ERROR: (<type 'exceptions.AssertionError'>, AssertionError(), <traceback object at 0x1045fff80>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 21333, in act432
+    assert (type(raised) == type(refRaised))
+STOPPING TESTING DUE TO FAILED TEST
+0.151513814926 TOTAL RUNTIME
+1 EXECUTED
+189 TOTAL TEST OPERATIONS
+0.045725107193 TIME SPENT EXECUTING TEST OPERATIONS
+0.00877285003662 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+0.000123500823975 TIME SPENT CHECKING PROPERTIES
+0.045848608017 TOTAL TIME SPENT RUNNING SUT
+0.00470995903015 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

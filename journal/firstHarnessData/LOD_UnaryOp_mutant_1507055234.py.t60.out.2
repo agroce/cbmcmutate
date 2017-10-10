@@ -1,0 +1,327 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.58668.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.NotImplementedError'>, NotImplementedError('O_EXCL without O_CREAT mode is not supported',), <traceback object at 0x1050b7b90>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 14563, in act340
+    self.p_fd[1] = self.p_os[0].open(self.p_path[4], os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 3290, in open
+    raise NotImplementedError('O_EXCL without O_CREAT mode is not supported')
+Original test has 56 steps
+
+SAVING TEST AS failure.58668.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component4 = "epsilon"                                                   # STEP 0
+ACTION: component4 = "epsilon" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'epsilon' : <type 'str'>
+==================================================
+component2 = "delta"                                                     # STEP 1
+ACTION: component2 = "delta" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'delta' : <type 'str'>
+==================================================
+component1 = "d"                                                         # STEP 2
+ACTION: component1 = "d" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'd' : <type 'str'>
+==================================================
+component0 = "omega"                                                     # STEP 3
+ACTION: component0 = "omega" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'omega' : <type 'str'>
+==================================================
+component3 = "f"                                                         # STEP 4
+ACTION: component3 = "f" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'f' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                        # STEP 5
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+=> os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x10514a910> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+REFERENCE ACTION: os_REF0 = os 
+=> os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+==================================================
+bytes2 = 0                                                               # STEP 6
+ACTION: bytes2 = 0 
+bytes2 = None : <type 'NoneType'>
+=> bytes2 = 0 : <type 'int'>
+==================================================
+str2 = ""                                                                # STEP 7
+ACTION: str2 = "" 
+str2 = None : <type 'NoneType'>
+=> str2 = '' : <type 'str'>
+==================================================
+str2 += 'r'                                                              # STEP 8
+ACTION: str2 += 'r' 
+str2 = '' : <type 'str'>
+=> str2 = 'r' : <type 'str'>
+==================================================
+str2 += 'j'                                                              # STEP 9
+ACTION: str2 += 'j' 
+str2 = 'r' : <type 'str'>
+=> str2 = 'rj' : <type 'str'>
+==================================================
+str3 = ""                                                               # STEP 10
+ACTION: str3 = "" 
+str3 = None : <type 'NoneType'>
+=> str3 = '' : <type 'str'>
+==================================================
+str2 += " "                                                             # STEP 11
+ACTION: str2 += " " 
+str2 = 'rj' : <type 'str'>
+=> str2 = 'rj ' : <type 'str'>
+==================================================
+str2 += 'h'                                                             # STEP 12
+ACTION: str2 += 'h' 
+str2 = 'rj ' : <type 'str'>
+=> str2 = 'rj h' : <type 'str'>
+==================================================
+str2 += 'j'                                                             # STEP 13
+ACTION: str2 += 'j' 
+str2 = 'rj h' : <type 'str'>
+=> str2 = 'rj hj' : <type 'str'>
+==================================================
+str3 += 'p'                                                             # STEP 14
+ACTION: str3 += 'p' 
+str3 = '' : <type 'str'>
+=> str3 = 'p' : <type 'str'>
+==================================================
+str3 += 'r'                                                             # STEP 15
+ACTION: str3 += 'r' 
+str3 = 'p' : <type 'str'>
+=> str3 = 'pr' : <type 'str'>
+==================================================
+str2 += 'y'                                                             # STEP 16
+ACTION: str2 += 'y' 
+str2 = 'rj hj' : <type 'str'>
+=> str2 = 'rj hjy' : <type 'str'>
+==================================================
+str3 += 'y'                                                             # STEP 17
+ACTION: str3 += 'y' 
+str3 = 'pr' : <type 'str'>
+=> str3 = 'pry' : <type 'str'>
+==================================================
+str2 += 'c'                                                             # STEP 18
+ACTION: str2 += 'c' 
+str2 = 'rj hjy' : <type 'str'>
+=> str2 = 'rj hjyc' : <type 'str'>
+==================================================
+str2 += 'l'                                                             # STEP 19
+ACTION: str2 += 'l' 
+str2 = 'rj hjyc' : <type 'str'>
+=> str2 = 'rj hjycl' : <type 'str'>
+==================================================
+str2 += 'd'                                                             # STEP 20
+ACTION: str2 += 'd' 
+str2 = 'rj hjycl' : <type 'str'>
+=> str2 = 'rj hjycld' : <type 'str'>
+==================================================
+str2 += 'k'                                                             # STEP 21
+ACTION: str2 += 'k' 
+str2 = 'rj hjycld' : <type 'str'>
+=> str2 = 'rj hjycldk' : <type 'str'>
+==================================================
+str2 += 'o'                                                             # STEP 22
+ACTION: str2 += 'o' 
+str2 = 'rj hjycldk' : <type 'str'>
+=> str2 = 'rj hjycldko' : <type 'str'>
+==================================================
+str3 += 'm'                                                             # STEP 23
+ACTION: str3 += 'm' 
+str3 = 'pry' : <type 'str'>
+=> str3 = 'prym' : <type 'str'>
+==================================================
+str2 += 'e'                                                             # STEP 24
+ACTION: str2 += 'e' 
+str2 = 'rj hjycldko' : <type 'str'>
+=> str2 = 'rj hjycldkoe' : <type 'str'>
+==================================================
+str3 += 'z'                                                             # STEP 25
+ACTION: str3 += 'z' 
+str3 = 'prym' : <type 'str'>
+=> str3 = 'prymz' : <type 'str'>
+==================================================
+str3 += 'd'                                                             # STEP 26
+ACTION: str3 += 'd' 
+str3 = 'prymz' : <type 'str'>
+=> str3 = 'prymzd' : <type 'str'>
+==================================================
+str2 = ""                                                               # STEP 27
+ACTION: str2 = "" 
+str2 = 'rj hjycldkoe' : <type 'str'>
+=> str2 = '' : <type 'str'>
+==================================================
+str2 += 'f'                                                             # STEP 28
+ACTION: str2 += 'f' 
+str2 = '' : <type 'str'>
+=> str2 = 'f' : <type 'str'>
+==================================================
+str2 += 'r'                                                             # STEP 29
+ACTION: str2 += 'r' 
+str2 = 'f' : <type 'str'>
+=> str2 = 'fr' : <type 'str'>
+==================================================
+str4 = ""                                                               # STEP 30
+ACTION: str4 = "" 
+str4 = None : <type 'NoneType'>
+=> str4 = '' : <type 'str'>
+==================================================
+str4 += 'c'                                                             # STEP 31
+ACTION: str4 += 'c' 
+str4 = '' : <type 'str'>
+=> str4 = 'c' : <type 'str'>
+==================================================
+str4 += 'x'                                                             # STEP 32
+ACTION: str4 += 'x' 
+str4 = 'c' : <type 'str'>
+=> str4 = 'cx' : <type 'str'>
+==================================================
+path0 = "/Volumes/ramdisk/test"                                         # STEP 33
+ACTION: path0 = "/Volumes/ramdisk/test" 
+path0 = None : <type 'NoneType'>
+=> path0 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str4 += 'q'                                                             # STEP 34
+ACTION: str4 += 'q' 
+str4 = 'cx' : <type 'str'>
+=> str4 = 'cxq' : <type 'str'>
+==================================================
+str2 += 'f'                                                             # STEP 35
+ACTION: str2 += 'f' 
+str2 = 'fr' : <type 'str'>
+=> str2 = 'frf' : <type 'str'>
+==================================================
+str3 += 'q'                                                             # STEP 36
+ACTION: str3 += 'q' 
+str3 = 'prymzd' : <type 'str'>
+=> str3 = 'prymzdq' : <type 'str'>
+==================================================
+str3 += 'c'                                                             # STEP 37
+ACTION: str3 += 'c' 
+str3 = 'prymzdq' : <type 'str'>
+=> str3 = 'prymzdqc' : <type 'str'>
+==================================================
+str3 += 'o'                                                             # STEP 38
+ACTION: str3 += 'o' 
+str3 = 'prymzdqc' : <type 'str'>
+=> str3 = 'prymzdqco' : <type 'str'>
+==================================================
+str3 += 'r'                                                             # STEP 39
+ACTION: str3 += 'r' 
+str3 = 'prymzdqco' : <type 'str'>
+=> str3 = 'prymzdqcor' : <type 'str'>
+==================================================
+str4 += 'u'                                                             # STEP 40
+ACTION: str4 += 'u' 
+str4 = 'cxq' : <type 'str'>
+=> str4 = 'cxqu' : <type 'str'>
+==================================================
+str4 += 'g'                                                             # STEP 41
+ACTION: str4 += 'g' 
+str4 = 'cxqu' : <type 'str'>
+=> str4 = 'cxqug' : <type 'str'>
+==================================================
+str4 += 'q'                                                             # STEP 42
+ACTION: str4 += 'q' 
+str4 = 'cxqug' : <type 'str'>
+=> str4 = 'cxqugq' : <type 'str'>
+==================================================
+str4 = ""                                                               # STEP 43
+ACTION: str4 = "" 
+str4 = 'cxqugq' : <type 'str'>
+=> str4 = '' : <type 'str'>
+==================================================
+str4 += 'b'                                                             # STEP 44
+ACTION: str4 += 'b' 
+str4 = '' : <type 'str'>
+=> str4 = 'b' : <type 'str'>
+==================================================
+bytes4 = 0                                                              # STEP 45
+ACTION: bytes4 = 0 
+bytes4 = None : <type 'NoneType'>
+=> bytes4 = 0 : <type 'int'>
+==================================================
+path0 += "/" + component0                                               # STEP 46
+ACTION: path0 += "/" + component0 
+component0 = 'omega' : <type 'str'>
+path0 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path0 = '/Volumes/ramdisk/test/omega' : <type 'str'>
+==================================================
+str2 = ""                                                               # STEP 47
+ACTION: str2 = "" 
+str2 = 'frf' : <type 'str'>
+=> str2 = '' : <type 'str'>
+==================================================
+str4 += 'p'                                                             # STEP 48
+ACTION: str4 += 'p' 
+str4 = 'b' : <type 'str'>
+=> str4 = 'bp' : <type 'str'>
+==================================================
+result = os0.path.isfile(path0)                                         # STEP 49
+ACTION: result = os0.path.isfile(path0) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x10514a910> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path0 = '/Volumes/ramdisk/test/omega' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.isfile(path0) 
+==================================================
+result = sorted(os0.listdir(path0))                                     # STEP 50
+ACTION: result = sorted(os0.listdir(path0)) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x10514a910> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path0 = '/Volumes/ramdisk/test/omega' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/omega'
+REFERENCE ACTION: result_REF = sorted(os_REF0.listdir(path0)) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory: '/Volumes/ramdisk/test/omega'
+==================================================
+path4 = "/Volumes/ramdisk/test"                                         # STEP 51
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = None : <type 'NoneType'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+bytes2 += 1                                                             # STEP 52
+ACTION: bytes2 += 1 
+bytes2 = 0 : <type 'int'>
+=> bytes2 = 1 : <type 'int'>
+==================================================
+path0 += "/" + component4                                               # STEP 53
+ACTION: path0 += "/" + component4 
+component4 = 'epsilon' : <type 'str'>
+path0 = '/Volumes/ramdisk/test/omega' : <type 'str'>
+=> path0 = '/Volumes/ramdisk/test/omega/epsilon' : <type 'str'>
+==================================================
+path4 += "/" + component2                                               # STEP 54
+ACTION: path4 += "/" + component2 
+component2 = 'delta' : <type 'str'>
+path4 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path4 = '/Volumes/ramdisk/test/delta' : <type 'str'>
+==================================================
+fd1 = os0.open(path4, os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL)  # STEP 55
+ACTION: fd1 = os0.open(path4, os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x10514a910> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path4 = '/Volumes/ramdisk/test/delta' : <type 'str'>
+fd1 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF1 = None : <type 'NoneType'>
+RAISED EXCEPTION: <type 'exceptions.NotImplementedError'> O_EXCL without O_CREAT mode is not supported
+ERROR: (<type 'exceptions.NotImplementedError'>, NotImplementedError('O_EXCL without O_CREAT mode is not supported',), <traceback object at 0x102dfcc20>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 14563, in act340
+    self.p_fd[1] = self.p_os[0].open(self.p_path[4], os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 3290, in open
+    raise NotImplementedError('O_EXCL without O_CREAT mode is not supported')
+STOPPING TESTING DUE TO FAILED TEST
+0.0419931411743 TOTAL RUNTIME
+1 EXECUTED
+56 TOTAL TEST OPERATIONS
+0.0040876865387 TIME SPENT EXECUTING TEST OPERATIONS
+0.00498795509338 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+3.71932983398e-05 TIME SPENT CHECKING PROPERTIES
+0.00412487983704 TOTAL TIME SPENT RUNNING SUT
+0.00444293022156 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

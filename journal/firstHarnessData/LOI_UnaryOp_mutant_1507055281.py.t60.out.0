@@ -1,0 +1,134 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.54993.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.AssertionError'>, AssertionError(), <traceback object at 0x1032ed1b8>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 14751, in act342
+    assert (type(raised) == type(refRaised))
+Original test has 19 steps
+
+SAVING TEST AS failure.54993.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component4 = "lambda"                                                    # STEP 0
+ACTION: component4 = "lambda" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'lambda' : <type 'str'>
+==================================================
+str0 = ""                                                                # STEP 1
+ACTION: str0 = "" 
+str0 = None : <type 'NoneType'>
+=> str0 = '' : <type 'str'>
+==================================================
+component0 = "b"                                                         # STEP 2
+ACTION: component0 = "b" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'b' : <type 'str'>
+==================================================
+str0 += 'a'                                                              # STEP 3
+ACTION: str0 += 'a' 
+str0 = '' : <type 'str'>
+=> str0 = 'a' : <type 'str'>
+==================================================
+str0 += 'g'                                                              # STEP 4
+ACTION: str0 += 'g' 
+str0 = 'a' : <type 'str'>
+=> str0 = 'ag' : <type 'str'>
+==================================================
+component1 = "phi"                                                       # STEP 5
+ACTION: component1 = "phi" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'phi' : <type 'str'>
+==================================================
+str0 += 'u'                                                              # STEP 6
+ACTION: str0 += 'u' 
+str0 = 'ag' : <type 'str'>
+=> str0 = 'agu' : <type 'str'>
+==================================================
+str0 += 'd'                                                              # STEP 7
+ACTION: str0 += 'd' 
+str0 = 'agu' : <type 'str'>
+=> str0 = 'agud' : <type 'str'>
+==================================================
+component3 = "alpha"                                                     # STEP 8
+ACTION: component3 = "alpha" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'alpha' : <type 'str'>
+==================================================
+component2 = "lambda"                                                    # STEP 9
+ACTION: component2 = "lambda" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'lambda' : <type 'str'>
+==================================================
+str0 += 'v'                                                             # STEP 10
+ACTION: str0 += 'v' 
+str0 = 'agud' : <type 'str'>
+=> str0 = 'agudv' : <type 'str'>
+==================================================
+path1 = "/Volumes/ramdisk/test"                                         # STEP 11
+ACTION: path1 = "/Volumes/ramdisk/test" 
+path1 = None : <type 'NoneType'>
+=> path1 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str0 += 'm'                                                             # STEP 12
+ACTION: str0 += 'm' 
+str0 = 'agudv' : <type 'str'>
+=> str0 = 'agudvm' : <type 'str'>
+==================================================
+path1 += "/" + component2                                               # STEP 13
+ACTION: path1 += "/" + component2 
+component2 = 'lambda' : <type 'str'>
+path1 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path1 = '/Volumes/ramdisk/test/lambda' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                       # STEP 14
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+=> os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x10336fe90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+REFERENCE ACTION: os_REF0 = os 
+=> os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+==================================================
+result = os0.path.lexists(path1)                                        # STEP 15
+ACTION: result = os0.path.lexists(path1) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x10336fe90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path1 = '/Volumes/ramdisk/test/lambda' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+REFERENCE ACTION: result_REF = os_REF0.path.lexists(path1) 
+==================================================
+str0 += 'w'                                                             # STEP 16
+ACTION: str0 += 'w' 
+str0 = 'agudvm' : <type 'str'>
+=> str0 = 'agudvmw' : <type 'str'>
+==================================================
+str0 += 'j'                                                             # STEP 17
+ACTION: str0 += 'j' 
+str0 = 'agudvmw' : <type 'str'>
+=> str0 = 'agudvmwj' : <type 'str'>
+==================================================
+fd0 = os0.open(path1, os.O_CREAT | os.O_WRONLY)                         # STEP 18
+ACTION: fd0 = os0.open(path1, os.O_CREAT | os.O_WRONLY) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x10336fe90> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path1 = '/Volumes/ramdisk/test/lambda' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 2] No such file or directory in fake filesystem: '/Volumes/ramdisk/test/lambda'
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path1, os.O_CREAT | os.O_WRONLY) 
+=> fd_REF0 = 4 : <type 'int'>
+ERROR: (<type 'exceptions.AssertionError'>, AssertionError(), <traceback object at 0x103c34440>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 14751, in act342
+    assert (type(raised) == type(refRaised))
+STOPPING TESTING DUE TO FAILED TEST
+0.0473141670227 TOTAL RUNTIME
+2 EXECUTED
+219 TOTAL TEST OPERATIONS
+0.00495290756226 TIME SPENT EXECUTING TEST OPERATIONS
+0.0132241249084 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+0.00010347366333 TIME SPENT CHECKING PROPERTIES
+0.00505638122559 TOTAL TIME SPENT RUNNING SUT
+0.00754499435425 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES

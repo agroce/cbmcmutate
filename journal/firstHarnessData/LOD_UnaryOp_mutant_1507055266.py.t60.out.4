@@ -1,0 +1,246 @@
+Random testing using config=Config(swarmSwitch=None, maxMustHitBranch=None, verbose=False, reducePool=False, failedLogging=None, exploitBestHint=1, greedyStutter=False, internal=False, exploit=None, seed=None, generalize=False, fastQuickAnalysis=False, stopWhenNoCoverage=None, useHints=False, localize=False, total=False, speed='FAST', probs=None, normalize=False, verboseExploit=False, highLowSwarm=None, replayable=False, essentials=False, maxMustHitStatement=None, noCoverageExploit=False, quickTests=False, relax=False, startExploitStall=0, enumerateEnabled=False, uniqueValuesAnalysis=False, swarm=False, noReassign=False, html=None, stopWhenHitStatement=None, biasLOC=None, progress=False, postCover=False, swarmLength=None, generateLOC=None, noSwarmDependencies=False, profile=False, LOCBaseline=0.2, noEnumerateEnabled=False, full=True, multiple=False, timedProgress=30, silentFail=False, ddmin=False, swarmP=0.5, stopWhenBranches=None, noAlphaConvert=False, coverFile='coverage.out', readQuick=False, verboseActions=False, running=False, computeFeatureStats=False, compareFails=False, swarmProbs=None, output='failure.50914.test', genDepth=None, Pcrossover=0.2, quickAnalysis=False, keepLast=False, exploitCeiling=0.1, markovP=1.0, logging=None, stopWhenHitBranch=None, LOCProbs=False, stopWhenStatements=None, noCheck=False, maxTests=-1, noExceptionMatch=False, Pmutate=0.0, depth=200, trackMaxCoverage=None, throughput=False, noCover=True, timeout=60, stutter=None, uncaught=False, markov=None, showActions=False, startExploit=0.0)
+UNCAUGHT EXCEPTION
+ERROR: (<type 'exceptions.ValueError'>, ValueError('I/O operation on closed file',), <traceback object at 0x102c8eb48>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 20015, in act414
+    self.p_os[0].write(self.p_fd[0],self.p_str[1])
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 3351, in write
+    file_handle.write(contents)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 4338, in __getattr__
+    self._check_open_file()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 4404, in _check_open_file
+    raise ValueError('I/O operation on closed file')
+Original test has 37 steps
+
+SAVING TEST AS failure.50914.test
+FINAL VERSION OF TEST, WITH LOGGED REPLAY:
+component2 = "lambda"                                                    # STEP 0
+ACTION: component2 = "lambda" 
+component2 = None : <type 'NoneType'>
+=> component2 = 'lambda' : <type 'str'>
+==================================================
+component4 = "b"                                                         # STEP 1
+ACTION: component4 = "b" 
+component4 = None : <type 'NoneType'>
+=> component4 = 'b' : <type 'str'>
+==================================================
+component0 = "alpha"                                                     # STEP 2
+ACTION: component0 = "alpha" 
+component0 = None : <type 'NoneType'>
+=> component0 = 'alpha' : <type 'str'>
+==================================================
+component3 = "epsilon"                                                   # STEP 3
+ACTION: component3 = "epsilon" 
+component3 = None : <type 'NoneType'>
+=> component3 = 'epsilon' : <type 'str'>
+==================================================
+component1 = "beta"                                                      # STEP 4
+ACTION: component1 = "beta" 
+component1 = None : <type 'NoneType'>
+=> component1 = 'beta' : <type 'str'>
+==================================================
+os0 = newFakeOS()                                                        # STEP 5
+ACTION: os0 = newFakeOS() 
+os0 = None : <type 'NoneType'>
+os_REF0 = None : <type 'NoneType'>
+=> os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x102d372d0> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+REFERENCE ACTION: os_REF0 = os 
+=> os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+==================================================
+str4 = ""                                                                # STEP 6
+ACTION: str4 = "" 
+str4 = None : <type 'NoneType'>
+=> str4 = '' : <type 'str'>
+==================================================
+str4 += 'i'                                                              # STEP 7
+ACTION: str4 += 'i' 
+str4 = '' : <type 'str'>
+=> str4 = 'i' : <type 'str'>
+==================================================
+bytes3 = 0                                                               # STEP 8
+ACTION: bytes3 = 0 
+bytes3 = None : <type 'NoneType'>
+=> bytes3 = 0 : <type 'int'>
+==================================================
+str4 += 'l'                                                              # STEP 9
+ACTION: str4 += 'l' 
+str4 = 'i' : <type 'str'>
+=> str4 = 'il' : <type 'str'>
+==================================================
+str4 += 'e'                                                             # STEP 10
+ACTION: str4 += 'e' 
+str4 = 'il' : <type 'str'>
+=> str4 = 'ile' : <type 'str'>
+==================================================
+str4 += 'o'                                                             # STEP 11
+ACTION: str4 += 'o' 
+str4 = 'ile' : <type 'str'>
+=> str4 = 'ileo' : <type 'str'>
+==================================================
+str4 += 't'                                                             # STEP 12
+ACTION: str4 += 't' 
+str4 = 'ileo' : <type 'str'>
+=> str4 = 'ileot' : <type 'str'>
+==================================================
+str4 += 'p'                                                             # STEP 13
+ACTION: str4 += 'p' 
+str4 = 'ileot' : <type 'str'>
+=> str4 = 'ileotp' : <type 'str'>
+==================================================
+str4 += 'i'                                                             # STEP 14
+ACTION: str4 += 'i' 
+str4 = 'ileotp' : <type 'str'>
+=> str4 = 'ileotpi' : <type 'str'>
+==================================================
+str4 += 'b'                                                             # STEP 15
+ACTION: str4 += 'b' 
+str4 = 'ileotpi' : <type 'str'>
+=> str4 = 'ileotpib' : <type 'str'>
+==================================================
+bytes2 = 0                                                              # STEP 16
+ACTION: bytes2 = 0 
+bytes2 = None : <type 'NoneType'>
+=> bytes2 = 0 : <type 'int'>
+==================================================
+str1 = ""                                                               # STEP 17
+ACTION: str1 = "" 
+str1 = None : <type 'NoneType'>
+=> str1 = '' : <type 'str'>
+==================================================
+path0 = "/Volumes/ramdisk/test"                                         # STEP 18
+ACTION: path0 = "/Volumes/ramdisk/test" 
+path0 = None : <type 'NoneType'>
+=> path0 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+str1 += 'f'                                                             # STEP 19
+ACTION: str1 += 'f' 
+str1 = '' : <type 'str'>
+=> str1 = 'f' : <type 'str'>
+==================================================
+os0.mkdir(path0)                                                        # STEP 20
+ACTION: os0.mkdir(path0) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x102d372d0> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path0 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] Fake object already exists: '/Volumes/ramdisk/test'
+REFERENCE ACTION: os_REF0.mkdir(path0) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File exists: '/Volumes/ramdisk/test'
+==================================================
+str4 += 'm'                                                             # STEP 21
+ACTION: str4 += 'm' 
+str4 = 'ileotpib' : <type 'str'>
+=> str4 = 'ileotpibm' : <type 'str'>
+==================================================
+str4 += 'w'                                                             # STEP 22
+ACTION: str4 += 'w' 
+str4 = 'ileotpibm' : <type 'str'>
+=> str4 = 'ileotpibmw' : <type 'str'>
+==================================================
+os0.link(path0,path0)                                                   # STEP 23
+ACTION: os0.link(path0,path0) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x102d372d0> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path0 = '/Volumes/ramdisk/test' : <type 'str'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+RAISED EXPECTED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File already exists in fake filesystem: '/Volumes/ramdisk/test'
+REFERENCE ACTION: os_REF0.link(path0,path0) 
+REFERENCE ACTION RAISED EXCEPTION: <type 'exceptions.OSError'> [Errno 17] File exists
+==================================================
+str4 += 'o'                                                             # STEP 24
+ACTION: str4 += 'o' 
+str4 = 'ileotpibmw' : <type 'str'>
+=> str4 = 'ileotpibmwo' : <type 'str'>
+==================================================
+str4 += 'a'                                                             # STEP 25
+ACTION: str4 += 'a' 
+str4 = 'ileotpibmwo' : <type 'str'>
+=> str4 = 'ileotpibmwoa' : <type 'str'>
+==================================================
+path4 = "/Volumes/ramdisk/test"                                         # STEP 26
+ACTION: path4 = "/Volumes/ramdisk/test" 
+path4 = None : <type 'NoneType'>
+=> path4 = '/Volumes/ramdisk/test' : <type 'str'>
+==================================================
+bytes0 = 0                                                              # STEP 27
+ACTION: bytes0 = 0 
+bytes0 = None : <type 'NoneType'>
+=> bytes0 = 0 : <type 'int'>
+==================================================
+str4 += 'x'                                                             # STEP 28
+ACTION: str4 += 'x' 
+str4 = 'ileotpibmwoa' : <type 'str'>
+=> str4 = 'ileotpibmwoax' : <type 'str'>
+==================================================
+str4 += 'd'                                                             # STEP 29
+ACTION: str4 += 'd' 
+str4 = 'ileotpibmwoax' : <type 'str'>
+=> str4 = 'ileotpibmwoaxd' : <type 'str'>
+==================================================
+path0 += "/" + component1                                               # STEP 30
+ACTION: path0 += "/" + component1 
+component1 = 'beta' : <type 'str'>
+path0 = '/Volumes/ramdisk/test' : <type 'str'>
+=> path0 = '/Volumes/ramdisk/test/beta' : <type 'str'>
+==================================================
+str1 += 'k'                                                             # STEP 31
+ACTION: str1 += 'k' 
+str1 = 'f' : <type 'str'>
+=> str1 = 'fk' : <type 'str'>
+==================================================
+str4 += 'h'                                                             # STEP 32
+ACTION: str4 += 'h' 
+str4 = 'ileotpibmwoaxd' : <type 'str'>
+=> str4 = 'ileotpibmwoaxdh' : <type 'str'>
+==================================================
+str1 += 'o'                                                             # STEP 33
+ACTION: str1 += 'o' 
+str1 = 'fk' : <type 'str'>
+=> str1 = 'fko' : <type 'str'>
+==================================================
+str4 += 'z'                                                             # STEP 34
+ACTION: str4 += 'z' 
+str4 = 'ileotpibmwoaxdh' : <type 'str'>
+=> str4 = 'ileotpibmwoaxdhz' : <type 'str'>
+==================================================
+fd0 = os0.open(path0, os.O_CREAT | os.O_WRONLY | os.O_TRUNC)            # STEP 35
+ACTION: fd0 = os0.open(path0, os.O_CREAT | os.O_WRONLY | os.O_TRUNC) 
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x102d372d0> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+path0 = '/Volumes/ramdisk/test/beta' : <type 'str'>
+fd0 = None : <type 'NoneType'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = None : <type 'NoneType'>
+=> fd0 = 0 : <type 'int'>
+REFERENCE ACTION: fd_REF0 = os_REF0.open(path0, os.O_CREAT | os.O_WRONLY | os.O_TRUNC) 
+=> fd_REF0 = 4 : <type 'int'>
+==================================================
+os0.write(fd0,str1)                                                     # STEP 36
+ACTION: os0.write(fd0,str1) 
+str1 = 'fko' : <type 'str'>
+os0 = <pyfakefs.fake_filesystem.FakeOsModule object at 0x102d372d0> : <class 'pyfakefs.fake_filesystem.FakeOsModule'>
+fd0 = 0 : <type 'int'>
+os_REF0 = <module 'os' from '/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/os.pyc'> : <type 'module'>
+fd_REF0 = 4 : <type 'int'>
+RAISED EXCEPTION: <type 'exceptions.ValueError'> I/O operation on closed file
+ERROR: (<type 'exceptions.ValueError'>, ValueError('I/O operation on closed file',), <traceback object at 0x102c48830>)
+TRACEBACK:
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 48329, in safely
+    act[2]()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/sut.py", line 20015, in act414
+    self.p_os[0].write(self.p_fd[0],self.p_str[1])
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 3351, in write
+    file_handle.write(contents)
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 4338, in __getattr__
+    self._check_open_file()
+  File "/Users/alex/tstl/examples/mutateProbe/pyfakefs/pyfakefs/fake_filesystem.py", line 4404, in _check_open_file
+    raise ValueError('I/O operation on closed file')
+STOPPING TESTING DUE TO FAILED TEST
+0.0606338977814 TOTAL RUNTIME
+2 EXECUTED
+237 TOTAL TEST OPERATIONS
+0.00829482078552 TIME SPENT EXECUTING TEST OPERATIONS
+0.0170183181763 TIME SPENT EVALUATING GUARDS AND CHOOSING ACTIONS
+0.000137329101562 TIME SPENT CHECKING PROPERTIES
+0.00843214988708 TOTAL TIME SPENT RUNNING SUT
+0.007887840271 TIME SPENT RESTARTING
+0.0 TIME SPENT REDUCING TEST CASES
