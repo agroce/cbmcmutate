@@ -1,0 +1,193 @@
+@import pyfakefs.fake_filesystem
+@import os
+@import shutil
+@import stat
+
+<@
+def newFakeOS():
+    fs = pyfakefs.fake_filesystem.FakeFilesystem()
+    if os.path.exists('/Volumes/ramdisk/test'):
+        shutil.rmtree('/Volumes/ramdisk/test')
+    os.mkdir('/Volumes/ramdisk/test')
+    fs.CreateDirectory('/Volumes')	
+    fs.CreateDirectory('/Volumes/ramdisk')
+    fs.CreateDirectory('/Volumes/ramdisk/test')
+    fakeOS = pyfakefs.fake_filesystem.FakeOsModule(fs)
+    return fakeOS
+
+def newFakeOpener(osmod):
+    return pyfakefs.fake_filesystem.FakeFileOpen(osmod.filesystem)
+
+def newOpener(osmod):
+    return open
+
+def sortWalk(l):
+    newList = []
+    for (p,l1,l2) in l:
+        newList.append((p,sorted(l1),sorted(l2)))
+    return sorted(newList,key=lambda x:x[0])
+
+def tooManyLevels(p,osmod):
+    # Exactly matching the real OS' symbolic link limit is difficult, so if you hit link limit in pyfakefs, just
+    # start a new test.  Monitor the output to make sure this isn't happening immediately, and never happens when
+    # symlinks are not turned on!
+    
+    try:
+        osmod.path.isdir(p)
+    except OSError as e:
+        return "Too many levels of symbolic links" in str(e)
+    return False
+@>
+
+pool: <os> 1 REF # Only one OS instance!  Don't change this!
+pool: <fd> 2 REF # eventually we'll allow multiple open FDs at once, but pyfakefs is not ready yet
+pool: <stat> 5 REF
+
+pool: <opener> 1 REF
+pool: <file> 1 REF
+
+pool: <path> 5
+pool: <component> 5
+pool: <str> 5
+pool: <bytes> 5
+pool: <mode> 5
+
+assume: not tooManyLevels(<path>,<os>)
+
+finally: <os>.close(<fd>)
+finally: <file>.close()
+
+<os> := newFakeOS()
+<opener> := newFakeOpener(~<os>)
+
+<component> := <["alpha","beta","gamma","delta","epsilon","a","b","c","d","e","f","g","h","omega","lambda","phi"]>
+
+<path> := "/Volumes/ramdisk/test"
+<path> += "/" + <component>
+
+<bytes> := 0
+<bytes> += 1
+
+# Below code allows us to test arbitrary mode combinations; however pyfakefs is proiritizing
+# sensible open combinations
+
+#<mode> := os.O_CREAT
+#<mode> := os.O_WRONLY
+#<mode> := os.O_TRUNC
+#<mode> := os.O_APPEND
+#<mode> := os.O_RDONLY
+#<mode> := os.O_EXCL
+#<mode> := os.O_RDWR
+#<mode> := <mode> | <mode>
+
+<str> := ""
+<str> += <['a'..'z']>
+<str> += " "
+
+{IOError,OSError} ~<os>.mkdir(<path>)
+{IOError,OSError} ~<os>.makedirs(<path>)
+
+{IOError,OSError} ~<os>.symlink(<path>,<path>)
+{IOError,OSError} ~<os>.link(<path>,<path>)
+
+# Guard needed due to reading directories being unspecified behavior
+#{IOError,OSError} not os.path.isdir(<path,1>) -> <fd> := ~<os>.open(<path>, os.O_CREAT | os.O_WRONLY | os.O_TRUNC)
+#{IOError,OSError} not os.path.isdir(<path,1>) -> <fd> := ~<os>.open(<path>, os.O_CREAT | os.O_WRONLY | os.O_TRUNC | os.O_EXCL)
+#{IOError,OSError} not os.path.isdir(<path,1>) -> <fd> := ~<os>.open(<path>, os.O_CREAT | os.O_WRONLY)
+#{IOError,OSError} not os.path.isdir(<path,1>) -> <fd> := ~<os>.open(<path>, os.O_CREAT | os.O_WRONLY | os.O_EXCL)
+#{IOError,OSError} not os.path.isdir(<path,1>) -> <fd> := ~<os>.open(<path>, os.O_CREAT)
+#{IOError,OSError} not os.path.isdir(<path,1>) -> <fd> := ~<os>.open(<path>, os.O_CREAT | os.O_EXCL)
+#{IOError,OSError} not os.path.isdir(<path,1>) -> <fd> := ~<os>.open(<path>, os.O_WRONLY | os.O_APPEND)
+#{IOError,OSError} not os.path.isdir(<path,1>) -> <fd> := ~<os>.open(<path>, os.O_RDONLY)
+#{IOError,OSError} not os.path.isdir(<path,1>) -> <fd> := ~<os>.open(<path>, os.O_RDWR)
+
+# Also allow arbitrary mode opens, but less frequently than typical useful combinations
+#{IOError,OSError} not os.path.isdir(<path,1>) -> <fd> := ~<os>.open(<path>, <mode>)
+
+{OSError} ~<os>.close(<fd>)
+{IOError,OSError} ~<os>.write(~<fd>,<str>)
+{IOError,OSError} ~<os>.read(~<fd>,<bytes>)
+{OSError} <stat> := ~<os>.fstat(~<fd>)
+
+{OSError} ~<os>.remove(<path>)
+
+{OSError} <path,1> != "/Volumes/ramdisk/test" -> ~<os>.rmdir(<path>)
+# Guard needed so you don't delete the "root" of the tested FS
+{OSError} len(os.listdir("/Volumes/ramdisk/test")) > 1 -> ~<os>.removedirs(<path>)
+
+{IOError,OSError} sorted(~<os>.listdir(<path>))
+
+{OSError} <path,1> != "/Volumes/ramdisk/test" -> <stat> := ~<os>.stat(<path>)
+{OSError} <path,1> != "/Volumes/ramdisk/test" -> <stat> := ~<os>.lstat(<path>)
+
+# Not testing mode equivalence for now
+#<stat>.st_mode
+not stat.S_ISDIR(<stat,1>.st_mode) -> <stat>.st_nlink
+not stat.S_ISDIR(<stat,1>.st_mode) -> <stat>.st_size
+
+{OSError} ~<os>.readlink(<path>)
+
+# The guard avoids the known error in OS X rename on 10.12.5
+{IOError,OSError} <path,2>.find(<path,1>) != 0 -> ~<os>.rename(<path>,<path>)
+#{IOError,OSError} ~<os>.rename(<path>,<path>)
+
+# followlinks True causes some symlink related issues that are not worth pursuing right now
+{OSError} sortWalk([p for p in ~<os>.walk(<path>,topdown=<[True,False]>,followlinks=<[False]>)])
+
+{OSError} ~<os>.path.exists(<path>)
+{OSError} ~<os>.path.lexists(<path>)
+
+{OSError} ~<os>.path.isdir(<path>)
+{OSError} ~<os>.path.isfile(<path>)
+{OSError} ~<os>.path.isabs(<path>)
+{OSError} ~<os>.path.islink(<path>)
+
+{OSError} not os.path.isdir(<path,1>) -> ~<os>.path.getsize(<path>)
+
+{OSError} ~<os>.path.abspath(<path>)
+{OSError} ~<os>.path.dirname(<path>)
+
+{OSError,IOError} <file> := ~<opener>(<path>)
+{OSError,IOError} <file> := ~<opener>(<path>,'r')
+{OSError,IOError} <file> := ~<opener>(<path>,'w')
+{OSError,IOError} <file> := ~<opener>(<path>,'a')
+#{OSError,IOError} <file> := ~<opener>(<path>,'r+')
+#{OSError,IOError} <file> := ~<opener>(<path>,'w+')
+#{OSError,IOError} <file> := ~<opener>(<path>,'a+')
+#{OSError,IOError} <file> := ~<opener>(<path>,'rw')  Not supported by pyfakefs?
+
+{OSError,IOError,ValueError} ~<file>.write(<str>)
+{OSError,IOError,ValueError} ~<file>.read()
+{OSError,IOError,ValueError} ~<file>.read(<bytes>)
+{OSError,IOError,ValueError} ~<file>.readline()
+{OSError,IOError,ValueError} ~<file>.readline(<bytes>)
+{OSError,IOError,ValueError} ~<file>.readlines()
+{StopIteration,ValueError,IOError} ~<file>.next()
+{OSError,IOError,ValueError} ~<file>.truncate()
+{OSError,ValueError} ~<file>.seek(<bytes>)
+#{OSError,ValueError} ~<file>.tell()
+{OSError,ValueError} ~<file>.flush()
+
+{OSError,ValueError} <file>.close()
+
+reference: newFakeOS\(\) ==> os
+reference: newFakeOpener ==> newOpener
+
+compare: listdir
+compare: read
+compare: abspath
+compare: dirname
+compare: exists
+compare: isdir
+compare: isfile
+compare: isabs
+compare: islink
+compare: getsize\(
+compare: walk
+
+# handles all stat fields
+compare: st_
+
+compare: tell
+
+
