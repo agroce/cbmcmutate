@@ -1552,9 +1552,86 @@ Summary of paper \cite{mutKernel}.
 
 \subsubsection {{\tt pyfakefs} Case Study}
 
-Used TSTL \cite{NFM15,ISSTA15,tstlsttt,tstl}
+We used the TSTL \cite{NFM15,ISSTA15,tstlsttt,tstl} harness for
+testing {\tt pyfakefs} \cite{pyfakefs} as a second case study in applying our approach
+to aggressive testing.  The {\tt pyfakefs} module is a widely-used
+tool for Python testing that allows tests to replace real file system
+usage with the use of a ``fake file system'' that can contain
+arbitrary contents, operate faster than a real file system, avoid
+tests modifying the real file system, and allow fault injection.  The
+harness for {\tt pyfakefs} is a TSTL-based differential testing
+harness conceptually similar to harnesses used at NASA for file system
+testing \cite{ICSEDiff,CFV08}.
 
-Found bugs:
+The muupi \cite{muupi} tool generated 873
+mutants of the file {\tt fake\_filesystem.py}, the tested part of the
+{\tt pyfakefs} system.  At the time we generated mutants, testing of
+{\tt pyfakefs} had been going on for a period of months, with many
+changes and extensions of the test harness, leading to discovery and
+correction of more than 50 bugs\footnote{See the issues labeled with
+  {\bf TSTL} on the pyfakefs GitHub issue tracker for a history of the
+  testing effort.}  Of the 873 mutants, only 424 were actually covered
+within 30 minutes of testing {\tt pyfakefs}, and so we omitted the
+mutants of code not covered.  Coverage information itself is useful,
+and showed some (known) limitations of the testing, but, as discussed
+above, we are interested in the additional information on oracle and
+input generation strength provided by mutation testing results.
+
+The harness killed 286 of the 449 covered mutants, all within 60
+seconds.  For 279 of these, 5 of 5 attempts to kill within 60 seconds
+succeeded.  For another 7, fewer than 5 (but not less than 3) attempts
+to kill in 60 seconds succeeded.  Extending the test budget to five
+minutes did not add any newly killed mutants.  The mean minimum time
+to kill a mutant was 0.59 seconds, and the mean maximum time was 3.25
+seconds.  The longest minimum time to kill a mutant was 44.8 seconds,
+and the longest mean time to kill a mutant was 42.64 seconds.
+Our mutation results suggest that 45 seconds of testing is likely to
+be as effective as 60 seconds (or five minutes) of testing for {\tt
+  pyfakefs}.
+
+Examining the 163 interesting un-killed mutants proved extremely fruitful.
+First, there were large groups of mutants that could be ignored, as
+they related to aspects of testing intentionally not performed, such
+as checking disk usage or atime/ctime/mtime related behavior (these
+behaviors are ignored due to the problems of differential testing with
+a reference file system).  Additionally, some mutants were obviously
+uninteresting on inspection (e.g., those that reversed a list where
+clearly the order of items in a list is not important).  Table
+\ref{table:ignore} shows the groups of mutants ignored, and the number
+of such mutants for each category.  Removing these obviously
+uninteresting mutants left us with 101 mutants to examine.  After
+throwing these mutants out, another two large sets of similar mutants
+were evident.  First, there were 14 mutants that modified a statement
+containing a check on the fake file system class field indicating
+whether the file system is case sensitive.  We immediately noticed
+that the harness only produced path components with lowercase
+characters, meaning that any faults related to handling of  case
+sensitivity would never be detected.  Second, there were a large
+number of mutants referencing methods checking the position of the
+path separator in a path, and in particular two mutants checking
+whether the path ends with a path separator.  We realized that paths
+ending in a path separator, or more generally containing extra path
+separators, were also not being generated, meaning that path
+normalization related faults would also be missed.
+
+We added these features to the test harness, a simple matter of
+changing the path component generation line from
+
+\begin{code}
+<component> := <["alpha","beta","gamma","delta", "epsilon","a","b",
+   "c","d","e","f","g", "h","omega","lambda","phi"]>
+\end{code}
+
+\noindent to
+
+\begin{code}
+<component> :=<["alpha","beta","gamma","Alpha","Beta","Gamma","a","b",
+   "c","d","e","f","g","omega","lambda","phi",""]>
+\end{code}
+
+\noindent and as a result were able
+to discover the following new faults, almost all of which have since
+been corrected:
 
 \begin{enumerate}
 \item \url{https://github.com/jmcgeheeiv/pyfakefs/issues/306}
