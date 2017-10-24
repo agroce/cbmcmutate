@@ -1589,6 +1589,39 @@ Our mutation results suggest that 45 seconds of testing is likely to
 be as effective as 60 seconds (or five minutes) of testing for {\tt
   pyfakefs}.
 
+\begin{table}
+\caption{Easily ignored unkilled mutant categories}
+{\scriptsize
+\begin{tabular}{l|l|r}
+Identifier & Explanation & Count \\
+\hline
+{\tt ChangeDiskUsage} & Disk usage is hard to model in differential
+                        testing & 8 \\
+{\tt usage\_change} & Disk usage is hard to model in differential
+                      testing & 2 \\
+{\tt \_last\_dev} & Differential testing only uses one device & 4\\
+{\tt \_last\_ino} & inode usage not modeled in differential testing &
+                                                                      8\\
+{\tt epoch} & epoch not modeled in differential testing & 3\\
+{\tt link\_depth} & link depth is limited by assumption in testing & 4\\
+{\tt reversed} & reversing lists used as sets or singleton lists is a
+                 no-op & 5\\
+{\tt st\_atime} & time stat fields not modeled in differential testing
+                         & 4 \\
+{\tt st\_ctime} & time stat fields not modeled in differential testing
+                         & 4\\
+{\tt st\_mtime} & time stat fields not modeled in differential testing
+                         & 4\\
+{\tt st\_mode} & mode values differ in ways not modeled in
+                 differential testing
+                         & 9\\
+{\tt st\_nlink} & known discrepancies in nlink behavior to be ignored
+                         & 7\\
+\end{tabular}
+}
+\label{table:ignore}
+\end{table}
+
 Examining the 163 interesting un-killed mutants proved extremely fruitful.
 First, there were large groups of mutants that could be ignored, as
 they related to aspects of testing intentionally not performed, such
