@@ -1753,17 +1753,27 @@ but showed that to find all faults in the file system, testing to a
 more aggressive depth limit is important for thorough testing.  And,
 sure enough, running our harness (without the changes for invalid
 paths, since not all of the faults thus revealed have been fixed) with
-depth 1000 revealed a new fault:  
-\url{https://github.com/jmcgeheeiv/pyfakefs/issues/321}.
+depth 1000 revealed what appeared to be a new fault:  
+\url{https://github.com/jmcgeheeiv/pyfakefs/issues/321}.  The test
+failed when run standalone, without the reference, so it appeared to
+be a legitimate issue.  However, on inspection the test is invalid,
+since writing to a directory is known to fail.  The TSTL harness
+guards against such a problem, however, so how could the test be
+generated?  It turns out the guard in the harness uses the reference
+file system (which has a bug, in this case), and incorrectly believes
+the path involved is not a directory.  However, the problem also turns
+out to be a bug in {\tt pyfakefs} which throws an internal error
+rather than signaling the correct errno and throwing OSError.
 
 At this point, the utility of examining mutants using our tools to
 generate witness tests that cover the mutant but pass is quite clear:
 these were the first two unkilled mutants inspected, chosen at
 random.  The first revealed a desireable but difficult change to the
 harness (and for now lets us ignore two mutants as clearly unkillable
-without that change).  The second, after investigation, results in the
-discovery of a particularly subtle and difficult-to-detect fault in
-the file system.
+without that change).  The second, after investigation, resulted in
+the discovery of an extremely subtle flaw in the test harness,
+interacting with a fault in the reference (Mac OS X) file system, and
+also an actual fault in the tested file system.
 
 \section{Discussion}
 
