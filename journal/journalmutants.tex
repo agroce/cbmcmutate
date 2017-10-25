@@ -1570,14 +1570,14 @@ mutants of the file {\tt fake\_filesystem.py}, the tested part of the
 changes and extensions of the test harness, leading to discovery and
 correction of more than 50 bugs\footnote{See the issues labeled with
   {\bf TSTL} on the pyfakefs GitHub issue tracker for a history of the
-  testing effort.}  Of the 873 mutants, only 424 were actually covered
+  testing effort.}  Of the 873 mutants, only 449 (51.4\%) were actually covered
 within 30 minutes of testing {\tt pyfakefs}, and so we omitted the
 mutants of code not covered.  Coverage information itself is useful,
 and showed some (known) limitations of the testing, but, as discussed
 above, we are interested in the additional information on oracle and
 input generation strength provided by mutation testing results.
 
-The harness killed 286 of the 449 covered mutants, all within 60
+The harness killed 288 of the 449 covered mutants (64.1\%), all within 60
 seconds.  For 279 of these, 5 of 5 attempts to kill within 60 seconds
 succeeded.  For another 7, fewer than 5 (but not less than 3) attempts
 to kill in 60 seconds succeeded.  Extending the test budget to five
@@ -1682,6 +1682,88 @@ been corrected:
 \item \url{https://github.com/jmcgeheeiv/pyfakefs/issues/319}
 \item \url{https://github.com/jmcgeheeiv/pyfakefs/issues/320}
 \end{enumerate}
+
+Adding these new features to the test harness and throwing out mutants
+matching one of our ``correctly ignored'' classes of mutants, we were
+able to improve the kill ratio to 81.1\% of covered mutants, a result
+indicating, we believe, a relatively strong oracle, which matches our
+expectations for a differential testing-based harness (and the very
+large number of faults thus far detected by the harness).
+
+Examining unkilled mutants using the more advanced,
+dynamic-analysis-based techniques proposed in this paper was also
+useful, if more time consuming.  For instance, consider a mutant that
+modifies the line:
+
+
+\begin{code}
+         if (not self.isabs(path)):
+
+\end{code}
+
+\noindent to
+
+\begin{code}
+         if self.isabs(path):
+\end{code}
+
+This code is easily covered, and stepping through a maximal-coverage
+test covering it generated using our TSTL extension makes it easy to
+see why the mutant is not killed.  Our harness only generates absolute
+paths, so the mutant forces the branch to always (instead of never) be
+taken.  That causes execution of the code:
+
+\begin{code}
+            path = self.join(getcwd(), path)
+\end{code}
+
+However, since the current directory is always root (``/'') this is a
+no-op.  The change indicates that we can extend our testing by
+generating relative paths.  This means the harness must also be
+modified to make sure the current directory in both file systems is
+the same.  Unfortunately, without the kind of file system sandboxing
+that pyfakefs provides, this also changes the current directory in the
+TSTL test generator itself, breaking the tool.  So, while in theory
+this could be added to testing, in practice the effort required is too
+large.  Discovering this, we can add absolute path queries to our set
+of ignored mutant types and proceed. 
+
+Another mutant introduces a spurious {\tt break} into a loop in a
+method of the file system's {\tt FakeDirectory} class, {\tt
+  HasParentObject} that checks whether (this is the text of the actual
+code comment):
+
+{\scriptsize
+\begin{code}
+dir\_object is a direct or indirect parent directory, or if both are the same object
+\end{code}
+}
+
+This code is only called during a {\tt rename} operation, and the change simply makes
+the function incorrectly return False in cases where discovering the
+link (that makes a rename invalid) requires traversing multiple levels
+of indirection.  This is clearly possible with our harness, but is
+likely to be quite difficult, since it requires setting up an invalid
+rename that is invalid due to at least two levels of indirection.  We
+hypothesized that the test size/search depth limit of 200 operations was making
+this problem hard to detect, and ran the {\tt tstl} random tester with
+a depth limit of 500 steps.  Within three minutes the mutant was
+detected. This did not result in a change in the file system harness,
+but showed that to find all faults in the file system, testing to a
+more aggressive depth limit is important for thorough testing.  And,
+sure enough, running our harness (without the changes for invalid
+paths, since not all of the faults thus revealed have been fixed) with
+depth 1000 revealed a new fault:  
+\url{https://github.com/jmcgeheeiv/pyfakefs/issues/321}.
+
+At this point, the utility of examining mutants using our tools to
+generate witness tests that cover the mutant but pass is quite clear:
+these were the first two unkilled mutants inspected, chosen at
+random.  The first revealed a desireable but difficult change to the
+harness (and for now lets us ignore two mutants as clearly unkillable
+without that change).  The second, after investigation, results in the
+discovery of a particularly subtle and difficult-to-detect fault in
+the file system.
 
 \section{Discussion}
 
