@@ -1801,7 +1801,7 @@ verification process, our approach shifts the emphasis to one of
 ``verifying'' the verification itself by repeatedly \emph{falsifying}
 claims that various incorrect programs satisfy the property.  This is,
 at a conceptual level, akin to Karl Popper's philosophy of science
-\cite{Popper}.
+\cite{Popper,popperconjectures}.
 
 For Popper, all scientific knowledge is provisional, and the key to
 the scientific approach is a critical effort, based on
@@ -1832,7 +1832,61 @@ problems:  we can clearly establish the falsehood of a ``theory'' in
 our context by a single counterexample; it is only establishing the
 truth of a theory, and the value of that truth, that is difficult for us.
 
-\subsection{The Power of Exhaustive Nondeterminism}
+The same idea applies to software testing, where there is perhaps even
+more danger of focusing on a successful result, since small errors in
+specification are less likely to be detected by lackluster testing
+efforts.  Shifting attention to false claims of correctness, and the
+ability to detect them, is the mental adjustment, with or without
+use of program mutants, necessary for good testing and proper
+attention to not only running the progam but providing an effective
+oracle \cite{oracleMcMinn} for those runs.  This point of view both
+lets us see code coverage \cite{CovDisc} as both useful and harmful:
+code coverage can easily be used as a potentially misleading indicator that the
+code is ``mostly'' tested (e.g., ``we have 80\% coverage, we're
+done'') or as a beneficial guide to code not yet ``put through the
+proving ground'' of a test (a very Popperian notion, code that has not
+been potentially falsified) \cite{ahmed_testedness}, or a measure of how many times code has
+been put to the test, with more quantitative coverage counts, such as
+traditionally provided by {\tt gcov}.
+
+Another way to think about this concept is to note that Popper
+basically rejects induction, in the sense of drawing general
+conclusions of truth from particulars (he claims that Hume's famous
+problem of induction \cite{Hum2} is best solved by stating it cannot
+be solved).  This corresponds to a rejection of one view of testing,
+where it is seen as demonstrating that a program works: if we observe
+enough ``good'' runs, we can conclude that the program is correct.
+Dijkstra meant his statement that testing ``can only show errors'' as
+a criticism, but Popper implies this is precisely the value of
+testing, in any context not purely deductive: that is, any context
+where we are either unable to prove fully that a program satisfies its
+specification (the usual case) or where we are able to do so, but
+unsure we really have a complete and perfect specification (which is
+still almost always the case).  In this sense the distinction between
+testing and verification is not so large, in a Popperian sense.
+
+The novel assumption we make in our use of mutation analysis that goes
+beyond Popper is our belief that a truer specification likely constrains
+the programs satisfying it more than a less true specification.  Replace ``truer'' with
+simply "more scientific" and Popper would likely agree.
+One additional interesting change is that methods not really (at
+present) practicable in scientific efforts apply here.  For instance,
+while our notion of tests is \emph{deductive} in that a useful test is
+one that potentially refutes either the correctness of the program (by
+failing) or the specification (by allowing a mutant to survive that
+should not), we can apply random testing.  In random testing, most
+tests are not very useful in a deductive sense: they provide little
+chance to refute a claim about the program.  However, collectively,
+some randomly generated tests are likely to be powerful for
+falsification in ways that individual tests designed by humans with
+the deductive approach in mind seldom achieve.  In science the
+equivalent concept would be to perform a vast set of experiments, with
+little effort to design them for refutation of a theory, and then scan
+the data for any results that falsify an existing theory.  This seems
+impractical, to say the least.
+
+\begin{comment}
+\subsection{Is Exhaustive Nondeterminism Important?}
 
 The ability to improve a harness based on surviving mutants (or on
 passing runs of killed mutants) essentially relies on the nature of
@@ -1853,13 +1907,18 @@ to the analysis space in which CBMC is situated: on the one hand,
 within a known bound, its results are exhaustive; on the other hand,
 the method behaves much like a dynamic analysis, in that there are no
 false positives.
+\end{comment}
 
 \section{Related Work}
 
 The idea that a ``successful verification'' in model checking (or even
  theorem proving) often simply indicates an inadequate property is
-long-standing \cite{PracticalCov,Hoskote}. Use of mutants
-\cite{MutSpec,MutCov} to provide a coverage measure dates back both to
+long-standing \cite{PracticalCov,Hoskote}. The most recent works in
+this line of thinking, to our knowledge, use Inductive Validiity Cores
+(IVCs) \cite{WhalenIVC} to indicate correspondence between property
+and constraint on the system under verification.
+
+Use of mutants \cite{MutSpec,MutCov} to provide a coverage measure dates back both to
 these early explorations and relatively recent work \cite{MutTheory,Arbiters,MutInterp}.
 However, in these efforts the mutation was usually applied to hardware
 models, and (critically) the surviving mutants were used to, e.g., identify
@@ -1873,7 +1932,7 @@ vacuity-based sense) produce the strongest passing LTL formula
 of Chockler et al. \cite{BeyondVac}.  We are not the first to note
 that model checking, at present, due to the ``many obstacles'' in
 proving a system correct, is primarily used for falsification
-\cite{AbsFals}.  Previous work on the topic \cite{AbsFals} focused on
+\cite{AbsFals}.  Most previous work on the topic \cite{AbsFals} focused on
 abstractions based on under-approximation, to ensure counterexamples
 were not spurious. We instead preserve the goal of
 verification\footnote{Note that we use a model checking approach that
@@ -1885,7 +1944,7 @@ incorrect systems.
 More distantly related is the general effort to determine the quality
 not only of test suites (which is often focused on missing tests
 within the ``range'' of testing, not a problem for CBMC) but of test
-oracles and entire testing infrastructures.  The problem of ``testing
+oracles and entire testing infrastructures \cite{oracleMcMinn}.  The problem of ``testing
 the tester'' \cite{WODA09} is fundamental to all efforts
 to improve software quality.  Recent efforts of most interest have
 focused on measuring \emph{checked coverage} \cite{CheckedCov,CheckedJournal,ThereYet}, where
