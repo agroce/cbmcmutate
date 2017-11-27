@@ -81,7 +81,7 @@ statement has the usual
 all executions that violate assumptions.
 
 \begin{figure}
-{\scriptsize
+{%\scriptsize
 \begin{code}
 \#include "sort.h"
 
@@ -271,7 +271,7 @@ un-killed mutants feasible.
 \section{A Simple Example Verification}
 
 \begin{figure}
-{\scriptsize
+{%\scriptsize
 \begin{code}
  \#include "sort.h"
 
@@ -395,7 +395,7 @@ model check.  What is a developer to do?
 
 
 \begin{figure}
-{\scriptsize
+{%\scriptsize
 \begin{code}
  9 :   /*(rep\_op)*/ if (l <= r) 
  26 :  /*(rep\_const)*/ while(-1)
@@ -448,7 +448,7 @@ checks that the array {\tt a} is sorted after the call to {\tt
   sort}, but it does not check that it is a permutation of the input!
 
 \begin{figure}
-{\scriptsize
+{%\scriptsize
 \begin{code}
 LOG: ref[0] = 2147414872
 LOG: ref[1] = 2147480408
@@ -469,7 +469,7 @@ LOG: a[2] = 2147480408
 \end{figure}
 
 \begin{figure}
-{\scriptsize
+{%\scriptsize
 \begin{code}
 ...
    int i, v, count, qcount, prev;
@@ -763,7 +763,7 @@ along with our experimental data and CBMC patch, at {\tt
 \end{figure}
 
 \begin{figure}
-{\scriptsize 
+{%\scriptsize 
 \begin{code}
 (int, survivors) {\underline{find-size}} ($H$, $M$, $S_0$: int,
                             $O$: int $\rightarrow$ options,
@@ -796,7 +796,7 @@ along with our experimental data and CBMC patch, at {\tt
 \end{figure}
 
 \begin{figure}
-{\scriptsize 
+{%\scriptsize 
 \begin{code}
 harness {\underline{cover-harness}} ($H$, $TARGET$) 
 \vspace{0.1in}
@@ -872,7 +872,7 @@ trace {\underline{maxcover}} ($m$, $H$, $S$, $O$, $U$)
 \end{figure}
 
 \begin{figure}
-{\scriptsize 
+{%\scriptsize 
 \begin{code}
 report {\underline{check-harness}} ($SUT$, $M$, $H$, $M(H)$, $S$, $O$, $U$) 
 \vspace{0.1in}
@@ -906,6 +906,55 @@ report {\underline{check-harness}} ($SUT$, $M$, $H$, $M(H)$, $S$, $O$, $U$)
 \subsection{Adapting Falsification-Based Approaches to Automated Test
   Generation}
 
+In
+this paper, we do not consider the problem of using mutants to improve
+manually constructed test cases; that concept is essentially as old as
+the idea of mutation testing itself.  Instead we focus on the testing
+equivalent of a verification harness: an automated test generation
+harness and the tests it produces.  This section explains the
+adaptations required to apply our approach in the context of automated
+test generation, rather than formal verification.
+One aspect of the approach outlined above requires no modifications:
+examining mutants that are not killed is the same basic process,
+whether those mutants are not killed by a verification harness or a
+test generation harness.  Similarly, mutating a test harness is not essentially
+different, though it is less useful in testing than in verification
+(because of the probabilistic nature of most aggressive testing).  Two
+aspects require some modification:
+
+First, and simplest, the method for generating passing executions is
+slightly different.  Rather than simply negating the specification and
+adding constraints for code coverage, we modify the testing tool (in
+our case the TSTL tool for Python \cite{tstlsttt,NFM15} by adding
+options to 1) search for a passing test with maximum code coverage and
+2) constrain the search to only tests that cover a given statement or
+branch.  These options are:  {\tt --trackMaxCoverage <file>}, {\tt
+  --maxMustHitBranch <branch>} and {\tt --maxMustHitStatement <stmt>}.
+
+With this addition to TSTL, finding passing executions to examine is
+trivial, simply a matter of identifying the location of the mutant.
+Adding a similar feature to most widely used test generation tools
+should be
+relatively easy, given that they work by first generating a test, then
+executing it and determining its coverage and other properties, such as
+whether it passes (or generating a test on the fly while determining
+these properties).  
+
+The second change is that the notion of mutant stability changes in
+two ways.  First, the parameter to be optimized is different:  while
+test generation usually requires a maximum test length \cite{ASE08},
+that parameter is not one with a corresponding computational cost,
+like a bounded model checking depth.  The same test budget can support
+multiple lengths, and there is no simple correspondence between depth
+and mutants killed.  Mutants killed is monotonic (stable or
+increasing) in bounded model checking depth; mutants killed is not
+monotonic in maximum test length \cite{ASE08}.  However, there is an
+analogous parameter in test generation:  actual test budget.  This
+parameter, however, only produces \emph{probabilistically} \cite{arcuri2014hitchhiker} monotonic
+behavior:  one run with budget $X > Y$ may kill fewer mutants than a
+run with budget $Y$; however, over a large number of runs,
+statistically, $X$-budget tests must outperform, or perform the same
+as, $Y$-budget tests.
 
 A key insight is that when estimating how hard a mutant is, a single
 run that either takes a long time to kill the mutant or a run that
@@ -917,6 +966,74 @@ mutant is in fact easy:  even hard mutants can sometimes be easy to
 detect.  In part we base this idea on empirical evidence (see below),
 but it can also be justified by a simple theoretical model of test
 generation.  
+
+Unfortunately, the change to a stochastic setting makes determining
+stability more difficult.  It is highly inefficient, once budgets
+become larger (which is often required in testing), to run each mutant
+enough times to obtain a good estimate of how long it takes to kill,
+and doing so requires running already killed mutants, or equivalent
+mutants, many times.  On the other hand, in another sense the problem
+becomes easier:  with bounded model checking, for each mutant $m$, we have
+to query wither unwinding depth $U$ is sufficient to kill the mutant,
+for each $U$ until stability is achieved.  Many test generation
+systems, such as TSTL, support a mode where the tool simply runs until
+a fault is detected.  If we set a large timeout (larger than the
+largest test budget we are interested in), we can simply run the tool
+with each mutant and discover how long it takes to kill it (or if it
+cannot be killed within our maximum possible budget).  Finding
+``stability'' then, becomes simply a matter of finding the mutant(s)
+with the largest time-to-kill, and inspecting those never killed to
+determine if they are equivalent.
+
+Unfortunately, again due to the stochastic setting, this is not quite
+sufficient.  A hard-to-kill mutant may, by chance, infrequently be
+detected very quickly; an easy-to-kill mutant may, by chance,
+sometimes not be detected quickly.  Both cases result in inaccurate
+information, and potentially in a wrong estimate of the correct test
+budget to use.  Fortunately, an asymmetry in the probabilities of
+these misleading results allows us to proceed without (usually) running each
+mutant many times.
+
+\subsubsection{Estimating Required Budget to Kill a Mutant}
+
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{probsmodel}
+\caption{Tests required for detection as difficult of fault/mutant increases.}
+\label{fig:probmodel}
+\end{figure}
+
+
+\begin{figure}
+{%\scriptsize 
+\begin{code}
+float {\underline{stable-budget}} ($M$, $k$, $T$, $maxTime$, $equiv$)
+\vspace{0.1in}
+  budget = 0
+
+  for m $\in M$:
+     killTime = -1
+     runs = 0
+     maxKillTime = -1
+     while (killTime < budget) and (runs < $k$):
+         runs = runs + 1
+         // Assume killTime is -1 if not killed
+         killTime = $T$(timeout=$maxTime$)
+         if killTime > maxKillTime:
+            maxKillTime = killTime
+
+     if maxKillTime == -1:
+        $equiv$ = $equiv \cup m$
+
+     if maxKillTime > budget:
+        budget = killTime
+  
+  return budget
+\end{code}
+}
+\caption{Estimating needed budget for mutant-stable testing}
+\label{alg:testdepth}
+\end{figure}
 
 The difficulty of detecting a fault (or killing a mutant, which is
 equivalent) can be simply expressed by a probability of detection,
@@ -940,11 +1057,30 @@ difficulty $1000$ on the first test is indeed small, only $1/1000$.  However, th
 chance of getting ``unlucky'' and failing to detect a test with
 difficulty $1/10$ for even as few as 100 tests is less than $1/30,000$.
 
-\begin{figure}
-\includegraphics[width=\columnwidth]{probsmodel}
-\caption{Tests required for detection as difficult of fault/mutant increases.}
-\label{fig:probmodel}
-\end{figure}
+
+This means that as soon as a mutant has taken a long time to kill, we
+can safely assume that it is indeed hard to kill; when a mutant is killed
+quickly, we run again, based on a tolerance for error in budget
+estimation (where each run adds large confidence); after $k$ runs we
+assume a mutant is indeed easy.  As soon as one
+detection takes a long time, or exhausts the budget, we can use that
+value as an estimate for the difficult of the mutant.  While this
+approach is not perfect, it has the huge advantage of never requiring
+more than a total runtime slightly more than 1 run with the full test
+budget, unless $k$ is large.  More precisely, to coarsely, but
+cheaply, estimate a stable test
+budget for a set of mutants, we use the procedure in Figure
+\ref{alg:testdepth}, which returns a budget and modifies a set of
+possibly equivalent mutants.  The procedure can also be used to set a
+difficulty for each mutant, in addition to an overall budget, by simply storing the largest {\tt
+  killTime} for that mutant.  The procedure takes as input a set of
+mutants $M$, a number of trials $k$, a test procedure $T$, a maximum
+test budget to use, $maxTime$, and a (modifiable) structure to store
+possibly equivalent mutants, $equiv$.
+
+
+
+
 
 \section{Case Studies and Experimental Results}
 
@@ -1034,7 +1170,7 @@ unwinding reached.  Unkilled mutants include clearly erroneous behaviors.
 
 \subsubsection{Merge With Duplicate Removal}
 \begin{figure}
-{\scriptsize
+{%\scriptsize
 \begin{code}
 int main () \{
   int a[SIZE], b[SIZE], c[SIZE*2];
@@ -1085,7 +1221,7 @@ int main () \{
 \end{figure}
 
 \begin{figure}
-{\scriptsize
+{%\scriptsize
 \begin{code}
 int merge\_sorted\_nodups(int a[], int asize, 
                         int b[], int bsize, int c[]) \{
@@ -1140,7 +1276,7 @@ but passing trace of this run using the CBMC extension lets us see the problem.
 \subsection{SpiderMonkey Boyer-Moore-Horspool Implementation}
 
 \begin{figure}
-{\scriptsize
+{%\scriptsize
 \begin{code}
 jsint
 js\_BoyerMooreHorspool(const jschar *text, jsint textlen,
@@ -1181,7 +1317,7 @@ js\_BoyerMooreHorspool(const jschar *text, jsint textlen,
 \end{figure}
 
 \begin{figure}
-{\scriptsize
+{%\scriptsize
 \begin{code}
 \#include "bmh.h"
 int main() \{
@@ -1372,7 +1508,7 @@ tools meet these requirements.}
 \end{comment}
 
 \begin{figure}[tb]
-{ \scriptsize
+{ %\scriptsize
 \begin{verbatim}
  1 static int rcu_read_nesting_global;
  2 
@@ -1594,7 +1730,7 @@ be as effective as 60 seconds (or five minutes) of testing for {\tt
 
 \begin{table}
 \caption{Easily ignored unkilled mutant categories}
-{\scriptsize
+{%\scriptsize
 \begin{tabular}{l|l|r}
 Identifier & Explanation & Count \\
 \hline
@@ -1737,7 +1873,7 @@ method of the file system's {\tt FakeDirectory} class, {\tt
   HasParentObject} that checks whether (this is the text of the actual
 code comment):
 
-{\scriptsize
+{%\scriptsize
 \begin{code}
 dir\_object is a direct or indirect parent directory, or if both are the same object
 \end{code}
@@ -2023,36 +2159,45 @@ of reactive systems \cite{aichernig2013model}.
 \section{Conclusions and Future Work}
 
 This paper proposes a \emph{falsification-driven} methodology for
-formal verification, particularly when verification is performed by
-the developers of critical software systems.  These developers are not
-experts in formal verification, but in the systems they are verifying.
-Verification is, we claim, always provisional, in that the potential
+formal verification and high-quality automated testing, particularly
+when these tasks are performed by
+the developers of critical software systems.  These developers are
+usually not
+experts in formal verification or automated test generation, but in the systems they are verifying.
+Verification, like testing, we claim, always provisional, in that the potential
 flaws in our assumptions, specification, and understanding of system
 behavior tend to leave room for doubt about the correctness of any
 verification result.  Verification of code is not self-explanatory,
 unlike a counterexample.  We propose to take advantage of the use of
-counterexamples and witnesses and center verification around the
-incorrect programs a verification fails to prove incorrect.  A
-verification is considered effective when it finds no faults in the
+counterexamples and witnesses and center verification (and testing) around the
+incorrect programs a verification or test effort fails to prove incorrect.  A
+verification or test effort is considered effective when it finds no faults in the
 SUT and detects every faulty variation of the SUT.  An
 obvious source of faulty SUT variations is mutants; we also suggest that
 known-flawed versions of code be included in this set, which all of
 our tools support, but the key to the method is the generation of a
-large set of potential buggy versions without additional developer effort.  Given
+large set of potential buggy versions without additional developer
+effort.  
+
+Given
 these faulty versions, a developer can examine mutants that a verification
 effort fails to detect, and (with the algorithms and tools presented
 in this paper) examine executions showing precisely how a program
-mutant can ``make it through'' a verification without being detected,
+mutant can ``make it through'' a verification or testing process without being detected,
 with assurance that these executions will have high coverage (and thus
 likely be non-trivial).  Developers can also check that a verification
-harness does not have any mutants that 1) verify the SUT while 2) killing
+or testing harness itself does not have any mutants that 1) verify the SUT while 2) killing
 more mutants than the original harness.  This can help detect
 very subtle flaws in harnesses, especially those based on bad
 reasoning about ``equivalent'' mutants.  We demonstrate, as a
 proof-of-concept, that our approach can be useful for simple but
 realistic verification efforts, and can contribute to serious systems
 verification and modeling efforts for complex code such as the Linux
-kernel RCU implementations.  The bigger picture is that our approach
+kernel RCU implementations.  Adapting the approach to testing, it
+works just as well, actually leading to detection of faults in the RCU
+implementation and a widely-used Python library.
+
+The bigger picture is that our approach
 attempts to apply the ideas of Karl Popper's falsification-centered
 approach to the philosophy of science to the understanding of software
 systems.  In this view, verification is almost always provisional, but we can 
@@ -2083,7 +2228,8 @@ e.g., Java Pathfinder \cite{JPF2} (at least in symbolic mode; in pure
 explicit-state exploration the problems of non-exhaustive exploration
 may dominate).
 
-{\scriptsize A portion of this work was funded by NSF grants CCF-1217824
+{
+A portion of this work was funded by NSF grants CCF-1217824
 and CCF-1054786.}
 
 % use section* for acknowledgment
