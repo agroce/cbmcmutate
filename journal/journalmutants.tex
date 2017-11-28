@@ -906,12 +906,66 @@ report {\underline{check-harness}} ($SUT$, $M$, $H$, $M(H)$, $S$, $O$, $U$)
 \subsection{Adapting Falsification-Based Approaches to Automated Test
   Generation}
 
-In
-this paper, we do not consider the problem of using mutants to improve
+\subsubsection{Mutants and Manual vs. Automatically Generated Tests}
+
+In this paper, we do not propose the idea of using mutants to improve
 manually constructed test cases; that concept is essentially as old as
 the idea of mutation testing itself.  Instead we focus on the testing
 equivalent of a verification harness: an automated test generation
-harness and the tests it produces.  This section explains the
+harness and the tests it produces.  We believe that, despite
+superficial similarity, the two ideas are fundamentally different.  In
+the first case, there is static, concrete, existing test suite.
+Mutation analysis is performed on this suite, and a developer writes
+concrete, specific, tests to kill mutants that are not equivalent.
+This may be a useful exercise, and may indeed somewhat improve the
+future defect detection powers of the suite
+\cite{justmutants,ahmed_testedness} to some extent.  We suspect,
+however, that this method seldom immediately results in detection of
+an existing fault in the SUT.  The developer of the test to kill the
+mutant is not, really, looking for a new way to test the system, but
+looking for a specific input that causes the mutant to behave
+incorrectly.  Again, this may improve the suite, but seems unlikely to
+detect other, lurking, incorrect behaviors.  To our knowledge, there
+are no human studies showing that such changes result in immediate
+fault detection.
+
+However, the story is quite different with an automated test
+generation system based on a harness defining tests to be generated,
+for instance a sophisticated random test generator for a specific
+domain \cite{ICSEDiff,csmith,tstlsttt,rcutorture}.  In that setting,
+modifying the harness so that a test is generated that kills the
+mutant does more than kill a specific mutant:  it, as in model
+checking, extends the generative range of the testing itself, and
+(likely) requires a more abstract approach to each mutant than is
+possible with specific, manually written tests.  In short, modifying a
+test harness that generates an essentialy unbounded number of
+different tests is not, at a high level, very different than modifying
+a verification harness to detect a mutant.  Both operations require
+not just an analysis of a specific faulty behavior, but an improvement
+to the \emph{testing process}.  The only major difference is that with
+test generation, the goal is to achieve high probability of detection,
+since the certainty of verification is lost.  In compensation,
+however, one receives scalability, ease-of-use, and availability in
+languages without formal verification tools.
+
+Note that we propose mutation testing as a way to \emph{extend} the insight
+into a test generation tool provided by code coverage \cite{CovDisc}.  When the
+generator never produces tests covering a line of code, this can be
+detected without the expense or difficulty of producing mutants, and
+interpretation is straightforward:  if you are interested in testing
+the un-covered code, you must modify the generator to cover it.
+Coverage is good at predicting overall mutation scores \cite{ISSTA13,ICSE14},
+but there is a gap between coverage's information and that provided by
+some surviving mutants.  This gap is our interest.
+Mutants provide insight on the strength of the oracle
+used to assess generated tests, and the degree to which generated
+inputs stress it (a line of code can be covered but not thoroughly
+stressed, since coverage does not consider subtle aspects of, e.g.,
+expression evaluation).
+
+\subsubsection{Falsification-Driven Testing}
+
+This section explains the
 adaptations required to apply our approach in the context of automated
 test generation, rather than formal verification.
 One aspect of the approach outlined above requires no modifications:
@@ -1540,7 +1594,7 @@ tools meet these requirements.}
 Because both RCU and the Linux kernel are moving targets, any validation
 and verification must be both automated and repeatable, for inclusion
 in a regression-test suite.  At present the {\tt rcutorture}
-stress-test provides some assurance in the form of automated testing,
+stress-test \cite{rcutorture} provides some assurance in the form of automated testing,
 but ideally would be complemented by some formal verification of the
 implementation(s) in the kernel.  An important question is whether
 available formal verification tools can provide effective additional
@@ -1608,13 +1662,12 @@ mutants is not prohibitive.  No single model checking run for the Tiny
 RCU benchmark takes more than 40 seconds, and total runtime for all
 mutants in the usage benchmarks ranges from just over 12 seconds for a
 basic litmus test to less than 5 minutes for the most complex of the
-benchmarks.  Our belief that analyzing all surviving mutants is
+benchmarks. \begin{comment} Our belief that analyzing all surviving mutants is
 plausible for code of this size and criticality is supported by our
 concurrent preliminary work on using mutants to analyze the
 effectiveness of {\tt rcutorture}, which has improved {\tt rcutorture}
-itself and (by doing so) exposed a previously undetected RCU bug.
+itself and (by doing so) exposed previously undetected RCU bugs.|
 
-\begin{comment}
 Nevertheless, it is important to note that these two benchmarks are not
 examples of useful verifications, but rather the simplest examples of
 a class that might some day expand to include useful verifications.
@@ -1687,11 +1740,62 @@ verification success time is only 1.5 seconds.
 
 \subsubsection {{\tt rcutorture} Case Study}
 
-Summary of paper \cite{mutKernel}.
+In a first effort to integrate our approach with automated test generation, we applied our method to {\tt rcutorture} \cite{rcutorture}
+itself \cite{mutKernel}.  While the model checking harnesses we were working with were
+weak and limited, {\tt rcutorture} is the workhorse of RCU testing,
+and has resulted in detection of numerous bugs.  We generated, again
+using Andrews' tool, 2,815 valid (compilable) mutants (and 354 invalid
+mutants)..  After throwing out
+all mutants that were equivalent or
+redundant via TCE \cite{TCE}, we ran {\tt rcutorture} for two minutes
+on each of the 2,150
+remaining mutants.  Two minutes is actual testing
+budget; each mutant took up to 30 minutes to compile in the first
+place (build failures usually took less time), and a
+1-time setup cost of about 30 minutes to produce an image for use in
+future testing, if we wanted to run {\tt rcutorture} for longer runs
+(this time without compilation or image-production overhead).
+Of these 2,150 mutants, only 380 survived the process, yielding an
+82\% kill rate, showing
+that {\tt rcutorture} is indeed quite effective at detecting most
+deviations from the code, and that the code is relatively tightly
+constrained in behavior.
+
+Manual inspection by the RCU developer (author McKenney) required
+about 5 minutes per mutant, but with very high variance.  Some mutants were
+immediately dismissed as irrelevant, while other required considerable
+effort.  A good estimate for overall human effort in this case is 25
+hours.  This is a significant investment of time, but the payoff, in
+this case, was substantial.  In general, the mutants that resulted in
+changes to kernel code were also mutants that required substantial
+analysis time.
+
+The results of mutation analysis were five patches to RCU code.  Two
+of these patches were to {\tt rcutorture} code, improving the testing
+process.  Three were patches to RCU code, including one actual bug
+fix for a bug detected by the changes to {\tt rcutorture}.  Another
+change to RCU was a performance improvement, avoiding the overhead of
+a {\tt local\_irq\_save()}/{\tt local\_irq\_restore} pair, since
+surviving mutants showed that interrupts were always disabled.  A
+final patch more precisely specified a type, again based on
+information from mutation testing.  Patch details are available at:
+
+\begin{itemize}
+\item \url{https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/commit/?id=45fed3e7cfb4001c80cd4bd25249d194a52bfed3}
+\item \url{https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/commit/?id=7c9906ca5e582a773fff696975e312cef58a7386}
+\item \url{https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/commit/?id=ca1d51ed9809a99d71c23a343b3acd3fd4ad8cbe}
+\item \url{https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/commit/?id=6e91f8cb138625be96070b778d9ba71ce520ea7e}
+\item \url{https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/commit/?id=f13bad9042dcf9b60b48a0137951b614a2ee24b5}
+\end{itemize}
+
+More details of our {\tt rcutorture} analysis are available in a
+workshop paper presented at the 2017 International Workshop on
+Mutation Testing \cite{mutKernel}.
 
 \subsubsection {{\tt pyfakefs} Case Study}
 
-We used the TSTL \cite{NFM15,ISSTA15,tstlsttt,tstl} harness for
+We used the a test harness written in  the TSTL
+\cite{NFM15,ISSTA15,tstlsttt,tstl} automated test generation language for
 testing {\tt pyfakefs} \cite{pyfakefs} as a second case study in applying our approach
 to aggressive testing.  The {\tt pyfakefs} module is a widely-used
 tool for Python testing that allows tests to replace real file system
@@ -1700,9 +1804,10 @@ arbitrary contents, operate faster than a real file system, avoid
 tests modifying the real file system, and allow fault injection.  The
 harness for {\tt pyfakefs} is a TSTL-based differential testing
 harness conceptually similar to harnesses used at NASA for file system
-testing \cite{ICSEDiff,CFV08}.
+testing \cite{ICSEDiff,CFV08}.  The TSTL tools support a number of testing
+methods, but in this case study we restricted ourselves to pure random testing.
 
-The muupi \cite{muupi} tool generated 873
+The muupi \cite{muupi} mutation generation tool generated 873
 mutants of the file {\tt fake\_filesystem.py}, the tested part of the
 {\tt pyfakefs} system.  At the time we generated mutants, testing of
 {\tt pyfakefs} had been going on for a period of months, with many
@@ -1873,7 +1978,7 @@ method of the file system's {\tt FakeDirectory} class, {\tt
   HasParentObject} that checks whether (this is the text of the actual
 code comment):
 
-{%\scriptsize
+{\scriptsize
 \begin{code}
 dir\_object is a direct or indirect parent directory, or if both are the same object
 \end{code}
@@ -2046,7 +2151,24 @@ prohibit the more they say..''\\
 \noindent In this sense, the distinction between specification and
 verification or testing method is perhaps less important than commonly
 thought.  How these interact to produce a prohibition on bad behavior
-is shared, and is most critical.
+is shared, and is most critical.  Moreover, using Popper's ideas helps
+us see why we should expect mutation-based falsification to be more
+fruitful in the context of verification or automated test generation
+than in manual test construction.  A manual test suite is like a
+scientific theory that consists entirely of basic empirical
+statements\footnote{Our terminology here is not quite Popper's, which
+  is somewhat difficult to follow without a lengthy introduction to
+ his  classification of statements.} about
+reality, e.g. that a certain very specific experiment should produce a certain
+result.   While potentially useful in a limited way, and potentially falsifiable, such
+a ``theory'' does not even qualify as a theory in Popper's analysis,
+since he expects theories to make universal statements, and be capable
+of generating a very large set (or even unbounded set) of such basic
+empirical statements via deduction: i.e., to produce tests.  Falsifying the kind of quasi-theory
+that a traditional manual test suite represents might be useful, and
+extend its power, but is a much weaker operation than modifying
+universal statements with generative power to \emph{produce} a large
+set of such quasi-theories.
 
 It is not, on the whole, surprising that there should be a
 correspondence between the ideas of Popper and the effort to verify
@@ -2156,6 +2278,38 @@ brief discussion in the direction
 of the basic idea by Aichernig in his work on model-based mutation testing
 of reactive systems \cite{aichernig2013model}.
 
+According to Mathur \cite{mathur2012foundations}, the idea of mutation
+testing itself was first proposed by 
+Lipton, then formalized by DeMillo et
+al. \cite{PracProg}, and practically implemented by
+Budd et al. \cite{budd1980theoretical} in 1980.
+Mutation analysis subsumes different coverage
+measures \cite{budd1980mutation,mathur1994empirical,offutt1996subsumption}.
+Mutants are
+similar to real faults in terms of both errors
+produced \cite{daran1996software} and difficulty of detection
+detection \cite{mutant,andrews2006using}. Just et
+al. \cite{justmutants} investigated the relation between mutation
+score and test case effectiveness using 357 real bugs, and found that
+the mutation score increased with effectiveness for 75\% of cases,
+which was better than the 46\% reported for structural coverage.
+
+\begin{comment}
+Performing a mutation analysis is usually costly due to the large number of test runs
+required for a full analysis~\cite{jia2011analysis}.
+% This is one of the chief barriers to more widespread adoption of the technique.
+There are several approaches to reducing the cost of mutation
+analysis, categorized by Offutt and
+Untch~\cite{offutt2001mutation} as: do
+\textit{fewer}, do \textit{smarter}, and do \textit{faster}.  The
+\textit{do fewer} approaches include selective mutation and mutant
+sampling, while weak mutation, parallelization of mutation analysis,
+and space/time trade-offs are grouped under the umbrella of \textit{do
+smarter}. Finally, the \textit{do faster} approaches include mutant schema
+generation, code patching, and other methods.
+\end{comment}
+
+
 \section{Conclusions and Future Work}
 
 This paper proposes a \emph{falsification-driven} methodology for
@@ -2214,23 +2368,17 @@ Eclipse tools, and use speculative model checking calls and
 incremental SAT to make mutant analysis available to developers
 continuously as part of their development/debugging process.  Finally,
 these techniques should also be applicable to verification using,
-e.g., Java Pathfinder \cite{JPF2}  (at least in symbolic mode \cite{SymJPF}; in pure
-explicit-state exploration the problems of non-exhaustive exploration
-may dominate).
+e.g., Java Pathfinder \cite{JPF2}.
 
-We would also like to
-integrate falsification-driven verification support into the CBMC
-Eclipse tools, and use speculative model checking calls and
-incremental SAT to make mutant analysis available to developers
-continuously as part of their development/debugging process.  Finally,
-these techniques should also be applicable to verification using,
-e.g., Java Pathfinder \cite{JPF2} (at least in symbolic mode; in pure
-explicit-state exploration the problems of non-exhaustive exploration
-may dominate).
+More fundamentally, it would be useful to perform human studies to
+determine the actual differences between extending (1)
+manually produced suites consisting of specific tests with additional specific
+tests, and (2) extending automated test generation harnesses of the
+same mutation-killing effectiveness. 
 
-{
+{\bf Acknowledgements:}
 A portion of this work was funded by NSF grants CCF-1217824
-and CCF-1054786.}
+and CCF-1054786.
 
 % use section* for acknowledgment
 %\section*{Acknowledgment}
