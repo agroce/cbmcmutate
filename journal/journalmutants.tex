@@ -260,7 +260,7 @@ in order to adapt to the probabilistic context of test generation.
 For example, the equivalent of a problem size for bounded model
 checking is a test budget for automated test generation; however,
 rather than a fixed outcome, the problem in this case is to present a
-likelyhood curve to users, and allow them to make tradeoffs based on
+likelihood curve to users, and allow them to make tradeoffs based on
 that curve.
 
 We still initially present our approach in the context of formal
@@ -638,7 +638,7 @@ summarized as follows:
   to the original code.
 \item Set unwinding depth/problem size $U$ to 0.
 \item Set $r = 0, r' = 1$.
-\item While $r != r'$:
+\item While $r \not= r'$:
 \begin{enumerate}
 \item Set $U = U + 1$.
 \item Set $r = r'$
@@ -974,7 +974,7 @@ whether those mutants are not killed by a verification harness or a
 test generation harness.  Similarly, mutating a test harness is not essentially
 different, though it is less useful in testing than in verification
 (because of the probabilistic nature of most aggressive testing).  Two
-aspects require some modification:
+aspects, however, require some modification.
 
 First, and simplest, the method for generating passing executions is
 slightly different.  Rather than simply negating the specification and
@@ -988,8 +988,7 @@ branch.  These options are:  {\tt --trackMaxCoverage <file>}, {\tt
 With this addition to TSTL, finding passing executions to examine is
 trivial, simply a matter of identifying the location of the mutant.
 Adding a similar feature to most widely used test generation tools
-should be
-relatively easy, given that they work by first generating a test, then
+should be relatively easy, given that they work by first generating a test, then
 executing it and determining its coverage and other properties, such as
 whether it passes (or generating a test on the fly while determining
 these properties).  
@@ -1516,9 +1515,9 @@ In the limiting case, achieved in server-class builds of the
 Linux kernel, overhead for entering and exiting an \emph{RCU read-side
 critical section} (using {\tt rcu\_read\_lock()} and {\tt rcu\_read\_unlock()},
 respectively) is exactly zero \cite{McKenney98}, making RCU an
-excellent choice for read-mostly workloads \cite{McKenney:2013:SDS:2483852.2483867,DinakarGuniguntala2008IBMSysJ,PaulMcKenney2013AMPenergyHOTPAR}.
-However, lightweight readers mean updaters cannot exclude readers,
-so must take care to avoid disrupting readers.
+excellent choice for read-mostly workloads
+\cite{McKenney:2013:SDS:2483852.2483867,DinakarGuniguntala2008IBMSysJ,PaulMcKenney2013AMPenergyHOTPAR}.  
+However, lightweight readers mean updaters cannot exclude readers, so updaters must take care to avoid disrupting readers.
 Updaters typically maintain multiple versions of the portion of the
 data structure being updated, removing old versions only when
 readers are no longer accessing them.
@@ -1745,7 +1744,7 @@ itself \cite{mutKernel}.  While the model checking harnesses we were working wit
 weak and limited, {\tt rcutorture} is the workhorse of RCU testing,
 and has resulted in detection of numerous bugs.  We generated, again
 using Andrews' tool, 2,815 valid (compilable) mutants (and 354 invalid
-mutants)..  After throwing out
+mutants).  After throwing out
 all mutants that were equivalent or
 redundant via TCE \cite{TCE}, we ran {\tt rcutorture} for two minutes
 on each of the 2,150
@@ -2111,7 +2110,7 @@ testing and verification is not so large, in a Popperian sense.
 The novel assumption we make in our use of mutation analysis that goes
 beyond Popper is our belief that a truer specification likely constrains
 the programs satisfying it more than a less true specification.  Replace ``truer'' with
-simply "more scientific" and Popper would likely agree.
+simply ``more scientific'' and Popper would likely agree.
 One additional interesting change is that methods not really (at
 present) practicable in scientific efforts apply here.  For instance,
 while our notion of tests is \emph{deductive} in that a useful test is
@@ -2143,7 +2142,7 @@ natural laws do in the scientific endeavor:
 
 
 \begin{quote}
-``Not for nothing do we call the laws of nature 'laws': the more they
+``Not for nothing do we call the laws of nature `laws': the more they
 prohibit the more they say..''\\
 -Popper, \emph{The Logic of Scientific Discovery} \cite{Popper}
 \end{quote}
