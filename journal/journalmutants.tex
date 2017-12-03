@@ -139,8 +139,8 @@ evidence as to the reason for the failure to verify the SUT. Moreover,
 any solution (fix to SUT or harness) is easily checked: if it is
 correct, the model checker stops reporting the previous
 counterexample.  
-%This is essentially a normal debugging problem, but
-%with the advantage that solutions are easily checked.
+This is essentially a normal debugging problem, but
+with the advantage that solutions are easily checked.
 
 Unfortunately, model checkers do not invariably report
 counterexamples: eventually the SUT is likely to satisfy the
@@ -1103,7 +1103,8 @@ over 100 runs each consisting of 10,000 tests, vary as the difficulty
 of a mutant or fault changes.  For simplicity, we measure difficulty
 by increasing $N$, where the probability of detection is $1/N$.  As
 you can see, while the maximum number of tests required increases
-rapidly, and the mean number of tests also increases steadily with
+rapidly, and the mean number of tests also increases steadily, but
+much more slowly, with
 difficulty, the minimum number of tests required increases very
 slowly.  A concrete example shows why: the chance of getting ``lucky'' and hitting a test with
 difficulty $1000$ on the first test is indeed small, only $1/1000$.  However, the
@@ -1111,16 +1112,25 @@ chance of getting ``unlucky'' and failing to detect a test with
 difficulty $1/10$ for even as few as 100 tests is less than $1/30,000$.
 
 
-This means that as soon as a mutant has taken a long time to kill, we
+This asymmetry means that as soon as a mutant has taken a long time to kill, we
 can safely assume that it is indeed hard to kill; when a mutant is killed
 quickly, we run again, based on a tolerance for error in budget
 estimation (where each run adds large confidence); after $k$ runs we
-assume a mutant is indeed easy.  As soon as one
+assume a mutant is indeed easy (and the chance that we are
+over-approximating its ease can be readily computed given $k$, by
+standard statistical techniques).  As soon as one
 detection takes a long time, or exhausts the budget, we can use that
-value as an estimate for the difficult of the mutant.  While this
+value as an estimate for the difficulty of the mutant, which means
+that we only use $k$ runs if the first $k-1$ runs are all relatively short.  While this
 approach is not perfect, it has the huge advantage of never requiring
 more than a total runtime slightly more than 1 run with the full test
-budget, unless $k$ is large.  More precisely, to coarsely, but
+budget, unless $k$ is large.  Of course, there is the question:  what
+is a ``long time'' to kill a mutant?  If our goal is to set a test
+budget, the answer is that a mutant takes a long time to kill if it
+takes longer than any previously killed mutant (where mutants that
+have not been killed at all do not increase this threshold).
+
+More precisely, to coarsely, but
 cheaply, estimate a stable test
 budget for a set of mutants, we use the procedure in Figure
 \ref{alg:testdepth}, which returns a budget and modifies a set of
