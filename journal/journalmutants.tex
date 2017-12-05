@@ -1060,7 +1060,7 @@ mutant many times.
 \begin{figure}
 {%\scriptsize 
 \begin{code}
-float {\underline{stable-budget}} ($M$, $k$, $T$, $maxTime$, $equiv$)
+float {\underline{stable-budget}} ($M$, $k$, $T$, $maxTime$, $equiv$,$killTimes$)
 \vspace{0.1in}
   budget = 0
 
@@ -1077,6 +1077,8 @@ float {\underline{stable-budget}} ($M$, $k$, $T$, $maxTime$, $equiv$)
 
      if maxKillTime == -1:
         $equiv$ = $equiv \cup m$
+     else:
+        $killTimes$[$m$] = maxKillTime
 
      if maxKillTime > budget:
         budget = killTime
@@ -1134,13 +1136,19 @@ More precisely, to coarsely, but
 cheaply, estimate a stable test
 budget for a set of mutants, we use the procedure in Figure
 \ref{alg:testdepth}, which returns a budget and modifies a set of
-possibly equivalent mutants.  The procedure can also be used to set a
+possibly equivalent mutants.  The procedure is also designed to store a
 difficulty for each mutant, in addition to an overall budget, by simply storing the largest {\tt
   killTime} for that mutant.  The procedure takes as input a set of
 mutants $M$, a number of trials $k$, a test procedure $T$, a maximum
-test budget to use, $maxTime$, and a (modifiable) structure to store
-possibly equivalent mutants, $equiv$.
-
+test budget to use, $maxTime$, a (modifiable) structure to store
+possibly equivalent mutants, $equiv$, and a similar structure (except
+a map), $killTimes$ to store the maximum kill times for each mutant.
+It is this map that allows us to use standard statistical techniques
+to derive budget tradeoffs.  Given a distribution of expected actual
+kill times based on the reported maximum kill times, it is easy to
+solve for (or use Monte Carlo methods to estimate) budgets that kill
+any given percent of mutants, or all killable mutants, with a certain
+required confidence.
 
 
 
