@@ -2179,8 +2179,23 @@ extend its power, but is a much weaker operation than modifying
 universal statements with generative power to \emph{produce} a large
 set of such quasi-theories.
 
+Moreover, while the complex methods Popper proposes for comparing
+theories do not all (at least obviously)
+apply, the basic ideas are fruitful for software engineering.  For
+instance, the proposal that it is often useful to devise a specification that \emph{arbitrarily
+forces a fixed behavior} in cases where requirements can be
+satisfied with non-deterministic behavior \cite{ICSEDiff} is a simple
+application of choosing the more testable theory.  Of course, in
+Popper's setting this often exposes a theory to actual falsification,
+when the real world is not so strongly determined, but in software
+making the implementation match the more testable specification by fiat decision is
+practical and often useful.  Arguably, many long-term problems in
+computing's ecosystem arise when standards are so non-testable that it
+turns out that ``conforming'' implementations are not really
+compatible.
+
 It is not, on the whole, surprising that there should be a
-correspondence between the ideas of Popper and the effort to verify
+correspondence between the ideas of Popper and efforts to verify
 and test software systems.  Popper is clear that his approach is meant
 as an answer to all the fundamental problems of epistemology.  Even
 such highly practical popular guides to software testing as the
@@ -2203,15 +2218,15 @@ similar systems \cite{strichman2008regression}.
 
 \subsection{Software Verification and Validation as Science Fiction}
 
-Taking the correspondences with Popper's ideas seriously, we arrive at
-a some high-level conclusions:
+Taking the correspondences with Popper's ideas seriously, we can derive
+some high-level conclusions:
 
 \begin{itemize}
 \item A verification harness (which includes both a specification and a
-  definition of behaviors to apply the specification to) is equivalent 
+  definition of behaviors to apply the specification to) is mappable
  to a \emph{scientific theory of the world}.
 \item A test generation harness (which includes both a specification and a
-  definition of behaviors to apply the specification to) is equivalent 
+  definition of behaviors to apply the specification to) is mappable
  to a \emph{scientific theory of the world}.
 \item Both of these things, then, serve an epistemological purpose:
   to help understand the actual nature of an external reality (the
@@ -2220,13 +2235,22 @@ a some high-level conclusions:
   falsification, or at least serious attempted falsification.
 \item As in real science, this includes falsification of the theories,
   via proof that a system does not match the theory.
+\item As in real science (with very rare exceptions for simple
+  systems), all theories are provisional and open to future rejection
+  based on the discovery that they under-specify (or incorrectly
+  specify) behavior.
 \end{itemize}
 
 The science fictional aspect comes in two points.  First, mutants
 allow us, as noted above, to produce hypothetical worlds that are not
 ours, and make sure that the theory distinguishes our world from these
 worlds, a new kind of falsification.  Second, of course, our purpose
-is often, unlike science, not purely epistemological in the larger
+is often, unlike science\footnote{Obviously science is also not purely
+  epistemological, in that we wish to use it to develop technologies
+  and manipulate the world; however, it is epistemological in that the
+  laws of nature are given, and not potentially further targets of our
+  modification.  Science even as an assistant of technology has the
+  goal of discovering a set of constraints, not creating them.}, not purely epistemological in the larger
 sense.  Rather, when we discover our theories do not fit reality, we
 often adjust reality to fit our theories.  This faces us with a new
 decision:  is our theory inadequate, or is our world inadequate?  In
