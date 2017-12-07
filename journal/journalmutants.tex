@@ -1121,7 +1121,7 @@ estimation (where each run adds large confidence); after $k$ runs we
 assume a mutant is indeed easy (and the chance that we are
 over-approximating its ease can be readily computed given $k$, by
 standard statistical techniques).  As soon as one
-detection takes a long time, or exhausts the budget, we can use that
+detection takes a long time  we can use that
 value as an estimate for the difficulty of the mutant, which means
 that we only use $k$ runs if the first $k-1$ runs are all relatively short.  While this
 approach is not perfect, it has the huge advantage of never requiring
@@ -1130,7 +1130,13 @@ budget, unless $k$ is large.  Of course, there is the question:  what
 is a ``long time'' to kill a mutant?  If our goal is to set a test
 budget, the answer is that a mutant takes a long time to kill if it
 takes longer than any previously killed mutant (where mutants that
-have not been killed at all do not increase this threshold).
+have not been killed at all do not increase this threshold).  This
+means that the expensive mutants (requiring $k$ long runs) are those
+that (1) cannot be killed, or are at least highly unlikely to be
+killed or (2) require time close to the current estimated
+budget, but not exceeding it.  If the goal is simply to classify
+mutants as ``easy'' or ``hard'' based on some threshold, however, the
+``bad cases'' can be made much less frequent.
 
 More precisely, to coarsely, but
 cheaply, estimate a stable test
@@ -1144,14 +1150,12 @@ test budget to use, $maxTime$, a (modifiable) structure to store
 possibly equivalent mutants, $equiv$, and a similar structure (except
 a map), $killTimes$ to store the maximum kill times for each mutant.
 It is this map that allows us to use standard statistical techniques
-to derive budget tradeoffs.  Given a distribution of expected actual
-kill times based on the reported maximum kill times, it is easy to
+to derive budget tradeoffs.  Given this (admittedly very approximate, since the
+procedure is intended to set a budget, not evaluate each mutant) distribution of expected actual
+kill times based on the reported maximum kill times, it is also easy to
 solve for (or use Monte Carlo methods to estimate) budgets that kill
 any given percent of mutants, or all killable mutants, with a certain
 required confidence.
-
-
-
 
 \section{Case Studies and Experimental Results}
 
