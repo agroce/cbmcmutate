@@ -277,8 +277,18 @@ cover the mutated code, in order to facilitate understanding of the
 limits of a harness, but the details require considerable modification
 in order to adapt to the probabilistic context of test generation.
 For example, the equivalent of a problem size for bounded model
-checking is a test budget for automated test generation; however,
-rather than a fixed outcome, the problem in this case is to present a
+checking is a test budget for automated test generation.   By a test
+budget, we mean a certain amount of computing time, e.g., one minute
+of test generation, or ten hours of test generation.  This time may be
+different than wall-clock time when tests are generated in parallel;
+however, the basic relationship of computing time to some cost, either
+in terms of waiting time for humans or of additional required
+computing resources, remains the same; the details of how the budget
+is expressed are not relevant to our purposes.  The important
+difference with model checking is that,
+rather than a fixed outcome the results are probabilistic.  Rather
+than present a single fixed unwinding depth or problem size,  we
+therefore need to describe a
 likelihood curve to users, and allow them to make tradeoffs based on
 that curve.
 
@@ -600,12 +610,13 @@ formula \cite{MutSpec}.  Once a developer is satisfied with a harness,
 has a mutant-stable bound for verification, and is convinced all
 surviving mutants are semantically equivalent to the original program
 (or, if not equivalent, also satisfy the same correct specification),
-we propose the developer mutate the test harness itself.  The
+we, following this line of thought, propose the developer mutate the \emph{test harness itself}.  The
 idea is to check that 1) most mutants of the harness reject the SUT
 and 2) the remaining mutants have a mutant kill rate no greater than
 that of the harness.  For the fixed sort harness, there are 61 mutants, of
-which 2 do not compile.  Of these, 40 produce an incorrect
-counterexample for the original, correct, quicksort.  An additional
+which 2 do not compile.  Of these, 40 produce a
+counterexample for the original, correct, quicksort:  they either make
+the specification too strong or (usually) simply incorrect.  An additional
 10 have mutant kill rates worse than the original harness (from
 as low as 5\% of mutants killed to only a few percent worse than the
 fixed harness).  The remaining 9 harness mutants have the same ability to kill
@@ -645,7 +656,52 @@ Examining the deleted/removed recursive calls shows the developer
 the problem in this case.  Our modified CBMC easily produces a witness showing a permuted array with correct
 {\tt a[0]} but with out-of-order later elements.
 
+Of course, like program mutation, harness mutation does not provide
+any absolute guarantees that it will detect problems with a harness.
+However, we do believe that, like program mutation, it will sometimes
+provide a simple concrete example of a weakness in a verification or
+testing approach.  In our experimental results, the most complex
+completed verification was substantially improved by a harness mutant
+showing that our initial approach was inadequate (see Section
+\ref{sec:BMH}).  Even though the mutant that improved the harness was
+not equivalent to the final version of the harness, it pointed the way
+to improving our specification effort, and when the final, modified
+harness had no mutants with improved ability to kill program mutants, it
+provided increased confidence in the harness and the verification
+effort.
+
+More practically, certain mutants (changes in equalities and
+inequalities in loops, assumptions, and assertions) are fairly likely,
+we believe, to correspond to common harness mistakes.  In particular,
+not checking inputs of size zero, or of the maximum input size, is
+likely to be as common as off-by-one bugs are in general.  Because these
+errors usually do not produce actual logical vacuity, they are likely
+to be hard to detect using traditional methods for checking
+specifications.  Now, in principle, the problem could in these cases
+usually be detected by examining some \emph{program} mutant.  However,
+it is easy to make a mistake in determining whether a mutant is
+equivalent to the original program or not, perhaps especially when the
+mutant only matters to ``degenerate'' inputs (e.g., lists of size zero).  Moreover, the tools our
+approach provides for help with detection of non-equivalent mutants
+may be weaker in these circumstances.  If the harness itself precludes
+the generation of size zero inputs, then CBMC cannot produce such an
+example as an example of an execution of the surviving mutant!
+Moreover, if the bug is in the specification, not the generation of
+inputs, CBMC may still not produce such inputs, precisely because our
+approach tries to produce a complex, high-coverage witness to how a
+mutant can satisfy the specification.  This is usually a good idea,
+but not helpful when the example of interest is degenerate.  In contrast, a harness mutant with a higher kill rate provides solid
+evidence that such mutations are \emph{not} equivalent to the original
+program, evidence that cannot easily be ignored or misinterpreted.  That
+is, because there is a concrete example of a harness that could detect
+a difference between the mutation and the original program, and that
+harness is very similar to the proposed verification harness, it is
+clear that the mutant is highly unlikely to actually be equivalent
+with respect to the ``real'' specification of the program.
+
 %\begin{comment}
+
+\subsection{Summary of Proposed Approach}
 
 The basic flow of our approach, for bounded model checking, can be
 summarized as follows:
@@ -750,7 +806,9 @@ impossible.  Other strategies for maximal coverage are possible
 (trying maximal coverage first, and decreasing the required coverage
 as attempts fail) but this approach minimizes the number of model
 checker runs that will fail to produce a witness, which is critical
-for performance reasons (see Section \ref{sec:sattimes}).  The 
+for performance reasons (see Section \ref{sec:sattimes}).
+
+The 
 {\tt check-harness} algorithm (Figure \ref{alg:checkharness}) analyzes
 harness mutants, producing a report of 1) harness mutants that are
 killed (either they do not verify the SUT or they have worse kill
@@ -799,11 +857,11 @@ along with our experimental data and CBMC patch, at {\tt
          r[m] = check($H$,$m$,$U(S)$,$O(S)$) 
          if r[m] == VERIFICATION FAILED:
            //once killed, assume always killed 
-           $M$ = $M \\ m$
+           $M$ = $M \\ \{m\}$
      if r[m] == VERIFICATION SUCCESSFUL:
         r'[m] = check($H$,$m$,$U(S+1)$,$O(S+1)$) 
         if r'[m] == VERIFICATION FAILED:
-           $M$ = $M \\ m$
+           $M$ = $M \\ \{m\}$
            goto TOP 
   // No result changed, so S is mutant-stable 
   return (S-1, $M$) 
@@ -1021,7 +1079,9 @@ multiple lengths, and there is no simple correspondence between depth
 and mutants killed.  Mutants killed is monotonic (stable or
 increasing) in bounded model checking depth; mutants killed is not
 monotonic in maximum test length \cite{ASE08}.  However, there is an
-analogous parameter in test generation:  actual test budget.  This
+analogous parameter in test generation:  actual test budget, in terms
+of computing resources, or, more simply \emph{time}, spent generating
+and executing tests.  This
 parameter, however, only produces \emph{probabilistically} \cite{arcuri2014hitchhiker} monotonic
 behavior:  one run with budget $X > Y$ may kill fewer mutants than a
 run with budget $Y$; however, over a large number of runs,
@@ -1046,7 +1106,7 @@ enough times to obtain a good estimate of how long it takes to kill,
 and doing so requires running already killed mutants, or equivalent
 mutants, many times.  On the other hand, in another sense the problem
 becomes easier:  with bounded model checking, for each mutant $m$, we have
-to query wither unwinding depth $U$ is sufficient to kill the mutant,
+to query whether unwinding depth $U$ is sufficient to kill the mutant,
 for each $U$ until stability is achieved.  Many test generation
 systems, such as TSTL, support a mode where the tool simply runs until
 a fault is detected.  If we set a large timeout (larger than the
@@ -1054,13 +1114,34 @@ largest test budget we are interested in), we can simply run the tool
 with each mutant and discover how long it takes to kill it (or if it
 cannot be killed within our maximum possible budget).  Finding
 ``stability'' then, becomes simply a matter of finding the mutant(s)
-with the largest time-to-kill, and inspecting those never killed to
+with the largest time-to-kill (the ``hardest'' mutant), and inspecting those never killed to
 determine if they are equivalent.
 
 Unfortunately, again due to the stochastic setting, this is not quite
-sufficient.  A hard-to-kill mutant may, by chance, infrequently be
-detected very quickly; an easy-to-kill mutant may, by chance,
-sometimes not be detected quickly.  Both cases result in inaccurate
+sufficient.  A hard-to-kill mutant may, infrequently, be
+detected very quickly; an easy-to-kill mutant may, in some particular runs,
+not be detected quickly.  What, then, does ``hard-to-kill'' or
+``easy-to-kill'' mean in such a setting, where there is no fixed
+computational difficulty, such as a required unwinding depth,
+associated with each mutant?  The definition shifts to one of
+probability.  A hard-to-kill mutant, relative to a given maximum test budget,
+is one where, \emph{over all possible runs of the stochastic test
+  generation process}, the mean time required to kill the mutant is
+at least a standard deviation higher than the mean time required to
+kill a randomly selected mutant.  Alternatively, in some cases, the
+mean time required to kill a mutant is very close to the test budget,
+so we also say that any mutant whose mean time-to-kill is larger than
+the test budget is hard-to-kill.  An easy-to-kill mutant is one whose
+mean time to kill is one standard deviation lower than the mean time
+to kill over all mutants.  The \emph{difficulty} of a mutant is,
+similarly, its average time-required-to-kill.  Alternatively,
+time-required-to-kill can be thought of in terms of the number of
+generated tests required to kill a mutant, since the frequency of
+detection is the factor that controls the time (if most tests do not
+detect a mutant, then it will take more time to generate a test that does).
+
+Both quick detection of a hard-to-kill mutant and delayed detection of
+an easy-to-kill mutant result in inaccurate
 information, and potentially in a wrong estimate of the correct test
 budget to use.  Fortunately, an asymmetry in the probabilities of
 these misleading results allows us to proceed without (usually) running each
@@ -1071,7 +1152,7 @@ mutant many times.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{probsmodel}
-\caption{Tests required for detection as difficult of fault/mutant increases.}
+\caption{Tests required for detection as difficulty of fault/mutant increases.}
 \label{fig:probmodel}
 \end{figure}
 
@@ -1116,37 +1197,48 @@ e.g. a trivial fault is detected with almost every generated test
 tests), and a hard fault is detected two orders of magnitude or more
 less frequently (1/5000 tests).  In fact, real faults often seem to
 fall into such coarse ``buckets'' of detection ease, though this is not
-required for our analysis \cite{PLDI13}.  
+required for our analysis \cite{PLDI13}.  Recall that, because there
+is, almost always, a relatively similar time required to generate and
+execute each test, and there certainly exists a well-defined
+probability distribution over this time even when it is unusually
+varied, frequency of detection by tests and time required for
+detection of a mutant are interchangeable.  In what follows we focus on
+the number of required tests because this makes the probabilistic
+reasoning clear.
 
 Figure \ref{fig:probmodel} shows how the minimum number of tests, mean
 number of tests, and maximum number of tests needed for detection,
 over 100 runs each consisting of 10,000 tests, vary as the difficulty
 of a mutant or fault changes.  For simplicity, we measure difficulty
 by increasing $N$, where the probability of detection is $1/N$.  As
-you can see, while the maximum number of tests required increases
-rapidly, and the mean number of tests also increases steadily, but
+you can see, the maximum number of tests required increases
+rapidly with difficulty.  The mean number of tests also increases steadily, but
 much more slowly, with
-difficulty, the minimum number of tests required increases very
-slowly.  A concrete example shows why: the chance of getting ``lucky'' and hitting a test with
+difficulty.  Finally, the \emph{minimum} number of tests required increases very
+slowly as the mutant becomes more difficult.  A concrete example shows
+why: the probability of hitting a test with
 difficulty $1000$ on the first test is indeed small, only $1/1000$.  However, the
-chance of getting ``unlucky'' and failing to detect a test with
+chance of failing to detect a test with
 difficulty $1/10$ for even as few as 100 tests is less than $1/30,000$.
 
 
-This asymmetry means that as soon as a mutant has taken a long time to kill, we
+This basic asymmetry means that as soon as a mutant has taken a long
+time to kill (relative to the maximum test budget), we
 can safely assume that it is indeed hard to kill; when a mutant is killed
-quickly, we run again, based on a tolerance for error in budget
-estimation (where each run adds large confidence); after $k$ runs we
-assume a mutant is indeed easy (and the chance that we are
+quickly (requiring time that is only a small fraction of the maximum test budget), we run again, based on a tolerance for error in budget
+estimation (where each run adds confidence); after $k$ runs we
+assume a mutant is indeed easy-to-kill (and the chance that we are
 over-approximating its ease can be readily computed given $k$, by
 standard statistical techniques).  As soon as one
-detection takes a long time  we can use that
+detection takes a ``long time'' we can use that
 value as an estimate for the difficulty of the mutant, which means
-that we only use $k$ runs if the first $k-1$ runs are all relatively short.  While this
-approach is not perfect, it has the huge advantage of never requiring
-more than a total runtime slightly more than 1 run with the full test
-budget, unless $k$ is large.  Of course, there is the question:  what
-is a ``long time'' to kill a mutant?  If our goal is to set a test
+that we only use $k$ runs if the first $k-1$ runs are all 
+below the current estimated needed budget.  Unless $k$ is very large
+relative to the definition of a ``long time,'' the procedure will
+never require more than approximately the maximum test budget, per mutant.
+
+The approach does raise the question:  what
+does it mean to take a ``long time'' to kill a mutant?  If our goal is to set a test
 budget, the answer is that a mutant takes a long time to kill if it
 takes longer than any previously killed mutant (where mutants that
 have not been killed at all do not increase this threshold).  This
@@ -1155,14 +1247,15 @@ that (1) cannot be killed, or are at least highly unlikely to be
 killed or (2) require time close to the current estimated
 budget, but not exceeding it.  If the goal is simply to classify
 mutants as ``easy'' or ``hard'' based on some threshold, however, the
-``bad cases'' can be made much less frequent.
+``bad cases'' can be made much less frequent by setting the maximum
+budget to that threshold, which means that for most ``hard' mutants
+only one run, requiring that maximum budget, will be required.
 
-More precisely, to coarsely, but
-cheaply, estimate a stable test
+To produce a computationally inexpensive, if course, estimate of a stable test
 budget for a set of mutants, we use the procedure in Figure
 \ref{alg:testdepth}, which returns a budget and modifies a set of
 possibly equivalent mutants.  The procedure is also designed to store a
-difficulty for each mutant, in addition to an overall budget, by simply storing the largest {\tt
+difficulty for each mutant, in addition to an overall budget, by reporting the largest {\tt
   killTime} for that mutant.  The procedure takes as input a set of
 mutants $M$, a number of trials $k$, a test procedure $T$, a maximum
 test budget to use, $maxTime$, a (modifiable) structure to store
@@ -1368,6 +1461,7 @@ detected.  No mutant produces such behavior, but noting an incorrect
 but passing trace of this run using the CBMC extension lets us see the problem.
 
 \subsection{SpiderMonkey Boyer-Moore-Horspool Implementation}
+\label{sec:BMH}
 
 \begin{figure}
 {%\scriptsize
@@ -1530,7 +1624,7 @@ the kill rate to 79.52\%.  However, on examining the surviving
 mutants, we realized that our verification was still unsatisfactory as
 a good regression for the Boyer-Moore-Horspool code: in particular, if
 the assertion were ever modified to allow bad inputs to pass through,
-or otherwise incorrectly changed, we would those bugs.  We then
+or otherwise incorrectly changed, we would miss those bugs.  We then
 changed the {\tt JS\_ASSERT} into code that returned a special value
 to signal assertion failure, and modified the harness once more,
 allowing some incorrect values to pass through and checking that
@@ -2170,14 +2264,25 @@ impractical, to say the least.
 
 The key idea really is that of falsification, in both the enterprise
 of software correctness and (in Popper's view) the enterprise of
-scientific, empirical, method.  A test, ideally, and a counterexample,
-by definition, falsifies the claim that a program satisfies some
+scientific, empirical, method.  A test, ideally, and a counterexample (by definition) falsifies the claim that a program satisfies some
 specification.  A surviving, non-equivalent, mutant can falsify the
-claim, less seldom thought about in the act of testing, that a
-specification or test harness or test suite is, itself, sufficiently
-falsifiable, and constrains the program enough to be effective.  Only
+related claim that a specification, test harness, or test suite is
+sufficiently powerful in its ability to falsify the system under
+test.  That is, a surviving mutant can falsify a claim about
+falsification power itself.  This meta-level aspect of falsification in testing or
+verification is usually less closely considered than the simpler
+falsification question answered by a faulty program's inability to satisfy a specification
+or pass a series of tests, presumably because it is much more abstract
+and hard to think about.  What program mutants bring to the table,
+again, is a \emph{concrete} way for even non-formal-methods
+specialists to think about the falsification of a method for
+falsification, itself.  Surviving mutants help determine if tests and
+verification harnesses and properties sufficiently constrain the
+system under test, by potentially providing concrete demonstration
+that the constraints are not sufficient.
+Only
 repeated, serious effort to falsify all that can be falsified can
-bring us to (still provisional) confidence.  Specifications and test
+bring us to (still provisional) confidence on this front.  Specifications and test
 harnesses fulfill the same role in software engineering that proposed
 natural laws do in the scientific endeavor:
 
@@ -2247,7 +2352,7 @@ methods used in approaches such as regression verification, where the
 entire goal is to find ``experiments'' that distinguish two putatively
 similar systems \cite{strichman2008regression}.
 
-\subsection{Software Verification and Validation as Science Fiction}
+%\subsection{Software Verification and Validation as Science Fiction}
 
 Taking the correspondences with Popper's ideas seriously, we can derive
 some high-level conclusions:
@@ -2272,6 +2377,7 @@ some high-level conclusions:
   specify) behavior.
 \end{itemize}
 
+\begin{comment}
 The science fictional aspect comes in two points.  First, mutants
 allow us, as noted above, to produce hypothetical worlds that are not
 ours, and make sure that the theory distinguishes our world from these
@@ -2286,6 +2392,7 @@ sense.  Rather, when we discover our theories do not fit reality, we
 often adjust reality to fit our theories.  This faces us with a new
 decision:  is our theory inadequate, or is our world inadequate?  In
 both cases, falsification helps us make the decision.
+\end{comment}
 
 \begin{comment}
 \subsection{Is Exhaustive Nondeterminism Important?}
@@ -2464,6 +2571,21 @@ incremental SAT to make mutant analysis available to developers
 continuously as part of their development/debugging process.  Finally,
 these techniques should also be applicable to verification using,
 e.g., Java Pathfinder \cite{JPF2}.
+
+Thus far, we have not applied the harness mutation aspect of our
+approach in software testing, in part because TSTL harnesses are not
+written in Python, but in a DSL that embeds Python, making mutation
+difficult.  However, using a newly developed mutation tool that does
+not require parsing of the file, but instead uses
+regular-expression-defined rules to make syntactic changes
+\cite{universalmutator}, we plan to extend our approach to harness
+mutation in the testing domain as well.  Moreover, this tool should
+enable our approach to be easily applied even to languages without
+their own mutation tools, so long as they have a basic structure similar to
+some supported language, and even to mutation of PROMELA harnesses for
+the SPIN model checker.  Given that most modern programming languages
+use similar expression syntax, and many resemble C and Java in
+structure, this should make our approach much more widely applicable.
 
 More fundamentally, it would be useful to perform human studies to
 determine the actual differences between extending (1)
